@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Buku Siswa PAI & BP Kelas 1 Semester 1 - Edisi Bergambar (CP No. 020 Tahun 2026)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@400;600;700;800;900&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #059669;
+      --primary-light: #ecfdf5;
+      --primary-dark: #047857;
+      --secondary: #f59e0b;
+      --secondary-light: #fef3c7;
+      --accent-blue: #0284c7;
+      --accent-blue-light: #e0f2fe;
+      --accent-purple: #7c3aed;
+      --accent-purple-light: #ede9fe;
+      --accent-rose: #e11d48;
+      --accent-rose-light: #ffe4e6;
+      --text-main: #1e293b;
+      --text-muted: #475569;
+      --border-color: #e2e8f0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      color: var(--text-main);
+      background-color: #e2e8f0;
+      font-size: 13pt;
+      line-height: 1.45;
+    }
+
+    @page {
+      size: A4 portrait;
+      margin: 0;
+    }
+
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 15px auto;
+      background: #ffffff;
+      padding: 14mm 16mm 16mm 16mm;
+      position: relative;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.12);
+      page-break-after: always;
+      display: flex;
+      flex-direction: column;
+    }
+
+    @media print {
+      body {
+        background: transparent;
+      }
+      .page {
+        margin: 0;
+        box-shadow: none;
+        width: 100%;
+        min-height: 100vh;
+        page-break-after: always;
+      }
+      .no-print {
+        display: none !important;
+      }
+    }
+
+    /* Print Instruction Banner */
+    .print-bar {
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      background: linear-gradient(135deg, #059669, #0d9488);
+      color: white;
+      padding: 14px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.18);
+      font-family: 'Fredoka', sans-serif;
+    }
+
+    .print-btn {
+      background: #f59e0b;
+      color: #78350f;
+      border: none;
+      padding: 10px 24px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 14pt;
+      cursor: pointer;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.25);
+      transition: all 0.2s;
+    }
+    .print-btn:hover {
+      background: #fbbf24;
+      transform: scale(1.04);
+    }
+
+    /* Typography */
+    h1, h2, h3, h4 {
+      font-family: 'Fredoka', sans-serif;
+    }
+
+    .arabic {
+      font-family: 'Amiri', serif;
+      font-size: 1.7rem;
+      direction: rtl;
+      display: inline-block;
+      color: #065f46;
+      line-height: 1.8;
+    }
+
+    /* Header & Footer Per Halaman */
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px dashed #a7f3d0;
+      padding-bottom: 5px;
+      margin-bottom: 12px;
+      font-size: 9.5pt;
+      color: #059669;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .page-footer {
+      margin-top: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 2px dashed #e2e8f0;
+      padding-top: 6px;
+      font-size: 9.5pt;
+      color: #94a3b8;
+      font-weight: 600;
+    }
+
+    /* ==================== COVER DESIGN ==================== */
+    .cover-page {
+      background: linear-gradient(180deg, #ecfdf5 0%, #d1fae5 45%, #fef3c7 100%);
+      border: 5px double #059669;
+      text-align: center;
+      padding: 12mm 14mm;
+      justify-content: space-between;
+    }
+
+    .cover-top-badge {
+      display: inline-block;
+      background: #059669;
+      color: white;
+      padding: 5px 22px;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 12pt;
+      box-shadow: 0 3px 6px rgba(5, 150, 105, 0.25);
+    }
+
+    .cover-title {
+      font-size: 23pt;
+      line-height: 1.2;
+      color: #064e3b;
+      margin-top: 6px;
+      margin-bottom: 2px;
+    }
+
+    .cover-subtitle {
+      font-size: 16pt;
+      color: #b45309;
+      font-weight: 700;
+    }
+
+    .cover-image-container {
+      margin: 10px auto;
+      width: 100%;
+      max-width: 175mm;
+      height: 100mm;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 4px solid #ffffff;
+      box-shadow: 0 10px 25px rgba(5, 150, 105, 0.25);
+      background: #dcfce7;
+    }
+
+    .cover-image-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .cover-info-card {
+      background: white;
+      border-radius: 14px;
+      padding: 12px 16px;
+      border: 2px solid #34d399;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    .cover-grid-tags {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .tag-item {
+      background: #f0fdf4;
+      border: 1px solid #86efac;
+      border-radius: 8px;
+      padding: 6px 4px;
+      font-size: 9.5pt;
+      font-weight: 700;
+      color: #047857;
+    }
+
+    .cp-badge-pill {
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      color: white;
+      font-weight: 800;
+      padding: 6px 20px;
+      border-radius: 25px;
+      display: inline-block;
+      font-size: 11pt;
+      margin-top: 6px;
+      box-shadow: 0 2px 6px rgba(217, 119, 6, 0.3);
+    }
+
+    /* ==================== BAB LAYOUT ==================== */
+    .bab-header-flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .bab-badge {
+      display: inline-flex;
+      align-items: center;
+      background: linear-gradient(135deg, #059669, #10b981);
+      color: white;
+      padding: 5px 16px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 11.5pt;
+      box-shadow: 0 3px 6px rgba(5, 150, 105, 0.2);
+    }
+
+    .bab-title {
+      font-size: 18.5pt;
+      color: #064e3b;
+      line-height: 1.2;
+      margin-top: 4px;
+    }
+
+    .box-tujuan {
+      background: #eff6ff;
+      border-left: 5px solid #3b82f6;
+      border-radius: 10px;
+      padding: 8px 12px;
+      margin-bottom: 12px;
+      font-size: 10.5pt;
+    }
+
+    /* Section with Visual Thumbnail */
+    .visual-content-row {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      margin-bottom: 10px;
+    }
+
+    .chapter-img-thumb {
+      width: 72mm;
+      height: 52mm;
+      border-radius: 14px;
+      object-fit: cover;
+      border: 3px solid #34d399;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+      flex-shrink: 0;
+    }
+
+    .box-materi {
+      background: #ffffff;
+      border: 2px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 10px 14px;
+      margin-bottom: 10px;
+      flex-grow: 1;
+    }
+
+    .box-materi h3 {
+      color: #0d9488;
+      font-size: 13pt;
+      border-bottom: 2px solid #ccfbf1;
+      padding-bottom: 3px;
+      margin-bottom: 6px;
+    }
+
+    .box-fun {
+      background: #fefce8;
+      border: 2px dashed #facc15;
+      border-radius: 12px;
+      padding: 8px 12px;
+      margin: 8px 0;
+      font-size: 10.5pt;
+    }
+
+    .box-latihan {
+      background: #fdf2f8;
+      border: 2px solid #f472b6;
+      border-radius: 12px;
+      padding: 10px 14px;
+      margin-top: 6px;
+    }
+
+    .box-latihan h4 {
+      color: #be185d;
+      font-size: 12pt;
+      margin-bottom: 6px;
+    }
+
+    /* Hijaiyah Grid */
+    .hijaiyah-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 5px;
+      margin: 8px 0;
+      text-align: center;
+    }
+
+    .h-card {
+      background: #f0fdf4;
+      border: 2px solid #86efac;
+      border-radius: 8px;
+      padding: 4px 2px;
+    }
+    .h-card .arabic {
+      font-size: 1.5rem;
+      line-height: 1.2;
+    }
+    .h-card .latin {
+      font-size: 8.5pt;
+      font-weight: 700;
+      color: #047857;
+    }
+
+    .grid-2col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin: 8px 0;
+    }
+
+    .card-item {
+      background: #f8fafc;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 10px;
+      padding: 8px 10px;
+      font-size: 10.5pt;
+    }
+
+    .card-item b {
+      color: #0369a1;
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .soal-item {
+      margin-bottom: 6px;
+      font-size: 10.5pt;
+    }
+    .opsi-list {
+      margin-left: 18px;
+    }
+
+    /* Table of contents styled */
+    .toc-card {
+      display: flex;
+      align-items: center;
+      background: #f8fafc;
+      border: 2px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 8px 12px;
+      margin-bottom: 8px;
+      gap: 12px;
+    }
+
+    .toc-badge {
+      padding: 6px 14px;
+      border-radius: 10px;
+      color: white;
+      font-weight: 800;
+      font-size: 11pt;
+      min-width: 65px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Print Action Bar -->
+  <div class="print-bar no-print">
+    <div>
+      <strong>✨ E-Book PAI & BP Kelas 1 SD (Edisi Lengkap Gambar 3D):</strong> Klik tombol kuning di samping, lalu pilih <em>"Save as PDF" / "Simpan sebagai PDF"</em> (Ukuran A4).
+    </div>
+    <button class="print-btn" onclick="window.print()">🖨️ Cetak / Simpan PDF</button>
+  </div>
+
+  <!-- ==================== HALAMAN 1: COVER (FULL VISUAL) ==================== -->
+  <div class="page cover-page">
+    <div>
+      <div class="cover-top-badge">🌟 BUKU SISWA RESMI 🌟</div>
+      <h1 class="cover-title">PENDIDIKAN AGAMA ISLAM<br>& BUDI PEKERTI</h1>
+      <div class="cover-subtitle">KELAS 1 SD / MI — SEMESTER 1</div>
+    </div>
+
+    <!-- 3D Disney/Pixar Cover Illustration -->
+    <div class="cover-image-container">
+      <img src="assets/cover_illustration.jpg" alt="Ilustrasi Anak Muslim Membaca Al-Qur'an">
+    </div>
+
+    <div>
+      <div class="cover-info-card">
+        <p style="font-size: 12pt; font-weight: 800; color: #047857; margin-bottom: 4px;">
+          📖 Belajar PAI Jadi Menyenangkan, Beriman Sejak Dini, & Berakhlak Mulia!
+        </p>
+        <div class="cover-grid-tags">
+          <div class="tag-item">📚 Materi BAB 1–5</div>
+          <div class="tag-item">🎨 Gambar 3D Ceria</div>
+          <div class="tag-item">✍️ LKPD Interaktif</div>
+          <div class="tag-item">📝 Soal & Asesmen</div>
+        </div>
+      </div>
+
+      <div class="cp-badge-pill">🌿 Sesuai Capaian Pembelajaran (CP) No. 020 Tahun 2026</div>
+      <div style="margin-top: 10px; font-weight: 700; color: #475569; font-size: 10pt;">
+        Koleksi Modul Digital Guru & Siswa Sekolah Dasar Indonesia
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== HALAMAN 2: DAFTAR ISI ==================== -->
+  <div class="page">
+    <div class="page-header">
+      <span>Daftar Isi Buku Siswa</span>
+      <span>PAI & BP Kelas 1 Semester 1</span>
+    </div>
+
+    <h2 style="color: #064e3b; font-size: 18pt; text-align: center; margin-bottom: 12px;">
+      📑 DAFTAR ISI PEMBELAJARAN
+    </h2>
+
+    <div class="toc-card">
+      <div class="toc-badge" style="background: #10b981;">BAB 1</div>
+      <div style="flex-grow: 1;">
+        <strong style="font-size: 12pt; color: #064e3b;">Mencintai Al-Qur'an Sejak Dini</strong><br>
+        <small style="color: #475569;">A. Mengenal Huruf Hijaiyah & Makharijul Huruf • B. Mengenal Huruf Berharakat • Ayo Berlatih</small>
+      </div>
+    </div>
+
+    <div class="toc-card">
+      <div class="toc-badge" style="background: #0284c7;">BAB 2</div>
+      <div style="flex-grow: 1;">
+        <strong style="font-size: 12pt; color: #0369a1;">Aku Cinta Rukun Iman</strong><br>
+        <small style="color: #475569;">A. Mengenal Arti Iman • B. Enam Urutan Rukun Iman • Tepuk Ceria & LKPD</small>
+      </div>
+    </div>
+
+    <div class="toc-card">
+      <div class="toc-badge" style="background: #7c3aed;">BAB 3</div>
+      <div style="flex-grow: 1;">
+        <strong style="font-size: 12pt; color: #6d28d9;">Akhlak Terpuji kepada Allah SWT</strong><br>
+        <small style="color: #475569;">A. Menyucikan Allah dengan Ucapan (Tasbih) • B. Menyucikan Diri (Thaharah) • Ayo Berlatih</small>
+      </div>
+    </div>
+
+    <div class="toc-card">
+      <div class="toc-badge" style="background: #ea580c;">BAB 4</div>
+      <div style="flex-grow: 1;">
+        <strong style="font-size: 12pt; color: #c2410c;">Aku Bangga Menjadi Muslim</strong><br>
+        <small style="color: #475569;">A. Mengenal 5 Rukun Islam • B. Syahadatain (Dua Kalimat Syahadat) • Lagu & Latihan</small>
+      </div>
+    </div>
+
+    <div class="toc-card">
+      <div class="toc-badge" style="background: #e11d48;">BAB 5</div>
+      <div style="flex-grow: 1;">
+        <strong style="font-size: 12pt; color: #be123c;">Kisah Keteladanan Nabi Adam a.s.</strong><br>
+        <small style="color: #475569;">A. Manusia Pertama Ciptaan Allah • B. Keteladanan Taubat & Memohon Ampun • Refleksi Diri</small>
+      </div>
+    </div>
+
+    <div class="toc-card">
+      <div class="toc-badge" style="background: #ca8a04;">UJIAN</div>
+      <div style="flex-grow: 1;">
+        <strong style="font-size: 12pt; color: #a16207;">Asesmen Sumatif Akhir Semester 1</strong><br>
+        <small style="color: #475569;">Evaluasi Pemahaman 10 Soal Pilihan Ganda & Kunci Jawaban Lengkap</small>
+      </div>
+    </div>
+
+    <div class="box-fun" style="margin-top: 15px;">
+      💡 <strong>Petunjuk untuk Guru dan Orang Tua:</strong><br>
+      Buku ini didesain interaktif dengan ilustrasi 3D yang ramah anak. Bacakan cerita dengan intonasi ceria, ajak anak bernyanyi bersama, dan berikan stiker bintang setiap kali mereka menyelesaikan latihan!
+    </div>
+
+    <div class="page-footer">
+      <span>Buku Siswa PAI & BP SD Kelas 1</span>
+      <span>Halaman 2</span>
+    </div>
+  </div>
+
+  <!-- ==================== HALAMAN 3: BAB 1 ==================== -->
+  <div class="page">
+    <div class="page-header">
+      <span>Bab 1: Al-Qur'an & Hadis</span>
+      <span>CP No. 020 Tahun 2026</span>
+    </div>
+
+    <div class="bab-header-flex">
+      <div>
+        <div class="bab-badge">BAB 1</div>
+        <h2 class="bab-title">Mencintai Al-Qur'an Sejak Dini</h2>
+      </div>
+    </div>
+
+    <div class="box-tujuan">
+      🎯 <strong>Tujuan Pembelajaran:</strong> Murid mengenal 29 huruf hijaiyah dengan makhraj yang benar serta memahami tanda baca fathah, kasrah, dan dammah.
+    </div>
+
+    <!-- Visual Thumb + Penjelasan -->
+    <div class="visual-content-row">
+      <img src="assets/quran_rehal.jpg" class="chapter-img-thumb" alt="Al-Qur'an dan Rehal">
+      <div class="box-materi" style="margin-bottom: 0;">
+        <h3>A. Mengenal Huruf Hijaiyah</h3>
+        <p style="font-size: 10.5pt;">
+          Al-Qur'an adalah kitab suci umat Islam yang penuh petunjuk kebaikan. Al-Qur'an ditulis dengan huruf Arab yang dinamakan <strong>Huruf Hijaiyah</strong>.<br>
+          Membaca Al-Qur'an dimulai dari sebelah <strong>kanan ke kiri</strong>. Jumlahnya ada <strong>29 huruf</strong>.
+        </p>
+      </div>
+    </div>
+
+    <div class="hijaiyah-grid">
+      <div class="h-card"><div class="arabic">خ</div><div class="latin">Kho</div></div>
+      <div class="h-card"><div class="arabic">ح</div><div class="latin">Ha</div></div>
+      <div class="h-card"><div class="arabic">ج</div><div class="latin">Jim</div></div>
+      <div class="h-card"><div class="arabic">ث</div><div class="latin">Tsa</div></div>
+      <div class="h-card"><div class="arabic">ت</div><div class="latin">Ta</div></div>
+      <div class="h-card"><div class="arabic">ب</div><div class="latin">Ba</div></div>
+      <div class="h-card"><div class="arabic">ا</div><div class="latin">Alif</div></div>
+
+      <div class="h-card"><div class="arabic">ص</div><div class="latin">Shod</div></div>
+      <div class="h-card"><div class="arabic">ش</div><div class="latin">Syin</div></div>
+      <div class="h-card"><div class="arabic">س</div><div class="latin">Sin</div></div>
+      <div class="h-card"><div class="arabic">ز</div><div class="latin">Zai</div></div>
+      <div class="h-card"><div class="arabic">ر</div><div class="latin">Ra</div></div>
+      <div class="h-card"><div class="arabic">ذ</div><div class="latin">Dzal</div></div>
+      <div class="h-card"><div class="arabic">د</div><div class="latin">Dal</div></div>
+
+      <div class="h-card"><div class="arabic">ق</div><div class="latin">Qof</div></div>
+      <div class="h-card"><div class="arabic">ف</div><div class="latin">Fa</div></div>
+      <div class="h-card"><div class="arabic">غ</div><div class="latin">Ghoin</div></div>
+      <div class="h-card"><div class="arabic">ع</div><div class="latin">'Ain</div></div>
+      <div class="h-card"><div class="arabic">ظ</div><div class="latin">Zho</div></div>
+      <div class="h-card"><div class="arabic">ط</div><div class="latin">Tho</div></div>
+      <div class="h-card"><div class="arabic">ض</div><div class="latin">Dhod</div></div>
+
+      <div class="h-card"><div class="arabic">ي</div><div class="latin">Ya</div></div>
+      <div class="h-card"><div class="arabic">ء</div><div class="latin">Hamzah</div></div>
+      <div class="h-card"><div class="arabic">هـ</div><div class="latin">Ha</div></div>
+      <div class="h-card"><div class="arabic">و</div><div class="latin">Waw</div></div>
+      <div class="h-card"><div class="arabic">ن</div><div class="latin">Nun</div></div>
+      <div class="h-card"><div class="arabic">م</div><div class="latin">Mim</div></div>
+      <div class="h-card"><div class="arabic">ل</div><div class="latin">Lam</div></div>
+    </div>
+
+    <div class="box-materi">
+      <h3>B. Mengenal Harakat (Tanda Baca)</h3>
+      <div style="display: flex; justify-content: space-around; text-align: center; font-size: 10.5pt;">
+        <div style="background: #fef2f2; padding: 4px 14px; border-radius: 8px; border: 1.5px solid #f87171;">
+          <strong style="color: #dc2626;">Fathah ( َ )</strong>: Di atas, bunyi <strong>"A"</strong> (<span class="arabic" style="font-size: 1.2rem;">بَ</span> = Ba)
+        </div>
+        <div style="background: #eff6ff; padding: 4px 14px; border-radius: 8px; border: 1.5px solid #60a5fa;">
+          <strong style="color: #2563eb;">Kasrah ( ِ )</strong>: Di bawah, bunyi <strong>"I"</strong> (<span class="arabic" style="font-size: 1.2rem;">بِ</span> = Bi)
+        </div>
+        <div style="background: #f0fdf4; padding: 4px 14px; border-radius: 8px; border: 1.5px solid #4ade80;">
+          <strong style="color: #16a34a;">Dammah ( ُ )</strong>: Di atas, bunyi <strong>"U"</strong> (<span class="arabic" style="font-size: 1.2rem;">بُ</span> = Bu)
+        </div>
+      </div>
+    </div>
+
+    <div class="box-latihan">
+      <h4>✏️ Ayo Berlatih Bab 1</h4>
+      <div class="soal-item">1. Huruf hijaiyah dibaca dari sebelah ............... (kanan / kiri)</div>
+      <div class="soal-item">2. Tanda baca yang berada di bawah huruf dan berbunyi "I" disebut ...............</div>
+    </div>
+
+    <div class="page-footer">
+      <span>Buku Siswa PAI & BP SD Kelas 1</span>
+      <span>Halaman 3</span>
+    </div>
+  </div>
+
+  <!-- ==================== HALAMAN 4: BAB 2 ==================== -->
+  <div class="page">
+    <div class="page-header">
+      <span>Bab 2: Akidah Islam</span>
+      <span>CP No. 020 Tahun 2026</span>
+    </div>
+
+    <div class="bab-badge" style="background: linear-gradient(135deg, #0284c7, #38bdf8);">BAB 2</div>
+    <h2 class="bab-title">Aku Cinta Rukun Iman</h2>
+
+    <div class="box-tujuan">
+      🎯 <strong>Tujuan Pembelajaran:</strong> Menjelaskan arti iman secara sederhana dan menghafal 6 urutan Rukun Iman dalam kehidupan harian.
+    </div>
+
+    <div class="box-materi">
+      <h3>A. Mengenal Arti Iman</h3>
+      <p style="font-size: 11pt;">
+        <strong>Iman</strong> artinya <em>percaya dan yakin dengan sepenuh hati</em>. Kita yakin bahwa Allah SWT adalah Tuhan yang menciptakan langit, bumi, bintang-bintang, dan manusia.
+      </p>
+    </div>
+
+    <div class="box-materi">
+      <h3>B. Enam Urutan Rukun Iman</h3>
+      <div class="grid-2col">
+        <div class="card-item"><b>1. Iman kepada Allah SWT</b> Percaya bahwa Allah itu Maha Esa dan Maha Penyayang.</div>
+        <div class="card-item"><b>2. Iman kepada Malaikat-Malaikat Allah</b> Makhluk taat dari cahaya yang mencatat setiap amal kita.</div>
+        <div class="card-item"><b>3. Iman kepada Kitab-Kitab Allah</b> Taurat, Zabur, Injil, dan kitab suci Al-Qur'an.</div>
+        <div class="card-item"><b>4. Iman kepada Rasul-Rasul Allah</b> Utusan pembawa kebaikan (Nabi terakhir: Nabi Muhammad SAW).</div>
+        <div class="card-item"><b>5. Iman kepada Hari Kiamat</b> Hari pembalasan di mana amal saleh akan dibalas surga.</div>
+        <div class="card-item"><b>6. Iman kepada Qada dan Qadar</b> Percaya takdir dan ketentuan terbaik dari Allah SWT.</div>
+      </div>
+    </div>
+
+    <div class="box-fun">
+      👏 <strong>Tepuk Rukun Iman Bersama Teman:</strong><br>
+      <em>(Tepuk 3x)</em> Rukun Iman! • <em>(Tepuk 3x)</em> Satu, Allah! • <em>(Tepuk 3x)</em> Dua, Malaikat! • <em>(Tepuk 3x)</em> Tiga, Kitab! • <em>(Tepuk 3x)</em> Empat, Rasul! • <em>(Tepuk 3x)</em> Lima, Hari Kiamat! • <em>(Tepuk 3x)</em> Enam, Qada Qadar! <strong>Muslim Cerdas!</strong>
+    </div>
+
+    <div class="box-latihan">
+      <h4>✏️ Ayo Berlatih Bab 2</h4>
+      <div class="soal-item">1. Rukun Iman berjumlah .................... perkara.</div>
+      <div class="soal-item">2. Malaikat Allah diciptakan dari .................... (Cahaya / Api)</div>
+      <div class="soal-item">3. Rukun iman yang kelima adalah iman kepada hari ....................</div>
+    </div>
+
+    <div class="page-footer">
+      <span>Buku Siswa PAI & BP SD Kelas 1</span>
+      <span>Halaman 4</span>
+    </div>
+  </div>
+
+  <!-- ==================== HALAMAN 5: BAB 3 ==================== -->
+  <div class="page">
+    <div class="page-header">
+      <span>Bab 3: Akhlak Mulia</span>
+      <span>CP No. 020 Tahun 2026</span>
+    </div>
+
+    <div class="bab-badge" style="background: linear-gradient(135deg, #7c3aed, #a855f7);">BAB 3</div>
+    <h2 class="bab-title">Akhlak Terpuji kepada Allah SWT</h2>
+
+    <div class="box-tujuan">
+      🎯 <strong>Tujuan Pembelajaran:</strong> Menyucikan asma Allah dengan bacaan tasbih dan membiasakan hidup bersih (thaharah/wudu).
+    </div>
+
+    <!-- Visual Thumb + Penjelasan Thaharah -->
+    <div class="visual-content-row">
+      <img src="assets/wudu_girl.jpg" class="chapter-img-thumb" alt="Anak Muslimah Berwudu">
+      <div class="box-materi" style="margin-bottom: 0;">
+        <h3>A. Kalimat Tasbih</h3>
+        <p style="font-size: 10.5pt;">Allah itu Maha Suci. Kita memuji kesucian-Nya dengan kalimat <strong>Tasbih</strong>:</p>
+        <div style="text-align: center; background: #faf5ff; padding: 6px; border-radius: 8px; margin: 4px 0; border: 1.5px dashed #c084fc;">
+          <span class="arabic">سُبْحَانَ اللهِ</span><br>
+          <strong style="color: #6b21a8; font-size: 11pt;">"Subhaanallaah"</strong><br>
+          <small>Artinya: "Maha Suci Allah"</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="box-materi">
+      <h3>B. Menyucikan Diri dengan Perbuatan (Thaharah)</h3>
+      <p style="font-size: 10.5pt;">Nabi Muhammad SAW bersabda: <em>"Kebersihan itu sebagian dari iman."</em></p>
+      <div class="grid-2col">
+        <div class="card-item">💧 <b>Istinja (Cebok)</b> Membersihkan kotoran setelah buang air dengan air bersih.</div>
+        <div class="card-item">🧼 <b>Mandi 2x Sehari</b> Mandi pagi dan sore dengan sabun agar harum dan sehat.</div>
+        <div class="card-item">🧕 <b>Pakaian Bersih</b> Menjaga baju suci dari kotoran najis saat hendak salat.</div>
+        <div class="card-item">🗑️ <b>Cinta Lingkungan</b> Selalu membuang sampah pada tempat sampah.</div>
+      </div>
+    </div>
+
+    <div class="box-latihan">
+      <h4>✏️ Ayo Berlatih Bab 3</h4>
+      <div class="soal-item">1. Bunyi kalimat tasbih adalah ...............</div>
+      <div class="soal-item">2. Setelah buang air kecil, kita harus bersuci menggunakan ...............</div>
+    </div>
+
+    <div class="page-footer">
+      <span>Buku Siswa PAI & BP SD Kelas 1</span>
+      <span>Halaman 5</span>
+    </div>
+  </div>
+
+  <!-- ==================== HALAMAN 6: BAB 4 ==================== -->
+  <div class="page">
+    <div class="page-header">
+      <span>Bab 4: Fikih Ibadah</span>
+      <span>CP No. 020 Tahun 2026</span>
+    </div>
+
+    <div class="bab-badge" style="background: linear-gradient(135deg, #ea580c, #fb923c);">BAB 4</div>
+    <h2 class="bab-title">Aku Bangga Menjadi Muslim</h2>
+
+    <div class="box-tujuan">
+      🎯 <strong>Tujuan Pembelajaran:</strong> Menghafal 5 Rukun Islam dan melafalkan Dua Kalimat Syahadat beserta artinya.
+    </div>
+
+    <!-- Visual Thumb + Penjelasan Rukun Islam -->
+    <div class="visual-content-row">
+      <img src="assets/boy_praying.jpg" class="chapter-img-thumb" alt="Anak Muslim Berdoa di Depan Ka'bah">
+      <div class="box-materi" style="margin-bottom: 0;">
+        <h3>A. Lima Rukun Islam</h3>
+        <ol style="margin-left: 18px; font-weight: 700; font-size: 10.5pt; line-height: 1.6;">
+          <li>Mengucapkan Dua Kalimat Syahadat</li>
+          <li>Mendirikan Salat 5 Waktu Sehari Semalam</li>
+          <li>Membayar Zakat bagi yang Mampu</li>
+          <li>Berpuasa di Bulan Suci Ramadan</li>
+          <li>Ibadah Haji ke Baitullah (Makkah)</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="box-materi">
+      <h3>B. Dua Kalimat Syahadat (Syahadatain)</h3>
+      <div style="background: #fff7ed; padding: 6px 10px; border-radius: 8px; margin-bottom: 6px; border-left: 4px solid #ea580c;">
+        <strong>1. Syahadat Tauhid:</strong><br>
+        <span class="arabic" style="font-size: 1.4rem;">أَشْهَدُ أَنْ لَا إِلٰهَ إِلَّا اللهُ</span><br>
+        <small><em>"Asyhadu an laa ilaaha illallaah"</em> (Tiada tuhan selain Allah).</small>
+      </div>
+      <div style="background: #fff7ed; padding: 6px 10px; border-radius: 8px; border-left: 4px solid #ea580c;">
+        <strong>2. Syahadat Rasul:</strong><br>
+        <span class="arabic" style="font-size: 1.4rem;">وَأَشْهَدُ أَنَّ مُحَمَّدًا رَسُولُ اللهِ</span><br>
+        <small><em>"Wa asyhadu anna Muhammadar Rasuulullaah"</em> (Nabi Muhammad utusan Allah).</small>
+      </div>
+    </div>
+
+    <div class="box-latihan">
+      <h4>✏️ Ayo Berlatih Bab 4</h4>
+      <div class="soal-item">1. Rukun Islam yang kedua adalah mendirikan ibadah ...............</div>
+      <div class="soal-item">2. Dua kalimat syahadat disebut juga ............... (Syahadatain / Tasbih)</div>
+    </div>
+
+    <div class="page-footer">
+      <span>Buku Siswa PAI & BP SD Kelas 1</span>
+      <span>Halaman 6</span>
+    </div>
+  </div>
+
+  <!-- ==================== HALAMAN 7: BAB 5 ==================== -->
+  <div class="page">
+    <div class="page-header">
+      <span>Bab 5: Kisah Keteladanan (SPI)</span>
+      <span>CP No. 020 Tahun 2026</span>
+    </div>
+
+    <div class="bab-badge" style="background: linear-gradient(135deg, #e11d48, #fb7185);">BAB 5</div>
+    <h2 class="bab-title">Kisah Keteladanan Nabi Adam a.s.</h2>
+
+    <div class="box-tujuan">
+      🎯 <strong>Tujuan Pembelajaran:</strong> Memahami bahwa Nabi Adam a.s. adalah manusia pertama dan meneladani sikap jujur serta berani mengakui kesalahan.
+    </div>
+
+    <!-- Visual Thumb + Penjelasan Nabi Adam -->
+    <div class="visual-content-row">
+      <img src="assets/jannah_garden.jpg" class="chapter-img-thumb" alt="Taman Indah Surga Nabi Adam">
+      <div class="box-materi" style="margin-bottom: 0;">
+        <h3>A. Manusia Pertama Ciptaan Allah</h3>
+        <p style="font-size: 10.5pt;">
+          Allah SWT menciptakan manusia pertama yaitu <strong>Nabi Adam a.s.</strong> dari <strong>tanah</strong>. Malaikat bersujud hormat atas perintah Allah, namun <strong>Iblis menolak karena sombong</strong> merasa diciptakan dari api.
+        </p>
+      </div>
+    </div>
+
+    <div class="box-materi">
+      <h3>B. Sikap Mulia: Bertaubat & Memohon Ampun</h3>
+      <p style="font-size: 10.5pt;">
+        Ketika melakukan kesalahan karena tergoda bujuk rayu Iblis di surga, Nabi Adam a.s. dan Siti Hawa <strong>tidak menyalahkan orang lain</strong>. Beliau langsung bertaubat memohon ampun:
+      </p>
+      <div style="background: #fff1f2; padding: 6px; border-radius: 8px; text-align: center; margin: 4px 0; border: 1.5px dashed #f43f5e;">
+        <span class="arabic" style="font-size: 1.3rem;">رَبَّنَا ظَلَمْنَا أَنْفُسَنَا وَإِنْ لَمْ تَغْفِرْ لَنَا وَتَرْحَمْنَا لَنَكُونَنَّ مِنَ الْخَاسِرِينَ</span><br>
+        <small><em>"Ya Tuhan kami, kami telah menzalimi diri kami sendiri. Ampunilah kami..."</em></small>
+      </div>
+      <p style="font-weight: 700; color: #be123c; font-size: 10.5pt; margin-top: 4px;">
+        🌟 Anak hebat berani mengakui kesalahan dan segera meminta maaf jika berbuat salah!
+      </p>
+    </div>
+
+    <div class="box-latihan">
+      <h4>✏️ Ayo Berlatih Bab 5</h4>
+      <div class="soal-item">1. Nabi Adam a.s. diciptakan oleh Allah dari bahan ...............</div>
+      <div class="soal-item">2. Jika kita bersalah kepada teman atau orang tua, kita harus segera ...............</div>
+    </div>
+
+    <div class="page-footer">
+      <span>Buku Siswa PAI & BP SD Kelas 1</span>
+      <span>Halaman 7</span>
+    </div>
+  </div>
+
+  <!-- ==================== HALAMAN 8: ASESMEN SUMATIF ==================== -->
+  <div class="page">
+    <div class="page-header">
+      <span>Asesmen Sumatif</span>
+      <span>Evaluasi Akhir Semester 1</span>
+    </div>
+
+    <div class="bab-badge" style="background: linear-gradient(135deg, #ca8a04, #facc15); color: #713f12;">EVALUASI</div>
+    <h2 class="bab-title">Soal Evaluasi Akhir Semester 1</h2>
+    <p style="margin-bottom: 10px; font-weight: 600; font-size: 10.5pt;">Berilah tanda silang (X) pada huruf a, b, atau c di depan jawaban yang paling benar!</p>
+
+    <div style="font-size: 10pt;">
+      <div class="soal-item">1. Kitab suci umat Islam yang ditulis dengan huruf hijaiyah adalah ....<br>
+        <span class="opsi-list">a. Majalah &nbsp;&nbsp;&nbsp; b. Al-Qur'an &nbsp;&nbsp;&nbsp; c. Kamus</span>
+      </div>
+      <div class="soal-item">2. Tanda baca yang berada di atas huruf dan berbunyi "A" adalah ....<br>
+        <span class="opsi-list">a. Kasrah &nbsp;&nbsp;&nbsp; b. Dammah &nbsp;&nbsp;&nbsp; c. Fathah</span>
+      </div>
+      <div class="soal-item">3. Percaya dan yakin dengan sepenuh hati di dalam jiwa disebut ....<br>
+        <span class="opsi-list">a. Iman &nbsp;&nbsp;&nbsp; b. Ragu &nbsp;&nbsp;&nbsp; c. Takut</span>
+      </div>
+      <div class="soal-item">4. Rukun Iman berjumlah ....<br>
+        <span class="opsi-list">a. 5 perkara &nbsp;&nbsp;&nbsp; b. 6 perkara &nbsp;&nbsp;&nbsp; c. 7 perkara</span>
+      </div>
+      <div class="soal-item">5. Lafal kalimat Tasbih yang benar adalah ....<br>
+        <span class="opsi-list">a. Alhamdulillah &nbsp;&nbsp;&nbsp; b. Subhanallah &nbsp;&nbsp;&nbsp; c. Allahu Akbar</span>
+      </div>
+      <div class="soal-item">6. Menyucikan diri setelah buang air kecil atau buang air besar disebut ....<br>
+        <span class="opsi-list">a. Istinja &nbsp;&nbsp;&nbsp; b. Tayamum &nbsp;&nbsp;&nbsp; c. Mandi</span>
+      </div>
+      <div class="soal-item">7. Rukun Islam yang kedua adalah mendirikan ....<br>
+        <span class="opsi-list">a. Puasa &nbsp;&nbsp;&nbsp; b. Salat &nbsp;&nbsp;&nbsp; c. Zakat</span>
+      </div>
+      <div class="soal-item">8. Syahadat ada dua yang dinamakan ....<br>
+        <span class="opsi-list">a. Syahadatain &nbsp;&nbsp;&nbsp; b. Al-Fatihah &nbsp;&nbsp;&nbsp; c. Tasbih</span>
+      </div>
+      <div class="soal-item">9. Nabi Adam a.s. diciptakan oleh Allah dari bahan ....<br>
+        <span class="opsi-list">a. Api &nbsp;&nbsp;&nbsp; b. Cahaya &nbsp;&nbsp;&nbsp; c. Tanah</span>
+      </div>
+      <div class="soal-item">10. Contoh sikap meneladani Nabi Adam ketika berbuat salah adalah ....<br>
+        <span class="opsi-list">a. Cepat meminta maaf &nbsp;&nbsp;&nbsp; b. Menyalahkan orang lain &nbsp;&nbsp;&nbsp; c. Berbohong</span>
+      </div>
+    </div>
+
+    <div style="background: #f1f5f9; padding: 8px 12px; border-radius: 8px; margin-top: 10px; font-size: 10pt;">
+      <strong>🔑 Kunci Jawaban Lengkap:</strong><br>
+      1. b &nbsp;|&nbsp; 2. c &nbsp;|&nbsp; 3. a &nbsp;|&nbsp; 4. b &nbsp;|&nbsp; 5. b &nbsp;|&nbsp; 6. a &nbsp;|&nbsp; 7. b &nbsp;|&nbsp; 8. a &nbsp;|&nbsp; 9. c &nbsp;|&nbsp; 10. a
+    </div>
+
+    <div class="page-footer">
+      <span>Buku Siswa PAI & BP SD Kelas 1</span>
+      <span>Halaman 8 (Selesai)</span>
+    </div>
+  </div>
+
+</body>
+</html>
