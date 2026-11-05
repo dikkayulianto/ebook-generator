@@ -66,11 +66,12 @@
     .badge-pill.amber { background: #d97706; }
     .badge-pill.teal { background: #0f766e; }
 
-    /* Full uncropped cover image without white borders */
+    /* Full uncropped cover image without white borders, perfectly fitted */
     .cover-art-box {
       margin: 6px auto;
-      width: 100%;
-      height: 142mm;
+      height: 155mm;
+      width: 116mm;
+      max-width: 95%;
       border-radius: 12px;
       overflow: hidden;
       border: 2px solid #059669;
@@ -80,7 +81,7 @@
       align-items: center;
       justify-content: center;
     }
-    .cover-art-box img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .cover-art-box img { width: 100%; height: 100%; object-fit: fill; display: block; }
 
     .feature-grid {
       display: grid;
