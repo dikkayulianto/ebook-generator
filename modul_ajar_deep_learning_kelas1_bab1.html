@@ -66,22 +66,29 @@
     .badge-pill.amber { background: #d97706; }
     .badge-pill.teal { background: #0f766e; }
 
-    /* Full uncropped cover image without white borders, perfectly fitted */
-    .cover-art-box {
-      margin: 6px auto;
-      height: 155mm;
-      width: 116mm;
-      max-width: 95%;
-      border-radius: 12px;
-      overflow: hidden;
-      border: 2px solid #059669;
-      box-shadow: 0 6px 20px rgba(5,150,105,0.25);
-      background: transparent;
+    /* Adaptive Uncropped Cover Artwork (Snug Border, Zero Cut-off) */
+    .cover-art-container {
+      margin: 8px auto;
+      text-align: center;
       display: flex;
       align-items: center;
       justify-content: center;
+      min-height: 120mm;
+      max-height: 155mm;
+      width: 100%;
     }
-    .cover-art-box img { width: 100%; height: 100%; object-fit: fill; display: block; }
+    .cover-art-img {
+      max-width: 175mm;
+      max-height: 150mm;
+      width: auto;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+      border-radius: 12px;
+      border: 2.5px solid #059669;
+      box-shadow: 0 6px 22px rgba(5,150,105,0.25);
+      object-fit: contain;
+    }
 
     .feature-grid {
       display: grid;
@@ -248,9 +255,9 @@
       <p style="font-weight: 800; color: #065f46; font-size: 11.5pt; margin-top: 4px;">📖 Tema: Aku Cinta Al-Qur'an (Mengenal Huruf Hijaiyah)</p>
     </div>
 
-    <!-- 100% Uncropped Full Artwork -->
-    <div class="cover-art-box">
-      <img src="/assets/cover_kelas2.jpg" alt="Ilustrasi Belajar Huruf Hijaiyah di Kelas">
+    <!-- 100% Adaptive Uncropped Artwork (Snug Border) -->
+    <div class="cover-art-container">
+      <img class="cover-art-img" src="/assets/cover_kelas2.jpg" alt="Ilustrasi Belajar Huruf Hijaiyah di Kelas">
     </div>
 
     <div>
