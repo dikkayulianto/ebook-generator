@@ -407,8 +407,8 @@ function getSmartChapterImage(title, content, index, usedImages = new Set()) {
     return pick(['/assets/sholat_berjamaah.jpg', '/assets/boy_praying.jpg']);
   }
 
-  // 5. Asmaul Husna / Sifat-Sifat Allah
-  if (t.match(/asmaul|husna|nama.*allah|ar-rahman|ar-rahim|al-quddus|as-salam|al-malik|al-mu'min|tauhid/)) {
+  // 5. Asmaul Husna / Sifat-Sifat Allah (Comprehensive CP Matcher)
+  if (t.match(/asmaul|husna|nama.*allah|sifat.*allah|ar-rahman|ar-rahim|al-hafiz|al-wali|al-alim|al-khabir|al-wahhab|al-kabir|al-malik|al-quddus|as-salam|al-mu'min|al-qawiyyu|al-qayyum|al-muhyi|al-ghaffar|al-afuw|tauhid/)) {
     return pick(['/assets/asmaul_husna.jpg', '/assets/boy_praying.jpg']);
   }
 
@@ -1130,7 +1130,11 @@ Struktur JSON yang HARUS dikembalikan:
 async function renderModulAjarHtml(modulData) {
   const g = parseInt(modulData.grade) || 1;
   const gradeTheme = getGradeTheme(g);
-  const coverImg = modulData.coverImage || gradeTheme.coverImg || '/assets/cover_kelas2.jpg';
+  const coverImg = modulData.coverImage || getSmartChapterImage(
+    `${modulData.chapterTitle || ''} ${modulData.theme || ''}`,
+    `${modulData.materi?.paragraf1 || ''} ${modulData.materi?.subMateriA?.content || ''} ${modulData.subject || ''}`,
+    0
+  );
   
   const tpItems = (modulData.tpList || []).map(tp => `<li><strong>${tp}</strong></li>`).join('');
   const profilItems = (modulData.profilPancasila || []).map(p => `<div>• <strong>${p.dimensi}:</strong> ${p.deskripsi}</div>`).join('');
@@ -1243,22 +1247,29 @@ async function renderModulAjarHtml(modulData) {
     .badge-pill.amber { background: #d97706; }
     .badge-pill.teal { background: #0f766e; }
 
-    /* Cover Art Box (Uncropped, Exactly Fitted, Zero Cut-off) */
-    .cover-art-box {
-      margin: 6px auto;
-      height: 155mm;
-      width: 116mm;
-      max-width: 95%;
-      border-radius: 12px;
-      overflow: hidden;
-      border: 2px solid #059669;
-      box-shadow: 0 6px 20px rgba(5,150,105,0.25);
-      background: transparent;
+    /* Cover Art Container & Responsive Frame (Adaptive Aspect Ratio, Zero Cut-off, Zero White Box) */
+    .cover-art-container {
+      margin: 8px auto;
+      text-align: center;
       display: flex;
       align-items: center;
       justify-content: center;
+      min-height: 120mm;
+      max-height: 155mm;
+      width: 100%;
     }
-    .cover-art-box img { width: 100%; height: 100%; object-fit: fill; display: block; }
+    .cover-art-img {
+      max-width: 175mm;
+      max-height: 150mm;
+      width: auto;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+      border-radius: 12px;
+      border: 2.5px solid #059669;
+      box-shadow: 0 6px 22px rgba(5,150,105,0.25);
+      object-fit: contain;
+    }
 
     .feature-grid {
       display: grid;
@@ -1374,9 +1385,9 @@ async function renderModulAjarHtml(modulData) {
       <p style="font-weight: 800; color: #065f46; font-size: 11pt; margin-top: 4px;">📖 Tema: ${modulData.chapterTitle}</p>
     </div>
 
-    <!-- 100% Uncropped Full Artwork (Zero White Box) -->
-    <div class="cover-art-box">
-      <img src="${coverImg}" alt="Ilustrasi ${modulData.chapterTitle}">
+    <!-- 100% Adaptive Uncropped Artwork (Snug Border, Matches Chapter Title) -->
+    <div class="cover-art-container">
+      <img class="cover-art-img" src="${coverImg}" alt="Ilustrasi ${modulData.chapterTitle}">
     </div>
 
     <div>
@@ -1744,6 +1755,14 @@ app.post('/api/generate', async (req, res) => {
 
       if (meetings && modulData.identity) modulData.identity.alokasi = meetings;
       if (modelStyle && modulData.identity) modulData.identity.model = modelStyle;
+
+      // Smart match chapter illustration to chapter title & content accurately
+      const smartImg = getSmartChapterImage(
+        `${chapterTitle || modulData.chapterTitle || ''} ${modulData.theme || ''}`,
+        `${modulData.materi?.paragraf1 || ''} ${modulData.materi?.subMateriA?.content || ''} ${subject || ''}`,
+        0
+      );
+      modulData.coverImage = smartImg;
 
       const htmlOutput = await renderModulAjarHtml(modulData);
       
