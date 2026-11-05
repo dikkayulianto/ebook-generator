@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Modul Ajar Deep Learning - PAI & BP Kelas 1 Bab 1</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+    body { font-family: 'Nunito', sans-serif; color: #1e293b; background: #e2e8f0; font-size: 10.5pt; line-height: 1.5; }
+    @page { size: A4 portrait; margin: 0; }
+    .page {
+      width: 210mm;
+      height: 297mm;
+      max-height: 297mm;
+      margin: 15px auto;
+      background: #ffffff;
+      padding: 10mm 14mm 10mm 14mm;
+      position: relative;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      page-break-after: always;
+      page-break-inside: avoid;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
+    }
+    @media print {
+      html, body {
+        width: 210mm !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        background: transparent !important;
+      }
+      .page {
+        margin: 0 !important;
+        box-shadow: none !important;
+        width: 210mm !important;
+        height: 297mm !important;
+        max-height: 297mm !important;
+        padding: 10mm 14mm 10mm 14mm !important;
+        page-break-after: always !important;
+        page-break-inside: avoid !important;
+        overflow: hidden !important;
+      }
+      .no-print { display: none !important; }
+    }
+    .page-header { display: flex; justify-content: space-between; border-bottom: 2px dashed #a7f3d0; padding-bottom: 4px; margin-bottom: 8px; font-size: 8.5pt; color: #059669; font-weight: 700; text-transform: uppercase; }
+    .page-footer { margin-top: auto; display: flex; justify-content: space-between; border-top: 2px dashed #e2e8f0; padding-top: 4px; font-size: 8.5pt; color: #94a3b8; font-weight: 600; }
+    
+    /* Cover Styling */
+    .cover-container {
+      background: linear-gradient(180deg, #ecfdf5 0%, #d1fae5 40%, #fef3c7 100%);
+      border: 5px double #059669;
+      text-align: center;
+      padding: 10mm 12mm;
+      justify-content: space-between;
+    }
+    .badge-top { display: inline-block; background: #065f46; color: #fef08a; padding: 4px 18px; border-radius: 20px; font-weight: 800; font-size: 10pt; letter-spacing: 0.5px; }
+    .title-deep { font-family: 'Fredoka', sans-serif; font-size: 28pt; color: #064e3b; margin-top: 4px; line-height: 1.1; }
+    .title-deep span { color: #d97706; font-style: italic; }
+    .subtitle-deep { font-family: 'Fredoka', sans-serif; font-size: 15pt; color: #047857; margin-top: 2px; }
+    .badge-bab { display: inline-flex; align-items: center; gap: 8px; margin-top: 6px; }
+    .badge-pill { background: #059669; color: white; padding: 4px 14px; border-radius: 20px; font-weight: 800; font-size: 9.5pt; }
+    .badge-pill.amber { background: #d97706; }
+    .badge-pill.teal { background: #0f766e; }
+
+    .cover-art-box {
+      margin: 8px auto;
+      width: 100%;
+      max-width: 175mm;
+      height: 135mm;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 4px solid #ffffff;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+      background: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .cover-art-box img { width: 100%; height: 100%; object-fit: contain; }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+      margin-top: 6px;
+    }
+    .feature-item {
+      background: white;
+      border: 1px solid #10b981;
+      border-radius: 8px;
+      padding: 5px 8px;
+      font-size: 8.5pt;
+      font-weight: 700;
+      color: #065f46;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    /* Content Components */
+    .section-title {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 13.5pt;
+      color: #065f46;
+      border-bottom: 2px solid #a7f3d0;
+      padding-bottom: 3px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .table-info { width: 100%; border-collapse: collapse; font-size: 9pt; margin-bottom: 10px; }
+    .table-info td { padding: 4px 8px; border: 1px solid #cbd5e1; }
+    .table-info td.header-col { background: #f0fdf4; font-weight: 700; color: #166534; width: 28%; }
+
+    .card-box {
+      background: #ffffff;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 8px 12px;
+      margin-bottom: 8px;
+    }
+    .card-box.green { border-color: #86efac; background: #f0fdf4; }
+    .card-box.amber { border-color: #fcd34d; background: #fffbeb; }
+    .card-box.blue { border-color: #93c5fd; background: #eff6ff; }
+
+    .syntax-step {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 6px;
+      padding: 6px 10px;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-left: 4px solid #059669;
+      border-radius: 6px;
+      font-size: 9pt;
+    }
+    .syntax-step .step-badge {
+      background: #059669;
+      color: white;
+      font-weight: 800;
+      font-size: 8pt;
+      padding: 2px 8px;
+      border-radius: 12px;
+      height: fit-content;
+      white-space: nowrap;
+    }
+
+    /* LKPD Specifics */
+    .lkpd-header {
+      background: linear-gradient(135deg, #059669, #0f766e);
+      color: white;
+      padding: 8px 12px;
+      border-radius: 10px;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .lkpd-title { font-family: 'Fredoka', sans-serif; font-size: 13pt; }
+    .lkpd-identity {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      background: #f8fafc;
+      border: 1.5px dashed #94a3b8;
+      border-radius: 8px;
+      padding: 6px 12px;
+      font-size: 8.5pt;
+      margin-bottom: 8px;
+    }
+
+    .match-container {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 12px;
+      align-items: center;
+      margin: 10px 0;
+    }
+    .letter-card {
+      background: #fdf2f8;
+      border: 2px solid #f472b6;
+      border-radius: 10px;
+      padding: 6px 12px;
+      text-align: center;
+      font-size: 18pt;
+      font-weight: bold;
+      color: #be185d;
+      font-family: 'Traditional Arabic', serif;
+    }
+    .meaning-card {
+      background: #eff6ff;
+      border: 2px solid #60a5fa;
+      border-radius: 10px;
+      padding: 8px 12px;
+      text-align: center;
+      font-size: 10pt;
+      font-weight: 700;
+      color: #1e40af;
+    }
+
+    /* Cut & Paste Flashcard Grid */
+    .flashcard-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin: 8px 0;
+    }
+    .flashcard-item {
+      border: 2px dashed #059669;
+      background: #ffffff;
+      border-radius: 10px;
+      padding: 8px;
+      text-align: center;
+      position: relative;
+    }
+    .flashcard-letter { font-size: 26pt; font-family: 'Traditional Arabic', serif; color: #047857; font-weight: bold; }
+    .flashcard-name { font-size: 9pt; font-weight: 800; color: #1e293b; margin-top: 2px; }
+    .scissors-icon { position: absolute; top: 2px; right: 4px; font-size: 8pt; color: #94a3b8; }
+  </style>
+</head>
+<body>
+
+  <!-- TOP BAR CONTROL -->
+  <div style="position: sticky; top: 0; z-index: 999; background: #064e3b; color: white; padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 8px rgba(0,0,0,0.2);" class="no-print">
+    <div><strong>🌟 CONTOH PURWARUPA:</strong> Modul Ajar Deep Learning PAI Kelas 1 Bab 1 + LKPD Interaktif</div>
+    <div style="display: flex; gap: 10px;">
+      <button onclick="window.print()" style="background: #f59e0b; color: #78350f; border: none; padding: 6px 18px; border-radius: 20px; font-weight: bold; cursor: pointer; font-size: 10pt;">🖨️ Cetak / Download PDF (8 Hal)</button>
+    </div>
+  </div>
+
+  <!-- ==================== HALAMAN 1: COVER MODUL AJAR ==================== -->
+  <div class="page cover-container">
+    <div>
+      <div class="badge-top">🌟 MODUL AJAR UNTUK GURU PAI & BP SD 🌟</div>
+      <h1 class="title-deep">MODUL AJAR <span>Deep Learning</span></h1>
+      <div class="subtitle-deep">PENDIDIKAN AGAMA ISLAM DAN BUDI PEKERTI TERBARU</div>
+      <div class="badge-bab">
+        <span class="badge-pill">BAB 1</span>
+        <span class="badge-pill amber">SEMESTER 1</span>
+        <span class="badge-pill teal">KELAS 1 SD</span>
+      </div>
+      <p style="font-weight: 800; color: #065f46; font-size: 11.5pt; margin-top: 4px;">📖 Tema: Aku Cinta Al-Qur'an (Mengenal Huruf Hijaiyah)</p>
+    </div>
+
+    <!-- 100% Uncropped Full Artwork -->
+    <div class="cover-art-box">
+      <img src="/assets/cover_kelas2.jpg" alt="Ilustrasi Belajar Huruf Hijaiyah di Kelas">
+    </div>
+
+    <div>
+      <div class="feature-grid">
+        <div class="feature-item">✅ Rangkuman Materi Lengkap</div>
+        <div class="feature-item">✅ Pendekatan Deep Learning (PjBL)</div>
+        <div class="feature-item">✅ LKPD 2 Pertemuan Siswa</div>
+        <div class="feature-item">✅ Soal HOTS & Pemecahan Masalah</div>
+        <div class="feature-item">✅ Rubrik Penilaian Otentik Guru</div>
+        <div class="feature-item">✅ Kartu Peraga Flashcard Gunting</div>
+      </div>
+      <div style="margin-top: 8px; background: #065f46; color: white; padding: 5px 18px; border-radius: 20px; font-weight: 800; font-size: 9.5pt; display: inline-block;">
+        🌿 Sesuai Capaian Pembelajaran (CP) BKPDM No. 020 Tahun 2026
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== HALAMAN 2: IDENTITAS & INFORMASI UMUM ==================== -->
+  <div class="page">
+    <div class="page-header"><span>BAGIAN I: INFORMASI UMUM MODUL AJAR</span><span>PAI & BP KELAS 1 SD</span></div>
+    <h2 class="section-title">📋 I. IDENTITAS & DESAIN PEMBELAJARAN</h2>
+
+    <table class="table-info">
+      <tr>
+        <td class="header-col">Penyusun & Instansi</td>
+        <td>Guru PAI & Budi Pekerti / SD Negeri ...........................................</td>
+      </tr>
+      <tr>
+        <td class="header-col">Fase / Kelas / Semester</td>
+        <td><strong>Fase A / Kelas 1 SD / Semester 1 (Ganjil)</strong></td>
+      </tr>
+      <tr>
+        <td class="header-col">Elemen Capaian</td>
+        <td><strong>Al-Qur'an dan Hadis</strong></td>
+      </tr>
+      <tr>
+        <td class="header-col">Alokasi Waktu</td>
+        <td>2 Pertemuan (6 Jam Pelajaran @ 35 Menit)</td>
+      </tr>
+      <tr>
+        <td class="header-col">Model & Pendekatan</td>
+        <td><strong>Deep Learning</strong> (Mindful, Meaningful, Joyful) berbasis <strong>Project Based Learning (PjBL)</strong></td>
+      </tr>
+    </table>
+
+    <div class="card-box green">
+      <strong style="color: #166534; font-size: 10pt;">🎯 Capaian Pembelajaran (CP No. 020 Tahun 2026):</strong>
+      <p style="margin-top: 3px; font-size: 9.5pt; line-height: 1.5; color: #14532d;">
+        Peserta didik mampu mengenal huruf hijaiah berharakat (fatḥah, kasrah, ḍammah) dan melafalkannya dengan makhraj yang benar, serta menunjukkan kecintaan terhadap Al-Qur'an sebagai kitab suci umat Islam melalui pembiasaan sehari-hari.
+      </p>
+    </div>
+
+    <div class="card-box blue">
+      <strong style="color: #1e40af; font-size: 10pt;">📌 Tujuan Pembelajaran (TP) & Kriteria Ketercapaian (KKTP):</strong>
+      <ul style="margin-left: 18px; margin-top: 4px; font-size: 9.3pt; line-height: 1.5; color: #1e3a8a;">
+        <li><strong>TP 1.1:</strong> Peserta didik mampu melafalkan 28 huruf hijaiah tunggal dari Alif hingga Ya dengan makhraj yang tepat.</li>
+        <li><strong>TP 1.2:</strong> Peserta didik mampu membedakan bunyi harakat dasar (fatḥah, kasrah, ḍammah) dengan benar.</li>
+        <li><strong>KKTP:</strong> Siswa dapat melafalkan minimal 20 huruf hijaiah berharakat secara mandiri dan membuat kreasi kartu huruf hijaiah.</li>
+      </ul>
+    </div>
+
+    <div class="card-box amber">
+      <strong style="color: #92400e; font-size: 10pt;">🌟 Dimensi Profil Pelajar Pancasila & Karakter Islami:</strong>
+      <div style="margin-top: 4px; display: grid; grid-template-columns: 1fr 1fr; gap: 6px; font-size: 9pt; color: #78350f;">
+        <div>• <strong>Beriman & Bertakwa:</strong> Membaca basmalah sebelum belajar.</div>
+        <div>• <strong>Gotong Royong:</strong> Bekerja sama menyusun puzzle huruf.</div>
+        <div>• <strong>Mandiri:</strong> Percaya diri melafalkan huruf di depan kelas.</div>
+        <div>• <strong>Bernalar Kritis:</strong> Membedakan bunyi harakat huruf serupa.</div>
+      </div>
+    </div>
+
+    <div class="page-footer"><span>Modul Ajar Deep Learning — PAI Kelas 1</span><span>Halaman 2</span></div>
+  </div>
+
+  <!-- ==================== HALAMAN 3: MATERI PEMBELAJARAN LENGKAP ==================== -->
+  <div class="page">
+    <div class="page-header"><span>BAGIAN II: URAIAN MATERI PEMBELAJARAN</span><span>BAB 1: HURUF HIJAIYAH</span></div>
+    <h2 class="section-title">📖 II. MATERI ESENSIAL: MENGENAL HURUF HIJAIAH</h2>
+
+    <div style="display: flex; gap: 12px; align-items: center; margin-bottom: 8px;">
+      <div style="flex: 1;">
+        <p style="font-size: 9.8pt; line-height: 1.55; text-align: justify; color: #334155;">
+          Al-Qur'an adalah kitab suci umat Islam yang diturunkan oleh Allah Swt. kepada Nabi Muhammad saw. dengan bahasa Arab yang sangat indah. Agar kita bisa membaca Al-Qur'an dengan tartil, langkah pertama yang paling penting adalah mengenal abjad Arab yang dinamakan <strong>huruf hijaiah</strong>.
+        </p>
+        <p style="font-size: 9.8pt; line-height: 1.55; text-align: justify; color: #334155; margin-top: 4px;">
+          Huruf hijaiah berjumlah <strong>28 huruf</strong>, dimulai dari huruf <em>Alif (ا)</em> sampai huruf <em>Ya (ي)</em>. Setiap huruf memiliki tempat keluar bunyi yang disebut <strong>makhārijul ḥurūf</strong> (seperti dari tenggorokan, lidah, atau bibir).
+        </p>
+      </div>
+      <div style="width: 50mm; height: 35mm; border-radius: 10px; overflow: hidden; border: 2px solid #a7f3d0; box-shadow: 0 2px 6px rgba(0,0,0,0.08);">
+        <img src="/assets/quran_rehal.jpg" style="width: 100%; height: 100%; object-fit: cover;" alt="Mushaf Quran">
+      </div>
+    </div>
+
+    <div class="card-box green">
+      <strong style="color: #166534; font-size: 10pt;">🔤 Tabel 28 Huruf Hijaiah Dasar:</strong>
+      <div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; text-align: center; margin-top: 6px;">
+        <div style="background: white; border: 1px solid #86efac; border-radius: 6px; padding: 4px;"><b style="font-size: 15pt;">ا</b><br><small>Alif</small></div>
+        <div style="background: white; border: 1px solid #86efac; border-radius: 6px; padding: 4px;"><b style="font-size: 15pt;">ب</b><br><small>Ba</small></div>
+        <div style="background: white; border: 1px solid #86efac; border-radius: 6px; padding: 4px;"><b style="font-size: 15pt;">ت</b><br><small>Ta</small></div>
+        <div style="background: white; border: 1px solid #86efac; border-radius: 6px; padding: 4px;"><b style="font-size: 15pt;">ث</b><br><small>Sa</small></div>
+        <div style="background: white; border: 1px solid #86efac; border-radius: 6px; padding: 4px;"><b style="font-size: 15pt;">ج</b><br><small>Jim</small></div>
+        <div style="background: white; border: 1px solid #86efac; border-radius: 6px; padding: 4px;"><b style="font-size: 15pt;">ح</b><br><small>Ha</small></div>
+        <div style="background: white; border: 1px solid #86efac; border-radius: 6px; padding: 4px;"><b style="font-size: 15pt;">خ</b><br><small>Kha</small></div>
+        <div style="background: white; border: 1px solid #86efac; border-radius: 6px; padding: 4px;"><b style="font-size: 15pt;">د</b><br><small>Dal</small></div>
+        <div style="background: white; border: 1px solid #86efac; border-radius: 6px; padding: 4px;"><b style="font-size: 15pt;">ذ</b><br><small>Zal</small></div>
+        <div style="background: white; border: 1px solid #86efac; border-radius: 6px; padding: 4px;"><b style="font-size: 15pt;">ر</b><br><small>Ra</small></div>
+        <div style="background: white; border: 1px solid #86efac; border-radius: 6px; padding: 4px;"><b style="font-size: 15pt;">ز</b><br><small>Zai</small></div>
+        <div style="background: white; border: 1px solid #86efac; border-radius: 6px; padding: 4px;"><b style="font-size: 15pt;">س</b><br><small>Sin</small></div>
+        <div style="background: white; border: 1px solid #86efac; border-radius: 6px; padding: 4px;"><b style="font-size: 15pt;">ش</b><br><small>Syin</small></div>
+        <div style="background: white; border: 1px solid #86efac; border-radius: 6px; padding: 4px;"><b style="font-size: 15pt;">ص</b><br><small>Sad</small></div>
+      </div>
+    </div>
+
+    <div class="card-box amber">
+      <strong style="color: #92400e; font-size: 10pt;">🎵 Mengenal 3 Harakat Dasar (Tanda Bunyi Suara):</strong>
+      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-top: 6px; font-size: 9pt;">
+        <div style="background: white; border: 1.5px solid #f59e0b; border-radius: 8px; padding: 6px; text-align: center;">
+          <b style="color: #b45309; font-size: 11pt;">1. Fatḥah ( َ )</b><br>
+          Garis miring di atas huruf.<br>Berbunyi vokal <strong>"A"</strong>.<br>Contoh: <strong>بَ (Ba)</strong>
+        </div>
+        <div style="background: white; border: 1.5px solid #f59e0b; border-radius: 8px; padding: 6px; text-align: center;">
+          <b style="color: #b45309; font-size: 11pt;">2. Kasrah ( ِ )</b><br>
+          Garis miring di bawah huruf.<br>Berbunyi vokal <strong>"I"</strong>.<br>Contoh: <strong>بِ (Bi)</strong>
+        </div>
+        <div style="background: white; border: 1.5px solid #f59e0b; border-radius: 8px; padding: 6px; text-align: center;">
+          <b style="color: #b45309; font-size: 11pt;">3. Ḍammah ( ُ )</b><br>
+          Bentuk seperti waw kecil di atas.<br>Berbunyi vokal <strong>"U"</strong>.<br>Contoh: <strong>بُ (Bu)</strong>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-footer"><span>Modul Ajar Deep Learning — PAI Kelas 1</span><span>Halaman 3</span></div>
+  </div>
+
+  <!-- ==================== HALAMAN 4: SKENARIO DEEP LEARNING (PjBL) ==================== -->
+  <div class="page">
+    <div class="page-header"><span>BAGIAN III: SKENARIO PEMBELAJARAN DEEP LEARNING</span><span>SINTAKS PjBL</span></div>
+    <h2 class="section-title">🚀 III. LANGKAH-LANGKAH PEMBELAJARAN (2 PERTEMUAN)</h2>
+
+    <p style="font-size: 9pt; color: #475569; margin-bottom: 8px;">
+      Menerapkan 3 Pilar Deep Learning: <strong>Mindful</strong> (Sadar & Hadir Penuh), <strong>Meaningful</strong> (Bermakna Relevan), dan <strong>Joyful</strong> (Menyenangkan & Antusias).
+    </p>
+
+    <!-- Pertemuan 1 -->
+    <div style="margin-bottom: 8px;">
+      <div style="background: #065f46; color: white; padding: 4px 10px; border-radius: 6px; font-weight: 800; font-size: 9.5pt; margin-bottom: 4px;">
+        📅 PERTEMUAN 1: Eksplorasi Huruf Hijaiah & Penentuan Proyek (3 JP x 35 Menit)
+      </div>
+      <div class="syntax-step">
+        <span class="step-badge">Awal (15m)</span>
+        <div><strong>Mindful Morning:</strong> Berdoa khusyuk, membaca Basmalah bersama, dan apersepsi video lagu "Alif Ba Ta Ceria". Guru membangun suasana riang dan menumbuhkan rasa ingin tahu siswa.</div>
+      </div>
+      <div class="syntax-step">
+        <span class="step-badge">Inti (75m)</span>
+        <div><strong>Sintaks PjBL:</strong><br>
+        1. <em>Penentuan Pertanyaan Mendasar:</em> "Bagaimana cara kita membuat kartu ajaib agar adik di rumah mudah belajar huruf hijaiah?"<br>
+        2. <em>Mendesain Perencanaan Proyek:</em> Siswa dibagi kelompok kecil untuk merencanakan proyek "Kartu Huruf Hijaiah Bergambar". Siswa memilih huruf yang akan dihias.</div>
+      </div>
+      <div class="syntax-step">
+        <span class="step-badge">Penutup (15m)</span>
+        <div>Refleksi bersama: Tepuk Huruf Hijaiah dan menyimpulkan 5 huruf pertama yang dipelajari. Mengingatkan bahan untuk pertemuan berikutnya.</div>
+      </div>
+    </div>
+
+    <!-- Pertemuan 2 -->
+    <div>
+      <div style="background: #d97706; color: white; padding: 4px 10px; border-radius: 6px; font-weight: 800; font-size: 9.5pt; margin-bottom: 4px;">
+        📅 PERTEMUAN 2: Pembuatan Proyek Kartu Hijaiah & Unjuk Karya (3 JP x 35 Menit)
+      </div>
+      <div class="syntax-step">
+        <span class="step-badge">Awal (15m)</span>
+        <div>Review ceria: Game "Tebak Suara Huruf". Guru menunjukkan kartu huruf, siswa serentak melafalkan bunyinya dengan intonasi gembira.</div>
+      </div>
+      <div class="syntax-step">
+        <span class="step-badge">Inti (75m)</span>
+        <div><strong>Sintaks PjBL Lanjutan:</strong><br>
+        3. <em>Memonitor Keaktifan Proyek:</em> Siswa menggunting, mewarnai, dan menghias kartu huruf hijaiah pada lembar LKPD 2.<br>
+        4. <em>Uji Hasil & Presentasi (Unjuk Karya):</em> Setiap siswa maju membacakan kartu huruf buatannya dengan suara lantang dan percaya diri.</div>
+      </div>
+      <div class="syntax-step">
+        <span class="step-badge">Penutup (15m)</span>
+        <div>Apresiasi "Bintang Anak Saleh", doa penutup majelis, dan komitmen mengaji di rumah bersama orang tua sehabis magrib.</div>
+      </div>
+    </div>
+
+    <div class="page-footer"><span>Modul Ajar Deep Learning — PAI Kelas 1</span><span>Halaman 4</span></div>
+  </div>
+
+  <!-- ==================== HALAMAN 5: LKPD 1 SISWA ==================== -->
+  <div class="page">
+    <div class="page-header"><span>BAGIAN IV: LEMBAR KERJA PESERTA DIDIK (LKPD 1)</span><span>PERTEMUAN 1</span></div>
+    
+    <div class="lkpd-header">
+      <div>
+        <div class="lkpd-title">📝 LKPD 1: Menjodohkan Huruf Hijaiah & Harakat</div>
+        <small>Aktivitas Ceria Menghubungkan Garis & Membaca Nyaring</small>
+      </div>
+      <span style="background: #fef08a; color: #854d0e; padding: 3px 10px; border-radius: 12px; font-weight: 800; font-size: 8.5pt;">NILAI: ______</span>
+    </div>
+
+    <div class="lkpd-identity">
+      <div><strong>Nama Lengkap:</strong> ....................................................</div>
+      <div><strong>Nomor Absen / Kelas:</strong> ............. / 1 SD</div>
+      <div><strong>Hari, Tanggal:</strong> ....................................................</div>
+      <div><strong>Paraf Guru:</strong> .....................................</div>
+    </div>
+
+    <div class="card-box green">
+      <strong>🎯 Petunjuk Aktivitas:</strong>
+      <p style="font-size: 9pt; margin-top: 2px;">Tariklah garis lurus dari huruf hijaiah berharakat di sebelah kiri ke bunyi bacaan yang benar di sebelah kanan!</p>
+    </div>
+
+    <!-- Menjodohkan Visual -->
+    <div class="match-container">
+      <div class="letter-card">بَ</div>
+      <div style="font-size: 16pt; color: #94a3b8;">➔</div>
+      <div class="meaning-card">Dibaca "BI"</div>
+
+      <div class="letter-card">تِ</div>
+      <div style="font-size: 16pt; color: #94a3b8;">➔</div>
+      <div class="meaning-card">Dibaca "BA"</div>
+
+      <div class="letter-card">ثُ</div>
+      <div style="font-size: 16pt; color: #94a3b8;">➔</div>
+      <div class="meaning-card">Dibaca "SU"</div>
+
+      <div class="letter-card">جَ</div>
+      <div style="font-size: 16pt; color: #94a3b8;">➔</div>
+      <div class="meaning-card">Dibaca "JA"</div>
+    </div>
+
+    <div class="card-box amber" style="margin-top: 10px;">
+      <strong style="color: #92400e;">🎨 Ayo Tebak & Lingkari:</strong>
+      <p style="font-size: 9pt; margin-top: 4px; line-height: 1.5;">
+        Manakah di bawah ini yang merupakan harakat <strong>Kasrah (bunyi "I")</strong>?<br>
+        Lingkarilah huruf yang benar: &nbsp;&nbsp;&nbsp;&nbsp; 
+        <span style="font-size: 14pt; font-weight: bold; padding: 2px 10px; border: 1.5px dashed #d97706; border-radius: 6px;">دَ</span> &nbsp;&nbsp;&nbsp;&nbsp;
+        <span style="font-size: 14pt; font-weight: bold; padding: 2px 10px; border: 1.5px dashed #d97706; border-radius: 6px;">دِ</span> &nbsp;&nbsp;&nbsp;&nbsp;
+        <span style="font-size: 14pt; font-weight: bold; padding: 2px 10px; border: 1.5px dashed #d97706; border-radius: 6px;">دُ</span>
+      </p>
+    </div>
+
+    <div class="page-footer"><span>Modul Ajar Deep Learning — PAI Kelas 1</span><span>Halaman 5</span></div>
+  </div>
+
+  <!-- ==================== HALAMAN 6: LKPD 2 SISWA (PROYEK KARTU) ==================== -->
+  <div class="page">
+    <div class="page-header"><span>BAGIAN V: LEMBAR KERJA PESERTA DIDIK (LKPD 2)</span><span>PERTEMUAN 2</span></div>
+
+    <div class="lkpd-header" style="background: linear-gradient(135deg, #d97706, #b45309);">
+      <div>
+        <div class="lkpd-title">✂️ LKPD 2: Proyek Kreasi Kartu Huruf Hijaiah</div>
+        <small>Aktivitas Project Based Learning (PjBL) — Gunting, Hias, & Unjuk Karya</small>
+      </div>
+      <span style="background: #fef08a; color: #854d0e; padding: 3px 10px; border-radius: 12px; font-weight: 800; font-size: 8.5pt;">KREASI SISWA</span>
+    </div>
+
+    <div class="card-box amber">
+      <strong>✂️ Panduan Proyek Gunting & Hias:</strong>
+      <p style="font-size: 8.8pt; margin-top: 2px;">
+        1. Warnailah huruf hijaiah di bawah ini dengan krayon warna-warni kesukaanmu.<br>
+        2. Guntinglah mengikuti garis putus-putus dengan bantuan gurumu.<br>
+        3. Tempelkan pada stik es krim atau kertas karton tebal untuk dipresentasikan di depan kelas!
+      </p>
+    </div>
+
+    <!-- Flashcard Cut Grid -->
+    <div class="flashcard-grid">
+      <div class="flashcard-item">
+        <span class="scissors-icon">✂️</span>
+        <div class="flashcard-letter">اَ</div>
+        <div class="flashcard-name">A</div>
+      </div>
+      <div class="flashcard-item">
+        <span class="scissors-icon">✂️</span>
+        <div class="flashcard-letter">بِ</div>
+        <div class="flashcard-name">BI</div>
+      </div>
+      <div class="flashcard-item">
+        <span class="scissors-icon">✂️</span>
+        <div class="flashcard-letter">تُ</div>
+        <div class="flashcard-name">TU</div>
+      </div>
+      <div class="flashcard-item">
+        <span class="scissors-icon">✂️</span>
+        <div class="flashcard-letter">ثَ</div>
+        <div class="flashcard-name">SA</div>
+      </div>
+      <div class="flashcard-item">
+        <span class="scissors-icon">✂️</span>
+        <div class="flashcard-letter">جِ</div>
+        <div class="flashcard-name">JI</div>
+      </div>
+      <div class="flashcard-item">
+        <span class="scissors-icon">✂️</span>
+        <div class="flashcard-letter">حُ</div>
+        <div class="flashcard-name">HU</div>
+      </div>
+      <div class="flashcard-item">
+        <span class="scissors-icon">✂️</span>
+        <div class="flashcard-letter">خَ</div>
+        <div class="flashcard-name">KHA</div>
+      </div>
+      <div class="flashcard-item">
+        <span class="scissors-icon">✂️</span>
+        <div class="flashcard-letter">دِ</div>
+        <div class="flashcard-name">DI</div>
+      </div>
+    </div>
+
+    <div class="card-box green" style="margin-top: 6px;">
+      <strong style="color: #166534;">🌟 Refleksi Diri Siswa:</strong>
+      <div style="font-size: 8.8pt; margin-top: 4px; display: flex; gap: 15px;">
+        <div>Aku merasa belajar huruf hijaiah hari ini:</div>
+        <div>😃 Sangat Senang [ &nbsp; ]</div>
+        <div>😊 Senang [ &nbsp; ]</div>
+        <div>😐 Biasa Saja [ &nbsp; ]</div>
+      </div>
+    </div>
+
+    <div class="page-footer"><span>Modul Ajar Deep Learning — PAI Kelas 1</span><span>Halaman 6</span></div>
+  </div>
+
+  <!-- ==================== HALAMAN 7: SOAL EVALUASI & HOTS ==================== -->
+  <div class="page">
+    <div class="page-header"><span>BAGIAN VI: ASESMEN SUMATIF & SOAL HOTS</span><span>BAB 1</span></div>
+    <h2 class="section-title">✏️ VI. EVALUASI HASIL BELAJAR BAB 1</h2>
+
+    <p style="font-weight: 700; margin-bottom: 6px; font-size: 9.5pt;">A. Soal Pilihan Ganda (Berilah tanda silang X pada a, b, atau c!):</p>
+    
+    <div style="font-size: 9pt; line-height: 1.5; margin-bottom: 6px;">
+      <strong>1.</strong> Huruf abjad yang digunakan dalam kitab suci Al-Qur'an dinamakan...<br>
+      <span style="margin-left: 14px; color: #334155;">a. Huruf Latin &nbsp;|&nbsp; <strong>b. Huruf Hijaiah</strong> &nbsp;|&nbsp; c. Huruf Angka</span>
+    </div>
+    <div style="font-size: 9pt; line-height: 1.5; margin-bottom: 6px;">
+      <strong>2.</strong> Huruf hijaiah yang pertama adalah...<br>
+      <span style="margin-left: 14px; color: #334155;"><strong>a. Alif (ا)</strong> &nbsp;|&nbsp; b. Ba (ب) &nbsp;|&nbsp; c. Ta (ت)</span>
+    </div>
+    <div style="font-size: 9pt; line-height: 1.5; margin-bottom: 6px;">
+      <strong>3.</strong> Tanda baca garis kecil di bawah huruf yang berbunyi "I" disebut...<br>
+      <span style="margin-left: 14px; color: #334155;">a. Fatḥah &nbsp;|&nbsp; <strong>b. Kasrah</strong> &nbsp;|&nbsp; c. Ḍammah</span>
+    </div>
+    <div style="font-size: 9pt; line-height: 1.5; margin-bottom: 6px;">
+      <strong>4.</strong> Huruf Ba jika diberi tanda ḍammah ( بُ ) maka dibaca...<br>
+      <span style="margin-left: 14px; color: #334155;">a. Ba &nbsp;|&nbsp; b. Bi &nbsp;|&nbsp; <strong>c. Bu</strong></span>
+    </div>
+    <div style="font-size: 9pt; line-height: 1.5; margin-bottom: 8px;">
+      <strong>5.</strong> Jumlah huruf hijaiah dasar secara keseluruhan adalah...<br>
+      <span style="margin-left: 14px; color: #334155;">a. 25 huruf &nbsp;|&nbsp; <strong>b. 28 huruf</strong> &nbsp;|&nbsp; c. 30 huruf</span>
+    </div>
+
+    <div class="card-box green">
+      <strong style="color: #166534; font-size: 9.8pt;">🧠 B. Soal Nalar Kritis (HOTS - Studi Kasus):</strong>
+      <p style="margin-top: 4px; font-size: 9pt; line-height: 1.5; text-align: justify; color: #14532d;">
+        <em>Studi Kasus:</em> Ahmad mendengar adiknya yang masih kecil kesulitan membaca huruf <strong>بَ (Ba)</strong> dan <strong>تَ (Ta)</strong> karena bentuknya hampir mirip. Sebagai kakak yang baik dan menguasai materi, bagaimana cara terbaik Ahmad membantu adiknya agar bisa membedakan kedua huruf tersebut dengan mudah?
+      </p>
+      <div style="margin-top: 6px; border-bottom: 1px dashed #22c55e; height: 18px;"></div>
+      <div style="margin-top: 4px; border-bottom: 1px dashed #22c55e; height: 18px;"></div>
+    </div>
+
+    <div class="card-box amber" style="margin-top: 8px;">
+      <strong style="color: #92400e; font-size: 9pt;">🔑 Kunci Jawaban & Pembahasan:</strong>
+      <div style="font-size: 8.5pt; color: #78350f; margin-top: 3px; line-height: 1.5;">
+        • 1.b | 2.a | 3.b | 4.c | 5.b<br>
+        • <em>Kunci HOTS:</em> Ahmad menjelaskan bahwa huruf Ba memiliki <strong>satu titik di bawah</strong> mangkuknya, sedangkan huruf Ta memiliki <strong>dua titik di atas</strong> mangkuknya.
+      </div>
+    </div>
+
+    <div class="page-footer"><span>Modul Ajar Deep Learning — PAI Kelas 1</span><span>Halaman 7</span></div>
+  </div>
+
+  <!-- ==================== HALAMAN 8: RUBRIK PENILAIAN GURU ==================== -->
+  <div class="page">
+    <div class="page-header"><span>BAGIAN VII: RUBRIK ASESMEN GURU & TANDA TANGAN</span><span>PENUTUP</span></div>
+    <h2 class="section-title">📋 VII. RUBRIK PENILAIAN OTENTIK GURU</h2>
+
+    <table style="width: 100%; border-collapse: collapse; font-size: 8pt; margin-bottom: 8px;">
+      <thead>
+        <tr style="background: #e0f2fe; color: #0369a1;">
+          <th style="border: 1px solid #cbd5e1; padding: 4px; width: 5%;">No</th>
+          <th style="border: 1px solid #cbd5e1; padding: 4px; width: 35%; text-align: left;">Aspek Penilaian</th>
+          <th style="border: 1px solid #cbd5e1; padding: 4px; width: 15%;">4 (Sangat Baik)</th>
+          <th style="border: 1px solid #cbd5e1; padding: 4px; width: 15%;">3 (Baik)</th>
+          <th style="border: 1px solid #cbd5e1; padding: 4px; width: 15%;">2 (Cukup)</th>
+          <th style="border: 1px solid #cbd5e1; padding: 4px; width: 15%;">1 (Bimbingan)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="border: 1px solid #cbd5e1; padding: 4px; text-align: center;">1</td>
+          <td style="border: 1px solid #cbd5e1; padding: 4px;"><strong>Sikap Spiritual & Sosial:</strong><br>Adab membaca Al-Qur'an, berdoa, dan gotong royong</td>
+          <td style="border: 1px solid #cbd5e1; padding: 4px; text-align: center;">Khusyuk, sopan, & sangat aktif</td>
+          <td style="border: 1px solid #cbd5e1; padding: 4px; text-align: center;">Khusyuk & sopan konsisten</td>
+          <td style="border: 1px solid #cbd5e1; padding: 4px; text-align: center;">Cukup khusyuk kadang diingatkan</td>
+          <td style="border: 1px solid #cbd5e1; padding: 4px; text-align: center;">Perlu bimbingan khusus</td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid #cbd5e1; padding: 4px; text-align: center;">2</td>
+          <td style="border: 1px solid #cbd5e1; padding: 4px;"><strong>Keterampilan Pelafalan (Tartil):</strong><br>Melafalkan makhraj huruf & harakat</td>
+          <td style="border: 1px solid #cbd5e1; padding: 4px; text-align: center;">Fasih, lancar, makhraj tepat</td>
+          <td style="border: 1px solid #cbd5e1; padding: 4px; text-align: center;">Lancar, sedikit kekeliruan kecil</td>
+          <td style="border: 1px solid #cbd5e1; padding: 4px; text-align: center;">Kurang lancar namun berusaha</td>
+          <td style="border: 1px solid #cbd5e1; padding: 4px; text-align: center;">Belum lancar melafalkan</td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid #cbd5e1; padding: 4px; text-align: center;">3</td>
+          <td style="border: 1px solid #cbd5e1; padding: 4px;"><strong>Hasil Proyek Kartu (PjBL):</strong><br>Kerapian menggunting, mewarnai, & kreativitas</td>
+          <td style="border: 1px solid #cbd5e1; padding: 4px; text-align: center;">Sangat rapi, indah, & kreatif</td>
+          <td style="border: 1px solid #cbd5e1; padding: 4px; text-align: center;">Rapi dan bersih</td>
+          <td style="border: 1px solid #cbd5e1; padding: 4px; text-align: center;">Cukup rapi</td>
+          <td style="border: 1px solid #cbd5e1; padding: 4px; text-align: center;">Kurang rapi</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Nilai Akhir & Catatan Guru -->
+    <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 8px; margin-bottom: 8px;">
+      <div style="background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 8px; padding: 8px; text-align: center;">
+        <span style="font-size: 8.5pt; font-weight: 700; color: #166534;">NILAI AKHIR MODUL:</span>
+        <div style="font-size: 20pt; font-weight: bold; color: #059669; margin-top: 4px;">______ / 100</div>
+      </div>
+      <div style="background: #f8fafc; border: 1.5px solid #e2e8f0; border-radius: 8px; padding: 6px 10px; font-size: 8.5pt;">
+        <strong>Catatan & Umpan Balik Guru:</strong>
+        <div style="height: 20px; border-bottom: 1px dashed #cbd5e1; margin-top: 2px;"></div>
+        <div style="height: 20px; border-bottom: 1px dashed #cbd5e1; margin-top: 2px;"></div>
+      </div>
+    </div>
+
+    <!-- Tanda Tangan -->
+    <div style="display: flex; justify-content: space-between; margin-top: auto; padding: 0 20px 6px 20px; font-size: 8.5pt;">
+      <div style="text-align: center;">
+        Mengetahui,<br><strong>Orang Tua / Wali Siswa</strong><br><br><br>
+        ( .................................................... )
+      </div>
+      <div style="text-align: center;">
+        Guru Mata Pelajaran,<br><strong>Guru PAI & Budi Pekerti</strong><br><br><br>
+        ( .................................................... )
+      </div>
+    </div>
+
+    <div class="page-footer"><span>Modul Ajar Deep Learning — PAI Kelas 1</span><span>Halaman 8</span></div>
+  </div>
+
+</body>
+</html>
