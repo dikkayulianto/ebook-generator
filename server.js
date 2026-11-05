@@ -903,7 +903,7 @@ async function renderBookHtml(bookData, apiKey) {
     .cover-top-badge { display: inline-block; background: ${gradeTheme.badgeBg}; color: white; padding: 4px 20px; border-radius: 30px; font-weight: 700; font-size: 10.5pt; box-shadow: 0 3px 6px rgba(0,0,0,0.15); }
     .cover-title { font-size: 22pt; font-family: 'Fredoka', sans-serif; color: ${gradeTheme.titleColor}; margin-top: 6px; line-height: 1.2; }
     .cover-subtitle { font-size: 16pt; font-family: 'Fredoka', sans-serif; color: ${gradeTheme.accent}; }
-    .cover-image-container { margin: 8px auto; width: 100%; max-width: 170mm; height: 92mm; border-radius: 16px; overflow: hidden; border: 4px solid #fff; box-shadow: 0 8px 20px rgba(0,0,0,0.15); background: #f0fdf4; }
+    .cover-image-container { margin: 8px auto; width: 100%; max-width: 172mm; height: 102mm; border-radius: 16px; overflow: hidden; border: 4px solid #fff; box-shadow: 0 8px 20px rgba(0,0,0,0.15); background: #f0fdf4; }
     .cover-image-container img { width: 100%; height: 100%; object-fit: cover; display: block; }
     
     .bab-badge { display: inline-flex; align-items: center; color: white; padding: 4px 14px; border-radius: 10px; font-weight: 700; font-size: 10.5pt; font-family: 'Fredoka', sans-serif; }
@@ -911,13 +911,13 @@ async function renderBookHtml(bookData, apiKey) {
     .box-tujuan { background: #eff6ff; border-left: 5px solid #3b82f6; border-radius: 8px; padding: 6px 10px; margin-bottom: 8px; font-size: 9.5pt; }
     
     /* Hero Illustration Banner (Symmetric, balanced, 48mm height) */
-    .chapter-hero-card { margin: 0 auto 8px auto; width: 100%; max-width: 175mm; text-align: center; background: #f8fafc; border: 1.5px solid #cbd5e1; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
-    .chapter-hero-img { width: 100%; height: 48mm; object-fit: cover; display: block; margin: 0 auto; }
+    .chapter-hero-card { margin: 0 auto 12px auto; width: 100%; max-width: 175mm; text-align: center; background: #f8fafc; border: 1.5px solid #cbd5e1; border-radius: 14px; overflow: hidden; box-shadow: 0 3px 10px rgba(0,0,0,0.05); }
+    .chapter-hero-img { width: 100%; height: 75mm; object-fit: cover; display: block; margin: 0 auto; }
     .chapter-caption { font-size: 8.8pt; color: #475569; padding: 4px 12px; background: #f1f5f9; border-top: 1px solid #e2e8f0; text-align: center; }
     
     .box-materi { background: #ffffff; border: 1.5px solid #e2e8f0; border-radius: 10px; padding: 8px 12px; margin-bottom: 6px; }
     .box-materi h3 { font-family: 'Fredoka', sans-serif; color: #0d9488; font-size: 12pt; border-bottom: 1.5px solid #ccfbf1; padding-bottom: 3px; margin-bottom: 6px; }
-    .materi-text { font-size: 9.8pt; line-height: 1.5; color: #334155; text-align: justify; }
+    .materi-text { font-size: 10.5pt; line-height: 1.6; color: #334155; text-align: justify; }
     
     .box-fun { background: #fefce8; border: 1.5px dashed #facc15; border-radius: 8px; padding: 6px 10px; margin: 6px 0; font-size: 9.5pt; }
     .box-latihan { background: #fdf2f8; border: 1.5px solid #f472b6; border-radius: 8px; padding: 8px 12px; margin-top: 6px; }
