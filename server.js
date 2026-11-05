@@ -989,10 +989,780 @@ async function renderBookHtml(bookData, apiKey) {
 </html>`;
 }
 
-// API: Generate E-Book
+
+// Prompt Builder for 8-Page Modul Ajar Deep Learning Per-Bab
+function getModulAjarPrompt(subject, grade, semester, curriculum, chapterNumber, chapterTitle, customNotes, referenceText) {
+  let prompt = `Anda adalah pakar penyusun modul ajar Kurikulum Merdeka dan konsultan pedagogi Deep Learning untuk Sekolah Dasar (SD) terkemuka di Indonesia.
+Tugas Anda adalah menyusun "MODUL AJAR DEEP LEARNING (MINDFUL, MEANINGFUL, JOYFUL) PER-BAB LENGKAP SIAP CETAK (8 HALAMAN)" untuk:
+- Mata Pelajaran: ${subject}
+- Kelas: ${grade} SD
+- Semester: ${semester}
+- Bab ke: ${chapterNumber || 1}
+- Judul Bab / Topik: ${chapterTitle || "Aku Cinta Al-Qur'an (Mengenal Huruf Hijaiyah & Harakat)"}
+- Acuan Kurikulum: ${curriculum || 'CP No. 020 Tahun 2026'}
+- Pendekatan: Deep Learning (Mindful, Meaningful, Joyful) berbasis Project Based Learning (PjBL)`;
+
+  if (referenceText && referenceText.trim().length > 0) {
+    prompt += `\n\nREFERENSI DOKUMEN MATERI DARI PENGGUNA:\n"""\n${referenceText.substring(0, 25000)}\n"""\nATURAN: Gunakan dan kembangkan materi dari referensi dokumen di atas!`;
+  }
+  if (customNotes) {
+    prompt += `\n\nCATATAN KHUSUS PENGGUNA:\n${customNotes}`;
+  }
+
+  prompt += `
+Format output WAJIB berupa JSON murni (valid JSON) tanpa awalan/akhiran markdown seperti \`\`\`json.
+Struktur JSON yang HARUS dikembalikan:
+{
+  "subject": "${subject}",
+  "grade": "${grade}",
+  "semester": "${semester}",
+  "curriculum": "${curriculum}",
+  "chapterNumber": ${chapterNumber || 1},
+  "chapterTitle": "${chapterTitle || 'Topik Pembelajaran'}",
+  "theme": "Tema Pembelajaran Ramah Anak",
+  "identity": {
+    "penyusun": "Guru PAI & Budi Pekerti",
+    "instansi": "SD Negeri ...........................................",
+    "fase": "Fase A",
+    "elemen": "Al-Qur'an dan Hadis",
+    "alokasi": "2 Pertemuan (6 Jam Pelajaran @ 35 Menit)",
+    "model": "Deep Learning (Mindful, Meaningful, Joyful) berbasis Project Based Learning (PjBL)"
+  },
+  "cp": "Teks Capaian Pembelajaran resmi sesuai CP No. 020 Tahun 2026 secara lengkap.",
+  "tpList": [
+    "TP 1.1: Menjelaskan / melafalkan ...",
+    "TP 1.2: Mempraktikkan / membedakan ..."
+  ],
+  "kktp": "Kriteria ketercapaian tujuan pembelajaran konkret...",
+  "profilPancasila": [
+    { "dimensi": "Beriman & Bertakwa", "deskripsi": "Membaca basmalah dan doa sebelum belajar" },
+    { "dimensi": "Gotong Royong", "deskripsi": "Bekerja sama dalam proyek kelompok" },
+    { "dimensi": "Mandiri", "deskripsi": "Percaya diri melafalkan materi di depan kelas" },
+    { "dimensi": "Bernalar Kritis", "deskripsi": "Menganalisis perbedaan konsep/tanda baca" }
+  ],
+  "sarana": {
+    "media": "LCD Proyektor, Kartu Huruf/Konsep 3D Berwarna, Puzzle Kayu, Gunting Siswa, Audio Murottal",
+    "sumber": "Buku Guru & Siswa Kelas ${grade} Kemendikbudristek 2024, Pedoman Tajwid/Iqro', Mushaf Standar Kemenag RI"
+  },
+  "targetDanPilar": {
+    "target": "28 Peserta Didik Reguler Fase A (dilengkapi bimbingan diferensiasi & pengayaan)",
+    "pilar": "Mindful (fokus tadabbur), Meaningful (kaitan hidup nyata), Joyful (permainan kartu edukatif)"
+  },
+  "pemahamanBermakna": "Penjelasan mendalam mengapa materi ini sangat penting bagi kehidupan dunia-akhirat peserta didik...",
+  "pertanyaanPemantik": [
+    "1. Pertanyaan pemantik 1 yang menggugah rasa ingin tahu siswa...",
+    "2. Pertanyaan pemantik 2 yang menghubungkan materi dengan kebiasaan sehari-hari..."
+  ],
+  "petaAlur": [
+    "1. Observasi & Pemahaman Awal",
+    "2. Eksplorasi & Artikulasi",
+    "3. Pemantapan Makna & Aturan",
+    "4. Kreasi Proyek Karya Nyata"
+  ],
+  "materi": {
+    "paragraf1": "Penjelasan paragraf 1 mendalam tentang urgensi topik ini...",
+    "paragraf2": "Penjelasan paragraf 2 langkah dan konsep dasar...",
+    "subMateriA": {
+      "subTitle": "A. Konsep & Pengenalan Inti",
+      "content": "Uraian komprehensif sub-materi A minimal 2-3 paragraf panjang..."
+    },
+    "subMateriB": {
+      "subTitle": "B. Kaidah, Praktik & Penerapan",
+      "content": "Uraian komprehensif sub-materi B minimal 2-3 paragraf panjang..."
+    },
+    "adab": "Adab dan budi pekerti terpuji yang menyertai materi ini..."
+  },
+  "skenario": {
+    "pertemuan1": {
+      "judul": "Pertemuan 1: Eksplorasi Konsep & Praktik Mandiri (3 JP)",
+      "mindful": "Aktivitas pembuka yang menenangkan: hening, doa, tadabbur singkat...",
+      "meaningful": "Eksplorasi konsep dan mengaitkan dengan kehidupan nyata siswa...",
+      "joyful": "Permainan edukatif, game tebak konsep, atau lagu belajar ceria..."
+    },
+    "pertemuan2": {
+      "judul": "Pertemuan 2: Proyek Karya Kolaboratif & Unjuk Kerja (3 JP)",
+      "mindful": "Fokus mengamati contoh proyek karya yang akan dikerjakan...",
+      "meaningful": "Bekerja sama dalam kelompok menyelesaikan proyek portofolio...",
+      "joyful": "Apresiasi karya, saling memuji hasil proyek teman, dan refleksi bahagia..."
+    }
+  },
+  "lkpd1": {
+    "title": "LKPD Pertemuan 1: Lembar Aktivitas Menjodohkan",
+    "petunjuk": "Tarik garis lurus dari kotak sebelah kiri ke kotak sebelah kanan yang sesuai!",
+    "items": [
+      { "left": "Soal / Huruf 1", "right": "Pasangan / Arti 1" },
+      { "left": "Soal / Huruf 2", "right": "Pasangan / Arti 2" },
+      { "left": "Soal / Huruf 3", "right": "Pasangan / Arti 3" },
+      { "left": "Soal / Huruf 4", "right": "Pasangan / Arti 4" }
+    ]
+  },
+  "lkpd2": {
+    "title": "LKPD Pertemuan 2: Proyek Flashcard Gunting & Tempel",
+    "petunjuk": "Guntinglah kartu-kartu berikut di sepanjang garis putus-putus secara rapi, lalu tempelkan pada lembar kerja portofoliomu!",
+    "cards": [
+      { "symbol": "Kartu 1", "label": "Keterangan 1", "detail": "Suara / Bunyi 1" },
+      { "symbol": "Kartu 2", "label": "Keterangan 2", "detail": "Suara / Bunyi 2" },
+      { "symbol": "Kartu 3", "label": "Keterangan 3", "detail": "Suara / Bunyi 3" },
+      { "symbol": "Kartu 4", "label": "Keterangan 4", "detail": "Suara / Bunyi 4" },
+      { "symbol": "Kartu 5", "label": "Keterangan 5", "detail": "Suara / Bunyi 5" },
+      { "symbol": "Kartu 6", "label": "Keterangan 6", "detail": "Suara / Bunyi 6" },
+      { "symbol": "Kartu 7", "label": "Keterangan 7", "detail": "Suara / Bunyi 7" },
+      { "symbol": "Kartu 8", "label": "Keterangan 8", "detail": "Suara / Bunyi 8" }
+    ]
+  },
+  "asesmen": [
+    { "no": 1, "question": "Pertanyaan nomor 1 pemahaman konsep...", "options": ["a. Pilihan 1", "b. Pilihan 2", "c. Pilihan 3"], "answer": "a", "isHots": false },
+    { "no": 2, "question": "Pertanyaan nomor 2 penerapan...", "options": ["a. Pilihan 1", "b. Pilihan 2", "c. Pilihan 3"], "answer": "b", "isHots": false },
+    { "no": 3, "question": "Pertanyaan nomor 3 pemahaman...", "options": ["a. Pilihan 1", "b. Pilihan 2", "c. Pilihan 3"], "answer": "c", "isHots": false },
+    { "no": 4, "question": "Pertanyaan nomor 4 studi kasus nyata...", "options": ["a. Pilihan 1", "b. Pilihan 2", "c. Pilihan 3"], "answer": "a", "isHots": true },
+    { "no": 5, "question": "Pertanyaan nomor 5 soal HOTS pemecahan masalah...", "options": ["a. Pilihan 1", "b. Pilihan 2", "c. Pilihan 3"], "answer": "b", "isHots": true }
+  ],
+  "rubrik": [
+    { "kriteria": "Penguasaan Konsep / Pelafalan", "perluBimbingan": "Belum mampu...", "cukup": "Mampu dengan bimbingan...", "baik": "Mampu secara mandiri...", "sangatBaik": "Sangat lancar dan tepat..." },
+    { "kriteria": "Penerapan & Kaidah Materi", "perluBimbingan": "Masih keliru...", "cukup": "Tepat sebagian...", "baik": "Tepat dan rapi...", "sangatBaik": "Sangat teliti dan konsisten..." },
+    { "kriteria": "Kreativitas & Kerapian Proyek LKPD", "perluBimbingan": "Belum rapi...", "cukup": "Cukup rapi...", "baik": "Rapi dan kreatif...", "sangatBaik": "Sangat rapi, indah, dan inovatif..." },
+    { "kriteria": "Sikap Gotong Royong & Karakter", "perluBimbingan": "Pasif...", "cukup": "Mulai terlibat...", "baik": "Aktif bekerja sama...", "sangatBaik": "Sangat antusias, solutif, dan santun..." }
+  ]
+}`;
+  return prompt;
+}
+
+// Template Builder for 8-Page Modul Ajar Deep Learning
+async function renderModulAjarHtml(modulData) {
+  const g = parseInt(modulData.grade) || 1;
+  const gradeTheme = getGradeTheme(g);
+  const coverImg = modulData.coverImage || gradeTheme.coverImg || '/assets/cover_kelas2.jpg';
+  
+  const tpItems = (modulData.tpList || []).map(tp => `<li><strong>${tp}</strong></li>`).join('');
+  const profilItems = (modulData.profilPancasila || []).map(p => `<div>• <strong>${p.dimensi}:</strong> ${p.deskripsi}</div>`).join('');
+  const alurItems = (modulData.petaAlur || []).map(step => `<span style="background: white; padding: 2px 8px; border-radius: 4px; border: 1px solid #cbd5e1;">${step}</span>`).join(' ➔ ');
+
+  const lkpd1Items = (modulData.lkpd1?.items || []).map(item => `
+    <div style="display: grid; grid-template-columns: 1fr auto 1fr; gap: 12px; align-items: center; margin-bottom: 8px;">
+      <div style="background: #fdf2f8; border: 2px solid #f472b6; border-radius: 8px; padding: 6px 12px; font-weight: bold; font-size: 11pt; color: #be185d; text-align: center;">${item.left || item.huruf || ''}</div>
+      <div style="color: #94a3b8; font-weight: bold;">➔</div>
+      <div style="background: #eff6ff; border: 2px solid #60a5fa; border-radius: 8px; padding: 6px 12px; font-weight: 700; font-size: 9.5pt; color: #1e40af; text-align: center;">${item.right || item.arti || item.latin || ''}</div>
+    </div>
+  `).join('');
+
+  const lkpd2Cards = (modulData.lkpd2?.cards || []).map(card => `
+    <div style="border: 2px dashed #059669; background: #ffffff; border-radius: 10px; padding: 8px; text-align: center; position: relative;">
+      <span style="position: absolute; top: 2px; right: 4px; font-size: 8pt; color: #94a3b8;">✂️</span>
+      <div style="font-size: 22pt; color: #047857; font-weight: bold; font-family: 'Traditional Arabic', serif;">${card.symbol || card.huruf || ''}</div>
+      <div style="font-size: 9pt; font-weight: 800; color: #1e293b; margin-top: 2px;">${card.label || card.nama || ''}</div>
+      <div style="font-size: 8pt; color: #059669; font-weight: 700;">${card.detail || card.suara || ''}</div>
+    </div>
+  `).join('');
+
+  const questionsHtml = (modulData.asesmen || []).map((q, idx) => `
+    <div style="margin-bottom: 7px; background: ${q.isHots ? '#fffbeb' : '#ffffff'}; border: 1px solid ${q.isHots ? '#f59e0b' : '#e2e8f0'}; border-radius: 8px; padding: 5px 9px; font-size: 9.2pt;">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 6px;">
+        <div><strong>${idx + 1}. ${q.question}</strong></div>
+        ${q.isHots ? '<span style="background: #f59e0b; color: white; font-weight: 800; font-size: 7.5pt; padding: 1px 6px; border-radius: 10px; white-space: nowrap;">🔥 HOTS</span>' : ''}
+      </div>
+      <div style="margin-top: 3px; margin-left: 10px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 4px; font-size: 8.8pt; color: #334155;">
+        ${(q.options || []).map(opt => `<div>${opt}</div>`).join('')}
+      </div>
+    </div>
+  `).join('');
+
+  const rubrikRows = (modulData.rubrik || []).map(r => `
+    <tr>
+      <td style="padding: 4px 7px; border: 1px solid #cbd5e1; font-weight: 700; color: #166534; background: #f0fdf4;">${r.kriteria}</td>
+      <td style="padding: 4px 7px; border: 1px solid #cbd5e1; font-size: 8.2pt;">${r.perluBimbingan}</td>
+      <td style="padding: 4px 7px; border: 1px solid #cbd5e1; font-size: 8.2pt;">${r.cukup}</td>
+      <td style="padding: 4px 7px; border: 1px solid #cbd5e1; font-size: 8.2pt;">${r.baik}</td>
+      <td style="padding: 4px 7px; border: 1px solid #cbd5e1; font-size: 8.2pt;">${r.sangatBaik}</td>
+    </tr>
+  `).join('');
+
+  return `<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Modul Ajar Deep Learning - ${modulData.subject} Kelas ${modulData.grade} Bab ${modulData.chapterNumber}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+    body { font-family: 'Nunito', sans-serif; color: #1e293b; background: #e2e8f0; font-size: 10pt; line-height: 1.45; }
+    @page { size: A4 portrait; margin: 0; }
+    .page {
+      width: 210mm;
+      height: 297mm;
+      max-height: 297mm;
+      margin: 15px auto;
+      background: #ffffff;
+      padding: 9mm 13mm 9mm 13mm;
+      position: relative;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      page-break-after: always;
+      page-break-inside: avoid;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
+    }
+    @media print {
+      html, body {
+        width: 210mm !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        background: transparent !important;
+      }
+      .page {
+        margin: 0 !important;
+        box-shadow: none !important;
+        width: 210mm !important;
+        height: 297mm !important;
+        max-height: 297mm !important;
+        padding: 9mm 13mm 9mm 13mm !important;
+        page-break-after: always !important;
+        page-break-inside: avoid !important;
+        overflow: hidden !important;
+      }
+      .no-print { display: none !important; }
+    }
+    .page-header { display: flex; justify-content: space-between; border-bottom: 2px dashed #a7f3d0; padding-bottom: 3px; margin-bottom: 7px; font-size: 8.5pt; color: #059669; font-weight: 700; text-transform: uppercase; }
+    .page-footer { margin-top: auto; display: flex; justify-content: space-between; border-top: 2px dashed #e2e8f0; padding-top: 3px; font-size: 8.5pt; color: #94a3b8; font-weight: 600; }
+    
+    /* Cover Styling */
+    .cover-container {
+      background: linear-gradient(180deg, #ecfdf5 0%, #d1fae5 40%, #fef3c7 100%);
+      border: 5px double #059669;
+      text-align: center;
+      padding: 8mm 12mm;
+      justify-content: space-between;
+    }
+    .badge-top { display: inline-block; background: #065f46; color: #fef08a; padding: 4px 18px; border-radius: 20px; font-weight: 800; font-size: 9.5pt; letter-spacing: 0.5px; }
+    .title-deep { font-family: 'Fredoka', sans-serif; font-size: 26pt; color: #064e3b; margin-top: 3px; line-height: 1.1; }
+    .title-deep span { color: #d97706; font-style: italic; }
+    .subtitle-deep { font-family: 'Fredoka', sans-serif; font-size: 13.5pt; color: #047857; margin-top: 2px; }
+    .badge-bab { display: inline-flex; align-items: center; gap: 8px; margin-top: 4px; }
+    .badge-pill { background: #059669; color: white; padding: 3px 12px; border-radius: 20px; font-weight: 800; font-size: 9pt; }
+    .badge-pill.amber { background: #d97706; }
+    .badge-pill.teal { background: #0f766e; }
+
+    /* Cover Art Box (Uncropped, No White Border Box) */
+    .cover-art-box {
+      margin: 6px auto;
+      width: 100%;
+      height: 142mm;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 2px solid #059669;
+      box-shadow: 0 6px 20px rgba(5,150,105,0.25);
+      background: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .cover-art-box img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 5px;
+      margin-top: 5px;
+    }
+    .feature-item {
+      background: white;
+      border: 1px solid #10b981;
+      border-radius: 8px;
+      padding: 4px 8px;
+      font-size: 8.2pt;
+      font-weight: 700;
+      color: #065f46;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .section-title {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 12.5pt;
+      color: #065f46;
+      border-bottom: 2px solid #a7f3d0;
+      padding-bottom: 2px;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .table-info { width: 100%; border-collapse: collapse; font-size: 8.8pt; margin-bottom: 6px; }
+    .table-info td { padding: 3.5px 7px; border: 1px solid #cbd5e1; }
+    .table-info td.header-col { background: #f0fdf4; font-weight: 700; color: #166534; width: 27%; }
+
+    .card-box {
+      background: #ffffff;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 6px 10px;
+      margin-bottom: 6px;
+    }
+    .card-box.green { border-color: #86efac; background: #f0fdf4; }
+    .card-box.amber { border-color: #fcd34d; background: #fffbeb; }
+    .card-box.blue { border-color: #93c5fd; background: #eff6ff; }
+
+    .syntax-step {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 5px;
+      padding: 5px 8px;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-left: 4px solid #059669;
+      border-radius: 6px;
+      font-size: 8.8pt;
+    }
+    .syntax-step .step-badge {
+      background: #059669;
+      color: white;
+      font-weight: 800;
+      font-size: 7.8pt;
+      padding: 2px 7px;
+      border-radius: 12px;
+      height: fit-content;
+      white-space: nowrap;
+    }
+    .lkpd-header {
+      background: linear-gradient(135deg, #059669, #0f766e);
+      color: white;
+      padding: 6px 10px;
+      border-radius: 8px;
+      margin-bottom: 6px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .lkpd-title { font-family: 'Fredoka', sans-serif; font-size: 12pt; }
+    .lkpd-identity {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      background: #f8fafc;
+      border: 1.5px dashed #94a3b8;
+      border-radius: 8px;
+      padding: 5px 10px;
+      font-size: 8.2pt;
+      margin-bottom: 6px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP BAR CONTROL -->
+  <div style="position: sticky; top: 0; z-index: 999; background: #064e3b; color: white; padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 8px rgba(0,0,0,0.2);" class="no-print">
+    <div><strong>🌟 MODUL AJAR DEEP LEARNING:</strong> ${modulData.subject} Kelas ${modulData.grade} Bab ${modulData.chapterNumber}</div>
+    <div style="display: flex; gap: 10px;">
+      <button onclick="window.print()" style="background: #f59e0b; color: #78350f; border: none; padding: 6px 18px; border-radius: 20px; font-weight: bold; cursor: pointer; font-size: 10pt;">🖨️ Cetak / Download PDF (8 Hal)</button>
+    </div>
+  </div>
+
+  <!-- ==================== HALAMAN 1: COVER MODUL AJAR ==================== -->
+  <div class="page cover-container">
+    <div>
+      <div class="badge-top">🌟 MODUL AJAR UNTUK GURU ${modulData.subject.toUpperCase()} 🌟</div>
+      <h1 class="title-deep">MODUL AJAR <span>Deep Learning</span></h1>
+      <div class="subtitle-deep">${modulData.subject.toUpperCase()} TERBARU</div>
+      <div class="badge-bab">
+        <span class="badge-pill">BAB ${modulData.chapterNumber}</span>
+        <span class="badge-pill amber">SEMESTER ${modulData.semester}</span>
+        <span class="badge-pill teal">KELAS ${modulData.grade} SD</span>
+      </div>
+      <p style="font-weight: 800; color: #065f46; font-size: 11pt; margin-top: 4px;">📖 Tema: ${modulData.chapterTitle}</p>
+    </div>
+
+    <!-- 100% Uncropped Full Artwork (Zero White Box) -->
+    <div class="cover-art-box">
+      <img src="${coverImg}" alt="Ilustrasi ${modulData.chapterTitle}">
+    </div>
+
+    <div>
+      <div class="feature-grid">
+        <div class="feature-item">✅ Rangkuman Materi Lengkap</div>
+        <div class="feature-item">✅ Pendekatan Deep Learning (PjBL)</div>
+        <div class="feature-item">✅ LKPD 2 Pertemuan Siswa</div>
+        <div class="feature-item">✅ Soal HOTS & Pemecahan Masalah</div>
+        <div class="feature-item">✅ Rubrik Penilaian Otentik Guru</div>
+        <div class="feature-item">✅ Kartu Peraga Flashcard Gunting</div>
+      </div>
+      <div style="margin-top: 6px; background: #065f46; color: white; padding: 4px 16px; border-radius: 20px; font-weight: 800; font-size: 9pt; display: inline-block;">
+        🌿 Sesuai Capaian Pembelajaran (CP) BKPDM No. 020 Tahun 2026
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== HALAMAN 2: IDENTITAS & INFORMASI UMUM (FULL SPACE) ==================== -->
+  <div class="page">
+    <div class="page-header"><span>BAGIAN I: INFORMASI UMUM MODUL AJAR</span><span>${modulData.subject} KELAS ${modulData.grade}</span></div>
+    <h2 class="section-title">📋 I. IDENTITAS & DESAIN PEMBELAJARAN</h2>
+
+    <table class="table-info">
+      <tr>
+        <td class="header-col">Penyusun & Instansi</td>
+        <td>${modulData.identity?.penyusun || 'Guru PAI & Budi Pekerti'} / ${modulData.identity?.instansi || 'SD Negeri ...........................................'}</td>
+      </tr>
+      <tr>
+        <td class="header-col">Fase / Kelas / Semester</td>
+        <td><strong>${modulData.identity?.fase || 'Fase A'} / Kelas ${modulData.grade} SD / Semester ${modulData.semester}</strong></td>
+      </tr>
+      <tr>
+        <td class="header-col">Elemen Capaian</td>
+        <td><strong>${modulData.identity?.elemen || 'Al-Qur\'an dan Hadis'}</strong></td>
+      </tr>
+      <tr>
+        <td class="header-col">Alokasi Waktu</td>
+        <td>${modulData.identity?.alokasi || '2 Pertemuan (6 Jam Pelajaran @ 35 Menit)'}</td>
+      </tr>
+      <tr>
+        <td class="header-col">Model & Pendekatan</td>
+        <td><strong>${modulData.identity?.model || 'Deep Learning berbasis PjBL'}</strong></td>
+      </tr>
+    </table>
+
+    <div class="card-box green">
+      <strong style="color: #166534; font-size: 9.5pt;">🎯 Capaian Pembelajaran (CP No. 020 Tahun 2026):</strong>
+      <p style="margin-top: 2px; font-size: 8.8pt; line-height: 1.45; color: #14532d;">${modulData.cp}</p>
+    </div>
+
+    <div class="card-box blue">
+      <strong style="color: #1e40af; font-size: 9.5pt;">📌 Tujuan Pembelajaran (TP) & Kriteria Ketercapaian (KKTP):</strong>
+      <ul style="margin-left: 16px; margin-top: 3px; font-size: 8.8pt; line-height: 1.45; color: #1e3a8a;">
+        ${tpItems}
+        <li><strong>KKTP:</strong> ${modulData.kktp}</li>
+      </ul>
+    </div>
+
+    <div class="card-box amber">
+      <strong style="color: #92400e; font-size: 9.5pt;">🌟 Dimensi Profil Pelajar Pancasila & Karakter:</strong>
+      <div style="margin-top: 3px; display: grid; grid-template-columns: 1fr 1fr; gap: 4px; font-size: 8.5pt; color: #78350f;">
+        ${profilItems}
+      </div>
+    </div>
+
+    <!-- Media, Sarana & Prasarana -->
+    <div class="card-box" style="background: #fafaf9; border-color: #d6d3d1; padding: 5px 8px;">
+      <strong style="color: #44403c; font-size: 9.2pt;">🛠️ Sarana, Prasarana & Sumber Belajar:</strong>
+      <div style="margin-top: 2px; display: grid; grid-template-columns: 1.2fr 1fr; gap: 6px; font-size: 8.2pt; color: #292524;">
+        <div><strong>• Media & Alat:</strong> ${modulData.sarana?.media || 'LCD Proyektor, Kartu Peraga 3D, Puzzle, Gunting & Lem, Audio'}</div>
+        <div><strong>• Sumber Belajar:</strong> ${modulData.sarana?.sumber || 'Buku Guru & Siswa Kemendikbudristek, Mushaf Standar Kemenag RI'}</div>
+      </div>
+    </div>
+
+    <!-- Target & Model Pembelajaran Deep Learning -->
+    <div class="card-box" style="background: #fdf4ff; border-color: #f0abfc; padding: 5px 8px;">
+      <strong style="color: #86198f; font-size: 9.2pt;">👥 Target Peserta Didik & Kerangka Deep Learning:</strong>
+      <div style="margin-top: 2px; display: grid; grid-template-columns: 1fr 1fr; gap: 6px; font-size: 8.2pt; color: #701a75;">
+        <div><strong>• Target:</strong> ${modulData.targetDanPilar?.target || '28 Siswa Reguler (diferensiasi bimbingan & pengayaan)'}</div>
+        <div><strong>• 3 Pilar:</strong> ${modulData.targetDanPilar?.pilar || 'Mindful (keheningan), Meaningful (relevansi), Joyful (kartu peraga)'}</div>
+      </div>
+    </div>
+
+    <!-- Pemahaman Bermakna & Pertanyaan Pemantik -->
+    <div class="card-box" style="background: #ecfdf5; border-color: #a7f3d0; padding: 5px 8px;">
+      <strong style="color: #065f46; font-size: 9.2pt;">💡 Pemahaman Bermakna (Meaningful Learning):</strong>
+      <p style="margin-top: 2px; font-size: 8.3pt; color: #047857; line-height: 1.4;">${modulData.pemahamanBermakna}</p>
+      <div style="margin-top: 3px; border-top: 1px dashed #6ee7b7; padding-top: 2px;">
+        <strong style="color: #065f46; font-size: 8.7pt;">❓ Pertanyaan Pemantik:</strong>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-top: 1px; font-size: 8.2pt; color: #047857;">
+          ${(modulData.pertanyaanPemantik || []).map(q => `<div>${q}</div>`).join('')}
+        </div>
+      </div>
+    </div>
+
+    <!-- Peta Alur Bab -->
+    <div style="background: #f1f5f9; border: 1px dashed #94a3b8; border-radius: 6px; padding: 4px 8px; display: flex; align-items: center; justify-content: space-between; font-size: 8pt; font-weight: 700; color: #334155;">
+      <span style="color: #0f172a;">🗺️ Alur Belajar:</span>
+      ${alurItems}
+    </div>
+
+    <div class="page-footer"><span>Modul Ajar Deep Learning — ${modulData.subject} Kelas ${modulData.grade}</span><span>Halaman 2</span></div>
+  </div>
+
+  <!-- ==================== HALAMAN 3: MATERI PEMBELAJARAN LENGKAP ==================== -->
+  <div class="page">
+    <div class="page-header"><span>BAGIAN II: URAIAN MATERI PEMBELAJARAN</span><span>BAB ${modulData.chapterNumber}: ${modulData.chapterTitle.toUpperCase()}</span></div>
+    <h2 class="section-title">📖 II. MATERI ESENSIAL: ${modulData.chapterTitle.toUpperCase()}</h2>
+
+    <div style="display: flex; gap: 12px; align-items: center; margin-bottom: 8px;">
+      <div style="flex: 1;">
+        <p style="font-size: 9.3pt; line-height: 1.5; text-align: justify; color: #334155;">${modulData.materi?.paragraf1 || ''}</p>
+        <p style="font-size: 9.3pt; line-height: 1.5; text-align: justify; color: #334155; margin-top: 4px;">${modulData.materi?.paragraf2 || ''}</p>
+      </div>
+      <div style="width: 50mm; height: 35mm; border-radius: 10px; overflow: hidden; border: 2px solid #a7f3d0; box-shadow: 0 2px 6px rgba(0,0,0,0.08);">
+        <img src="/assets/quran_rehal.jpg" style="width: 100%; height: 100%; object-fit: cover;" alt="Visual Materi">
+      </div>
+    </div>
+
+    <div class="card-box green">
+      <strong style="color: #166534; font-size: 9.8pt;">${modulData.materi?.subMateriA?.subTitle || 'A. Materi Bagian 1'}:</strong>
+      <p style="margin-top: 3px; font-size: 9pt; line-height: 1.5; color: #14532d; text-align: justify;">${modulData.materi?.subMateriA?.content || ''}</p>
+    </div>
+
+    <div class="card-box blue">
+      <strong style="color: #1e40af; font-size: 9.8pt;">${modulData.materi?.subMateriB?.subTitle || 'B. Materi Bagian 2'}:</strong>
+      <p style="margin-top: 3px; font-size: 9pt; line-height: 1.5; color: #1e3a8a; text-align: justify;">${modulData.materi?.subMateriB?.content || ''}</p>
+    </div>
+
+    <div class="card-box amber">
+      <strong style="color: #92400e; font-size: 9.8pt;">🌿 Adab & Budi Pekerti Terpuji:</strong>
+      <p style="margin-top: 3px; font-size: 9pt; line-height: 1.5; color: #78350f;">${modulData.materi?.adab || 'Menjaga kebersihan dan adab santun dalam setiap aktivitas belajar.'}</p>
+    </div>
+
+    <div class="page-footer"><span>Modul Ajar Deep Learning — ${modulData.subject} Kelas ${modulData.grade}</span><span>Halaman 3</span></div>
+  </div>
+
+  <!-- ==================== HALAMAN 4: SKENARIO DEEP LEARNING (PjBL) ==================== -->
+  <div class="page">
+    <div class="page-header"><span>BAGIAN III: SKENARIO PEMBELAJARAN DEEP LEARNING</span><span>SINTAKS PjBL</span></div>
+    <h2 class="section-title">🚀 III. LANGKAH-LANGKAH PEMBELAJARAN (DEEP LEARNING PjBL)</h2>
+
+    <!-- PERTEMUAN 1 -->
+    <div class="card-box" style="border-left: 4px solid #059669; margin-bottom: 8px;">
+      <h3 style="color: #065f46; font-size: 10.5pt; font-family: 'Fredoka', sans-serif;">📍 ${modulData.skenario?.pertemuan1?.judul || 'Pertemuan 1: Eksplorasi Konsep & Praktik'}</h3>
+      <div style="margin-top: 4px;">
+        <div class="syntax-step">
+          <span class="step-badge" style="background: #0284c7;">1. MINDFUL</span>
+          <div><strong>Keheningan & Fokus (Mindful Opening):</strong> ${modulData.skenario?.pertemuan1?.mindful || 'Membaca doa dan fokus tadabbur.'}</div>
+        </div>
+        <div class="syntax-step">
+          <span class="step-badge" style="background: #059669;">2. MEANINGFUL</span>
+          <div><strong>Eksplorasi Bermakna (Core Activity):</strong> ${modulData.skenario?.pertemuan1?.meaningful || 'Mengkaji materi dan relevansi dengan kehidupan nyata.'}</div>
+        </div>
+        <div class="syntax-step">
+          <span class="step-badge" style="background: #ea580c;">3. JOYFUL</span>
+          <div><strong>Aktivitas Ceria (Joyful Closing):</strong> ${modulData.skenario?.pertemuan1?.joyful || 'Game edukatif dan tepuk anak soleh.'}</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PERTEMUAN 2 -->
+    <div class="card-box" style="border-left: 4px solid #d97706; margin-bottom: 8px;">
+      <h3 style="color: #92400e; font-size: 10.5pt; font-family: 'Fredoka', sans-serif;">📍 ${modulData.skenario?.pertemuan2?.judul || 'Pertemuan 2: Proyek Karya Kolaboratif'}</h3>
+      <div style="margin-top: 4px;">
+        <div class="syntax-step">
+          <span class="step-badge" style="background: #0284c7;">1. MINDFUL</span>
+          <div><strong>Fokus Perencanaan Proyek:</strong> ${modulData.skenario?.pertemuan2?.mindful || 'Mempersiapkan alat kerja dan pembagian tugas kelompok.'}</div>
+        </div>
+        <div class="syntax-step">
+          <span class="step-badge" style="background: #059669;">2. MEANINGFUL</span>
+          <div><strong>Penyelesaian Proyek Karya (PjBL):</strong> ${modulData.skenario?.pertemuan2?.meaningful || 'Membuat karya kartu peraga bersama kelompok.'}</div>
+        </div>
+        <div class="syntax-step">
+          <span class="step-badge" style="background: #ea580c;">3. JOYFUL</span>
+          <div><strong>Pameran Karya & Apresiasi Teman:</strong> ${modulData.skenario?.pertemuan2?.joyful || 'Mempresentasikan hasil karya dan refleksi bersama.'}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-footer"><span>Modul Ajar Deep Learning — ${modulData.subject} Kelas ${modulData.grade}</span><span>Halaman 4</span></div>
+  </div>
+
+  <!-- ==================== HALAMAN 5: LKPD PERTEMUAN 1 ==================== -->
+  <div class="page">
+    <div class="page-header"><span>BAGIAN IV: LEMBAR KERJA PESERTA DIDIK (LKPD)</span><span>PERTEMUAN 1</span></div>
+    <div class="lkpd-header">
+      <div>
+        <div class="lkpd-title">📝 ${modulData.lkpd1?.title || 'LKPD Pertemuan 1'}</div>
+        <small>Aktivitas Pemahaman Konsep & Pasangan Makna</small>
+      </div>
+      <div style="background: rgba(255,255,255,0.25); padding: 3px 10px; border-radius: 6px; font-weight: bold; font-size: 8.5pt;">NILAI: ______</div>
+    </div>
+
+    <div class="lkpd-identity">
+      <div>Nama Siswa: .....................................................</div>
+      <div>Kelas / No. Absen: ${modulData.grade} SD / .....</div>
+      <div>Hari / Tanggal: .................................................</div>
+      <div>Catatan Guru: .................................................</div>
+    </div>
+
+    <div class="card-box green">
+      <strong style="color: #166534; font-size: 9.5pt;">📌 Petunjuk Pengerjaan:</strong>
+      <p style="margin-top: 2px; font-size: 8.8pt; color: #14532d;">${modulData.lkpd1?.petunjuk || 'Tarik garis lurus dari kotak sebelah kiri ke kotak sebelah kanan yang sesuai!'}</p>
+    </div>
+
+    <div style="margin: 10px 0;">
+      ${lkpd1Items}
+    </div>
+
+    <div class="card-box amber" style="margin-top: auto;">
+      <strong style="color: #92400e; font-size: 9pt;">😊 Refleksi Perasaan Belajarku Hari Ini:</strong>
+      <div style="display: flex; justify-content: space-around; margin-top: 6px; font-size: 14pt;">
+        <div>😊 Sangat Bahagia</div>
+        <div>🙂 Senang</div>
+        <div>😐 Butuh Bantuan</div>
+      </div>
+    </div>
+
+    <div class="page-footer"><span>Modul Ajar Deep Learning — ${modulData.subject} Kelas ${modulData.grade}</span><span>Halaman 5</span></div>
+  </div>
+
+  <!-- ==================== HALAMAN 6: LKPD PERTEMUAN 2 (KARTU GUNTING) ==================== -->
+  <div class="page">
+    <div class="page-header"><span>BAGIAN V: LKPD PROYEK SISWA (PERTEMUAN 2)</span><span>KARYA KREATIF</span></div>
+    <div class="lkpd-header" style="background: linear-gradient(135deg, #d97706, #b45309);">
+      <div>
+        <div class="lkpd-title">✂️ ${modulData.lkpd2?.title || 'LKPD Pertemuan 2: Proyek Flashcard'}</div>
+        <small>Proyek Gunting-Tempel Kartu Peraga Siswa</small>
+      </div>
+      <div style="background: rgba(255,255,255,0.25); padding: 3px 10px; border-radius: 6px; font-weight: bold; font-size: 8.5pt;">PARAF: ______</div>
+    </div>
+
+    <div class="card-box amber">
+      <strong style="color: #92400e; font-size: 9.5pt;">📌 Petunjuk Proyek:</strong>
+      <p style="margin-top: 2px; font-size: 8.8pt; color: #78350f;">${modulData.lkpd2?.petunjuk || 'Guntinglah kartu-kartu berikut di sepanjang garis putus-putus secara rapi, lalu tempelkan pada lembar kerja portofoliomu!'}</p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 8px 0;">
+      ${lkpd2Cards}
+    </div>
+
+    <div style="margin-top: 8px; border: 2px dashed #94a3b8; border-radius: 10px; background: #f8fafc; padding: 12px; min-height: 55mm; text-align: center;">
+      <strong style="color: #64748b; font-size: 9pt;">📌 AREA PENEMPELAN HASIL KARYA KELOMPOK SISWA</strong>
+      <p style="font-size: 8pt; color: #94a3b8; margin-top: 2px;">Tempelkan kartu-kartu yang sudah digunting rapi di sini bersama kelompokmu.</p>
+    </div>
+
+    <div class="page-footer"><span>Modul Ajar Deep Learning — ${modulData.subject} Kelas ${modulData.grade}</span><span>Halaman 6</span></div>
+  </div>
+
+  <!-- ==================== HALAMAN 7: ASESMEN SUMATIF & SOAL HOTS ==================== -->
+  <div class="page">
+    <div class="page-header"><span>BAGIAN VI: ASESMEN SUMATIF BAB</span><span>EVALUASI HASIL BELAJAR</span></div>
+    <h2 class="section-title">📝 VI. ASESMEN SUMATIF & SOAL HOTS BAB ${modulData.chapterNumber}</h2>
+    
+    <div class="card-box green" style="padding: 4px 8px; margin-bottom: 6px;">
+      <small style="color: #166534; font-weight: 700;">Petunjuk: Berilah tanda silang (X) pada huruf a, b, atau c pada jawaban yang paling benar!</small>
+    </div>
+
+    <div style="margin-top: 4px;">
+      ${questionsHtml}
+    </div>
+
+    <div style="background: #f1f5f9; border: 1.5px solid #cbd5e1; border-radius: 8px; padding: 6px 10px; margin-top: auto; font-size: 8.8pt;">
+      <strong>🔑 Kunci Jawaban Lengkap:</strong>
+      <div style="margin-top: 2px; color: #065f46; font-weight: bold;">
+        ${(modulData.asesmen || []).map((q, i) => `${i + 1}. (${q.answer})`).join(' &nbsp;|&nbsp; ')}
+      </div>
+    </div>
+
+    <div class="page-footer"><span>Modul Ajar Deep Learning — ${modulData.subject} Kelas ${modulData.grade}</span><span>Halaman 7</span></div>
+  </div>
+
+  <!-- ==================== HALAMAN 8: RUBRIK PENILAIAN OTENTIK GURU ==================== -->
+  <div class="page">
+    <div class="page-header"><span>BAGIAN VII: RUBRIK PENILAIAN OTENTIK GURU</span><span>ASESMEN FORMATIF & SUMATIF</span></div>
+    <h2 class="section-title">📊 VII. RUBRIK PENILAIAN OTENTIK GURU (SKOR 1 - 4)</h2>
+
+    <table style="width: 100%; border-collapse: collapse; font-size: 8.2pt; margin-bottom: 8px;">
+      <thead>
+        <tr style="background: #059669; color: white;">
+          <th style="padding: 5px 8px; border: 1px solid #059669; width: 22%;">Kriteria</th>
+          <th style="padding: 5px 8px; border: 1px solid #059669; width: 19%;">Perlu Bimbingan (1)</th>
+          <th style="padding: 5px 8px; border: 1px solid #059669; width: 19%;">Cukup (2)</th>
+          <th style="padding: 5px 8px; border: 1px solid #059669; width: 20%;">Baik (3)</th>
+          <th style="padding: 5px 8px; border: 1px solid #059669; width: 20%;">Sangat Baik (4)</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${rubrikRows}
+      </tbody>
+    </table>
+
+    <div class="card-box blue" style="padding: 5px 8px; margin-bottom: 6px;">
+      <strong style="color: #1e40af; font-size: 8.8pt;">📐 Pedoman Penskoran:</strong>
+      <p style="font-size: 8.2pt; color: #1e3a8a; margin-top: 1px;">
+        Nilai Akhir = (Total Skor Perolehan / Skor Maksimal 16) × 100.<br>
+        • Kategori: 86–100 (Sangat Mahir) | 71–85 (Cakap) | 56–70 (Berkembang) | &lt;56 (Perlu Pendampingan).
+      </p>
+    </div>
+
+    <div class="card-box amber" style="padding: 5px 8px; margin-bottom: 6px;">
+      <strong style="color: #92400e; font-size: 8.8pt;">🔄 Rencana Tindak Lanjut:</strong>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px; font-size: 8.2pt; color: #78350f; margin-top: 2px;">
+        <div><strong>• Remedial:</strong> Bimbingan khusus secara fonetik dan tutor sebaya bagi siswa yang belum mencapai KKTP.</div>
+        <div><strong>• Pengayaan:</strong> Melafalkan ayat-ayat pendek dalam Juz 'Amma dan proyek memimpin doa kelas.</div>
+      </div>
+    </div>
+
+    <div style="margin-top: auto; display: flex; justify-content: space-between; font-size: 8.8pt; padding: 0 20px;">
+      <div style="text-align: center;">
+        Mengetahui,<br>
+        Kepala SD Negeri ...........................<br><br><br><br>
+        (....................................................)<br>
+        NIP. ..............................................
+      </div>
+      <div style="text-align: center;">
+        Guru Mata Pelajaran,<br><br><br><br><br>
+        (....................................................)<br>
+        NIP. ..............................................
+      </div>
+    </div>
+
+    <div class="page-footer"><span>Modul Ajar Deep Learning — ${modulData.subject} Kelas ${modulData.grade}</span><span>Halaman 8 (Selesai)</span></div>
+  </div>
+
+</body>
+</html>`;
+}
+
+
+// API: Generate E-Book Siswa ATAU Modul Ajar Deep Learning Per-Bab
 app.post('/api/generate', async (req, res) => {
   try {
-    const { subject, grade, semester, curriculum, customNotes, referenceText, provider, apiKey, model, endpoint } = req.body;
+    const { 
+      mode, 
+      subject, 
+      grade, 
+      semester, 
+      curriculum, 
+      customNotes, 
+      referenceText, 
+      chapterNumber, 
+      chapterTitle, 
+      meetings, 
+      modelStyle, 
+      provider, 
+      apiKey, 
+      model, 
+      endpoint 
+    } = req.body;
+
+    // === MODE: MODUL AJAR PER-BAB ===
+    if (mode === 'modul_ajar') {
+      console.log(`🚀 Menghasilkan Modul Ajar Deep Learning: ${subject} Kelas ${grade} Bab ${chapterNumber}...`);
+      const prompt = getModulAjarPrompt(subject, grade, semester, curriculum, chapterNumber, chapterTitle, customNotes, referenceText);
+
+      let modulData;
+      if (provider === 'gemini') {
+        if (!apiKey) return res.status(400).json({ error: 'API Key Gemini diperlukan' });
+        modulData = await callGemini(prompt, apiKey, model || 'gemini-3.8-flash');
+      } else {
+        modulData = await callOpenAICompatible(prompt, endpoint || 'http://localhost:11434/v1', apiKey, model);
+      }
+
+      if (meetings && modulData.identity) modulData.identity.alokasi = meetings;
+      if (modelStyle && modulData.identity) modulData.identity.model = modelStyle;
+
+      const htmlOutput = await renderModulAjarHtml(modulData);
+      
+      const sanitizedTitle = `Modul_Ajar_${subject}_Kelas_${grade}_Bab_${chapterNumber || 1}`.replace(/[^a-zA-Z0-9_-]/g, '_');
+      const fileName = `${sanitizedTitle}_${Date.now()}.html`;
+      const filePath = path.join(exportsDir, fileName);
+      fs.writeFileSync(filePath, htmlOutput, 'utf8');
+
+      return res.json({
+        success: true,
+        mode: 'modul_ajar',
+        modulData,
+        htmlOutput,
+        savedFile: `/exports/${fileName}`
+      });
+    }
+
+    // === MODE: BUKU SISWA 1 SEMESTER (DEFAULT) ===
+    console.log(`📘 Menghasilkan E-Book Siswa 1 Semester: ${subject} Kelas ${grade} Sem ${semester}...`);
     let prompt = getSystemPrompt(subject, grade, semester, curriculum, referenceText);
     if (customNotes) {
       prompt += `\n\nCatatan Khusus Pengguna:\n${customNotes}`;
@@ -1003,7 +1773,6 @@ app.post('/api/generate', async (req, res) => {
       if (!apiKey) return res.status(400).json({ error: 'API Key Gemini diperlukan' });
       bookData = await callGemini(prompt, apiKey, model || 'gemini-3.8-flash');
     } else {
-      // Hermes / Local LLM / Ollama
       bookData = await callOpenAICompatible(prompt, endpoint || 'http://localhost:11434/v1', apiKey, model);
     }
 
@@ -1017,18 +1786,19 @@ app.post('/api/generate', async (req, res) => {
 
     res.json({
       success: true,
+      mode: 'ebook',
       bookData,
       htmlOutput,
       savedFile: `/exports/${fileName}`
     });
   } catch (err) {
     console.error('Generation Error:', err);
-    res.status(500).json({ error: err.message || 'Gagal menghasilkan e-book' });
+    res.status(500).json({ error: err.message || 'Gagal menghasilkan dokumen' });
   }
 });
 
 // Serve exported HTML files
-app.use('/exports', express.static(exportsDir));
+app.use("/exports", express.static(exportsDir));
 
 app.listen(PORT, () => {
   console.log(`🚀 E-Book AI Generator Server berjalan di http://localhost:${PORT}`);

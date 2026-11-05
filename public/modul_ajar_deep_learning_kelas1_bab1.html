@@ -54,33 +54,33 @@
       background: linear-gradient(180deg, #ecfdf5 0%, #d1fae5 40%, #fef3c7 100%);
       border: 5px double #059669;
       text-align: center;
-      padding: 10mm 12mm;
+      padding: 8mm 12mm;
       justify-content: space-between;
     }
     .badge-top { display: inline-block; background: #065f46; color: #fef08a; padding: 4px 18px; border-radius: 20px; font-weight: 800; font-size: 10pt; letter-spacing: 0.5px; }
-    .title-deep { font-family: 'Fredoka', sans-serif; font-size: 28pt; color: #064e3b; margin-top: 4px; line-height: 1.1; }
+    .title-deep { font-family: 'Fredoka', sans-serif; font-size: 27pt; color: #064e3b; margin-top: 4px; line-height: 1.1; }
     .title-deep span { color: #d97706; font-style: italic; }
-    .subtitle-deep { font-family: 'Fredoka', sans-serif; font-size: 15pt; color: #047857; margin-top: 2px; }
-    .badge-bab { display: inline-flex; align-items: center; gap: 8px; margin-top: 6px; }
+    .subtitle-deep { font-family: 'Fredoka', sans-serif; font-size: 14pt; color: #047857; margin-top: 2px; }
+    .badge-bab { display: inline-flex; align-items: center; gap: 8px; margin-top: 5px; }
     .badge-pill { background: #059669; color: white; padding: 4px 14px; border-radius: 20px; font-weight: 800; font-size: 9.5pt; }
     .badge-pill.amber { background: #d97706; }
     .badge-pill.teal { background: #0f766e; }
 
+    /* Full uncropped cover image without white borders */
     .cover-art-box {
-      margin: 8px auto;
+      margin: 6px auto;
       width: 100%;
-      max-width: 175mm;
-      height: 135mm;
-      border-radius: 16px;
+      height: 142mm;
+      border-radius: 12px;
       overflow: hidden;
-      border: 4px solid #ffffff;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.12);
-      background: #ffffff;
+      border: 2px solid #059669;
+      box-shadow: 0 6px 20px rgba(5,150,105,0.25);
+      background: transparent;
       display: flex;
       align-items: center;
       justify-content: center;
     }
-    .cover-art-box img { width: 100%; height: 100%; object-fit: contain; }
+    .cover-art-box img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
     .feature-grid {
       display: grid;
@@ -313,12 +313,54 @@
 
     <div class="card-box amber">
       <strong style="color: #92400e; font-size: 10pt;">🌟 Dimensi Profil Pelajar Pancasila & Karakter Islami:</strong>
-      <div style="margin-top: 4px; display: grid; grid-template-columns: 1fr 1fr; gap: 6px; font-size: 9pt; color: #78350f;">
-        <div>• <strong>Beriman & Bertakwa:</strong> Membaca basmalah sebelum belajar.</div>
-        <div>• <strong>Gotong Royong:</strong> Bekerja sama menyusun puzzle huruf.</div>
-        <div>• <strong>Mandiri:</strong> Percaya diri melafalkan huruf di depan kelas.</div>
-        <div>• <strong>Bernalar Kritis:</strong> Membedakan bunyi harakat huruf serupa.</div>
+      <div style="margin-top: 4px; display: grid; grid-template-columns: 1fr 1fr; gap: 6px; font-size: 8.8pt; color: #78350f;">
+        <div>• <strong>Beriman & Bertakwa:</strong> Membaca basmalah dan doa sebelum belajar.</div>
+        <div>• <strong>Gotong Royong:</strong> Aktif berdiskusi & kerja kelompok kartu huruf.</div>
+        <div>• <strong>Mandiri:</strong> Percaya diri melafalkan makhraj huruf di depan kelas.</div>
+        <div>• <strong>Bernalar Kritis:</strong> Menganalisis perbedaan harakat pada huruf serupa.</div>
       </div>
+    </div>
+
+    <!-- Media, Sarana & Prasarana -->
+    <div class="card-box" style="background: #fafaf9; border-color: #d6d3d1; padding: 6px 10px; margin-bottom: 7px;">
+      <strong style="color: #44403c; font-size: 9.8pt;">🛠️ Sarana, Prasarana & Sumber Belajar:</strong>
+      <div style="margin-top: 3px; display: grid; grid-template-columns: 1.2fr 1fr; gap: 8px; font-size: 8.5pt; color: #292524;">
+        <div><strong>• Media & Alat:</strong> LCD Proyektor, Kartu Huruf Hijaiah 3D Berwarna, Puzzle Huruf Kayu, Gunting Siswa & Lem Kertas, Audio Murottal Syeikh Mahmud Khalil Al-Hussary.</div>
+        <div><strong>• Sumber Belajar:</strong> Buku Siswa & Guru PAI Kelas 1 Kemendikbudristek 2024, Buku Pedoman Tajwid Praktis, Mushaf Al-Qur'an Standar Kemenag RI.</div>
+      </div>
+    </div>
+
+    <!-- Target & Model Pembelajaran Deep Learning -->
+    <div class="card-box" style="background: #fdf4ff; border-color: #f0abfc; padding: 6px 10px; margin-bottom: 7px;">
+      <strong style="color: #86198f; font-size: 9.8pt;">👥 Target Peserta Didik & Kerangka Deep Learning:</strong>
+      <div style="margin-top: 3px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 8.5pt; color: #701a75;">
+        <div><strong>• Target:</strong> 28 Siswa Reguler Fase A. Bimbingan khusus fonetik bagi siswa kinestetik/lambat membaca, serta pengayaan sambung huruf bagi siswa mahir.</div>
+        <div><strong>• 3 Pilar Deep Learning:</strong> <em>Mindful</em> (fokus & hening tadabbur), <em>Meaningful</em> (menghubungkan huruf dengan kehidupan), <em>Joyful</em> (game kartu interaktif).</div>
+      </div>
+    </div>
+
+    <!-- Pemahaman Bermakna & Pertanyaan Pemantik -->
+    <div class="card-box" style="background: #ecfdf5; border-color: #a7f3d0; padding: 6px 10px; margin-bottom: 7px;">
+      <strong style="color: #065f46; font-size: 9.8pt;">💡 Pemahaman Bermakna (Meaningful Learning):</strong>
+      <p style="margin-top: 2px; font-size: 8.7pt; color: #047857; line-height: 1.45;">
+        Al-Qur'an adalah pedoman hidup mulia dan sumber kebahagiaan sejati. Mampu mengenali dan melafalkan huruf hijaiah dengan fasih adalah gerbang utama meraih pahala berlipat ganda dari Allah Swt. dan membentuk pribadi santun yang berakhlak mulia.
+      </p>
+      <div style="margin-top: 4px; border-top: 1px dashed #6ee7b7; padding-top: 3px;">
+        <strong style="color: #065f46; font-size: 9pt;">❓ Pertanyaan Pemantik (Essential Inquiring Questions):</strong>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-top: 2px; font-size: 8.5pt; color: #047857;">
+          <div>1. Siapa yang pernah melihat tulisan Al-Qur'an di rumah atau musala?</div>
+          <div>2. Mengapa bentuk huruf Al-Qur'an berbeda dari abjad latin A-B-C?</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Peta Alur Bab 1 -->
+    <div style="background: #f1f5f9; border: 1px dashed #94a3b8; border-radius: 8px; padding: 5px 10px; display: flex; align-items: center; justify-content: space-between; font-size: 8.2pt; font-weight: 700; color: #334155;">
+      <span style="color: #0f172a;">🗺️ Alur Belajar:</span>
+      <span style="background: white; padding: 2px 8px; border-radius: 4px; border: 1px solid #cbd5e1;">1. Observasi Huruf</span> ➔
+      <span style="background: white; padding: 2px 8px; border-radius: 4px; border: 1px solid #cbd5e1;">2. Artikulasi Makhraj</span> ➔
+      <span style="background: white; padding: 2px 8px; border-radius: 4px; border: 1px solid #cbd5e1;">3. Bunyi Harakat</span> ➔
+      <span style="background: white; padding: 2px 8px; border-radius: 4px; border: 1px solid #cbd5e1;">4. Kreasi Kartu Huruf</span>
     </div>
 
     <div class="page-footer"><span>Modul Ajar Deep Learning — PAI Kelas 1</span><span>Halaman 2</span></div>
