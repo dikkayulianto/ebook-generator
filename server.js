@@ -903,8 +903,8 @@ async function renderBookHtml(bookData, apiKey) {
     .cover-top-badge { display: inline-block; background: ${gradeTheme.badgeBg}; color: white; padding: 4px 20px; border-radius: 30px; font-weight: 700; font-size: 10.5pt; box-shadow: 0 3px 6px rgba(0,0,0,0.15); }
     .cover-title { font-size: 22pt; font-family: 'Fredoka', sans-serif; color: ${gradeTheme.titleColor}; margin-top: 6px; line-height: 1.2; }
     .cover-subtitle { font-size: 16pt; font-family: 'Fredoka', sans-serif; color: ${gradeTheme.accent}; }
-    .cover-image-container { margin: 8px auto; width: 100%; max-width: 172mm; height: 102mm; border-radius: 16px; overflow: hidden; border: 4px solid #fff; box-shadow: 0 8px 20px rgba(0,0,0,0.15); background: #f0fdf4; }
-    .cover-image-container img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .cover-image-container { margin: 8px auto; width: 100%; max-width: 175mm; height: 162mm; border-radius: 16px; overflow: hidden; border: 4px solid #fff; box-shadow: 0 8px 25px rgba(0,0,0,0.12); background: #ffffff; display: flex; align-items: center; justify-content: center; }
+    .cover-image-container img { width: 100%; height: 100%; object-fit: contain; display: block; margin: 0 auto; }
     
     .bab-badge { display: inline-flex; align-items: center; color: white; padding: 4px 14px; border-radius: 10px; font-weight: 700; font-size: 10.5pt; font-family: 'Fredoka', sans-serif; }
     .bab-title { font-size: 17pt; font-family: 'Fredoka', sans-serif; color: #064e3b; margin-top: 2px; line-height: 1.2; }
