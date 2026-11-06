@@ -898,24 +898,56 @@ async function renderBookHtml(bookData, apiKey) {
     .page-header { display: flex; justify-content: space-between; border-bottom: 2px dashed #a7f3d0; padding-bottom: 4px; margin-bottom: 8px; font-size: 9pt; color: #059669; font-weight: 700; text-transform: uppercase; }
     .page-footer { margin-top: auto; display: flex; justify-content: space-between; border-top: 2px dashed #e2e8f0; padding-top: 4px; font-size: 9pt; color: #94a3b8; font-weight: 600; }
     
-    /* Cover Page Themed per Grade (Full Bleed Edge-to-Edge, Zero Cut-off) */
+    /* Cover Page Themed per Grade */
     .cover-page {
-      padding: 0 !important;
-      margin: 15px auto;
-      width: 210mm;
-      height: 297mm;
-      max-height: 297mm;
-      overflow: hidden;
-      border: none !important;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-      position: relative;
-      display: flex;
+      background: ${gradeTheme.gradient};
+      border: 5px double ${gradeTheme.border};
+      text-align: center;
+      padding: 10mm 14mm;
+      justify-content: space-between;
     }
-    .cover-page img.full-cover {
+    .cover-top-badge {
+      display: inline-block;
+      background: ${gradeTheme.badgeBg};
+      color: white;
+      padding: 4px 20px;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 10.5pt;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+    }
+    .cover-title {
+      font-size: 22pt;
+      font-family: 'Fredoka', sans-serif;
+      color: ${gradeTheme.titleColor};
+      margin-top: 6px;
+      line-height: 1.2;
+    }
+    .cover-subtitle {
+      font-size: 16pt;
+      font-family: 'Fredoka', sans-serif;
+      color: ${gradeTheme.accent};
+    }
+    .cover-image-container {
+      margin: 6px auto;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       width: 100%;
-      height: 100%;
-      object-fit: fill;
+      max-height: 155mm;
+    }
+    .cover-image-container img {
+      max-width: 175mm;
+      max-height: 150mm;
+      width: auto;
+      height: auto;
+      border-radius: 14px;
+      border: 3px solid ${gradeTheme.border};
+      box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+      object-fit: contain;
       display: block;
+      margin: 0 auto;
     }
     
     .bab-badge { display: inline-flex; align-items: center; color: white; padding: 4px 14px; border-radius: 10px; font-weight: 700; font-size: 10.5pt; font-family: 'Fredoka', sans-serif; }
@@ -966,9 +998,22 @@ async function renderBookHtml(bookData, apiKey) {
     }
   </script>
 
-  <!-- COVER THEMED PER GRADE (FULL BLEED, NO WHITE BOX, NO CUT-OFF) -->
+  <!-- COVER THEMED PER GRADE -->
   <div class="page cover-page">
-    <img class="full-cover" src="${gradeTheme.coverImg}" alt="Cover ${bookData.title} Kelas ${bookData.grade}" onerror="this.src='/assets/cover_illustration.jpg'">
+    <div>
+      <div class="cover-top-badge">🌟 BUKU SISWA RESMI — ${gradeTheme.fase} 🌟</div>
+      <h1 class="cover-title">${bookData.title.toUpperCase()}</h1>
+      <div class="cover-subtitle">KELAS ${bookData.grade} SD — SEMESTER ${bookData.semester}</div>
+    </div>
+    <div class="cover-image-container">
+      <img src="${gradeTheme.coverImg}" alt="Cover Kelas ${bookData.grade}" onerror="this.src='/assets/cover_illustration.jpg'">
+    </div>
+    <div>
+      <div style="background: white; border-radius: 12px; padding: 10px 16px; border: 2px solid ${gradeTheme.border}; margin-bottom: 8px;">
+        <p style="font-weight: 800; color: ${gradeTheme.titleColor}; font-size: 11.5pt;">📖 ${gradeTheme.coverTag}</p>
+      </div>
+      <div style="background: #f59e0b; color: white; font-weight: 800; padding: 6px 20px; border-radius: 20px; display: inline-block; font-size: 11pt;">🌿 Sesuai ${bookData.curriculum}</div>
+    </div>
   </div>
 
   <!-- TOC -->
