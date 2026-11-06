@@ -300,8 +300,10 @@ async function callOpenAICompatible(prompt, endpoint, apiKey, model) {
 }
 
 // Grade Theming: Specific colors, badges, and cover artwork per grade
-function getGradeTheme(grade) {
+// Grade Theming: Specific colors, badges, and cover artwork per grade and semester
+function getGradeTheme(grade, semester = 1) {
   const g = parseInt(grade) || 1;
+  const sem = parseInt(semester) === 2 ? 2 : 1;
   const themes = {
     1: {
       fase: "FASE A",
@@ -310,8 +312,8 @@ function getGradeTheme(grade) {
       accent: "#b45309",
       titleColor: "#064e3b",
       badgeBg: "#059669",
-      coverImg: "/assets/cover_penjualan_buku_kelas1.jpg",
-      coverTag: "Mengenal Dasar Keislaman & Budi Pekerti"
+      coverImg: sem === 2 ? "/assets/cover_penjualan_buku_kelas1_sem2.jpg" : "/assets/cover_penjualan_buku_kelas1.jpg",
+      coverTag: sem === 2 ? "Semester 2: Penguatan Ibadah & Keteladanan" : "Mengenal Dasar Keislaman & Budi Pekerti"
     },
     2: {
       fase: "FASE A",
@@ -320,8 +322,8 @@ function getGradeTheme(grade) {
       accent: "#0369a1",
       titleColor: "#0c4a6e",
       badgeBg: "#0284c7",
-      coverImg: "/assets/cover_penjualan_buku_kelas2.jpg",
-      coverTag: "Belajar Huruf Bersambung & Ketaatan Ibadah"
+      coverImg: sem === 2 ? "/assets/cover_penjualan_buku_kelas2_sem2.jpg" : "/assets/cover_penjualan_buku_kelas2.jpg",
+      coverTag: sem === 2 ? "Semester 2: Penguatan Akhlak & Kisah Teladan" : "Belajar Huruf Bersambung & Ketaatan Ibadah"
     },
     3: {
       fase: "FASE B",
@@ -330,8 +332,8 @@ function getGradeTheme(grade) {
       accent: "#6d28d9",
       titleColor: "#4c1d95",
       badgeBg: "#7c3aed",
-      coverImg: "/assets/cover_penjualan_buku_kelas3.jpg",
-      coverTag: "Mendalami Shalat, Zikir, & Sifat Terpuji"
+      coverImg: sem === 2 ? "/assets/cover_penjualan_buku_kelas3_sem2.jpg" : "/assets/cover_penjualan_buku_kelas3.jpg",
+      coverTag: sem === 2 ? "Semester 2: Penguatan Keimanan & Shalat Berjamaah" : "Mendalami Shalat, Zikir, & Sifat Terpuji"
     },
     4: {
       fase: "FASE B",
@@ -340,8 +342,8 @@ function getGradeTheme(grade) {
       accent: "#c2410c",
       titleColor: "#7c2d12",
       badgeBg: "#ea580c",
-      coverImg: "/assets/cover_penjualan_buku_kelas4.jpg",
-      coverTag: "Memahami Tanda Baligh & Akhlak Mulia"
+      coverImg: sem === 2 ? "/assets/cover_penjualan_buku_kelas4_sem2.jpg" : "/assets/cover_penjualan_buku_kelas4.jpg",
+      coverTag: sem === 2 ? "Semester 2: Keragaman & Kisah Hijrah Nabi" : "Memahami Tanda Baligh & Akhlak Mulia"
     },
     5: {
       fase: "FASE C",
@@ -350,8 +352,8 @@ function getGradeTheme(grade) {
       accent: "#15803d",
       titleColor: "#14532d",
       badgeBg: "#16a34a",
-      coverImg: "/assets/cover_penjualan_buku_kelas5.jpg",
-      coverTag: "Menerapkan Toleransi, Zakat, & Ukhuwah"
+      coverImg: sem === 2 ? "/assets/cover_penjualan_buku_kelas5_sem2.jpg" : "/assets/cover_penjualan_buku_kelas5.jpg",
+      coverTag: sem === 2 ? "Semester 2: Ibadah Haji, Kurban, & Kebersamaan" : "Menerapkan Toleransi, Zakat, & Ukhuwah"
     },
     6: {
       fase: "FASE C",
@@ -360,8 +362,8 @@ function getGradeTheme(grade) {
       accent: "#be185d",
       titleColor: "#831843",
       badgeBg: "#db2777",
-      coverImg: "/assets/cover_penjualan_buku_kelas6.jpg",
-      coverTag: "Memantapkan Iman Hari Akhir & Kepemimpinan"
+      coverImg: sem === 2 ? "/assets/cover_penjualan_buku_kelas6_sem2.jpg" : "/assets/cover_penjualan_buku_kelas6.jpg",
+      coverTag: sem === 2 ? "Semester 2: Muamalah Halal & Keteladanan Sahabat" : "Memantapkan Iman Hari Akhir & Kepemimpinan"
     }
   };
   return themes[g] || themes[1];
@@ -542,7 +544,7 @@ function getSmartChapterImage(title, content, index, usedImages = new Set()) {
 
 // Template Builder: Convert JSON into Printable A4 HTML with Balanced Two-Spread Layout
 async function renderBookHtml(bookData, apiKey) {
-  const gradeTheme = getGradeTheme(bookData.grade);
+  const gradeTheme = getGradeTheme(bookData.grade, bookData.semester);
 
   const colors = [
     { badge: '#10b981', gradient: 'linear-gradient(135deg, #059669, #10b981)', border: '#34d399' },
@@ -1205,7 +1207,7 @@ Struktur JSON yang HARUS dikembalikan:
 // Template Builder for 8-Page Modul Ajar Deep Learning
 async function renderModulAjarHtml(modulData) {
   const g = parseInt(modulData.grade) || 1;
-  const gradeTheme = getGradeTheme(g);
+  const gradeTheme = getGradeTheme(g, modulData.semester);
   const coverImg = modulData.coverImage || getSmartChapterImage(
     `${modulData.chapterTitle || ''} ${modulData.theme || ''}`,
     `${modulData.materi?.paragraf1 || ''} ${modulData.materi?.subMateriA?.content || ''} ${modulData.subject || ''}`,
