@@ -310,7 +310,7 @@ function getGradeTheme(grade) {
       accent: "#b45309",
       titleColor: "#064e3b",
       badgeBg: "#059669",
-      coverImg: "/assets/cover_illustration.jpg",
+      coverImg: "/assets/cover_penjualan_buku_kelas1.jpg",
       coverTag: "Mengenal Dasar Keislaman & Budi Pekerti"
     },
     2: {
@@ -320,7 +320,7 @@ function getGradeTheme(grade) {
       accent: "#0369a1",
       titleColor: "#0c4a6e",
       badgeBg: "#0284c7",
-      coverImg: "/assets/cover_kelas2.jpg",
+      coverImg: "/assets/cover_penjualan_buku_kelas2.jpg",
       coverTag: "Belajar Huruf Bersambung & Ketaatan Ibadah"
     },
     3: {
@@ -330,7 +330,7 @@ function getGradeTheme(grade) {
       accent: "#6d28d9",
       titleColor: "#4c1d95",
       badgeBg: "#7c3aed",
-      coverImg: "/assets/cover_kelas3.jpg",
+      coverImg: "/assets/cover_penjualan_buku_kelas3.jpg",
       coverTag: "Mendalami Shalat, Zikir, & Sifat Terpuji"
     },
     4: {
@@ -340,7 +340,7 @@ function getGradeTheme(grade) {
       accent: "#c2410c",
       titleColor: "#7c2d12",
       badgeBg: "#ea580c",
-      coverImg: "/assets/cover_kelas4.jpg",
+      coverImg: "/assets/cover_penjualan_buku_kelas4.jpg",
       coverTag: "Memahami Tanda Baligh & Akhlak Mulia"
     },
     5: {
@@ -350,7 +350,7 @@ function getGradeTheme(grade) {
       accent: "#15803d",
       titleColor: "#14532d",
       badgeBg: "#16a34a",
-      coverImg: "/assets/cover_kelas5.jpg",
+      coverImg: "/assets/cover_penjualan_buku_kelas5.jpg",
       coverTag: "Menerapkan Toleransi, Zakat, & Ukhuwah"
     },
     6: {
@@ -360,7 +360,7 @@ function getGradeTheme(grade) {
       accent: "#be185d",
       titleColor: "#831843",
       badgeBg: "#db2777",
-      coverImg: "/assets/cover_kelas6.jpg",
+      coverImg: "/assets/cover_penjualan_buku_kelas6.jpg",
       coverTag: "Memantapkan Iman Hari Akhir & Kepemimpinan"
     }
   };
