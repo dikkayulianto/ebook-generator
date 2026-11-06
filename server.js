@@ -404,7 +404,7 @@ function getSmartChapterImage(title, content, index, usedImages = new Set()) {
   
   // 4. Shalat / Salat / Ibadah Fardhu / Sujud
   if (t.match(/salat|sholat|solat|sujud|ruku|adzan|iqamah|waktu|fardu/)) {
-    return pick(['/assets/sholat_berjamaah.jpg', '/assets/boy_praying.jpg']);
+    return pick(['/assets/boy_praying.jpg', '/assets/sholat_berjamaah.jpg']);
   }
 
   // 5. Asmaul Husna / Sifat-Sifat Allah (Comprehensive CP Matcher)
@@ -414,12 +414,12 @@ function getSmartChapterImage(title, content, index, usedImages = new Set()) {
 
   // 6. Hijaiyah / Huruf Arab / Makhraj / Harakat / Bersambung
   if (t.match(/hijaiyah|harakat|huruf|makhraj|makhārijul|bersambung|tanwin|fathah|kasrah|dhammah/)) {
-    return pick(['/assets/cover_kelas2.jpg', '/assets/quran_rehal.jpg']);
+    return pick(['/assets/hijaiyah_bersambung.jpg', '/assets/quran_rehal.jpg']);
   }
 
   // 7. Surah / Al-Qur'an / Membaca Al-Qur'an / Juz Amma
   if (t.match(/surah|an-nas|al-falaq|al-fatihah|al-ikhlas|qur'?an|tadarus|tajwid|tartil|tilawah/)) {
-    return pick(['/assets/quran_rehal.jpg', '/assets/cover_kelas3.jpg']);
+    return pick(['/assets/cover_kelas3.jpg', '/assets/quran_rehal.jpg']);
   }
 
   // 8. Wudhu / Thaharah / Bersuci / PHBS / Pola Hidup Bersih & Sehat
@@ -463,16 +463,16 @@ function getSmartChapterImage(title, content, index, usedImages = new Set()) {
     return pick(['/assets/rukun_iman.jpg', '/assets/boy_praying.jpg']);
   }
   if (c.match(/melaksanakan\s+salat|shalat\s+berjamaah|bacaan\s+ruku|bacaan\s+sujud|salat\s+fardu/)) {
-    return pick(['/assets/sholat_berjamaah.jpg', '/assets/boy_praying.jpg']);
+    return pick(['/assets/boy_praying.jpg', '/assets/sholat_berjamaah.jpg']);
   }
   if (c.match(/asmaul\s*husna|ar-rahman|ar-rahim|al-quddus|as-salam|al-malik|al-mu'min/)) {
     return pick(['/assets/asmaul_husna.jpg', '/assets/boy_praying.jpg']);
   }
   if (c.match(/huruf\s+hijaiyah|harakat|tanda\s+baca\s+arab|makharijul/)) {
-    return pick(['/assets/cover_kelas2.jpg', '/assets/quran_rehal.jpg']);
+    return pick(['/assets/hijaiyah_bersambung.jpg', '/assets/quran_rehal.jpg']);
   }
   if (c.match(/surah\s+an-nas|surah\s+al-falaq|surah\s+al-fatihah|al-qur'?an\s+adalah|membaca\s+surah/)) {
-    return pick(['/assets/quran_rehal.jpg', '/assets/cover_kelas3.jpg']);
+    return pick(['/assets/cover_kelas3.jpg', '/assets/quran_rehal.jpg']);
   }
   if (c.match(/tata\s+cara\s+wudhu|berwudhu|rukun\s+wudhu|hidup\s+bersih|kebersihan/)) {
     return pick(['/assets/wudu_girl.jpg', '/assets/menjaga_alam.jpg']);
