@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Aset Visual Lynk.id & Cover Penjualan Buku Siswa - Bahan Ajar Bu Guru</title>
+  <title>Aset Visual Lynk.id & Caption Penjualan - Bahan Ajar Bu Guru</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,16 +21,19 @@
       <div class="flex items-center gap-3">
         <div class="bg-white/20 p-2 rounded-xl text-2xl">🌸</div>
         <div>
-          <h1 class="text-2xl font-bold tracking-wide">Galeri Visual & Katalog Lynk.id</h1>
+          <h1 class="text-2xl font-bold tracking-wide">Galeri Visual & Caption Lynk.id</h1>
           <p class="text-xs text-pink-100">Koleksi Desain Resmi: <strong class="underline">lynk.id/bahanajarbuguru</strong> (Tema Pastel Pink & Muslimah)</p>
         </div>
       </div>
       <div class="flex items-center gap-2">
         <a href="#cover-buku" class="hidden sm:inline-flex text-xs font-bold bg-pink-700/60 hover:bg-pink-700 text-white px-3 py-2 rounded-lg transition-all items-center gap-1">
-          📖 Slide 1: Cover Buku
+          📖 Slide 1: Cover
         </a>
         <a href="#slide2-mockup" class="hidden sm:inline-flex text-xs font-bold bg-amber-400 hover:bg-amber-300 text-amber-950 px-3 py-2 rounded-lg transition-all items-center gap-1">
-          ⭐ Slide 2: Mockup 3D
+          ⭐ Slide 2: Mockup
+        </a>
+        <a href="#caption-section" class="hidden sm:inline-flex text-xs font-bold bg-emerald-500 hover:bg-emerald-600 text-white px-3 py-2 rounded-lg transition-all items-center gap-1">
+          📝 Caption Per Bab
         </a>
         <a href="/" class="text-xs font-bold bg-white text-pink-600 px-4 py-2 rounded-lg shadow-sm hover:bg-pink-50 transition-all flex items-center gap-1.5">
           🔙 Dashboard
@@ -47,12 +50,12 @@
       <div class="flex items-center gap-3">
         <span class="text-3xl">✨</span>
         <div>
-          <h2 class="text-base font-bold text-pink-900">Paket Penjualan Lengkap (Slide 1 Cover & Slide 2 Mockup 3D)</h2>
+          <h2 class="text-base font-bold text-pink-900">Paket Penjualan Lengkap (Cover, Mockup 3D & Caption Per Bab)</h2>
           <p class="text-xs text-pink-700">Disesuaikan untuk marketplace <strong class="text-pink-900">lynk.id/bahanajarbuguru</strong>, tema islami ramah anak, acuan <strong>CP No. 020 Tahun 2026</strong>, dan tanpa nomor telepon.</p>
         </div>
       </div>
       <div class="text-xs text-pink-700 bg-pink-50 px-3 py-2 rounded-xl border border-pink-200 font-semibold text-center sm:text-right">
-        🎨 3D Disney/Pixar HD<br><span class="text-[11px] text-slate-500 font-normal">Tersedia Format 3:4 & 1:1 Square</span>
+        🎨 3D Disney/Pixar HD<br><span class="text-[11px] text-slate-500 font-normal">Tersedia Format 3:4, 1:1, & Teks Siap Salin</span>
       </div>
     </div>
 
@@ -353,7 +356,52 @@
     </section>
 
     <!-- ========================================== -->
-    <!-- SECTION 3: BRANDING STORE LYNK.ID          -->
+    <!-- SECTION 3: TEMPLATE CAPTION PER BAB       -->
+    <!-- ========================================== -->
+    <section id="caption-section" class="space-y-6 pt-6 border-t-2 border-pink-200">
+      <div class="flex flex-col sm:flex-row items-start sm:items-end justify-between border-b-2 border-pink-200 pb-3 gap-2">
+        <div>
+          <span class="text-xs font-extrabold uppercase tracking-wider text-emerald-700 bg-emerald-100 px-3 py-1 rounded-full">COPYWRITING & DESKRIPSI PRODUK</span>
+          <h2 class="text-2xl font-bold text-slate-800 mt-2 flex items-center gap-2">
+            <span>📝</span> Template Caption Penjualan Per Bab & Paket Kelas
+          </h2>
+          <p class="text-xs text-slate-500 mt-0.5">Format rapi dengan emoji, poin materi, rincian produk, dan link lynk.id. Tinggal klik tombol untuk menyalin langsung ke clipboard!</p>
+        </div>
+        <div class="text-xs font-bold text-emerald-800 bg-emerald-50 px-3 py-1.5 rounded-lg border border-emerald-200">
+          📋 1-Klik Salin Teks
+        </div>
+      </div>
+
+      <!-- Grade Selector Buttons -->
+      <div class="flex flex-wrap items-center gap-2 p-2 bg-white rounded-2xl border border-pink-200 shadow-sm" id="gradeTabs">
+        <button onclick="switchCaptionGrade(1)" id="btnTab1" class="px-4 py-2 rounded-xl text-xs font-bold transition-all bg-pink-500 text-white shadow-sm">
+          🟢 Kelas 1 SD (Fase A)
+        </button>
+        <button onclick="switchCaptionGrade(2)" id="btnTab2" class="px-4 py-2 rounded-xl text-xs font-bold transition-all bg-slate-100 text-slate-600 hover:bg-pink-100 hover:text-pink-700">
+          🔵 Kelas 2 SD (Fase A)
+        </button>
+        <button onclick="switchCaptionGrade(3)" id="btnTab3" class="px-4 py-2 rounded-xl text-xs font-bold transition-all bg-slate-100 text-slate-600 hover:bg-pink-100 hover:text-pink-700">
+          🟣 Kelas 3 SD (Fase B)
+        </button>
+        <button onclick="switchCaptionGrade(4)" id="btnTab4" class="px-4 py-2 rounded-xl text-xs font-bold transition-all bg-slate-100 text-slate-600 hover:bg-pink-100 hover:text-pink-700">
+          🟠 Kelas 4 SD (Fase B)
+        </button>
+        <button onclick="switchCaptionGrade(5)" id="btnTab5" class="px-4 py-2 rounded-xl text-xs font-bold transition-all bg-slate-100 text-slate-600 hover:bg-pink-100 hover:text-pink-700">
+          🟢 Kelas 5 SD (Fase C)
+        </button>
+        <button onclick="switchCaptionGrade(6)" id="btnTab6" class="px-4 py-2 rounded-xl text-xs font-bold transition-all bg-slate-100 text-slate-600 hover:bg-pink-100 hover:text-pink-700">
+          🔴 Kelas 6 SD (Fase C)
+        </button>
+      </div>
+
+      <!-- Container of Caption Cards (Rendered via JS) -->
+      <div id="captionCardsContainer" class="space-y-6">
+        <!-- Injected dynamically -->
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SECTION 4: BRANDING STORE LYNK.ID          -->
     <!-- ========================================== -->
     <section class="space-y-6 pt-6 border-t-2 border-pink-200">
       <div>
@@ -446,6 +494,421 @@
   <footer class="bg-white border-t border-pink-100 py-6 text-center text-xs text-slate-500">
     Aset visual untuk toko digital <strong>https://lynk.id/bahanajarbuguru</strong> • Dibuat khusus dengan tema pastel pink & karakter muslimah ramah.
   </footer>
+
+  <!-- Script for Dynamic Captions & Copy to Clipboard -->
+  <script>
+    const captionsData = {
+      1: [
+        {
+          title: "Paket Lengkap Buku Siswa Kelas 1 (BAB 1–5)",
+          badge: "Full 1 Semester • Best Seller",
+          materiPills: ["Huruf Hijaiyah & Harakat", "Rukun Iman", "Tasbih & Thaharah", "Rukun Islam & Syahadatain", "Keteladanan Nabi Adam a.s."],
+          text: `Buku siswa yang dirancang menarik, sederhana, interaktif, dan ramah anak, dilengkapi materi BAB 1–5, ilustrasi Islami 3D, aktivitas belajar, LKPD interaktif, rangkuman, latihan, refleksi, dan asesmen sumatif.
+
+📌 Materi:
+🔤 Huruf Hijaiyah & Harakat
+❤️ Rukun Iman
+💧 Tasbih & Thaharah
+🕌 Rukun Islam & Syahadatain
+🌿 Keteladanan Nabi Adam a.s.
+
+✨ Detail Produk:
+📖 41 halaman materi lengkap & mendalam
+🎨 Desain full color & ramah anak (3D Disney Style)
+✏️ Dilengkapi LKPD interaktif tiap bab
+📝 Latihan & asesmen sumatif
+🌱 Aktivitas pembiasaan akhlak Islami
+📚 Sesuai CP No. 020 Tahun 2026
+👦👧 Cocok untuk siswa Kelas 1 SD/MI & Guru PAI
+
+💚 “Belajar PAI jadi menyenangkan, memahami Islam sejak dini, dan tumbuh menjadi anak beriman serta berakhlak mulia!”
+
+🛒 Dapatkan Produk Digital Ini di:
+lynk.id/bahanajarbuguru
+(Toko Digital Bahan Ajar Bu Guru)`
+        },
+        {
+          title: "BAB 1: Mengenal Huruf Hijaiyah & Harakatnya",
+          badge: "Modul / Buku Per Bab",
+          materiPills: ["28 Huruf Hijaiyah", "Harakat Fathah, Kasrah, Dammah", "Menebalkan Huruf", "Melafalkan Makhorijul Huruf"],
+          text: `Buku siswa / Modul ajar yang dirancang menarik, sederhana, interaktif, dan ramah anak, dilengkapi materi BAB 1: Mengenal Huruf Hijaiyah & Harakatnya, ilustrasi Islami 3D, aktivitas belajar ceria, LKPD mewarnai & menulis, rangkuman, latihan, refleksi, dan asesmen.
+
+📌 Materi Bab 1:
+🔤 Mengenal Bentuk 28 Huruf Hijaiyah Tunggal
+✨ Mengenal Tanda Baca (Harakat: Fathah, Kasrah, Dammah)
+🖍️ Aktivitas Menebalkan & Mewarnai Huruf Hijaiyah
+🗣️ Praktik Melafalkan Huruf Hijaiyah dengan Benar
+
+✨ Detail Produk:
+📖 Disajikan runtut & mudah dipahami anak usia 6-7 tahun
+🎨 Desain full color 3D Pixar ceria & ramah anak
+✏️ Dilengkapi LKPD Interaktif 2 Pertemuan siap pakai
+📝 Latihan pemahaman konsep & kartu huruf bergambar
+🌱 Pembiasaan membaca basmalah sebelum belajar
+📚 Sesuai Capaian Pembelajaran (CP) No. 020 Tahun 2026
+👦👧 Sangat cocok untuk pegangan siswa & modul ajar guru PAI
+
+💚 “Belajar membaca Al-Qur'an sejak dini jadi mudah dan menyenangkan bersama Bu Guru!”
+
+🛒 Dapatkan Produk Digital Ini di:
+lynk.id/bahanajarbuguru
+(Toko Digital Bahan Ajar Bu Guru)`
+        },
+        {
+          title: "BAB 2: Mengenal Rukun Iman",
+          badge: "Modul / Buku Per Bab",
+          materiPills: ["6 Rukun Iman", "Iman kepada Allah", "Iman kepada Rasul", "Kalimat Basmalah & Hamdalah"],
+          text: `Buku siswa / Modul ajar yang dirancang menarik, sederhana, interaktif, dan ramah anak, dilengkapi materi BAB 2: Mengenal Rukun Iman, ilustrasi Islami 3D, aktivitas belajar, LKPD interaktif, rangkuman, latihan konsep, refleksi, dan asesmen.
+
+📌 Materi Bab 2:
+❤️ Mengenal Urutan 6 Rukun Iman
+🌟 Mengenal Allah Sang Pencipta Alam Semesta & Asmaulhusna (Ar-Rahman, Ar-Rahim)
+📜 Mengenal Nabi dan Rasul Utusan Allah yang Wajib Diteladani
+🤲 Pembiasaan Mengucap Kalimat Tayibah Basmalah dan Hamdalah
+
+✨ Detail Produk:
+📖 Penjelasan konsep akidah yang konkret & mudah dicerna anak
+🎨 Desain full color & ilustrasi alam ciptaan Allah yang memukau
+✏️ Dilengkapi LKPD Interaktif & aktivitas bernyanyi rukun iman
+📝 Latihan soal formatif & tantangan berpikir kritis anak
+🌱 Penanaman cinta kepada Allah dan Rasul sejak dini
+📚 Sesuai Capaian Pembelajaran (CP) No. 020 Tahun 2026
+👦👧 Cocok untuk siswa Kelas 1 SD/MI & pegangan guru PAI
+
+💚 “Tumbuhkan iman di hati si kecil dengan cara yang hangat dan menyenangkan!”
+
+🛒 Dapatkan Produk Digital Ini di:
+lynk.id/bahanajarbuguru
+(Toko Digital Bahan Ajar Bu Guru)`
+        },
+        {
+          title: "BAB 3: Aku Suka Bersuci (Thaharah & Wudhu)",
+          badge: "Modul / Buku Per Bab",
+          materiPills: ["Arti Bersuci (Thaharah)", "Membersihkan Najis", "Urutan Berwudhu", "Pola Hidup Bersih & Sehat"],
+          text: `Buku siswa / Modul ajar yang dirancang menarik, sederhana, interaktif, dan ramah anak, dilengkapi materi BAB 3: Aku Suka Bersuci, ilustrasi Islami 3D, panduan praktik wudhu, aktivitas belajar, LKPD interaktif, rangkuman, latihan, refleksi, dan asesmen.
+
+📌 Materi Bab 3:
+💧 Mengenal Arti Bersuci (Thaharah) dari Najis & Hadas
+🧼 Adab Masuk & Keluar Kamar Mandi serta Doanya
+🌊 Urutan, Rukun, dan Tata Cara Berwudhu Praktis Bergambar
+🌿 Pembiasaan Hidup Bersih & Rapi di Rumah dan Sekolah
+
+✨ Detail Produk:
+📖 Panduan visual urutan wudhu langkah demi langkah
+🎨 Desain full color dengan karakter 3D muslim mempraktikkan wudhu
+✏️ Dilengkapi LKPD Interaktif & lembar ceklis praktik harian
+📝 Latihan soal pilihan bergambar & asesmen ketercapaian
+🌱 Pembiasaan mandiri menjaga kebersihan diri
+📚 Sesuai Capaian Pembelajaran (CP) No. 020 Tahun 2026
+👦👧 Cocok untuk siswa Kelas 1 SD/MI & panduan guru PAI
+
+💚 “Bersuci itu mudah, wudhu itu segar, dan kebersihan adalah sebagian dari iman!”
+
+🛒 Dapatkan Produk Digital Ini di:
+lynk.id/bahanajarbuguru
+(Toko Digital Bahan Ajar Bu Guru)`
+        },
+        {
+          title: "BAB 4: Mengenal Rukun Islam & Syahadatain",
+          badge: "Modul / Buku Per Bab",
+          materiPills: ["5 Rukun Islam", "Syahadat Tauhid", "Syahadat Rasul", "Adab Beribadah"],
+          text: `Buku siswa / Modul ajar yang dirancang menarik, sederhana, interaktif, dan ramah anak, dilengkapi materi BAB 4: Mengenal Rukun Islam & Dua Kalimat Syahadat, ilustrasi Islami 3D, aktivitas belajar, LKPD interaktif, rangkuman, latihan, refleksi, dan asesmen.
+
+📌 Materi Bab 4:
+🕌 Mengenal 5 Rukun Islam sebagai Pondasi Ibadah
+🗣️ Melafalkan Dua Kalimat Syahadat (Tauhid & Rasul) Beserta Artinya
+🌟 Mengakui Tiada Tuhan Selain Allah dan Nabi Muhammad Utusan Allah
+🤲 Pembiasaan Ibadah Ceria & Doa Sehari-hari
+
+✨ Detail Produk:
+📖 Penjelasan rukun Islam dengan metafora bangunan kokoh yang ramah anak
+🎨 Desain full color 3D Disney bernuansa islami menyejukkan
+✏️ Dilengkapi LKPD Menghubungkan Garis, Mewarnai & Melafalkan
+📝 Latihan formatif & asesmen sikap religius
+🌱 Membentuk pondasi keislaman yang kuat pada anak
+📚 Sesuai Capaian Pembelajaran (CP) No. 020 Tahun 2026
+👦👧 Cocok untuk siswa Kelas 1 SD/MI & guru kelas/guru PAI
+
+💚 “Ajarkan syahadatain dengan cinta agar si kecil bangga menjadi anak muslim yang sholeh!”
+
+🛒 Dapatkan Produk Digital Ini di:
+lynk.id/bahanajarbuguru
+(Toko Digital Bahan Ajar Bu Guru)`
+        },
+        {
+          title: "BAB 5: Meneladani Kisah Nabi Adam a.s.",
+          badge: "Modul / Buku Per Bab",
+          materiPills: ["Ciptaan Manusia Pertama", "Kehidupan di Surga", "Sikap Mau Mengakui Kesalahan", "Keteladanan Berdoa & Tobat"],
+          text: `Buku siswa / Modul ajar yang dirancang menarik, sederhana, interaktif, dan ramah anak, dilengkapi materi BAB 5: Meneladani Kisah Nabi Adam a.s., kisah teladan menyentuh hati, ilustrasi Islami 3D, aktivitas belajar, LKPD interaktif, rangkuman, latihan, dan asesmen.
+
+📌 Materi Bab 5:
+🌿 Nabi Adam a.s. Sebagai Manusia Pertama dan Khalifah di Bumi
+🕊️ Kisah Ketaatan Nabi Adam a.s. dan Hawa di Surga
+🙏 Pelajaran Berharga: Berani Mengakui Kesalahan & Segera Memohon Maaf
+🌟 Doa Nabi Adam a.s. dan Keteladanan Akhlak Rendah Hati
+
+✨ Detail Produk:
+📖 Narasi cerita dongeng islami yang inspiratif dan mendidik
+🎨 Desain full color kaya ilustrasi pemandangan alam dan hikmah
+✏️ Dilengkapi LKPD Analisis Cerita, Diskusi & Lembar Refleksi Diri
+📝 Soal latihan HOTS pemecahan masalah moral sehari-hari
+🌱 Pembiasaan sikap jujur, pemaaf, dan rendah hati
+📚 Sesuai Capaian Pembelajaran (CP) No. 020 Tahun 2026
+👦👧 Cocok untuk siswa Kelas 1 SD/MI, orang tua di rumah, & guru PAI
+
+💚 “Belajar dari kisah Nabi Adam a.s. bahwa anak hebat bukanlah yang tak pernah salah, tapi yang berani jujur dan memperbaiki diri!”
+
+🛒 Dapatkan Produk Digital Ini di:
+lynk.id/bahanajarbuguru
+(Toko Digital Bahan Ajar Bu Guru)`
+        }
+      ],
+      2: [
+        {
+          title: "Paket Lengkap Buku Siswa Kelas 2 (BAB 1–5)",
+          badge: "Full 1 Semester • Fase A",
+          materiPills: ["Huruf Hijaiyah Bersambung", "Asmaulhusna Al-Hafiz & Al-Wali", "Pola Hidup Bersih (PHBS)", "Salat Fardu Lima Waktu", "Kisah Nabi Nuh a.s."],
+          text: `Buku siswa PAI Kelas 2 SD yang dirancang sistematis, menarik, dan ramah anak, dilengkapi materi BAB 1–5 Semester 1, ilustrasi Islami 3D, aktivitas belajar interaktif, lembar LKPD, rangkuman, latihan soal, dan asesmen sumatif.
+
+📌 Materi:
+🔤 Huruf Hijaiyah Bersambung & Surah An-Nas/Al-Falaq
+💖 Asmaulhusna: Al-Hafiz, Al-Wali, Al-Alim, Al-Khabir
+🧼 Pola Hidup Bersih dan Sehat (PHBS) dalam Islam
+🕌 Ketaatan Ibadah Salat Fardu Lima Waktu
+🚢 Kisah Keteladanan Nabi Nuh a.s. yang Sabar
+
+✨ Detail Produk:
+📖 Materi esensial sesuai kurikulum terkini
+🎨 Desain full color bernuansa Sky Blue ceria
+✏️ Dilengkapi LKPD interaktif & tabel ceklis ibadah
+📝 Soal latihan formatif & sumatif akhir semester
+📚 Sesuai CP No. 020 Tahun 2026
+👦👧 Cocok untuk siswa Kelas 2 SD/MI & Guru PAI
+
+💚 “Bimbing anak makin rajin beribadah dan terbiasa dengan akhlak mulia setiap hari!”
+
+🛒 Dapatkan Produk Digital Ini di:
+lynk.id/bahanajarbuguru
+(Toko Digital Bahan Ajar Bu Guru)`
+        },
+        {
+          title: "BAB 1: Huruf Hijaiyah Bersambung & Surah Pendek",
+          badge: "Modul / Buku Per Bab",
+          materiPills: ["Bentuk Huruf di Awal, Tengah, Akhir", "Membaca Kata Hijaiyah", "Surah An-Nas & Al-Falaq"],
+          text: `Buku siswa / Modul ajar PAI Kelas 2 BAB 1: Mengenal Huruf Hijaiyah Bersambung & Surah Pilihan (An-Nas dan Al-Falaq), disajikan dengan metode mudah dan ilustrasi visual interaktif.
+
+📌 Materi Bab 1:
+🔤 Perubahan Bentuk Huruf Hijaiyah di Awal, Tengah, dan Akhir Kata
+📖 Latihan Merangkai & Membaca Kata Arab Sederhana
+🤲 Menghafal dan Memahami Makna Surah An-Nas dan Surah Al-Falaq
+🛡️ Perlindungan Diri Hanya Kepada Allah SWT
+
+✨ Detail Produk:
+📖 Penjelasan visual step-by-step menyambung huruf
+🎨 Full color 3D Pixar, ramah dan menarik minat baca siswa
+✏️ Dilengkapi LKPD Menulis & Menebalkan Sambungan Huruf
+📚 Sesuai CP No. 020 Tahun 2026
+
+🛒 Dapatkan Produk Digital Ini di:
+lynk.id/bahanajarbuguru`
+        },
+        {
+          title: "BAB 4: Ketaatan Salat Fardu Lima Waktu",
+          badge: "Modul / Buku Per Bab",
+          materiPills: ["Nama & Waktu Salat 5 Waktu", "Jumlah Rakaat", "Gerakan & Bacaan Salat", "Jadwal Ibadah Harian"],
+          text: `Buku siswa / Modul ajar PAI Kelas 2 BAB 4: Salat Fardu Lima Waktu, menghadirkan panduan lengkap menghafal nama, rakaat, dan melatih anak mencintai salat sejak dini.
+
+📌 Materi Bab 4:
+🕌 Mengenal 5 Waktu Salat (Subuh, Zuhur, Asar, Magrib, Isya)
+🔢 Jumlah Rakaat Tiap Salat Fardu
+🤲 Gerakan dan Bacaan Salat Ringkas Bergambar
+🌟 Keutamaan Menjaga Salat Tepat Waktu
+
+✨ Detail Produk:
+📖 Tabel visual jadwal salat & lembar kebiasaan ibadah harian
+✏️ LKPD Interaktif & aktivitas bernyanyi lima waktu
+📚 Sesuai CP No. 020 Tahun 2026
+
+🛒 Dapatkan Produk Digital Ini di:
+lynk.id/bahanajarbuguru`
+        }
+      ],
+      3: [
+        {
+          title: "Paket Lengkap Buku Siswa Kelas 3 (BAB 1–5)",
+          badge: "Full 1 Semester • Fase B",
+          materiPills: ["Surah Al-Kautsar & Al-Ikhlas", "Asmaulhusna Al-Wahhab & Al-Kabir", "Berbakti kepada Orang Tua & Guru", "Salat Berjamaah", "Kisah Nabi Ibrahim a.s."],
+          text: `Buku siswa PAI Kelas 3 SD dirancang ramah anak, interaktif, dan berbobot, dilengkapi materi BAB 1–5, kisah teladan Amir & Hana, LKPD berbasis aktivitas, dan asesmen mendalam.
+
+📌 Materi:
+📖 Membaca & Menghafal Surah Al-Kautsar dan Al-Ikhlas
+✨ Asmaulhusna: Al-Wahhab, Al-Kabir, Al-Malik
+👨‍👩‍👧‍👦 Adab & Kewajiban Berbakti kepada Orang Tua dan Guru
+🕌 Keutamaan dan Tata Cara Salat Berjamaah di Masjid
+🔥 Kisah Keteladanan Nabi Ibrahim a.s. Mencari Kebenaran
+
+✨ Detail Produk:
+📖 Disertai Kamus Cilik dan Mutiara Hikmah
+🎨 Desain full color tema Royal Lilac & Gold
+✏️ Dilengkapi LKPD Interaktif dan Asesmen Sumatif
+📚 Sesuai CP No. 020 Tahun 2026
+
+🛒 Dapatkan Produk Digital Ini di:
+lynk.id/bahanajarbuguru`
+        }
+      ],
+      4: [
+        {
+          title: "Paket Lengkap Buku Siswa Kelas 4 (BAB 1–5)",
+          badge: "Full 1 Semester • Fase B",
+          materiPills: ["Keragaman (QS. Al-Hujurat:13)", "Asmaulhusna Al-Quddus & As-Salam", "Tanda-Tanda Baligh", "Salat Jumat & Dhuha", "Hijrah Nabi Muhammad saw."],
+          text: `Buku siswa PAI Kelas 4 SD berorientasi Deep Learning dan Penguatan Profil Pelajar Pancasila, memuat penjelasan materi komprehensif, soal HOTS, LKPD kolaboratif, dan asesmen lengkap.
+
+📌 Materi:
+🌍 Mengagumi Keragaman & Toleransi dalam QS. Al-Hujurat: 13
+🌟 Mengenal Asmaulhusna: Al-Quddus, As-Salam, Al-Mu'min
+🌱 Mengenal Tanda-Tanda Baligh & Konsekuensi Hukum Ibadah
+🕌 Keutamaan Salat Jumat dan Praktik Salat Dhuha
+🐪 Kisah Perjuangan Hijrah Nabi Muhammad saw. ke Madinah
+
+✨ Detail Produk:
+📖 Penjelasan mendalam melatih daya nalar kritis siswa
+🎨 Desain full color bernuansa Warm Tangerine elegan
+✏️ Dilengkapi LKPD Diskusi Kelompok & Lembar Proyek
+📚 Sesuai CP No. 020 Tahun 2026
+
+🛒 Dapatkan Produk Digital Ini di:
+lynk.id/bahanajarbuguru`
+        }
+      ],
+      5: [
+        {
+          title: "Paket Lengkap Buku Siswa Kelas 5 (BAB 1–5)",
+          badge: "Full 1 Semester • Fase C",
+          materiPills: ["Surah At-Tin & Al-Ma'un", "Asmaulhusna Al-Qawiyyu & Al-Qayyum", "Zakat, Infak & Sedekah", "Keragaman Budaya", "Kisah Fathu Makkah"],
+          text: `Buku siswa PAI Kelas 5 SD Fase C menyajikan pembelajaran bermakna tentang kedermawanan, kemanusiaan, dan keteguhan akidah sesuai Capaian Pembelajaran Kurikulum Merdeka 2026.
+
+📌 Materi:
+🍇 Tafsir & Makna Kandungan Surah At-Tin dan Surah Al-Ma'un
+💪 Asmaulhusna: Al-Qawiyyu, Al-Qayyum, Al-Muhyi, Al-Mumit
+🤝 Indahnya Berbagi: Zakat Fitrah, Zakat Mal, Infak & Sedekah
+🕊️ Menghormati Perbedaan Budaya dan Agama dalam Masyarakat
+🕋 Peristiwa Bersejarah Fathu Makkah dan Pemaafan Agung Rasulullah
+
+✨ Detail Produk:
+📖 Materi kontekstual dengan kehidupan sosial nyata anak
+🎨 Desain full color bernuansa Mint Turquoise modern
+✏️ Dilengkapi LKPD Berbasis Masalah & Rubrik Asesmen Otentik
+📚 Sesuai CP No. 020 Tahun 2026
+
+🛒 Dapatkan Produk Digital Ini di:
+lynk.id/bahanajarbuguru`
+        }
+      ],
+      6: [
+        {
+          title: "Paket Lengkap Buku Siswa Kelas 6 (BAB 1–5)",
+          badge: "Full 1 Semester • Fase C",
+          materiPills: ["Surah Al-A'la & Ad-Duha", "Asmaulhusna Al-Ghaffar & Al-Afuw", "Iman Hari Akhir & Takdir", "Jual Beli Halal", "Khulafaur Rasyidin"],
+          text: `Buku siswa PAI Kelas 6 SD Fase C disiapkan untuk penguatan akidah, kepemimpinan, dan kesiapan asesmen akhir jenjang sekolah dasar.
+
+📌 Materi:
+🌅 Menghayati Pesan Mulia Surah Al-A'la dan Surah Ad-Duha
+💖 Asmaulhusna: Al-Ghaffar (Maha Pengampun) & Al-Afuw (Maha Pemaaf)
+⚖️ Memantapkan Iman kepada Hari Kiamat dan Takdir Allah (Qada & Qadar)
+🪙 Etika Jual Beli Halal & Muamalah Kejujuran dalam Islam
+👑 Keteladanan Kepemimpinan Sahabat Khulafaur Rasyidin
+
+✨ Detail Produk:
+📖 Pembahasan tingkat tinggi (HOTS) persiapan asesmen sekolah
+🎨 Desain full color bernuansa Crimson Rose & Royal Gold
+✏️ Dilengkapi 20 Soal Pilihan Ganda Asesmen Sumatif + Kunci Jawaban
+📚 Sesuai CP No. 020 Tahun 2026
+
+🛒 Dapatkan Produk Digital Ini di:
+lynk.id/bahanajarbuguru`
+        }
+      ]
+    };
+
+    function renderCaptions(grade) {
+      const container = document.getElementById('captionCardsContainer');
+      const items = captionsData[grade] || captionsData[1];
+
+      container.innerHTML = items.map((item, idx) => {
+        const idName = `captionText_${grade}_${idx}`;
+        const btnId = `copyBtn_${grade}_${idx}`;
+        const pillsHtml = (item.materiPills || []).map(p => 
+          `<span class="bg-pink-50 text-pink-700 border border-pink-200 text-[11px] font-semibold px-2.5 py-0.5 rounded-full">• ${p}</span>`
+        ).join('');
+
+        return `
+          <div class="bg-white rounded-2xl border-2 border-pink-100 p-6 shadow-sm hover:border-pink-300 transition-all">
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between pb-3 border-b border-pink-50 gap-2 mb-3">
+              <div>
+                <span class="text-xs font-extrabold uppercase tracking-wider text-pink-600 bg-pink-100 px-2.5 py-0.5 rounded-full">${item.badge}</span>
+                <h3 class="text-lg font-bold text-slate-800 mt-1">${item.title}</h3>
+              </div>
+              <button id="${btnId}" onclick="copyCaption('${idName}', '${btnId}')" class="text-xs font-bold bg-pink-500 hover:bg-pink-600 text-white px-4 py-2 rounded-xl shadow-sm transition-all flex items-center gap-1.5 flex-shrink-0">
+                📋 Salin Caption
+              </button>
+            </div>
+            
+            <div class="flex flex-wrap gap-1.5 mb-3">
+              ${pillsHtml}
+            </div>
+
+            <div class="relative bg-slate-50 rounded-xl p-4 border border-slate-200 font-mono text-xs text-slate-700 whitespace-pre-wrap leading-relaxed max-h-64 overflow-y-auto" id="${idName}">${escapeHtml(item.text)}</div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function switchCaptionGrade(grade) {
+      // update tab styling
+      for (let i = 1; i <= 6; i++) {
+        const btn = document.getElementById(`btnTab${i}`);
+        if (i === grade) {
+          btn.className = "px-4 py-2 rounded-xl text-xs font-bold transition-all bg-pink-500 text-white shadow-sm";
+        } else {
+          btn.className = "px-4 py-2 rounded-xl text-xs font-bold transition-all bg-slate-100 text-slate-600 hover:bg-pink-100 hover:text-pink-700";
+        }
+      }
+      renderCaptions(grade);
+    }
+
+    function copyCaption(elemId, btnId) {
+      const textElem = document.getElementById(elemId);
+      if (!textElem) return;
+      const text = textElem.textContent;
+
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = document.getElementById(btnId);
+        const originalHtml = btn.innerHTML;
+        btn.innerHTML = "✅ Tersalin!";
+        btn.classList.remove('bg-pink-500', 'hover:bg-pink-600');
+        btn.classList.add('bg-emerald-600', 'hover:bg-emerald-700');
+
+        setTimeout(() => {
+          btn.innerHTML = originalHtml;
+          btn.classList.remove('bg-emerald-600', 'hover:bg-emerald-700');
+          btn.classList.add('bg-pink-500', 'hover:bg-pink-600');
+        }, 2000);
+      });
+    }
+
+    function escapeHtml(str) {
+      return str
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    // Initialize with Grade 1
+    renderCaptions(1);
+  </script>
 
 </body>
 </html>
