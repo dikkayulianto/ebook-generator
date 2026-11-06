@@ -457,7 +457,12 @@ function getSmartChapterImage(title, content, index, usedImages = new Set()) {
     return pick(['/assets/quran_rehal.jpg', '/assets/cover_kelas5.jpg', '/assets/jannah_garden.jpg']);
   }
 
-  // 15. Kisah Nabi / Rasul / Sahabat / Keteladanan / Adam / Nuh / Ibrahim / Surga
+  // 15. Kisah Keteladanan Sahabat Nabi / Khulafaurasyidin (Abu Bakar, Umar, Utsman, Ali) / Kodifikasi Al-Qur'an
+  if (t.match(/khulafaurasyidin|khulafa|abu\s+bakar|umar\s+bin\s+khattab|utsman|ali\s+bin\s+abi\s+thalib|sahabat\s+nabi|kepemimpinan/)) {
+    return pick(['/assets/quran_rehal.jpg', '/assets/boy_praying.jpg', '/assets/tasbih_zikir.jpg']);
+  }
+
+  // 16. Kisah Nabi / Rasul / Keteladanan / Adam / Nuh / Ibrahim / Surga
   if (t.match(/nabi|rasul|kisah|mukjizat|adam|nuh|ibrahim|surga|jannah/)) {
     return pick(['/assets/jannah_garden.jpg', '/assets/cover_kelas5.jpg']);
   }
@@ -509,6 +514,9 @@ function getSmartChapterImage(title, content, index, usedImages = new Set()) {
   }
   if (c.match(/menjaga\s+kelestarian|merawat\s+lingkungan|ciptaan\s+allah\s+di\s+bumi/)) {
     return pick(['/assets/menjaga_alam.jpg', '/assets/cover_kelas5.jpg']);
+  }
+  if (c.match(/khulafaurasyidin|abu\s+bakar|umar\s+bin\s+khattab|kodifikasi\s+al-qur'?an/)) {
+    return pick(['/assets/quran_rehal.jpg', '/assets/boy_praying.jpg']);
   }
   if (c.match(/kisah\s+nabi|keteladanan\s+rasul|nabi\s+adam|mukjizat|wahyu\s+pertama/)) {
     return pick(['/assets/jannah_garden.jpg', '/assets/cover_kelas5.jpg']);
