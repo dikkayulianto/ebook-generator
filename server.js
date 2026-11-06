@@ -389,92 +389,111 @@ function getSmartChapterImage(title, content, index, usedImages = new Set()) {
 
   // === PRIORITY 1: MATCH BY SPECIFIC CHAPTER TITLE (Highest Accuracy) ===
 
-  // 1. Sifat Wajib, Mustahil, dan Jaiz bagi Allah Swt. (Faith in Allah & His Attributes)
-  if (t.match(/sifat\s+wajib|sifat\s+mustahil|sifat\s+jaiz|wujud|qidam|baqa|sifat-sifat\s+kesempurnaan/)) {
-    return pick(['/assets/rukun_iman.jpg', '/assets/tasbih_zikir.jpg', '/assets/boy_praying.jpg']);
+  // 1. Surah Al-Qur'an Pilihan (MUST BE CHECKED FIRST before general 'syukur'/'salat')
+  if (t.match(/surah|q\.?s\.?|al-kau[sṡ]ar|an-na[sṣ]r|al-'?a[sṣ]r|al-falaq|an-nas|al-fatihah|al-ikhlas|at-tin|al-ma'?un|al-hujurat|al-a'?la|ad-duha/)) {
+    return pick(['/assets/cover_kelas3.jpg', '/assets/quran_rehal.jpg']);
   }
 
-  // 2. Akhlak Terhadap Allah Swt. / Husnuzan / Doa & Tawakal / Sabar & Syukur
-  if (t.match(/akhlak\s+terhadap\s+allah|ḥ?husnuzan|berbaik\s+sangka|berdoa|doa|tawakal|ikhtiar|syukur|sabar/)) {
-    return pick(['/assets/tasbih_zikir.jpg', '/assets/boy_praying.jpg']);
-  }
-
-  // 3. Puasa (Shaum / Siyam) Wajib & Sunah / Ramadan
-  if (t.match(/puasa|shaum|siyam|ramadan|ramadhan|iftar|sahur/)) {
-    return pick(['/assets/rukun_islam.jpg', '/assets/sedekah_berbagi.jpg', '/assets/boy_praying.jpg']);
-  }
-
-  // 4. Tasbih / Menyucikan Allah / Zikir / Subhanallah
-  if (t.match(/tasbih|subhanallah|menyucikan\s+allah|zikir|memuji\s+allah/)) {
-    return pick(['/assets/tasbih_zikir.jpg', '/assets/boy_praying.jpg']);
-  }
-
-  // 5. Rukun Islam / Syahadat / Syahadatain / Dua Kalimat Syahadat
-  if (t.match(/rukun\s+islam|syahadat|syahadatain|kalimat\s+syahadat/)) {
-    return pick(['/assets/rukun_islam.jpg', '/assets/boy_praying.jpg']);
-  }
-
-  // 6. Rukun Iman / 6 Rukun Iman / Meyakini Rukun Iman / Hari Akhir / Qada Qadar
-  if (t.match(/rukun\s+iman|enam\s+rukun\s+iman|iman\s+kepada|meyakini\s+rukun\s+iman|hari\s*akhir|kiamat|takdir|qada|qadar/)) {
-    return pick(['/assets/rukun_iman.jpg', '/assets/boy_praying.jpg']);
-  }
-  
-  // 7. Shalat / Salat / Azan / Ikamah / Sujud / Salat Rawatib, Duha, Tahajud / Salat Berjamaah / Fardu
-  if (t.match(/salat|sholat|solat|sujud|ruku|azan|adzan|ikamah|iqamah|rawatib|duha|dhuha|tahajud|berjamaah|fardu|saf|waktu\s+salat/)) {
-    return pick(['/assets/boy_praying.jpg', '/assets/sholat_berjamaah.jpg']);
-  }
-
-  // 8. Asmaul Husna (Al-Gaffar, Al-Wahhab, Al-Fattah, Al-Latif, Al-Halim, Asy-Syakur, Al-Hakim, Al-Wadud, dll)
-  if (t.match(/asmaul|husna|nama.*allah|ar-rahman|ar-rahim|al-hafiz|al-wali|al-alim|al-khabir|al-wahhab|al-fattah|al-latif|al-halim|asy-syakur|al-hakim|al-wadud|al-kabir|al-malik|al-quddus|as-salam|al-mu'min|al-qawiyyu|al-qayyum|al-muhyi|al-ghaffar|al-afuw/)) {
-    return pick(['/assets/asmaul_husna.jpg', '/assets/boy_praying.jpg']);
-  }
-
-  // 9. Huruf Hijaiyah / Tajwid / Mim Sukun / Mad Thabi'i / Makhraj
+  // 2. Huruf Hijaiyah / Tajwid / Mim Sukun / Mad Thabi'i / Makhraj
   if (t.match(/hijaiyah|harakat|huruf|makhraj|makhārijul|bersambung|tanwin|fathah|kasrah|dhammah|mad\s*ṭ?t?ab|mim\s+sukun|idgam|ikhfa|izhar/)) {
     return pick(['/assets/hijaiyah_bersambung.jpg', '/assets/quran_rehal.jpg']);
   }
 
-  // 10. Surah Al-Qur'an / Juz Amma / Membaca Al-Qur'an (An-Nas, Al-Falaq, Al-Kautsar, Al-'Asr, An-Nasr, At-Tin, Al-Ma'un, dll)
-  if (t.match(/surah|q\.?s\.?|al-kau[sṡ]ar|an-na[sṣ]r|al-'?a[sṣ]r|al-falaq|an-nas|al-fatihah|al-ikhlas|at-tin|al-ma'?un|al-hujurat|al-a'?la|ad-duha|juz\s*'amma|qur'?an|tadarus|tartil|tilawah/)) {
+  // 2b. General Al-Qur'an / Juz 'Amma / Tadarus
+  if (t.match(/juz\s*'amma|qur'?an|tadarus|tartil|tilawah/)) {
     return pick(['/assets/cover_kelas3.jpg', '/assets/quran_rehal.jpg']);
   }
 
-  // 11. Wudhu / Thaharah / Bersuci / PHBS / Pola Hidup Bersih & Sehat
+  // 3. Sifat Wajib, Mustahil, dan Jaiz bagi Allah Swt. (Faith in Allah & His 20 Attributes)
+  if (t.match(/sifat\s+wajib|sifat\s+mustahil|sifat\s+jaiz|wujud|qidam|baqa|sifat-sifat\s+kesempurnaan/)) {
+    return pick(['/assets/sifat_allah.jpg', '/assets/asmaul_husna.jpg', '/assets/tasbih_zikir.jpg', '/assets/boy_praying.jpg']);
+  }
+
+  // 4. Asmaul Husna (Al-Gaffar, Al-Wahhab, Al-Fattah, Al-Latif, Al-Halim, Asy-Syakur, Al-Hakim, Al-Wadud, dll)
+  if (t.match(/asmaul|husna|nama-nama\s+allah|ar-rahman|ar-rahim|al-hafiz|al-wali|al-alim|al-khabir|al-wahhab|al-fattah|al-latif|al-halim|asy-syakur|al-hakim|al-wadud|al-kabir|al-malik|al-quddus|as-salam|al-mu'min|al-qawiyyu|al-qayyum|al-muhyi|al-ghaffar|al-afuw/)) {
+    return pick(['/assets/asmaul_husna.jpg', '/assets/sifat_allah.jpg', '/assets/boy_praying.jpg']);
+  }
+
+  // 5. Azan dan Ikamah (Muazin Cilik / Panggilan Salat)
+  if (t.match(/azan|adzan|ikamah|iqamah|muazin|muadzin|menyeru\s+salat/)) {
+    return pick(['/assets/azan_ikamah.jpg', '/assets/sholat_berjamaah.jpg', '/assets/boy_praying.jpg']);
+  }
+
+  // 6. Shalat / Salat / Sujud / Rukuk / Rawatib / Duha / Tahajud / Berjamaah / Fardu
+  if (t.match(/salat|sholat|solat|sujud|\bruku'?k?\b|rawatib|duha|dhuha|tahajud|berjamaah|fardu|\bsaf\b|waktu\s+salat/)) {
+    return pick(['/assets/boy_praying.jpg', '/assets/sholat_berjamaah.jpg']);
+  }
+
+  // 7. Puasa (Shaum / Siyam) Wajib & Sunah / Ramadan
+  if (t.match(/puasa|shaum|siyam|ramadan|ramadhan|iftar|sahur/)) {
+    return pick(['/assets/rukun_islam.jpg', '/assets/sedekah_berbagi.jpg', '/assets/boy_praying.jpg']);
+  }
+
+  // 8. Rukun Islam / Syahadat / Syahadatain / Dua Kalimat Syahadat
+  if (t.match(/rukun\s+islam|syahadat|syahadatain|kalimat\s+syahadat/)) {
+    return pick(['/assets/rukun_islam.jpg', '/assets/boy_praying.jpg']);
+  }
+
+  // 9. Rukun Iman / 6 Rukun Iman / Meyakini Rukun Iman / Hari Akhir / Qada Qadar
+  if (t.match(/rukun\s+iman|enam\s+rukun\s+iman|iman\s+kepada|meyakini\s+rukun\s+iman|hari\s*akhir|kiamat|takdir|qada|qadar/)) {
+    return pick(['/assets/rukun_iman.jpg', '/assets/boy_praying.jpg']);
+  }
+
+  // 10. Akhlak Terhadap Allah Swt. / Husnuzan / Doa & Tawakal / Sabar & Syukur / Berbaik Sangka
+  if (t.match(/akhlak\s+terhadap\s+allah|ḥ?husnuzan|berbaik\s+sangka|berdoa|doa|tawakal|ikhtiar|syukur|sabar/)) {
+    return pick(['/assets/tasbih_zikir.jpg', '/assets/boy_praying.jpg']);
+  }
+
+  // 11. Tasbih / Menyucikan Allah / Zikir / Subhanallah
+  if (t.match(/tasbih|subhanallah|menyucikan\s+allah|zikir|memuji\s+allah/)) {
+    return pick(['/assets/tasbih_zikir.jpg', '/assets/boy_praying.jpg']);
+  }
+
+  // 12. Wudhu / Thaharah / Bersuci / PHBS / Pola Hidup Bersih & Sehat
   if (t.match(/wudhu|wudu|thaharah|bersuci|istinja|mandi|najis|cuci|bersih|phbs|sehat/)) {
     return pick(['/assets/wudu_girl.jpg', '/assets/menjaga_alam.jpg']);
   }
 
-  // 12. Zakat / Sedekah / Infaq / Berbagi / Tolong Menolong
+  // 13. Zakat / Sedekah / Infaq / Berbagi / Tolong Menolong
   if (t.match(/zakat|sedekah|infaq|infak|berbagi|dermawan|kedermawanan|tolong|peduli/)) {
     return pick(['/assets/sedekah_berbagi.jpg', '/assets/cover_kelas4.jpg']);
   }
 
-  // 13. Akhlak Terhadap Sesama / Adab / Sopan Santun / Hormat Orang Tua & Guru & Keluarga
+  // 14. Akhlak Terhadap Sesama / Adab / Sopan Santun / Hormat Orang Tua & Guru & Keluarga
   if (t.match(/keluarga|orang\s*tua|ibu|ayah|guru|adab|sopan|hormat|santun|birrul|ukhuwah|tetangga/)) {
     return pick(['/assets/adab_orangtua.jpg', '/assets/cover_kelas4.jpg']);
   }
 
-  // 14. Kisah Kerasulan / Dakwah Nabi Periode Makkah / Gua Hira / Wahyu Pertama
+  // 15. Kisah Kerasulan / Dakwah Nabi Periode Makkah / Gua Hira / Wahyu Pertama
   if (t.match(/kerasulan|dakwah.*makkah|gua\s+hira|al-alaq|periode\s+makkah|fathu\s+makkah|hijrah\s+nabi/)) {
     return pick(['/assets/quran_rehal.jpg', '/assets/cover_kelas5.jpg', '/assets/jannah_garden.jpg']);
   }
 
-  // 15. Kisah Keteladanan Sahabat Nabi / Khulafaurasyidin (Abu Bakar, Umar, Utsman, Ali) / Kodifikasi Al-Qur'an
+  // 16. Kisah Keteladanan Sahabat Nabi / Khulafaurasyidin (Abu Bakar, Umar, Utsman, Ali) / Kodifikasi Al-Qur'an
   if (t.match(/khulafaurasyidin|khulafa|abu\s+bakar|umar\s+bin\s+khattab|utsman|ali\s+bin\s+abi\s+thalib|sahabat\s+nabi|kepemimpinan/)) {
     return pick(['/assets/quran_rehal.jpg', '/assets/boy_praying.jpg', '/assets/tasbih_zikir.jpg']);
   }
 
-  // 16. Kisah Nabi / Rasul / Keteladanan / Adam / Nuh / Ibrahim / Surga
-  if (t.match(/nabi|rasul|kisah|mukjizat|adam|nuh|ibrahim|surga|jannah/)) {
-    return pick(['/assets/jannah_garden.jpg', '/assets/cover_kelas5.jpg']);
+  // 17. Kisah Kelahiran Nabi Muhammad / Maulid / Kisah Nabi / Rasul / Adam / Nuh / Ibrahim
+  if (t.match(/kelahiran\s+nabi|maulid|nabi\s+muhammad|kisah.*nabi|rasul|mukjizat|adam|nuh|ibrahim|surga|jannah/)) {
+    return pick(['/assets/jannah_garden.jpg', '/assets/cover_kelas5.jpg', '/assets/quran_rehal.jpg']);
   }
 
-  // 16. Menjaga Alam / Lingkungan / Ciptaan Allah
+  // 18. Menjaga Alam / Lingkungan / Ciptaan Allah
   if (t.match(/alam|lingkungan|pohon|tanaman|bumi|ciptaan|hewan|flora|fauna/)) {
     return pick(['/assets/menjaga_alam.jpg', '/assets/cover_kelas5.jpg']);
   }
 
   // === PRIORITY 2: MATCH BY CONTENT (Strict Multi-word Phrases) ===
+  if (c.match(/surah\s+al-kau|surah\s+al-'as|surah\s+an-nas|surah\s+al-falaq|al-qur'?an\s+adalah|membaca\s+surah/)) {
+    return pick(['/assets/cover_kelas3.jpg', '/assets/quran_rehal.jpg']);
+  }
+  if (c.match(/sifat\s+wajib\s+allah|sifat\s+mustahil|wujud|qidam|baqa/)) {
+    return pick(['/assets/sifat_allah.jpg', '/assets/asmaul_husna.jpg', '/assets/tasbih_zikir.jpg']);
+  }
+  if (c.match(/azan\s+dan\s+ikamah|panggilan\s+salat|muazin/)) {
+    return pick(['/assets/azan_ikamah.jpg', '/assets/sholat_berjamaah.jpg']);
+  }
   if (c.match(/puasa\s+ramadan|puasa\s+sunah|menahan\s+lapar|berbuka\s+puasa|shaum/)) {
     return pick(['/assets/rukun_islam.jpg', '/assets/sedekah_berbagi.jpg']);
   }
@@ -487,9 +506,6 @@ function getSmartChapterImage(title, content, index, usedImages = new Set()) {
   if (c.match(/lima\s+rukun\s+islam|dua\s+kalimat\s+syahadat|syahadatain/)) {
     return pick(['/assets/rukun_islam.jpg', '/assets/boy_praying.jpg']);
   }
-  if (c.match(/sifat\s+wajib\s+allah|sifat\s+mustahil|wujud|qidam|baqa/)) {
-    return pick(['/assets/rukun_iman.jpg', '/assets/tasbih_zikir.jpg']);
-  }
   if (c.match(/enam\s+rukun\s+iman|iman\s+kepada\s+allah|iman\s+kepada\s+malaikat/)) {
     return pick(['/assets/rukun_iman.jpg', '/assets/boy_praying.jpg']);
   }
@@ -501,9 +517,6 @@ function getSmartChapterImage(title, content, index, usedImages = new Set()) {
   }
   if (c.match(/huruf\s+hijaiyah|harakat|tanda\s+baca\s+arab|makharijul|mad\s+tabii|mim\s+sukun/)) {
     return pick(['/assets/hijaiyah_bersambung.jpg', '/assets/quran_rehal.jpg']);
-  }
-  if (c.match(/surah\s+al-kau|surah\s+al-'as|surah\s+an-nas|surah\s+al-falaq|al-qur'?an\s+adalah|membaca\s+surah/)) {
-    return pick(['/assets/cover_kelas3.jpg', '/assets/quran_rehal.jpg']);
   }
   if (c.match(/tata\s+cara\s+wudhu|berwudhu|rukun\s+wudhu|hidup\s+bersih|kebersihan/)) {
     return pick(['/assets/wudu_girl.jpg', '/assets/menjaga_alam.jpg']);
