@@ -1979,16 +1979,19 @@ async function renderSasHtml(sasData) {
   const isianList = sasData.isian || [];
   const uraianList = sasData.uraian || [];
 
-  // Helper to render a PG item
+  // Helper to render a PG item with crisp professional styling (no broken glyphs)
   function renderPgItem(item, idx, customNo) {
     const no = customNo !== undefined ? customNo : (item.nomor || (idx + 1));
-    const stimulus = item.stimulus ? `<div class="stimulus-box">📖 ${item.stimulus}</div>` : '';
+    const stimulus = item.stimulus ? `
+      <div class="stimulus-box">
+        <span class="stimulus-tag">Wacana:</span> "${item.stimulus}"
+      </div>` : '';
     const choices = item.pilihan || {};
     const keys = Object.keys(choices);
 
     const choicesHtml = keys.map(k => `
       <div class="choice-opt">
-        <span class="choice-key"><strong>${k}.</strong></span>
+        <span class="choice-key">${k}.</span>
         <span class="choice-val">${choices[k]}</span>
       </div>
     `).join('');
@@ -2009,17 +2012,17 @@ async function renderSasHtml(sasData) {
     `;
   }
 
-  // Balanced Distribution to Prevent Any Page Overflow:
-  // Halaman 1: PG 1 s.d. 5 (5 soal - fits Kop, Identitas, Petunjuk with 70mm+ buffer)
-  // Halaman 2: PG 6 s.d. 15 (10 soal - dedicated page for remaining PG, zero cutoff)
-  // Halaman 3: Isian 16 s.d. 20 (5 soal) + Uraian 21 s.d. 25 (5 soal) (perfect fit!)
-  // Halaman 4: Kunci Jawaban PG (1-15) + Kunci Isian (16-20) (Dokumen Guru)
-  // Halaman 5: Rubrik Uraian (21-25) + Rekap Penskoran + Pengesahan Tanda Tangan (Dokumen Guru)
-  const pgPart1 = pgList.slice(0, 5);
-  const pgPart2 = pgList.slice(5);
+  // Golden Ratio Distribution (Zero Cutoff & Zero Empty Voids):
+  // Halaman 1 (Siswa): PG 1 s.d. 7 (7 soal - fills page naturally alongside Kop, Identitas, Petunjuk)
+  // Halaman 2 (Siswa): PG 8 s.d. 15 (8 soal PG) + Bagian B: Isian Singkat 16 s.d. 20 (5 soal)
+  // Halaman 3 (Siswa): Bagian C: Uraian 21 s.d. 25 (5 soal dengan 4 garis berjarak rapi)
+  // Halaman 4 (Guru): Kunci Jawaban Lengkap & Pembahasan PG (1-15) + Kunci Isian (16-20)
+  // Halaman 5 (Guru): Rubrik Penskoran Uraian (21-25) + Rekapitulasi + Pengesahan Tanda Tangan
+  const pgPart1 = pgList.slice(0, 7);
+  const pgPart2 = pgList.slice(7);
 
   const pgHtmlPart1 = pgPart1.map((item, idx) => renderPgItem(item, idx, idx + 1)).join('');
-  const pgHtmlPart2 = pgPart2.map((item, idx) => renderPgItem(item, idx, idx + 6)).join('');
+  const pgHtmlPart2 = pgPart2.map((item, idx) => renderPgItem(item, idx, idx + 8)).join('');
 
   // Render Isian Items (No 16 s.d. 20)
   const isianHtml = isianList.map((item, idx) => {
@@ -2039,7 +2042,10 @@ async function renderSasHtml(sasData) {
   // Render Uraian Items (No 21 s.d. 25)
   const uraianHtml = uraianList.map((item, idx) => {
     const no = item.nomor || (21 + idx);
-    const stimulus = item.stimulus ? `<div class="stimulus-box" style="margin-bottom: 2px;">📖 ${item.stimulus}</div>` : '';
+    const stimulus = item.stimulus ? `
+      <div class="stimulus-box" style="margin-bottom: 3px;">
+        <span class="stimulus-tag" style="background: #ede9fe; color: #6d28d9;">Konteks:</span> "${item.stimulus}"
+      </div>` : '';
     return `
       <div class="question-item uraian-item">
         <div class="question-header">
@@ -2048,6 +2054,7 @@ async function renderSasHtml(sasData) {
             ${stimulus}
             <div class="question-text"><strong>${item.pertanyaan}</strong></div>
             <div class="answer-space">
+              <div class="writing-line"></div>
               <div class="writing-line"></div>
               <div class="writing-line"></div>
               <div class="writing-line"></div>
@@ -2065,8 +2072,8 @@ async function renderSasHtml(sasData) {
       <tr>
         <td style="text-align: center; font-weight: 700;">${no}</td>
         <td style="text-align: center; font-weight: 800; color: #047857; background: #ecfdf5;">${p.kunci || '-'}</td>
-        <td style="font-size: 8pt; color: #475569;">${p.bab || '-'}</td>
-        <td style="font-size: 8pt; line-height: 1.3;">${p.pembahasan || '-'}</td>
+        <td style="font-size: 7.8pt; color: #475569;">${p.bab || '-'}</td>
+        <td style="font-size: 7.8pt; line-height: 1.3;">${p.pembahasan || '-'}</td>
       </tr>
     `;
   }).join('');
@@ -2078,7 +2085,7 @@ async function renderSasHtml(sasData) {
       <tr>
         <td style="text-align: center; font-weight: 700;">${no}</td>
         <td style="font-weight: 700; color: #0f766e;">${is.kunci || '-'}</td>
-        <td style="font-size: 8pt; color: #475569;">${is.bab || '-'}</td>
+        <td style="font-size: 7.8pt; color: #475569;">${is.bab || '-'}</td>
         <td style="text-align: center; font-weight: 600;">${is.skorMaksimal || 4} Poin</td>
       </tr>
     `;
@@ -2091,15 +2098,15 @@ async function renderSasHtml(sasData) {
       <tr>
         <td style="text-align: center; font-weight: 700; vertical-align: top;">${no}</td>
         <td style="vertical-align: top;">
-          <div style="font-weight: 700; color: #1e293b; margin-bottom: 2px; font-size: 8.5pt;">${ur.pertanyaan}</div>
-          <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 4px; padding: 3px 6px; color: #166534; font-size: 8.2pt; line-height: 1.32;">
+          <div style="font-weight: 700; color: #1e293b; margin-bottom: 2px; font-size: 8.3pt;">${ur.pertanyaan}</div>
+          <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 4px; padding: 3px 6px; color: #166534; font-size: 8pt; line-height: 1.32;">
             <strong>Kunci Jawaban:</strong> ${ur.kunci}
           </div>
         </td>
-        <td style="vertical-align: top; font-size: 8pt; color: #475569; line-height: 1.32;">
+        <td style="vertical-align: top; font-size: 7.8pt; color: #475569; line-height: 1.32;">
           ${ur.rubrik || 'Lengkap & tepat: 10, Sebagian tepat: 6-8, Kurang tepat: 2-4'}
         </td>
-        <td style="text-align: center; font-weight: 800; vertical-align: top; color: #b45309; background: #fffbeb; font-size: 9pt;">
+        <td style="text-align: center; font-weight: 800; vertical-align: top; color: #b45309; background: #fffbeb; font-size: 8.8pt;">
           ${ur.skorMaksimal || 10} Poin
         </td>
       </tr>
@@ -2125,7 +2132,7 @@ async function renderSasHtml(sasData) {
     body {
       font-family: 'Nunito', 'Segoe UI', Arial, sans-serif;
       font-size: 8.8pt;
-      line-height: 1.38;
+      line-height: 1.36;
       color: #0f172a;
       background: #e2e8f0;
       margin: 0;
@@ -2178,19 +2185,19 @@ async function renderSasHtml(sasData) {
     .kop-wrapper {
       text-align: center;
       position: relative;
-      padding-bottom: 4px;
+      padding-bottom: 3px;
       border-bottom: 2.5px double #0f172a;
-      margin-bottom: 6px;
+      margin-bottom: 5px;
     }
     .kop-kementerian {
-      font-size: 8.5pt;
+      font-size: 8.2pt;
       font-weight: 700;
       letter-spacing: 0.5px;
       text-transform: uppercase;
       color: #1e293b;
     }
     .kop-dinas {
-      font-size: 10pt;
+      font-size: 9.8pt;
       font-weight: 800;
       letter-spacing: 0.5px;
       text-transform: uppercase;
@@ -2205,7 +2212,7 @@ async function renderSasHtml(sasData) {
       margin-top: 1px;
     }
     .kop-ta {
-      font-size: 8.2pt;
+      font-size: 8pt;
       font-weight: 600;
       color: #334155;
     }
@@ -2214,11 +2221,11 @@ async function renderSasHtml(sasData) {
     .identitas-grid {
       width: 100%;
       border-collapse: collapse;
-      margin-bottom: 6px;
+      margin-bottom: 5px;
       font-size: 8.2pt;
     }
     .identitas-grid td {
-      padding: 2px 4px;
+      padding: 1.5px 4px;
       vertical-align: middle;
     }
     .identitas-border-box {
@@ -2229,21 +2236,21 @@ async function renderSasHtml(sasData) {
     .score-cell {
       border-left: 1.5px solid #0f172a;
       text-align: center;
-      width: 90px;
+      width: 85px;
       padding: 2px !important;
       background: #f1f5f9;
     }
     .score-title {
-      font-size: 7pt;
+      font-size: 6.8pt;
       font-weight: 700;
       text-transform: uppercase;
       color: #475569;
     }
     .score-val {
-      font-size: 14pt;
+      font-size: 13pt;
       font-weight: 900;
       color: #047857;
-      height: 22px;
+      height: 20px;
     }
 
     /* PETUNJUK */
@@ -2252,9 +2259,9 @@ async function renderSasHtml(sasData) {
       border: 1px solid #cbd5e1;
       border-left: 3.5px solid #047857;
       border-radius: 4px;
-      padding: 4px 7px;
-      margin-bottom: 6px;
-      font-size: 7.5pt;
+      padding: 3.5px 7px;
+      margin-bottom: 5px;
+      font-size: 7.4pt;
       color: #334155;
     }
     .petunjuk-title {
@@ -2266,7 +2273,7 @@ async function renderSasHtml(sasData) {
     }
     .petunjuk-list {
       margin: 0;
-      padding-left: 13px;
+      padding-left: 12px;
       line-height: 1.25;
     }
 
@@ -2278,7 +2285,7 @@ async function renderSasHtml(sasData) {
       font-size: 8.3pt;
       font-weight: 700;
       border-radius: 3px;
-      margin: 5px 0 5px 0;
+      margin: 4px 0 4px 0;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -2292,7 +2299,7 @@ async function renderSasHtml(sasData) {
 
     /* QUESTION STYLING */
     .question-item {
-      margin-bottom: 4.5px;
+      margin-bottom: 4px;
       font-size: 8.3pt;
       page-break-inside: avoid;
     }
@@ -2303,7 +2310,7 @@ async function renderSasHtml(sasData) {
     }
     .question-num {
       font-weight: 800;
-      min-width: 16px;
+      min-width: 15px;
       color: #0f172a;
     }
     .question-body {
@@ -2311,13 +2318,23 @@ async function renderSasHtml(sasData) {
     }
     .stimulus-box {
       background: #f8fafc;
-      border-left: 2.5px solid #10b981;
-      padding: 2px 5px;
+      border-left: 2.5px solid #059669;
+      padding: 2px 6px;
       border-radius: 0 3px 3px 0;
       margin-bottom: 2px;
       font-size: 7.8pt;
       line-height: 1.25;
       color: #334155;
+    }
+    .stimulus-tag {
+      background: #d1fae5;
+      color: #065f46;
+      font-size: 6.8pt;
+      font-weight: 800;
+      padding: 1px 4px;
+      border-radius: 2px;
+      text-transform: uppercase;
+      margin-right: 3px;
     }
     .question-text {
       color: #0f172a;
@@ -2326,13 +2343,13 @@ async function renderSasHtml(sasData) {
     .choices-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 1px 10px;
+      gap: 1px 12px;
       margin-top: 1.5px;
     }
     .choice-opt {
       display: flex;
-      gap: 3px;
-      align-items: flex-start;
+      gap: 4px;
+      align-items: baseline;
       line-height: 1.25;
     }
     .choice-key {
@@ -2345,11 +2362,11 @@ async function renderSasHtml(sasData) {
     }
 
     .uraian-item {
-      margin-bottom: 7px;
+      margin-bottom: 6px;
     }
     .writing-line {
       border-bottom: 1px dashed #cbd5e1;
-      height: 15px;
+      height: 14px;
       margin-top: 2px;
     }
 
@@ -2359,7 +2376,7 @@ async function renderSasHtml(sasData) {
       justify-content: space-between;
       border-bottom: 1.5px dashed #cbd5e1;
       padding-bottom: 2px;
-      margin-bottom: 5px;
+      margin-bottom: 4px;
       font-size: 7.8pt;
       color: #047857;
       font-weight: 700;
@@ -2371,7 +2388,7 @@ async function renderSasHtml(sasData) {
       justify-content: space-between;
       border-top: 1.5px dashed #cbd5e1;
       padding-top: 2px;
-      font-size: 7.6pt;
+      font-size: 7.5pt;
       color: #94a3b8;
       font-weight: 600;
     }
@@ -2390,22 +2407,22 @@ async function renderSasHtml(sasData) {
       margin-bottom: 1px;
     }
     .teacher-title {
-      font-size: 10pt;
+      font-size: 9.8pt;
       font-weight: 800;
       color: #991b1b;
-      margin: 0 0 3px 0;
+      margin: 0 0 2px 0;
       text-transform: uppercase;
     }
     .key-table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 7.6pt;
-      margin-bottom: 5px;
+      font-size: 7.5pt;
+      margin-bottom: 4px;
     }
     .key-table th {
       background: #047857;
       color: #ffffff;
-      padding: 2.5px 4px;
+      padding: 2px 4px;
       font-weight: 700;
       border: 1px solid #047857;
       text-align: left;
@@ -2422,10 +2439,10 @@ async function renderSasHtml(sasData) {
       background: #f0fdf4;
       border: 1.5px solid #86efac;
       border-radius: 4px;
-      padding: 4px 7px;
-      font-size: 7.8pt;
+      padding: 3.5px 6px;
+      font-size: 7.6pt;
       color: #166534;
-      margin-bottom: 5px;
+      margin-bottom: 4px;
     }
   </style>
 </head>
@@ -2439,7 +2456,7 @@ async function renderSasHtml(sasData) {
     </div>
   </div>
 
-  <!-- ==================== HALAMAN 1 (A4): KOP, IDENTITAS, PETUNJUK & PG 1-5 ==================== -->
+  <!-- ==================== HALAMAN 1 (A4): KOP, IDENTITAS, PETUNJUK & PG 1-7 ==================== -->
   <div class="page">
     <div class="kop-wrapper">
       <div class="kop-kementerian">KEMENTERIAN AGAMA / DINAS PENDIDIKAN DAN KEBUDAYAAN</div>
@@ -2460,7 +2477,7 @@ async function renderSasHtml(sasData) {
         <td rowspan="3" class="score-cell">
           <div class="score-title">Nilai Akhir</div>
           <div class="score-val">......</div>
-          <div style="font-size: 6.8pt; color: #64748b;">Paraf Guru</div>
+          <div style="font-size: 6.5pt; color: #64748b;">Paraf Guru</div>
         </td>
       </tr>
       <tr>
@@ -2489,9 +2506,9 @@ async function renderSasHtml(sasData) {
       </ol>
     </div>
 
-    <!-- BAGIAN I: PILIHAN GANDA (BAGIAN 1: NO 1 s.d. 5) -->
+    <!-- BAGIAN I: PILIHAN GANDA (BAGIAN 1: NO 1 s.d. 7) -->
     <div class="section-banner">
-      <span>A. PILIHAN GANDA (BAGIAN 1: NOMOR 1 s.d. 5)</span>
+      <span>A. PILIHAN GANDA (BAGIAN 1: NOMOR 1 s.d. 7)</span>
       <span class="section-subtitle">Berilah tanda silang (X) pada huruf ${g <= 3 ? 'A, B, atau C' : 'A, B, C, atau D'} di depan jawaban yang paling benar!</span>
     </div>
 
@@ -2506,21 +2523,31 @@ async function renderSasHtml(sasData) {
   </div>
 
 
-  <!-- ==================== HALAMAN 2 (A4): LANJUTAN PG 6 s.d. 15 ==================== -->
+  <!-- ==================== HALAMAN 2 (A4): LANJUTAN PG 8 s.d. 15 & ISIAN 16 s.d. 20 ==================== -->
   <div class="page">
     <div class="page-header">
       <span>PENILAIAN SUMATIF AKHIR SEMESTER (SAS) — ${subject}</span>
       <span>KELAS ${g} SD • SEMESTER ${sem}</span>
     </div>
 
-    <!-- LANJUTAN PILIHAN GANDA (NO 6 s.d. 15) -->
+    <!-- LANJUTAN PILIHAN GANDA (NO 8 s.d. 15) -->
     <div class="section-banner">
-      <span>A. PILIHAN GANDA (LANJUTAN: NOMOR 6 s.d. 15)</span>
+      <span>A. PILIHAN GANDA (LANJUTAN: NOMOR 8 s.d. 15)</span>
       <span class="section-subtitle">Pilihlah salah satu jawaban yang paling tepat!</span>
     </div>
 
     <div class="pg-container">
       ${pgHtmlPart2}
+    </div>
+
+    <!-- BAGIAN II: ISIAN SINGKAT (NO 16 s.d. 20) -->
+    <div class="section-banner" style="background: linear-gradient(135deg, #0284c7, #0369a1); margin-top: 4px;">
+      <span>B. ISIAN SINGKAT (5 BUTIR SOAL: NOMOR 16 s.d. 20)</span>
+      <span class="section-subtitle">Isilah titik-titik di bawah ini dengan jawaban yang singkat, tepat, dan benar!</span>
+    </div>
+
+    <div class="isian-container">
+      ${isianHtml}
     </div>
 
     <div class="page-footer">
@@ -2530,25 +2557,15 @@ async function renderSasHtml(sasData) {
   </div>
 
 
-  <!-- ==================== HALAMAN 3 (A4): ISIAN 16-20 & URAIAN 21-25 ==================== -->
+  <!-- ==================== HALAMAN 3 (A4): URAIAN / ESSAY 21-25 ==================== -->
   <div class="page">
     <div class="page-header">
       <span>PENILAIAN SUMATIF AKHIR SEMESTER (SAS) — ${subject}</span>
       <span>KELAS ${g} SD • SEMESTER ${sem}</span>
     </div>
 
-    <!-- BAGIAN II: ISIAN SINGKAT (NO 16 s.d. 20) -->
-    <div class="section-banner" style="background: linear-gradient(135deg, #0284c7, #0369a1); margin-top: 2px;">
-      <span>B. ISIAN SINGKAT (5 BUTIR SOAL: NOMOR 16 s.d. 20)</span>
-      <span class="section-subtitle">Isilah titik-titik di bawah ini dengan jawaban yang singkat, tepat, dan benar!</span>
-    </div>
-
-    <div class="isian-container">
-      ${isianHtml}
-    </div>
-
     <!-- BAGIAN III: URAIAN / ESSAY (NO 21 s.d. 25) -->
-    <div class="section-banner" style="background: linear-gradient(135deg, #7c3aed, #6d28d9); margin-top: 6px;">
+    <div class="section-banner" style="background: linear-gradient(135deg, #7c3aed, #6d28d9);">
       <span>C. URAIAN / ESSAY (5 BUTIR SOAL: NOMOR 21 s.d. 25)</span>
       <span class="section-subtitle">Jawablah pertanyaan-pertanyaan di bawah ini secara lengkap, jelas, dan santun!</span>
     </div>
@@ -2570,11 +2587,11 @@ async function renderSasHtml(sasData) {
 
   <!-- ==================== HALAMAN 4 (A4): KUNCI JAWABAN PG & ISIAN (DOKUMEN GURU) ==================== -->
   <div class="page">
-    <div style="border-bottom: 2px solid #991b1b; padding-bottom: 4px; margin-bottom: 5px; display: flex; justify-content: space-between; align-items: flex-end;">
+    <div style="border-bottom: 2px solid #991b1b; padding-bottom: 3px; margin-bottom: 4px; display: flex; justify-content: space-between; align-items: flex-end;">
       <div>
         <span class="teacher-badge">DOKUMEN RAHASIA KHUSUS GURU</span>
         <h2 class="teacher-title">KUNCI JAWABAN & PEMBAHASAN ASESMEN SUMATIF AKHIR SEMESTER (SAS)</h2>
-        <div style="font-size: 8pt; color: #475569;">
+        <div style="font-size: 7.8pt; color: #475569;">
           Mata Pelajaran: <strong>${subject}</strong> | Kelas: <strong>${g} SD (${fase})</strong> | Semester: <strong>${sem}</strong> | Tahun Ajaran: <strong>${academicYear}</strong>
         </div>
       </div>
@@ -2588,13 +2605,13 @@ async function renderSasHtml(sasData) {
         <div>• <strong>Isian Singkat (5 Soal):</strong> 5 x 4 = <strong>20 Poin</strong></div>
         <div>• <strong>Uraian/Essay (5 Soal):</strong> 5 x 10 = <strong>50 Poin</strong></div>
       </div>
-      <div style="margin-top: 2px; font-weight: 700; color: #15803d; font-size: 7.5pt;">
+      <div style="margin-top: 2px; font-weight: 700; color: #15803d; font-size: 7.4pt;">
         Rumus: Nilai Akhir (NA) = Skor Pilihan Ganda + Skor Isian Singkat + Skor Uraian = (Total Skor / 100) x 100
       </div>
     </div>
 
     <!-- TABEL KUNCI PILIHAN GANDA (1-15) -->
-    <h3 style="font-size: 8.2pt; font-weight: 700; color: #047857; margin: 3px 0 2px 0;">A. Kunci Jawaban & Pembahasan Pilihan Ganda (No. 1 s.d. 15)</h3>
+    <h3 style="font-size: 8pt; font-weight: 700; color: #047857; margin: 3px 0 2px 0;">A. Kunci Jawaban & Pembahasan Pilihan Ganda (No. 1 s.d. 15)</h3>
     <table class="key-table">
       <thead>
         <tr>
@@ -2610,7 +2627,7 @@ async function renderSasHtml(sasData) {
     </table>
 
     <!-- TABEL KUNCI ISIAN (16-20) -->
-    <h3 style="font-size: 8.2pt; font-weight: 700; color: #0284c7; margin: 5px 0 2px 0;">B. Kunci Jawaban Isian Singkat (No. 16 s.d. 20)</h3>
+    <h3 style="font-size: 8pt; font-weight: 700; color: #0284c7; margin: 4px 0 2px 0;">B. Kunci Jawaban Isian Singkat (No. 16 s.d. 20)</h3>
     <table class="key-table">
       <thead>
         <tr>
@@ -2634,18 +2651,18 @@ async function renderSasHtml(sasData) {
 
   <!-- ==================== HALAMAN 5 (A4): RUBRIK URAIAN & PENGESAHAN (DOKUMEN GURU) ==================== -->
   <div class="page">
-    <div style="border-bottom: 2px solid #7c3aed; padding-bottom: 4px; margin-bottom: 5px; display: flex; justify-content: space-between; align-items: flex-end;">
+    <div style="border-bottom: 2px solid #7c3aed; padding-bottom: 3px; margin-bottom: 4px; display: flex; justify-content: space-between; align-items: flex-end;">
       <div>
         <span class="teacher-badge" style="background: #7c3aed;">RUBRIK & PENGESAHAN GURU</span>
         <h2 class="teacher-title" style="color: #6d28d9;">RUBRIK PENSKORAN URAIAN & LEMBAR PENGESAHAN ASESMEN</h2>
-        <div style="font-size: 8pt; color: #475569;">
+        <div style="font-size: 7.8pt; color: #475569;">
           Mata Pelajaran: <strong>${subject}</strong> | Kelas: <strong>${g} SD (${fase})</strong> | Semester: <strong>${sem}</strong>
         </div>
       </div>
     </div>
 
     <!-- TABEL KUNCI & RUBRIK URAIAN (21-25) -->
-    <h3 style="font-size: 8.2pt; font-weight: 700; color: #6d28d9; margin: 3px 0 2px 0;">C. Kunci Jawaban Lengkap & Rubrik Penskoran Soal Uraian (No. 21 s.d. 25)</h3>
+    <h3 style="font-size: 8pt; font-weight: 700; color: #6d28d9; margin: 3px 0 2px 0;">C. Kunci Jawaban Lengkap & Rubrik Penskoran Soal Uraian (No. 21 s.d. 25)</h3>
     <table class="key-table">
       <thead>
         <tr style="background: #7c3aed;">
@@ -2661,16 +2678,16 @@ async function renderSasHtml(sasData) {
     </table>
 
     <!-- CATATAN & REKOMENDASI GURU -->
-    <div style="background: #f8fafc; border: 1.5px solid #e2e8f0; border-radius: 5px; padding: 5px 8px; font-size: 7.8pt; margin-top: 4px; margin-bottom: 8px;">
+    <div style="background: #f8fafc; border: 1.5px solid #e2e8f0; border-radius: 4px; padding: 4px 7px; font-size: 7.6pt; margin-top: 3px; margin-bottom: 6px;">
       <strong style="color: #334155;">📝 Catatan Evaluasi & Rencana Tindak Lanjut Guru:</strong>
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 3px; font-size: 7.6pt; color: #64748b;">
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 2px; font-size: 7.4pt; color: #64748b;">
         <div>• <strong>Remedial (Skor < 75):</strong> Bimbingan tutor sebaya & penguatan materi pokok</div>
         <div>• <strong>Pengayaan (Skor ≥ 75):</strong> Penugasan studi kasus kontekstual & soal HOTS lanjutan</div>
       </div>
     </div>
 
     <!-- LEMBAR PENGESAHAN TANDA TANGAN -->
-    <div style="margin-top: auto; display: flex; justify-content: space-between; font-size: 8.2pt; padding: 0 30px 6px 30px;">
+    <div style="margin-top: auto; display: flex; justify-content: space-between; font-size: 8pt; padding: 0 30px 4px 30px;">
       <div style="text-align: center;">
         Mengetahui,<br>
         Kepala SD Negeri ...........................<br><br><br><br>
