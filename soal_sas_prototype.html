@@ -3,53 +3,63 @@
 <head>
   <meta charset="UTF-8">
   <title>Naskah Soal SAS — Pendidikan Agama Islam dan Budi Pekerti (PAI & BP) Kelas 5 Semester 1</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
   <style>
-    @page {
-      size: A4 portrait;
-      margin: 12mm 15mm 12mm 15mm;
-    }
-    *, *::before, *::after {
+    * {
       box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
     }
     body {
-      font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+      font-family: 'Nunito', 'Segoe UI', Arial, sans-serif;
       font-size: 9pt;
       line-height: 1.4;
       color: #0f172a;
-      background: #f1f5f9;
+      background: #e2e8f0;
       margin: 0;
-      padding: 20px;
+      padding: 0;
     }
-    .print-container {
-      max-width: 210mm;
-      margin: 0 auto;
+    @page {
+      size: A4 portrait;
+      margin: 0;
     }
-    .page-sheet {
+    .page {
+      width: 210mm;
+      height: 297mm;
+      max-height: 297mm;
+      margin: 15px auto;
       background: #ffffff;
-      padding: 14mm 15mm;
-      margin-bottom: 20px;
-      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
-      border-radius: 4px;
+      padding: 9mm 14mm 9mm 14mm;
       position: relative;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      page-break-after: always;
+      page-break-inside: avoid;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
     }
     @media print {
-      body {
-        background: #ffffff;
-        padding: 0;
+      html, body {
+        width: 210mm !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        background: transparent !important;
       }
-      .print-container {
-        max-width: 100%;
-        margin: 0;
-      }
-      .page-sheet {
-        box-shadow: none;
-        padding: 0;
-        margin-bottom: 0;
-        border-radius: 0;
-      }
-      .page-break {
-        page-break-before: always;
-        break-before: page;
+      .page {
+        margin: 0 !important;
+        box-shadow: none !important;
+        width: 210mm !important;
+        height: 297mm !important;
+        max-height: 297mm !important;
+        padding: 9mm 14mm 9mm 14mm !important;
+        page-break-after: always !important;
+        page-break-inside: avoid !important;
+        overflow: hidden !important;
       }
       .no-print {
         display: none !important;
@@ -60,39 +70,34 @@
     .kop-wrapper {
       text-align: center;
       position: relative;
-      padding-bottom: 8px;
+      padding-bottom: 6px;
       border-bottom: 3px double #0f172a;
-      margin-bottom: 12px;
+      margin-bottom: 8px;
     }
     .kop-kementerian {
-      font-size: 9.5pt;
+      font-size: 9pt;
       font-weight: 700;
       letter-spacing: 0.5px;
       text-transform: uppercase;
       color: #1e293b;
     }
     .kop-dinas {
-      font-size: 11pt;
+      font-size: 10.5pt;
       font-weight: 800;
-      letter-spacing: 0.8px;
+      letter-spacing: 0.6px;
       text-transform: uppercase;
       color: #0f172a;
     }
-    .kop-kkg {
-      font-size: 9pt;
-      font-weight: 600;
-      color: #475569;
-    }
     .kop-title {
-      font-size: 12pt;
-      font-weight: 800;
+      font-size: 11.5pt;
+      font-weight: 900;
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: 0.8px;
       color: #047857;
-      margin-top: 4px;
+      margin-top: 2px;
     }
     .kop-ta {
-      font-size: 9pt;
+      font-size: 8.5pt;
       font-weight: 600;
       color: #334155;
     }
@@ -101,11 +106,11 @@
     .identitas-grid {
       width: 100%;
       border-collapse: collapse;
-      margin-bottom: 10px;
-      font-size: 8.8pt;
+      margin-bottom: 8px;
+      font-size: 8.5pt;
     }
     .identitas-grid td {
-      padding: 3px 6px;
+      padding: 2.5px 5px;
       vertical-align: middle;
     }
     .identitas-border-box {
@@ -116,32 +121,32 @@
     .score-cell {
       border-left: 1.5px solid #0f172a;
       text-align: center;
-      width: 110px;
-      padding: 4px !important;
+      width: 95px;
+      padding: 3px !important;
       background: #f1f5f9;
     }
     .score-title {
-      font-size: 7.5pt;
+      font-size: 7.2pt;
       font-weight: 700;
       text-transform: uppercase;
       color: #475569;
     }
     .score-val {
-      font-size: 16pt;
+      font-size: 15pt;
       font-weight: 900;
       color: #047857;
-      height: 28px;
+      height: 24px;
     }
 
     /* PETUNJUK */
     .petunjuk-card {
       background: #f8fafc;
       border: 1px solid #cbd5e1;
-      border-left: 4px solid #047857;
+      border-left: 3.5px solid #047857;
       border-radius: 4px;
-      padding: 6px 10px;
-      margin-bottom: 12px;
-      font-size: 8pt;
+      padding: 5px 8px;
+      margin-bottom: 8px;
+      font-size: 7.8pt;
       color: #334155;
     }
     .petunjuk-title {
@@ -149,28 +154,29 @@
       color: #047857;
       margin-bottom: 2px;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.4px;
     }
     .petunjuk-list {
       margin: 0;
-      padding-left: 16px;
+      padding-left: 14px;
+      line-height: 1.3;
     }
 
     /* SECTION HEADERS */
     .section-banner {
       background: linear-gradient(135deg, #047857, #059669);
       color: #ffffff;
-      padding: 4px 10px;
-      font-size: 9pt;
+      padding: 3.5px 8px;
+      font-size: 8.6pt;
       font-weight: 700;
-      border-radius: 4px;
-      margin: 12px 0 8px 0;
+      border-radius: 3px;
+      margin: 6px 0 6px 0;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
     .section-subtitle {
-      font-size: 8pt;
+      font-size: 7.5pt;
       font-weight: normal;
       font-style: italic;
       color: #d1fae5;
@@ -178,18 +184,18 @@
 
     /* QUESTION STYLING */
     .question-item {
-      margin-bottom: 8px;
-      font-size: 8.8pt;
+      margin-bottom: 7px;
+      font-size: 8.5pt;
       page-break-inside: avoid;
     }
     .question-header {
       display: flex;
-      gap: 6px;
+      gap: 5px;
       align-items: flex-start;
     }
     .question-num {
-      font-weight: 700;
-      min-width: 20px;
+      font-weight: 800;
+      min-width: 18px;
       color: #0f172a;
     }
     .question-body {
@@ -197,30 +203,30 @@
     }
     .stimulus-box {
       background: #f8fafc;
-      border-left: 3px solid #10b981;
-      padding: 4px 8px;
-      border-radius: 0 4px 4px 0;
-      margin-bottom: 4px;
-      font-size: 8.2pt;
+      border-left: 2.5px solid #10b981;
+      padding: 3px 6px;
+      border-radius: 0 3px 3px 0;
+      margin-bottom: 3px;
+      font-size: 8pt;
       color: #334155;
     }
     .question-text {
       color: #0f172a;
-      line-height: 1.35;
+      line-height: 1.32;
     }
     .choices-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 2px 14px;
-      margin-top: 3px;
+      gap: 1.5px 12px;
+      margin-top: 2.5px;
     }
     .choice-opt {
       display: flex;
-      gap: 5px;
+      gap: 4px;
       align-items: flex-start;
     }
     .choice-key {
-      font-weight: 700;
+      font-weight: 800;
       color: #047857;
       min-width: 14px;
     }
@@ -229,12 +235,35 @@
     }
 
     .uraian-item {
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
     .writing-line {
       border-bottom: 1px dashed #cbd5e1;
-      height: 18px;
+      height: 16px;
       margin-top: 2px;
+    }
+
+    /* HEADER & FOOTER */
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1.5px dashed #cbd5e1;
+      padding-bottom: 3px;
+      margin-bottom: 6px;
+      font-size: 8pt;
+      color: #047857;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .page-footer {
+      margin-top: auto;
+      display: flex;
+      justify-content: space-between;
+      border-top: 1.5px dashed #cbd5e1;
+      padding-top: 3px;
+      font-size: 7.8pt;
+      color: #94a3b8;
+      font-weight: 600;
     }
 
     /* TEACHER EVALUATION SHEET */
@@ -242,37 +271,37 @@
       display: inline-block;
       background: #dc2626;
       color: #ffffff;
-      font-size: 7.5pt;
+      font-size: 7pt;
       font-weight: 700;
-      padding: 2px 8px;
+      padding: 1.5px 6px;
       border-radius: 3px;
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      margin-bottom: 4px;
+      margin-bottom: 2px;
     }
     .teacher-title {
-      font-size: 11pt;
+      font-size: 10.5pt;
       font-weight: 800;
       color: #991b1b;
-      margin: 0 0 10px 0;
+      margin: 0 0 6px 0;
       text-transform: uppercase;
     }
     .key-table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 8.2pt;
-      margin-bottom: 12px;
+      font-size: 7.8pt;
+      margin-bottom: 8px;
     }
     .key-table th {
       background: #047857;
       color: #ffffff;
-      padding: 4px 6px;
+      padding: 3px 5px;
       font-weight: 700;
       border: 1px solid #047857;
       text-align: left;
     }
     .key-table td {
-      padding: 4px 6px;
+      padding: 2.5px 5px;
       border: 1px solid #e2e8f0;
     }
     .key-table tr:nth-child(even) {
@@ -282,77 +311,82 @@
     .scoring-summary-box {
       background: #f0fdf4;
       border: 1.5px solid #86efac;
-      border-radius: 6px;
-      padding: 8px 12px;
-      font-size: 8.5pt;
+      border-radius: 5px;
+      padding: 6px 10px;
+      font-size: 8pt;
       color: #166534;
-      margin-bottom: 16px;
+      margin-bottom: 8px;
     }
   </style>
 </head>
 <body>
 
-  <div class="print-container">
-    
-    <!-- ================= HALAMAN LEMBAR NASKAH SOAL SISWA ================= -->
-    <div class="page-sheet">
-      <!-- KOP RESMI -->
-      <div class="kop-wrapper">
-        <div class="kop-kementerian">KEMENTERIAN AGAMA / DINAS PENDIDIKAN DAN KEBUDAYAAN</div>
-        <div class="kop-dinas">KELOMPOK KERJA GURU (KKG) PENDIDIKAN AGAMA ISLAM</div>
-        <div class="kop-title">PENILAIAN SUMATIF AKHIR SEMESTER (SAS) GANJIL</div>
-        <div class="kop-ta">TAHUN PELAJARAN 2026/2027</div>
-      </div>
+  <!-- TOP BAR BUTTONS (NO PRINT) -->
+  <div style="position: sticky; top: 0; z-index: 999; background: #047857; color: white; padding: 8px 18px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 8px rgba(0,0,0,0.15);" class="no-print">
+    <div><strong>📝 Naskah Soal SAS (4 Halaman A4):</strong> Pendidikan Agama Islam dan Budi Pekerti (PAI & BP) Kelas 5 Semester 1</div>
+    <div style="display: flex; gap: 8px; align-items: center;">
+      <button onclick="window.print()" style="background: #f59e0b; color: #78350f; border: none; padding: 5px 16px; border-radius: 20px; font-weight: 700; cursor: pointer; font-size: 9.5pt;">🖨️ Cetak / Download PDF (A4)</button>
+    </div>
+  </div>
 
-      <!-- IDENTITAS SISWA & UJIAN -->
-      <table class="identitas-grid identitas-border-box">
-        <tr>
-          <td style="width: 18%;"><strong>Mata Pelajaran</strong></td>
-          <td style="width: 3%;">:</td>
-          <td style="width: 32%;">Pendidikan Agama Islam dan Budi Pekerti (PAI & BP)</td>
-          <td style="width: 18%;"><strong>Nama Siswa</strong></td>
-          <td style="width: 3%;">:</td>
-          <td style="width: 26%;">......................................................</td>
-          <td rowspan="3" class="score-cell">
-            <div class="score-title">Nilai Akhir</div>
-            <div class="score-val">......</div>
-            <div style="font-size: 7pt; color: #64748b; margin-top: 2px;">Paraf Guru</div>
-          </td>
-        </tr>
-        <tr>
-          <td><strong>Kelas / Fase</strong></td>
-          <td>:</td>
-          <td>Kelas 5 SD / Fase C</td>
-          <td><strong>Nomor Presensi</strong></td>
-          <td>:</td>
-          <td>......................................................</td>
-        </tr>
-        <tr>
-          <td><strong>Waktu / Kurikulum</strong></td>
-          <td>:</td>
-          <td>90 Menit / Kurikulum Merdeka (CP No. 020 Tahun 2026)</td>
-          <td><strong>Hari / Tanggal</strong></td>
-          <td>:</td>
-          <td>......................................................</td>
-        </tr>
-      </table>
+  <!-- ==================== HALAMAN 1 (A4): KOP, IDENTITAS, PETUNJUK & PG 1-8 ==================== -->
+  <div class="page">
+    <div class="kop-wrapper">
+      <div class="kop-kementerian">KEMENTERIAN AGAMA / DINAS PENDIDIKAN DAN KEBUDAYAAN</div>
+      <div class="kop-dinas">KELOMPOK KERJA GURU (KKG) PENDIDIKAN AGAMA ISLAM</div>
+      <div class="kop-title">PENILAIAN SUMATIF AKHIR SEMESTER (SAS) GANJIL</div>
+      <div class="kop-ta">TAHUN PELAJARAN 2026/2027</div>
+    </div>
 
-      <!-- PETUNJUK PENGERJAAN -->
-      <div class="petunjuk-card">
-        <div class="petunjuk-title">📋 Petunjuk Umum Pengerjaan Soal:</div>
-        <ol class="petunjuk-list">
-          <li>Berdoalah sebelum mengerjakan soal.</li><li>Tuliskan nama lengkap dan nomor presensi pada kolom identitas yang tersedia.</li><li>Bacalah setiap butir soal dengan teliti dan cermat sebelum menjawab.</li><li>Dahulukan menjawab soal-soal yang kamu anggap paling mudah.</li><li>Periksa dan teliti kembali seluruh hasil pekerjaanmu sebelum diserahkan kepada bapak/ibu guru.</li>
-        </ol>
-      </div>
+    <!-- IDENTITAS SISWA & UJIAN -->
+    <table class="identitas-grid identitas-border-box">
+      <tr>
+        <td style="width: 17%;"><strong>Mata Pelajaran</strong></td>
+        <td style="width: 2%;">:</td>
+        <td style="width: 33%;">Pendidikan Agama Islam dan Budi Pekerti (PAI & BP)</td>
+        <td style="width: 17%;"><strong>Nama Siswa</strong></td>
+        <td style="width: 2%;">:</td>
+        <td style="width: 29%;">...................................................</td>
+        <td rowspan="3" class="score-cell">
+          <div class="score-title">Nilai Akhir</div>
+          <div class="score-val">......</div>
+          <div style="font-size: 6.8pt; color: #64748b;">Paraf Guru</div>
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Kelas / Fase</strong></td>
+        <td>:</td>
+        <td>Kelas 5 SD / Fase C</td>
+        <td><strong>Nomor Presensi</strong></td>
+        <td>:</td>
+        <td>...................................................</td>
+      </tr>
+      <tr>
+        <td><strong>Waktu / Kurikulum</strong></td>
+        <td>:</td>
+        <td>90 Menit / Kurikulum Merdeka (CP No. 020 Tahun 2026)</td>
+        <td><strong>Hari / Tanggal</strong></td>
+        <td>:</td>
+        <td>...................................................</td>
+      </tr>
+    </table>
 
-      <!-- BAGIAN I: PILIHAN GANDA (15 SOAL) -->
-      <div class="section-banner">
-        <span>A. PILIHAN GANDA (15 BUTIR SOAL)</span>
-        <span class="section-subtitle">Berilah tanda silang (X) pada huruf A, B, C, atau D di depan jawaban yang paling benar!</span>
-      </div>
+    <!-- PETUNJUK PENGERJAAN -->
+    <div class="petunjuk-card">
+      <div class="petunjuk-title">📋 Petunjuk Umum Pengerjaan Soal:</div>
+      <ol class="petunjuk-list">
+        <li>Berdoalah sebelum mengerjakan soal.</li><li>Tuliskan nama lengkap dan nomor presensi pada kolom identitas yang tersedia.</li><li>Bacalah setiap butir soal dengan teliti dan cermat sebelum menjawab.</li><li>Dahulukan menjawab soal-soal yang kamu anggap paling mudah.</li><li>Periksa dan teliti kembali seluruh hasil pekerjaanmu sebelum diserahkan kepada bapak/ibu guru.</li>
+      </ol>
+    </div>
 
-      <div class="pg-container">
-        
+    <!-- BAGIAN I: PILIHAN GANDA (BAGIAN 1: NO 1 s.d. 8) -->
+    <div class="section-banner">
+      <span>A. PILIHAN GANDA (BAGIAN 1: NOMOR 1 s.d. 8)</span>
+      <span class="section-subtitle">Berilah tanda silang (X) pada huruf A, B, C, atau D di depan jawaban yang paling benar!</span>
+    </div>
+
+    <div class="pg-container">
+      
       <div class="question-item">
         <div class="question-header">
           <span class="question-num">1.</span>
@@ -617,6 +651,30 @@
         </div>
       </div>
     
+    </div>
+
+    <div class="page-footer">
+      <span>Naskah Soal SAS — Pendidikan Agama Islam dan Budi Pekerti (PAI & BP) Kelas 5 SD</span>
+      <span>Halaman 1 dari 4</span>
+    </div>
+  </div>
+
+
+  <!-- ==================== HALAMAN 2 (A4): LANJUTAN PG 9-15 & ISIAN 16-20 ==================== -->
+  <div class="page">
+    <div class="page-header">
+      <span>PENILAIAN SUMATIF AKHIR SEMESTER (SAS) — Pendidikan Agama Islam dan Budi Pekerti (PAI & BP)</span>
+      <span>KELAS 5 SD • SEMESTER 1</span>
+    </div>
+
+    <!-- LANJUTAN PILIHAN GANDA (NO 9 s.d. 15) -->
+    <div class="section-banner">
+      <span>A. PILIHAN GANDA (LANJUTAN: NOMOR 9 s.d. 15)</span>
+      <span class="section-subtitle">Pilihlah salah satu jawaban yang paling tepat!</span>
+    </div>
+
+    <div class="pg-container">
+      
       <div class="question-item">
         <div class="question-header">
           <span class="question-num">9.</span>
@@ -848,17 +906,17 @@
         </div>
       </div>
     
-      </div>
+    </div>
 
-      <!-- BAGIAN II: ISIAN SINGKAT (5 SOAL) -->
-      <div class="section-banner" style="background: linear-gradient(135deg, #0284c7, #0369a1); margin-top: 14px;">
-        <span>B. ISIAN SINGKAT (5 BUTIR SOAL)</span>
-        <span class="section-subtitle">Isilah titik-titik di bawah ini dengan jawaban yang singkat, tepat, dan benar!</span>
-      </div>
+    <!-- BAGIAN II: ISIAN SINGKAT (NO 16 s.d. 20) -->
+    <div class="section-banner" style="background: linear-gradient(135deg, #0284c7, #0369a1); margin-top: 10px;">
+      <span>B. ISIAN SINGKAT (5 BUTIR SOAL: NOMOR 16 s.d. 20)</span>
+      <span class="section-subtitle">Isilah titik-titik di bawah ini dengan jawaban yang singkat, tepat, dan benar!</span>
+    </div>
 
-      <div class="isian-container">
-        
-      <div class="question-item">
+    <div class="isian-container">
+      
+      <div class="question-item" style="margin-bottom: 6px;">
         <div class="question-header">
           <span class="question-num">16.</span>
           <div class="question-body">
@@ -867,7 +925,7 @@
         </div>
       </div>
     
-      <div class="question-item">
+      <div class="question-item" style="margin-bottom: 6px;">
         <div class="question-header">
           <span class="question-num">17.</span>
           <div class="question-body">
@@ -876,7 +934,7 @@
         </div>
       </div>
     
-      <div class="question-item">
+      <div class="question-item" style="margin-bottom: 6px;">
         <div class="question-header">
           <span class="question-num">18.</span>
           <div class="question-body">
@@ -885,7 +943,7 @@
         </div>
       </div>
     
-      <div class="question-item">
+      <div class="question-item" style="margin-bottom: 6px;">
         <div class="question-header">
           <span class="question-num">19.</span>
           <div class="question-body">
@@ -894,7 +952,7 @@
         </div>
       </div>
     
-      <div class="question-item">
+      <div class="question-item" style="margin-bottom: 6px;">
         <div class="question-header">
           <span class="question-num">20.</span>
           <div class="question-body">
@@ -903,23 +961,38 @@
         </div>
       </div>
     
-      </div>
+    </div>
 
-      <!-- BAGIAN III: URAIAN / ESSAY (5 SOAL) -->
-      <div class="section-banner" style="background: linear-gradient(135deg, #7c3aed, #6d28d9); margin-top: 14px;">
-        <span>C. URAIAN / ESSAY (5 BUTIR SOAL)</span>
-        <span class="section-subtitle">Jawablah pertanyaan-pertanyaan di bawah ini secara lengkap, jelas, dan santun!</span>
-      </div>
+    <div class="page-footer">
+      <span>Naskah Soal SAS — Pendidikan Agama Islam dan Budi Pekerti (PAI & BP) Kelas 5 SD</span>
+      <span>Halaman 2 dari 4</span>
+    </div>
+  </div>
 
-      <div class="uraian-container">
-        
+
+  <!-- ==================== HALAMAN 3 (A4): URAIAN / ESSAY 21-25 ==================== -->
+  <div class="page">
+    <div class="page-header">
+      <span>PENILAIAN SUMATIF AKHIR SEMESTER (SAS) — Pendidikan Agama Islam dan Budi Pekerti (PAI & BP)</span>
+      <span>KELAS 5 SD • SEMESTER 1</span>
+    </div>
+
+    <!-- BAGIAN III: URAIAN / ESSAY (NO 21 s.d. 25) -->
+    <div class="section-banner" style="background: linear-gradient(135deg, #7c3aed, #6d28d9);">
+      <span>C. URAIAN / ESSAY (5 BUTIR SOAL: NOMOR 21 s.d. 25)</span>
+      <span class="section-subtitle">Jawablah pertanyaan-pertanyaan di bawah ini secara lengkap, jelas, dan santun!</span>
+    </div>
+
+    <div class="uraian-container">
+      
       <div class="question-item uraian-item">
         <div class="question-header">
           <span class="question-num">21.</span>
           <div class="question-body">
-            <div class="stimulus-box">📖 Ketika ada teman yang membutuhkan bantuan dalam memahami pelajaran agama...</div>
+            <div class="stimulus-box" style="margin-bottom: 2px;">📖 Ketika ada teman yang membutuhkan bantuan dalam memahami pelajaran agama...</div>
             <div class="question-text"><strong>Jelaskan bagaimana langkah nyata yang dapat kamu lakukan untuk menerapkan nilai bab 1 dalam kehidupan sehari-hari!</strong></div>
             <div class="answer-space">
+              <div class="writing-line"></div>
               <div class="writing-line"></div>
               <div class="writing-line"></div>
               <div class="writing-line"></div>
@@ -932,9 +1005,10 @@
         <div class="question-header">
           <span class="question-num">22.</span>
           <div class="question-body">
-            <div class="stimulus-box">📖 Ketika ada teman yang membutuhkan bantuan dalam memahami pelajaran agama...</div>
+            <div class="stimulus-box" style="margin-bottom: 2px;">📖 Ketika ada teman yang membutuhkan bantuan dalam memahami pelajaran agama...</div>
             <div class="question-text"><strong>Jelaskan bagaimana langkah nyata yang dapat kamu lakukan untuk menerapkan nilai bab 2 dalam kehidupan sehari-hari!</strong></div>
             <div class="answer-space">
+              <div class="writing-line"></div>
               <div class="writing-line"></div>
               <div class="writing-line"></div>
               <div class="writing-line"></div>
@@ -947,9 +1021,10 @@
         <div class="question-header">
           <span class="question-num">23.</span>
           <div class="question-body">
-            <div class="stimulus-box">📖 Ketika ada teman yang membutuhkan bantuan dalam memahami pelajaran agama...</div>
+            <div class="stimulus-box" style="margin-bottom: 2px;">📖 Ketika ada teman yang membutuhkan bantuan dalam memahami pelajaran agama...</div>
             <div class="question-text"><strong>Jelaskan bagaimana langkah nyata yang dapat kamu lakukan untuk menerapkan nilai bab 3 dalam kehidupan sehari-hari!</strong></div>
             <div class="answer-space">
+              <div class="writing-line"></div>
               <div class="writing-line"></div>
               <div class="writing-line"></div>
               <div class="writing-line"></div>
@@ -962,9 +1037,10 @@
         <div class="question-header">
           <span class="question-num">24.</span>
           <div class="question-body">
-            <div class="stimulus-box">📖 Ketika ada teman yang membutuhkan bantuan dalam memahami pelajaran agama...</div>
+            <div class="stimulus-box" style="margin-bottom: 2px;">📖 Ketika ada teman yang membutuhkan bantuan dalam memahami pelajaran agama...</div>
             <div class="question-text"><strong>Jelaskan bagaimana langkah nyata yang dapat kamu lakukan untuk menerapkan nilai bab 4 dalam kehidupan sehari-hari!</strong></div>
             <div class="answer-space">
+              <div class="writing-line"></div>
               <div class="writing-line"></div>
               <div class="writing-line"></div>
               <div class="writing-line"></div>
@@ -977,9 +1053,10 @@
         <div class="question-header">
           <span class="question-num">25.</span>
           <div class="question-body">
-            <div class="stimulus-box">📖 Ketika ada teman yang membutuhkan bantuan dalam memahami pelajaran agama...</div>
+            <div class="stimulus-box" style="margin-bottom: 2px;">📖 Ketika ada teman yang membutuhkan bantuan dalam memahami pelajaran agama...</div>
             <div class="question-text"><strong>Jelaskan bagaimana langkah nyata yang dapat kamu lakukan untuk menerapkan nilai bab 5 dalam kehidupan sehari-hari!</strong></div>
             <div class="answer-space">
+              <div class="writing-line"></div>
               <div class="writing-line"></div>
               <div class="writing-line"></div>
               <div class="writing-line"></div>
@@ -988,52 +1065,57 @@
         </div>
       </div>
     
-      </div>
+    </div>
 
-      <div style="text-align: center; font-size: 8pt; color: #64748b; margin-top: 14px; border-top: 1px solid #e2e8f0; padding-top: 6px;">
-        ✨ <i>"Kejujuran adalah perhiasan orang yang beriman. Selamat mengerjakan dengan mandiri dan teliti!"</i> ✨
+    <div style="text-align: center; font-size: 8pt; color: #64748b; margin-top: 8px; border-top: 1px solid #e2e8f0; padding-top: 4px;">
+      ✨ <i>"Kejujuran adalah cermin keimanan. Periksa kembali seluruh jawabanmu sebelum diserahkan kepada pengawas!"</i> ✨
+    </div>
+
+    <div class="page-footer">
+      <span>Naskah Soal SAS — Pendidikan Agama Islam dan Budi Pekerti (PAI & BP) Kelas 5 SD</span>
+      <span>Halaman 3 dari 4</span>
+    </div>
+  </div>
+
+
+  <!-- ==================== HALAMAN 4 (A4): KUNCI JAWABAN & RUBRIK (PEGANGAN GURU) ==================== -->
+  <div class="page">
+    <div style="border-bottom: 2px solid #991b1b; padding-bottom: 4px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: flex-end;">
+      <div>
+        <span class="teacher-badge">DOKUMEN RAHASIA KHUSUS GURU</span>
+        <h2 class="teacher-title">KUNCI JAWABAN & PEDOMAN PENSKORAN ASESMEN SUMATIF AKHIR SEMESTER (SAS)</h2>
+        <div style="font-size: 8pt; color: #475569;">
+          Mata Pelajaran: <strong>Pendidikan Agama Islam dan Budi Pekerti (PAI & BP)</strong> | Kelas: <strong>5 SD (Fase C)</strong> | Semester: <strong>1</strong> | Tahun Ajaran: <strong>2026/2027</strong>
+        </div>
       </div>
     </div>
 
-
-    <!-- ================= HALAMAN TERPISAH: KUNCI JAWABAN & RUBRIK (PEGANGAN GURU) ================= -->
-    <div class="page-sheet page-break">
-      <div style="border-bottom: 2px solid #991b1b; padding-bottom: 6px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: flex-end;">
-        <div>
-          <span class="teacher-badge">DOKUMEN RAHASIA KHUSUS GURU</span>
-          <h2 class="teacher-title">KUNCI JAWABAN & PEDOMAN PENSKORAN ASESMEN SUMATIF AKHIR SEMESTER (SAS)</h2>
-          <div style="font-size: 8.5pt; color: #475569;">
-            Mata Pelajaran: <strong>Pendidikan Agama Islam dan Budi Pekerti (PAI & BP)</strong> | Kelas: <strong>5 SD (Fase C)</strong> | Semester: <strong>1</strong> | Tahun Ajaran: <strong>2026/2027</strong>
-          </div>
-        </div>
+    <!-- REKAPITULASI BOBOT SKOR & RUMUS NILAI -->
+    <div class="scoring-summary-box">
+      <strong>📊 Pedoman Konversi & Rumus Penilaian Akhir (Skor Maksimal = 100):</strong>
+      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; margin-top: 3px;">
+        <div>• <strong>Pilihan Ganda (15 Soal):</strong> 15 x 2 Poin = <strong>30 Poin</strong></div>
+        <div>• <strong>Isian Singkat (5 Soal):</strong> 5 x 4 Poin = <strong>20 Poin</strong></div>
+        <div>• <strong>Uraian/Essay (5 Soal):</strong> 5 x 10 Poin = <strong>50 Poin</strong></div>
       </div>
-
-      <!-- REKAPITULASI BOBOT SKOR & RUMUS NILAI -->
-      <div class="scoring-summary-box">
-        <strong>📊 Pedoman Konversi & Rumus Penilaian Akhir (Skor Maksimal = 100):</strong>
-        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-top: 4px;">
-          <div>• <strong>Pilihan Ganda (15 Soal):</strong> 15 x 2 Poin = <strong>30 Poin</strong></div>
-          <div>• <strong>Isian Singkat (5 Soal):</strong> 5 x 4 Poin = <strong>20 Poin</strong></div>
-          <div>• <strong>Uraian/Essay (5 Soal):</strong> 5 x 10 Poin = <strong>50 Poin</strong></div>
-        </div>
-        <div style="margin-top: 4px; font-weight: 700; color: #15803d;">
-          Rumus: Nilai Akhir (NA) = Skor Pilihan Ganda + Skor Isian Singkat + Skor Uraian = (Total Skor / 100) x 100
-        </div>
+      <div style="margin-top: 3px; font-weight: 700; color: #15803d; font-size: 7.8pt;">
+        Rumus: Nilai Akhir (NA) = Skor Pilihan Ganda + Skor Isian Singkat + Skor Uraian = (Total Skor / 100) x 100
       </div>
+    </div>
 
-      <!-- TABEL KUNCI PILIHAN GANDA (1-15) -->
-      <h3 style="font-size: 9pt; font-weight: 700; color: #047857; margin: 10px 0 4px 0;">A. Kunci Jawaban & Pembahasan Pilihan Ganda (No. 1 s.d. 15)</h3>
-      <table class="key-table">
-        <thead>
-          <tr>
-            <th style="width: 5%; text-align: center;">No</th>
-            <th style="width: 8%; text-align: center;">Kunci</th>
-            <th style="width: 25%;">Materi / Bab Pokok</th>
-            <th>Pembahasan & Indikator Soal</th>
-          </tr>
-        </thead>
-        <tbody>
-          
+    <!-- TABEL KUNCI PILIHAN GANDA (1-15) -->
+    <h3 style="font-size: 8.2pt; font-weight: 700; color: #047857; margin: 4px 0 2px 0;">A. Kunci Jawaban & Pembahasan Pilihan Ganda (No. 1 s.d. 15)</h3>
+    <table class="key-table">
+      <thead>
+        <tr>
+          <th style="width: 5%; text-align: center;">No</th>
+          <th style="width: 7%; text-align: center;">Kunci</th>
+          <th style="width: 25%;">Materi / Bab Pokok</th>
+          <th>Pembahasan & Indikator Soal</th>
+        </tr>
+      </thead>
+      <tbody>
+        
       <tr>
         <td style="text-align: center; font-weight: 700;">1</td>
         <td style="text-align: center; font-weight: 800; color: #047857; background: #ecfdf5;">B</td>
@@ -1139,22 +1221,22 @@
         <td style="font-size: 8pt;">Pembahasan untuk butir nomor 15 sangat jelas dan rinci.</td>
       </tr>
     
-        </tbody>
-      </table>
+      </tbody>
+    </table>
 
-      <!-- TABEL KUNCI ISIAN (16-20) -->
-      <h3 style="font-size: 9pt; font-weight: 700; color: #0284c7; margin: 12px 0 4px 0;">B. Kunci Jawaban Isian Singkat (No. 16 s.d. 20)</h3>
-      <table class="key-table">
-        <thead>
-          <tr>
-            <th style="width: 5%; text-align: center;">No</th>
-            <th style="width: 35%;">Kunci Jawaban Tepat</th>
-            <th style="width: 45%;">Materi / Pokok Bahasan</th>
-            <th style="width: 15%; text-align: center;">Bobot Skor</th>
-          </tr>
-        </thead>
-        <tbody>
-          
+    <!-- TABEL KUNCI ISIAN (16-20) -->
+    <h3 style="font-size: 8.2pt; font-weight: 700; color: #0284c7; margin: 4px 0 2px 0;">B. Kunci Jawaban Isian Singkat (No. 16 s.d. 20)</h3>
+    <table class="key-table">
+      <thead>
+        <tr>
+          <th style="width: 5%; text-align: center;">No</th>
+          <th style="width: 35%;">Kunci Jawaban Tepat</th>
+          <th style="width: 45%;">Materi / Pokok Bahasan</th>
+          <th style="width: 15%; text-align: center;">Bobot Skor</th>
+        </tr>
+      </thead>
+      <tbody>
+        
       <tr>
         <td style="text-align: center; font-weight: 700;">16</td>
         <td style="font-weight: 700; color: #0f766e;">Kunci konsep 1</td>
@@ -1190,92 +1272,95 @@
         <td style="text-align: center; font-weight: 600;">4 Poin</td>
       </tr>
     
-        </tbody>
-      </table>
+      </tbody>
+    </table>
 
-      <!-- TABEL KUNCI & RUBRIK URAIAN (21-25) -->
-      <h3 style="font-size: 9pt; font-weight: 700; color: #7c3aed; margin: 12px 0 4px 0;">C. Kunci Jawaban & Rubrik Penskoran Uraian (No. 21 s.d. 25)</h3>
-      <table class="key-table">
-        <thead>
-          <tr>
-            <th style="width: 5%; text-align: center;">No</th>
-            <th style="width: 55%;">Pertanyaan & Jawaban Ideal</th>
-            <th style="width: 25%;">Kriteria & Rubrik Skor</th>
-            <th style="width: 15%; text-align: center;">Skor Maks</th>
-          </tr>
-        </thead>
-        <tbody>
-          
+    <!-- TABEL KUNCI & RUBRIK URAIAN (21-25) -->
+    <h3 style="font-size: 8.2pt; font-weight: 700; color: #7c3aed; margin: 4px 0 2px 0;">C. Kunci Jawaban & Rubrik Penskoran Uraian (No. 21 s.d. 25)</h3>
+    <table class="key-table">
+      <thead>
+        <tr>
+          <th style="width: 5%; text-align: center;">No</th>
+          <th style="width: 55%;">Pertanyaan & Jawaban Ideal</th>
+          <th style="width: 25%;">Kriteria & Rubrik Skor</th>
+          <th style="width: 15%; text-align: center;">Skor Maks</th>
+        </tr>
+      </thead>
+      <tbody>
+        
       <tr>
         <td style="text-align: center; font-weight: 700; vertical-align: top;">21</td>
         <td style="vertical-align: top;">
-          <div style="font-weight: 600; color: #1e293b; margin-bottom: 4px;">Jelaskan bagaimana langkah nyata yang dapat kamu lakukan untuk menerapkan nilai bab 1 dalam kehidupan sehari-hari!</div>
-          <div style="color: #047857; font-size: 8.5pt;"><strong>Kunci Jawaban:</strong> Langkah nyata penerapan nilai bab 1 mencakup sikap peduli, membantu dengan ikhlas, dan mengajak kepada kebaikan.</div>
+          <div style="font-weight: 600; color: #1e293b; margin-bottom: 2px;">Jelaskan bagaimana langkah nyata yang dapat kamu lakukan untuk menerapkan nilai bab 1 dalam kehidupan sehari-hari!</div>
+          <div style="color: #047857; font-size: 8pt;"><strong>Kunci:</strong> Langkah nyata penerapan nilai bab 1 mencakup sikap peduli, membantu dengan ikhlas, dan mengajak kepada kebaikan.</div>
         </td>
-        <td style="vertical-align: top; font-size: 8pt; color: #64748b;">Skor 10 jika memuat 3 tindakan nyata dan alasan logis; Skor 6 jika memuat 2 tindakan; Skor 3 jika hanya 1 tindakan.</td>
+        <td style="vertical-align: top; font-size: 7.8pt; color: #64748b;">Skor 10 jika memuat 3 tindakan nyata dan alasan logis; Skor 6 jika memuat 2 tindakan; Skor 3 jika hanya 1 tindakan.</td>
         <td style="text-align: center; font-weight: 700; vertical-align: top; color: #b45309;">10 Poin</td>
       </tr>
     
       <tr>
         <td style="text-align: center; font-weight: 700; vertical-align: top;">22</td>
         <td style="vertical-align: top;">
-          <div style="font-weight: 600; color: #1e293b; margin-bottom: 4px;">Jelaskan bagaimana langkah nyata yang dapat kamu lakukan untuk menerapkan nilai bab 2 dalam kehidupan sehari-hari!</div>
-          <div style="color: #047857; font-size: 8.5pt;"><strong>Kunci Jawaban:</strong> Langkah nyata penerapan nilai bab 2 mencakup sikap peduli, membantu dengan ikhlas, dan mengajak kepada kebaikan.</div>
+          <div style="font-weight: 600; color: #1e293b; margin-bottom: 2px;">Jelaskan bagaimana langkah nyata yang dapat kamu lakukan untuk menerapkan nilai bab 2 dalam kehidupan sehari-hari!</div>
+          <div style="color: #047857; font-size: 8pt;"><strong>Kunci:</strong> Langkah nyata penerapan nilai bab 2 mencakup sikap peduli, membantu dengan ikhlas, dan mengajak kepada kebaikan.</div>
         </td>
-        <td style="vertical-align: top; font-size: 8pt; color: #64748b;">Skor 10 jika memuat 3 tindakan nyata dan alasan logis; Skor 6 jika memuat 2 tindakan; Skor 3 jika hanya 1 tindakan.</td>
+        <td style="vertical-align: top; font-size: 7.8pt; color: #64748b;">Skor 10 jika memuat 3 tindakan nyata dan alasan logis; Skor 6 jika memuat 2 tindakan; Skor 3 jika hanya 1 tindakan.</td>
         <td style="text-align: center; font-weight: 700; vertical-align: top; color: #b45309;">10 Poin</td>
       </tr>
     
       <tr>
         <td style="text-align: center; font-weight: 700; vertical-align: top;">23</td>
         <td style="vertical-align: top;">
-          <div style="font-weight: 600; color: #1e293b; margin-bottom: 4px;">Jelaskan bagaimana langkah nyata yang dapat kamu lakukan untuk menerapkan nilai bab 3 dalam kehidupan sehari-hari!</div>
-          <div style="color: #047857; font-size: 8.5pt;"><strong>Kunci Jawaban:</strong> Langkah nyata penerapan nilai bab 3 mencakup sikap peduli, membantu dengan ikhlas, dan mengajak kepada kebaikan.</div>
+          <div style="font-weight: 600; color: #1e293b; margin-bottom: 2px;">Jelaskan bagaimana langkah nyata yang dapat kamu lakukan untuk menerapkan nilai bab 3 dalam kehidupan sehari-hari!</div>
+          <div style="color: #047857; font-size: 8pt;"><strong>Kunci:</strong> Langkah nyata penerapan nilai bab 3 mencakup sikap peduli, membantu dengan ikhlas, dan mengajak kepada kebaikan.</div>
         </td>
-        <td style="vertical-align: top; font-size: 8pt; color: #64748b;">Skor 10 jika memuat 3 tindakan nyata dan alasan logis; Skor 6 jika memuat 2 tindakan; Skor 3 jika hanya 1 tindakan.</td>
+        <td style="vertical-align: top; font-size: 7.8pt; color: #64748b;">Skor 10 jika memuat 3 tindakan nyata dan alasan logis; Skor 6 jika memuat 2 tindakan; Skor 3 jika hanya 1 tindakan.</td>
         <td style="text-align: center; font-weight: 700; vertical-align: top; color: #b45309;">10 Poin</td>
       </tr>
     
       <tr>
         <td style="text-align: center; font-weight: 700; vertical-align: top;">24</td>
         <td style="vertical-align: top;">
-          <div style="font-weight: 600; color: #1e293b; margin-bottom: 4px;">Jelaskan bagaimana langkah nyata yang dapat kamu lakukan untuk menerapkan nilai bab 4 dalam kehidupan sehari-hari!</div>
-          <div style="color: #047857; font-size: 8.5pt;"><strong>Kunci Jawaban:</strong> Langkah nyata penerapan nilai bab 4 mencakup sikap peduli, membantu dengan ikhlas, dan mengajak kepada kebaikan.</div>
+          <div style="font-weight: 600; color: #1e293b; margin-bottom: 2px;">Jelaskan bagaimana langkah nyata yang dapat kamu lakukan untuk menerapkan nilai bab 4 dalam kehidupan sehari-hari!</div>
+          <div style="color: #047857; font-size: 8pt;"><strong>Kunci:</strong> Langkah nyata penerapan nilai bab 4 mencakup sikap peduli, membantu dengan ikhlas, dan mengajak kepada kebaikan.</div>
         </td>
-        <td style="vertical-align: top; font-size: 8pt; color: #64748b;">Skor 10 jika memuat 3 tindakan nyata dan alasan logis; Skor 6 jika memuat 2 tindakan; Skor 3 jika hanya 1 tindakan.</td>
+        <td style="vertical-align: top; font-size: 7.8pt; color: #64748b;">Skor 10 jika memuat 3 tindakan nyata dan alasan logis; Skor 6 jika memuat 2 tindakan; Skor 3 jika hanya 1 tindakan.</td>
         <td style="text-align: center; font-weight: 700; vertical-align: top; color: #b45309;">10 Poin</td>
       </tr>
     
       <tr>
         <td style="text-align: center; font-weight: 700; vertical-align: top;">25</td>
         <td style="vertical-align: top;">
-          <div style="font-weight: 600; color: #1e293b; margin-bottom: 4px;">Jelaskan bagaimana langkah nyata yang dapat kamu lakukan untuk menerapkan nilai bab 5 dalam kehidupan sehari-hari!</div>
-          <div style="color: #047857; font-size: 8.5pt;"><strong>Kunci Jawaban:</strong> Langkah nyata penerapan nilai bab 5 mencakup sikap peduli, membantu dengan ikhlas, dan mengajak kepada kebaikan.</div>
+          <div style="font-weight: 600; color: #1e293b; margin-bottom: 2px;">Jelaskan bagaimana langkah nyata yang dapat kamu lakukan untuk menerapkan nilai bab 5 dalam kehidupan sehari-hari!</div>
+          <div style="color: #047857; font-size: 8pt;"><strong>Kunci:</strong> Langkah nyata penerapan nilai bab 5 mencakup sikap peduli, membantu dengan ikhlas, dan mengajak kepada kebaikan.</div>
         </td>
-        <td style="vertical-align: top; font-size: 8pt; color: #64748b;">Skor 10 jika memuat 3 tindakan nyata dan alasan logis; Skor 6 jika memuat 2 tindakan; Skor 3 jika hanya 1 tindakan.</td>
+        <td style="vertical-align: top; font-size: 7.8pt; color: #64748b;">Skor 10 jika memuat 3 tindakan nyata dan alasan logis; Skor 6 jika memuat 2 tindakan; Skor 3 jika hanya 1 tindakan.</td>
         <td style="text-align: center; font-weight: 700; vertical-align: top; color: #b45309;">10 Poin</td>
       </tr>
     
-        </tbody>
-      </table>
+      </tbody>
+    </table>
 
-      <!-- TANDA TANGAN -->
-      <div style="margin-top: 24px; display: flex; justify-content: space-between; font-size: 8.8pt; padding: 0 30px;">
-        <div style="text-align: center;">
-          Mengetahui,<br>
-          Kepala SD Negeri ...........................<br><br><br><br>
-          ( .................................................... )<br>
-          NIP. ..............................................
-        </div>
-        <div style="text-align: center;">
-          ........................., ............................... 2026<br>
-          Guru Mata Pelajaran,<br><br><br><br>
-          ( .................................................... )<br>
-          NIP. ..............................................
-        </div>
+    <!-- TANDA TANGAN -->
+    <div style="margin-top: auto; display: flex; justify-content: space-between; font-size: 8.2pt; padding: 0 20px;">
+      <div style="text-align: center;">
+        Mengetahui,<br>
+        Kepala SD Negeri ...........................<br><br><br>
+        ( .................................................... )<br>
+        NIP. ..............................................
+      </div>
+      <div style="text-align: center;">
+        ........................., ............................... 2026<br>
+        Guru Mata Pelajaran,<br><br><br>
+        ( .................................................... )<br>
+        NIP. ..............................................
       </div>
     </div>
 
+    <div class="page-footer">
+      <span>Pedoman Penskoran Resmi Guru — Pendidikan Agama Islam dan Budi Pekerti (PAI & BP) Kelas 5 SD</span>
+      <span>Halaman 4 (Selesai)</span>
+    </div>
   </div>
 
 </body>
