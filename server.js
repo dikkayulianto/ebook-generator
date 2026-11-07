@@ -390,18 +390,21 @@ function getSmartChapterImage(title, content, index, usedImages = new Set()) {
   // === PRIORITY 1: MATCH BY SPECIFIC CHAPTER TITLE (Highest Accuracy) ===
 
   // 1. Surah Al-Qur'an Pilihan (MUST BE CHECKED FIRST before general 'syukur'/'salat')
-  if (t.match(/surah|q\.?s\.?|al-kau[sṡ]ar|an-na[sṣ]r|al-'?a[sṣ]r|al-falaq|an-nas|al-fatihah|al-ikhlas|at-tin|al-ma'?un|al-hujurat|al-a'?la|ad-duha/)) {
-    return pick(['/assets/cover_kelas3.jpg', '/assets/quran_rehal.jpg']);
+  if (t.match(/al-'?a[sṣ]r/)) {
+    return pick(['/assets/surah_alasr.jpg', '/assets/cover_kelas3.jpg', '/assets/quran_rehal.jpg']);
+  }
+  if (t.match(/surah|q\.?s\.?|al-kau[sṡ]ar|an-na[sṣ]r|al-falaq|an-nas|al-fatihah|al-ikhlas|at-tin|al-ma'?un|al-hujurat|al-a'?la|ad-duha/)) {
+    return pick(['/assets/cover_kelas3.jpg', '/assets/surah_alasr.jpg', '/assets/quran_rehal.jpg']);
   }
 
   // 2. Huruf Hijaiyah / Tajwid / Mim Sukun / Mad Thabi'i / Makhraj
   if (t.match(/hijaiyah|harakat|huruf|makhraj|makhārijul|bersambung|tanwin|fathah|kasrah|dhammah|mad\s*ṭ?t?ab|mim\s+sukun|idgam|ikhfa|izhar/)) {
-    return pick(['/assets/hijaiyah_bersambung.jpg', '/assets/quran_rehal.jpg']);
+    return pick(['/assets/surah_alasr.jpg', '/assets/hijaiyah_bersambung.jpg', '/assets/quran_rehal.jpg']);
   }
 
   // 2b. General Al-Qur'an / Juz 'Amma / Tadarus
   if (t.match(/juz\s*'amma|qur'?an|tadarus|tartil|tilawah/)) {
-    return pick(['/assets/cover_kelas3.jpg', '/assets/quran_rehal.jpg']);
+    return pick(['/assets/surah_alasr.jpg', '/assets/cover_kelas3.jpg', '/assets/quran_rehal.jpg']);
   }
 
   // 3. Sifat Wajib, Mustahil, dan Jaiz bagi Allah Swt. (Faith in Allah & His 20 Attributes)
@@ -426,7 +429,7 @@ function getSmartChapterImage(title, content, index, usedImages = new Set()) {
 
   // 7. Puasa (Shaum / Siyam) Wajib & Sunah / Ramadan
   if (t.match(/puasa|shaum|siyam|ramadan|ramadhan|iftar|sahur/)) {
-    return pick(['/assets/rukun_islam.jpg', '/assets/sedekah_berbagi.jpg', '/assets/boy_praying.jpg']);
+    return pick(['/assets/ibadah_puasa.jpg', '/assets/sedekah_berbagi.jpg', '/assets/boy_praying.jpg']);
   }
 
   // 8. Rukun Islam / Syahadat / Syahadatain / Dua Kalimat Syahadat
@@ -469,9 +472,14 @@ function getSmartChapterImage(title, content, index, usedImages = new Set()) {
     return pick(['/assets/quran_rehal.jpg', '/assets/cover_kelas5.jpg', '/assets/jannah_garden.jpg']);
   }
 
+  // 15b. Kepemimpinan Nabi Muhammad saw. Periode Madinah / Masjid Nabawi / Piagam Madinah
+  if (t.match(/periode\s+madinah|madinah|masjid\s+nabawi|piagam\s+madinah|muhajirin|anshar|ansar|kepemimpinan.*nabi/)) {
+    return pick(['/assets/madinah_masjid.jpg', '/assets/cover_kelas5.jpg', '/assets/jannah_garden.jpg']);
+  }
+
   // 16. Kisah Keteladanan Sahabat Nabi / Khulafaurasyidin (Abu Bakar, Umar, Utsman, Ali) / Kodifikasi Al-Qur'an
-  if (t.match(/khulafaurasyidin|khulafa|abu\s+bakar|umar\s+bin\s+khattab|utsman|ali\s+bin\s+abi\s+thalib|sahabat\s+nabi|kepemimpinan/)) {
-    return pick(['/assets/quran_rehal.jpg', '/assets/boy_praying.jpg', '/assets/tasbih_zikir.jpg']);
+  if (t.match(/khulafaurasyidin|khulafa|abu\s+bakar|umar\s+bin\s+khattab|utsman|ali\s+bin\s+abi\s+thalib|sahabat\s+nabi|\bkepemimpinan\b/)) {
+    return pick(['/assets/cover_kelas5.jpg', '/assets/quran_rehal.jpg', '/assets/boy_praying.jpg']);
   }
 
   // 17. Kisah Kelahiran Nabi Muhammad / Maulid / Kisah Nabi / Rasul / Adam / Nuh / Ibrahim
@@ -485,7 +493,10 @@ function getSmartChapterImage(title, content, index, usedImages = new Set()) {
   }
 
   // === PRIORITY 2: MATCH BY CONTENT (Strict Multi-word Phrases) ===
-  if (c.match(/surah\s+al-kau|surah\s+al-'as|surah\s+an-nas|surah\s+al-falaq|al-qur'?an\s+adalah|membaca\s+surah/)) {
+  if (c.match(/surah\s+al-'a[sṣ]r|demi\s+masa|hukum\s+mim\s+sukun/)) {
+    return pick(['/assets/surah_alasr.jpg', '/assets/cover_kelas3.jpg']);
+  }
+  if (c.match(/surah\s+al-kau|surah\s+an-nas|surah\s+al-falaq|al-qur'?an\s+adalah|membaca\s+surah/)) {
     return pick(['/assets/cover_kelas3.jpg', '/assets/quran_rehal.jpg']);
   }
   if (c.match(/sifat\s+wajib\s+allah|sifat\s+mustahil|wujud|qidam|baqa/)) {
@@ -494,8 +505,11 @@ function getSmartChapterImage(title, content, index, usedImages = new Set()) {
   if (c.match(/azan\s+dan\s+ikamah|panggilan\s+salat|muazin/)) {
     return pick(['/assets/azan_ikamah.jpg', '/assets/sholat_berjamaah.jpg']);
   }
-  if (c.match(/puasa\s+ramadan|puasa\s+sunah|menahan\s+lapar|berbuka\s+puasa|shaum/)) {
-    return pick(['/assets/rukun_islam.jpg', '/assets/sedekah_berbagi.jpg']);
+  if (c.match(/puasa\s+ramadan|puasa\s+sunah|puasa\s+wajib|menahan\s+lapar|berbuka\s+puasa|shaum|ketentuan\s+puasa/)) {
+    return pick(['/assets/ibadah_puasa.jpg', '/assets/sedekah_berbagi.jpg']);
+  }
+  if (c.match(/masjid\s+nabawi|piagam\s+madinah|kaum\s+muhajirin|kaum\s+ansar|periode\s+madinah/)) {
+    return pick(['/assets/madinah_masjid.jpg', '/assets/cover_kelas5.jpg']);
   }
   if (c.match(/berdoa\s+kepada\s+allah|bertawakal|ikhtiar\s+dan\s+doa|memohon\s+pertolongan/)) {
     return pick(['/assets/tasbih_zikir.jpg', '/assets/boy_praying.jpg']);
