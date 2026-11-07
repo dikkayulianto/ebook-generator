@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Generator Flyer & Story Promosi 9:16 — Bahan Ajar Bu Guru</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700;800&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Nunito', sans-serif; }
+    h1, h2, h3, h4, .font-fredoka { font-family: 'Fredoka', sans-serif; }
+    
+    /* 9:16 Canvas Canvas Viewport (1080 x 1920 Aspect Ratio) */
+    .canvas-9-16 {
+      width: 540px;
+      height: 960px; /* Exact 9:16 ratio on screen preview, exports to 1080x1920 */
+      background: linear-gradient(180deg, #ecfdf5 0%, #f0fdf4 30%, #fefce8 65%, #ecfdf5 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* 3D Book Standing Perspective */
+    .book-3d-stand {
+      perspective: 1000px;
+      transform: rotateY(-14deg) rotateX(4deg);
+      box-shadow: -15px 20px 30px rgba(0, 0, 0, 0.25), 0 5px 15px rgba(0, 0, 0, 0.15);
+      transition: all 0.3s ease;
+    }
+    .book-3d-stand:hover {
+      transform: rotateY(-8deg) rotateX(2deg);
+    }
+
+    .fanned-sheet {
+      box-shadow: 0 8px 16px rgba(0,0,0,0.12);
+      transition: transform 0.2s;
+    }
+  </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen">
+
+  <!-- TOP BAR CONTROL -->
+  <header class="bg-slate-800/90 backdrop-blur border-b border-slate-700 sticky top-0 z-50 px-4 py-3">
+    <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-3">
+      <div class="flex items-center gap-2">
+        <span class="text-2xl">🎨</span>
+        <div>
+          <h1 class="text-lg font-bold text-emerald-400">STUDIO FLYER PROMOSI 9:16</h1>
+          <p class="text-xs text-slate-400">Rasio 9:16 (TikTok Photo Mode, IG Story, Reels & Carousel)</p>
+        </div>
+      </div>
+
+      <!-- GRADE SELECTOR -->
+      <div class="flex items-center gap-1.5 bg-slate-900/80 p-1.5 rounded-xl border border-slate-700">
+        <span class="text-xs font-bold text-slate-400 px-2">Pilih Kelas:</span>
+        <button onclick="selectGrade(1)" id="btn-g1" class="grade-btn px-3 py-1 rounded-lg text-xs font-black bg-emerald-500 text-slate-900 transition-all">Kelas 1</button>
+        <button onclick="selectGrade(2)" id="btn-g2" class="grade-btn px-3 py-1 rounded-lg text-xs font-black bg-slate-800 text-slate-300 hover:bg-slate-700 transition-all">Kelas 2</button>
+        <button onclick="selectGrade(3)" id="btn-g3" class="grade-btn px-3 py-1 rounded-lg text-xs font-black bg-slate-800 text-slate-300 hover:bg-slate-700 transition-all">Kelas 3</button>
+        <button onclick="selectGrade(4)" id="btn-g4" class="grade-btn px-3 py-1 rounded-lg text-xs font-black bg-slate-800 text-slate-300 hover:bg-slate-700 transition-all">Kelas 4</button>
+        <button onclick="selectGrade(5)" id="btn-g5" class="grade-btn px-3 py-1 rounded-lg text-xs font-black bg-slate-800 text-slate-300 hover:bg-slate-700 transition-all">Kelas 5</button>
+        <button onclick="selectGrade(6)" id="btn-g6" class="grade-btn px-3 py-1 rounded-lg text-xs font-black bg-slate-800 text-slate-300 hover:bg-slate-700 transition-all">Kelas 6</button>
+      </div>
+
+      <!-- IMAGE TYPE SELECTOR (Cover, Isi, Rangkuman) -->
+      <div class="flex items-center gap-1.5 bg-slate-900/80 p-1.5 rounded-xl border border-slate-700">
+        <span class="text-xs font-bold text-slate-400 px-2">Slide:</span>
+        <button onclick="selectMode('cover')" id="btn-mode-cover" class="mode-btn px-3 py-1 rounded-lg text-xs font-black bg-rose-500 text-white transition-all">1. Cover Utama</button>
+        <button onclick="selectMode('isi')" id="btn-mode-isi" class="mode-btn px-3 py-1 rounded-lg text-xs font-black bg-slate-800 text-slate-300 hover:bg-slate-700 transition-all">2. Spill Lembar Isi</button>
+        <button onclick="selectMode('rangkuman')" id="btn-mode-rangkuman" class="mode-btn px-3 py-1 rounded-lg text-xs font-black bg-slate-800 text-slate-300 hover:bg-slate-700 transition-all">3. Rangkuman & CTA</button>
+      </div>
+
+      <!-- EXPORT BUTTON -->
+      <button onclick="downloadFlyerPng()" class="px-4 py-2 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-black rounded-xl text-xs flex items-center gap-2 shadow-lg shadow-amber-500/20 active:scale-95 transition-all">
+        📸 Unduh Gambar HD (1080x1920)
+      </button>
+    </div>
+  </header>
+
+  <!-- WORKSPACE WRAPPER -->
+  <main class="max-w-7xl mx-auto p-4 flex flex-col lg:flex-row gap-6 items-start justify-center mt-4">
+
+    <!-- 9:16 LIVE CANVAS (CANVAS CAPTURE TARGET) -->
+    <div id="capture-canvas" class="canvas-9-16 rounded-3xl shadow-2xl border-4 border-slate-700/50 p-5 flex flex-col justify-between text-slate-800 shrink-0 mx-auto select-none">
+      
+      <!-- BACKGROUND ISLAMIC DECORATIONS -->
+      <div class="absolute -top-10 -left-10 w-40 h-40 bg-emerald-200/40 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute top-1/2 -right-10 w-48 h-48 bg-amber-200/40 rounded-full blur-3xl pointer-events-none"></div>
+      
+      <!-- TOP BANNER & HEADLINE -->
+      <div class="relative z-10 text-center space-y-1">
+        <!-- Top Pill -->
+        <div class="inline-flex items-center gap-1.5 px-4 py-1 bg-emerald-800 text-white rounded-full text-[10px] font-black tracking-wide shadow-sm">
+          <span>⭐</span> <span id="top-pill-text">Belajar PAI Jadi Mudah, Seru, dan Bermakna!</span> <span>⭐</span>
+        </div>
+
+        <!-- Big Main Headline -->
+        <h2 id="main-title-text" class="text-xl font-black text-emerald-950 uppercase tracking-tight leading-tight mt-1">
+          BUKU RANGKUMAN &<br>LKPD INTERAKTIF
+        </h2>
+        <p class="text-xs font-black text-emerald-700 uppercase tracking-wider">
+          Pendidikan Agama Islam dan Budi Pekerti
+        </p>
+
+        <!-- Grade Badge & Official CP Tag -->
+        <div class="flex items-center justify-center gap-2 pt-0.5">
+          <span id="grade-badge-text" class="px-3 py-1 bg-gradient-to-r from-emerald-700 to-teal-800 text-white font-extrabold text-[11px] rounded-lg shadow-sm">
+            KELAS 1 SD/MI — SEMESTER 1
+          </span>
+          <span id="cp-badge-text" class="px-2.5 py-1 bg-amber-400 text-amber-950 font-black text-[10px] rounded-lg shadow-sm border border-amber-500">
+            CP NO. 020 TAHUN 2026
+          </span>
+        </div>
+      </div>
+
+      <!-- ==================== DYNAMIC MODE CONTENT ==================== -->
+      
+      <!-- MODE 1: COVER UTAMA (MOCKUP 3D BERDIRI + SEBARAN LEMBAR ISI + KEUNGGULAN) -->
+      <div id="content-mode-cover" class="relative z-10 my-1 grid grid-cols-12 gap-3 items-center">
+        <!-- Left: 3D Standing Book Mockup -->
+        <div class="col-span-5 relative">
+          <div class="book-3d-stand rounded-xl overflow-hidden border-2 border-emerald-600 bg-white">
+            <img id="mockup-book-img" src="/assets/cover_kelas1.jpg" alt="Cover Buku" class="w-full h-auto object-cover block">
+          </div>
+          <!-- Corner Badges -->
+          <div class="absolute -bottom-2 -right-2 bg-rose-600 text-white font-black text-[9px] px-2 py-0.5 rounded-full shadow-md">
+            Full Color!
+          </div>
+        </div>
+
+        <!-- Right: Fanned Sheets Preview & Checklists -->
+        <div class="col-span-7 space-y-2">
+          <!-- Mini Fanned Sheets Grid -->
+          <div class="grid grid-cols-2 gap-1.5 bg-white/80 p-2 rounded-xl border border-emerald-200/80 shadow-sm backdrop-blur-sm">
+            <div class="bg-amber-50 border border-amber-200 rounded p-1.5 text-center text-[8.5px]">
+              <span class="font-extrabold text-amber-800 block">📖 RANGKUMAN</span>
+              <span class="text-slate-600 text-[7.5px] block">Materi Inti per Bab</span>
+            </div>
+            <div class="bg-emerald-50 border border-emerald-200 rounded p-1.5 text-center text-[8.5px]">
+              <span class="font-extrabold text-emerald-800 block">✏️ LKPD INTERAKTIF</span>
+              <span class="text-slate-600 text-[7.5px] block">Tarik Garis & Gunting</span>
+            </div>
+            <div class="bg-sky-50 border border-sky-200 rounded p-1.5 text-center text-[8.5px]">
+              <span class="font-extrabold text-sky-800 block">🎯 EVALUASI</span>
+              <span class="text-slate-600 text-[7.5px] block">Pilihan Ganda & HOTS</span>
+            </div>
+            <div class="bg-purple-50 border border-purple-200 rounded p-1.5 text-center text-[8.5px]">
+              <span class="font-extrabold text-purple-800 block">🌟 REFLEKSI</span>
+              <span class="text-slate-600 text-[7.5px] block">Anak Saleh Berkarakter</span>
+            </div>
+          </div>
+
+          <!-- Feature Bullets (Matching Reference Flyer) -->
+          <div class="bg-emerald-900 text-white rounded-xl p-2.5 space-y-1 shadow-md">
+            <div class="font-bold text-[10px] text-emerald-300 uppercase flex items-center justify-between">
+              <span>LENGKAP & PRAKTIS!</span>
+              <span class="text-[8px] bg-emerald-800 px-1.5 py-0.5 rounded">SIAP CETAK</span>
+            </div>
+            <ul class="text-[8.5px] space-y-0.5 text-emerald-50 font-medium">
+              <li>✔ Rangkuman Materi Tiap Bab Lengkap</li>
+              <li>✔ LKPD Aktivitas Menyenangkan</li>
+              <li>✔ Evaluasi Formatif & Kunci Jawaban</li>
+              <li>✔ Desain Pastel Menarik & Ramah Anak</li>
+            </ul>
+          </div>
+
+          <div class="bg-amber-100 border border-amber-300 rounded-lg p-1.5 text-center text-[9px] font-bold text-amber-900">
+            🖨️ SIAP PAKAI: Langsung Download & Cetak A4
+          </div>
+        </div>
+      </div>
+
+      <!-- MODE 2: SPILL ISI (ZOOM LEMBAR KERJA & MATERI) -->
+      <div id="content-mode-isi" class="relative z-10 my-1 hidden space-y-2">
+        <div class="text-center">
+          <span class="px-2.5 py-0.5 bg-rose-500 text-white font-black text-[9px] rounded-full uppercase">
+            🔍 INTIP ISI LEMBAR KERJA & BUKU
+          </span>
+        </div>
+        <div class="grid grid-cols-3 gap-2">
+          <!-- Page 1 Preview -->
+          <div class="bg-white rounded-xl p-2 border border-slate-200 shadow-sm text-center">
+            <div class="h-32 bg-slate-100 rounded border border-slate-300 overflow-hidden mb-1 flex items-center justify-center">
+              <img id="isi-img-1" src="/assets/cover_kelas1.jpg" alt="Rangkuman" class="w-full h-full object-cover">
+            </div>
+            <strong class="text-[9px] text-slate-800 block">Rangkuman Bab</strong>
+            <span class="text-[7.5px] text-slate-500 block">Ilustrasi & Kosakata</span>
+          </div>
+
+          <!-- Page 2 Preview -->
+          <div class="bg-white rounded-xl p-2 border border-slate-200 shadow-sm text-center">
+            <div class="h-32 bg-slate-100 rounded border border-slate-300 overflow-hidden mb-1 flex items-center justify-center">
+              <img id="isi-img-2" src="/assets/carousel_buku_siswa_slide2.jpg" alt="LKPD" class="w-full h-full object-cover">
+            </div>
+            <strong class="text-[9px] text-emerald-800 block">LKPD Interaktif</strong>
+            <span class="text-[7.5px] text-slate-500 block">Aktivitas Siswa</span>
+          </div>
+
+          <!-- Page 3 Preview -->
+          <div class="bg-white rounded-xl p-2 border border-slate-200 shadow-sm text-center">
+            <div class="h-32 bg-slate-100 rounded border border-slate-300 overflow-hidden mb-1 flex items-center justify-center">
+              <img id="isi-img-3" src="/assets/quran_rehal.jpg" alt="Infografis" class="w-full h-full object-cover">
+            </div>
+            <strong class="text-[9px] text-amber-800 block">Soal HOTS & Latihan</strong>
+            <span class="text-[7.5px] text-slate-500 block">Uji Pemahaman</span>
+          </div>
+        </div>
+
+        <div class="bg-white/90 p-2.5 rounded-xl border border-emerald-200 text-center text-[9px] text-slate-700">
+          ✨ <strong>Dilengkapi:</strong> Kamus Cilik Kosakata Baru, Kisah Teladan Penuh Hikmah, dan Lembar Refleksi Karakter Profil Pelajar Pancasila.
+        </div>
+      </div>
+
+      <!-- MODE 3: RANGKUMAN & CTA (PAKET PEMBELIAN & LINK BIO) -->
+      <div id="content-mode-rangkuman" class="relative z-10 my-1 hidden space-y-2">
+        <div class="text-center">
+          <span class="px-2.5 py-0.5 bg-purple-600 text-white font-black text-[9px] rounded-full uppercase">
+            🎁 APA SAJA YANG ANDA DAPATKAN?
+          </span>
+        </div>
+        <div class="bg-white rounded-xl p-3 border border-slate-200 shadow-sm space-y-2">
+          <div class="flex items-center gap-2 border-b border-slate-100 pb-1.5">
+            <span class="text-base">📦</span>
+            <div>
+              <strong class="text-[10px] text-slate-800 block">1. File Buku Siswa Lengkap 1 Semester (PDF)</strong>
+              <span class="text-[8px] text-slate-500">Mencakup Bab 1 sampai Bab 5 secara runtut & rapi</span>
+            </div>
+          </div>
+          <div class="flex items-center gap-2 border-b border-slate-100 pb-1.5">
+            <span class="text-base">📂</span>
+            <div>
+              <strong class="text-[10px] text-slate-800 block">2. Modul Ajar Deep Learning (Word & PDF)</strong>
+              <span class="text-[8px] text-slate-500">8 halaman lengkap dengan sintaks, LKPD & rubrik guru</span>
+            </div>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-base">📝</span>
+            <div>
+              <strong class="text-[10px] text-slate-800 block">3. Naskah Soal SAS (15 PG, 5 Isian, 5 Uraian)</strong>
+              <span class="text-[8px] text-slate-500">Lengkap dengan kunci jawaban & kisi-kisi asesmen</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-gradient-to-r from-emerald-600 to-teal-700 text-white p-3 rounded-xl text-center shadow-lg">
+          <div class="text-[11px] font-black uppercase tracking-wider">CARA MENDAPATKAN:</div>
+          <div class="text-[10px] font-bold mt-0.5">🔗 KLIK LINK DI BIO PROFIL KAMI</div>
+          <div class="inline-block bg-white text-emerald-800 font-black text-[10px] px-3 py-0.5 rounded-full mt-1.5">
+            lynk.id/bahanajarbuguru
+          </div>
+        </div>
+      </div>
+
+      <!-- BOTTOM BANNER & AUTHOR FOOTER (EXACT STRUCTURE OF REFERENCE FLYER) -->
+      <div class="relative z-10 space-y-1.5 pt-1 border-t border-emerald-300/60">
+        <!-- Keunggulan & Page Count -->
+        <div class="grid grid-cols-12 gap-1.5 items-center">
+          <!-- Bonus Box -->
+          <div class="col-span-3 bg-amber-500 text-slate-950 p-1.5 rounded-lg text-center shadow-sm">
+            <span class="font-black text-[8px] block uppercase">🎁 BONUS!</span>
+            <span class="font-bold text-[7px] block leading-tight">File PNG Ilustrasi</span>
+          </div>
+
+          <!-- Page Count Badge -->
+          <div class="col-span-3 bg-white border border-emerald-300 p-1 rounded-lg text-center shadow-sm">
+            <span class="text-[7px] text-slate-500 block uppercase font-bold">BERISI</span>
+            <span id="page-count-text" class="font-black text-sm text-emerald-800 block leading-tight">40+</span>
+            <span class="text-[6.5px] text-emerald-700 block font-extrabold uppercase">HALAMAN</span>
+          </div>
+
+          <!-- Keunggulan Checklist -->
+          <div class="col-span-6 bg-white/90 border border-emerald-200 p-1.5 rounded-lg text-[7.5px] space-y-0.5 text-slate-700 font-medium">
+            <div>✔ Sesuai CP Terbaru No. 020/2026</div>
+            <div>✔ Bahasa sederhana & mudah dipahami</div>
+            <div>✔ Desain pastel islami ramah anak</div>
+          </div>
+        </div>
+
+        <!-- Author / Seller Card (Editable in Form) -->
+        <div class="bg-emerald-950 text-white p-2 rounded-xl flex items-center justify-between shadow-md">
+          <div class="space-y-0.5">
+            <span class="text-[7px] text-emerald-400 font-bold block uppercase tracking-wider">DISUSUN & DITERBITKAN OLEH:</span>
+            <h4 id="author-name-text" class="text-[10px] font-black text-white leading-tight">Bahan Ajar Bu Guru, S.Pd.</h4>
+            <div class="flex items-center gap-2 text-[7.5px] text-emerald-200">
+              <span id="author-ig-text">📷 @bahanajarbuguru</span>
+              <span id="author-tiktok-text">🎵 TikTok Edukasi</span>
+            </div>
+          </div>
+          <div class="text-right">
+            <span class="text-[7px] text-emerald-300 font-bold block">PESAN LANGSUNG:</span>
+            <span id="author-wa-text" class="text-[9.5px] font-extrabold text-amber-300 block">lynk.id/bahanajarbuguru</span>
+          </div>
+        </div>
+
+        <!-- Bottom Icons Row -->
+        <div class="flex justify-between items-center text-[7.5px] text-slate-600 px-1 font-bold">
+          <span>📄 PDF Berkualitas</span>
+          <span>🖨️ Siap Cetak A4</span>
+          <span>⚡ Mudah Digunakan</span>
+          <span>⏳ Hemat Waktu Guru</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT: CONTROLS & EDIT FORM -->
+    <div class="bg-slate-800 border border-slate-700 rounded-2xl p-5 w-full lg:w-80 space-y-4">
+      <h3 class="text-base font-bold text-white flex items-center gap-2">
+        <span>⚙️</span> Pengaturan & Teks Flyer
+      </h3>
+      <p class="text-xs text-slate-400">Sesuaikan teks nama, kontak, dan identitas flyer agar sesuai dengan akun toko Anda.</p>
+
+      <div class="space-y-3 text-xs">
+        <div>
+          <label class="block text-slate-300 font-bold mb-1">Nama Penyusun / Guru:</label>
+          <input type="text" id="input-author" value="Bahan Ajar Bu Guru, S.Pd." oninput="updateForm()" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 text-white font-medium focus:outline-none focus:border-emerald-500">
+        </div>
+
+        <div>
+          <label class="block text-slate-300 font-bold mb-1">Akun IG / TikTok:</label>
+          <input type="text" id="input-ig" value="@bahanajarbuguru" oninput="updateForm()" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 text-white font-medium focus:outline-none focus:border-emerald-500">
+        </div>
+
+        <div>
+          <label class="block text-slate-300 font-bold mb-1">Tautan Lynk.id / WhatsApp:</label>
+          <input type="text" id="input-wa" value="lynk.id/bahanajarbuguru" oninput="updateForm()" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 text-white font-medium focus:outline-none focus:border-emerald-500">
+        </div>
+
+        <div>
+          <label class="block text-slate-300 font-bold mb-1">Jumlah Halaman Buku:</label>
+          <input type="text" id="input-pages" value="46" oninput="updateForm()" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 text-white font-medium focus:outline-none focus:border-emerald-500">
+        </div>
+      </div>
+
+      <div class="pt-2 border-t border-slate-700">
+        <button onclick="downloadFlyerPng()" class="w-full py-2.5 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black rounded-xl text-xs flex items-center justify-center gap-2 shadow-lg transition-all">
+          💾 Simpan Gambar Ini (PNG)
+        </button>
+        <p class="text-[10px] text-slate-400 text-center mt-2">
+          File otomatis diunduh dengan resolusi tinggi (1080x1920) siap langsung diposting ke TikTok / Instagram.
+        </p>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    let currentGrade = 1;
+    let currentMode = 'cover';
+
+    const gradeData = {
+      1: {
+        fase: 'Fase A',
+        coverImg: '/assets/cover_kelas1.jpg',
+        badgeColor: 'from-emerald-700 to-teal-800',
+        titleColor: 'text-emerald-950',
+        pages: '42'
+      },
+      2: {
+        fase: 'Fase A',
+        coverImg: '/assets/cover_kelas2.jpg',
+        badgeColor: 'from-sky-700 to-cyan-800',
+        titleColor: 'text-sky-950',
+        pages: '44'
+      },
+      3: {
+        fase: 'Fase B',
+        coverImg: '/assets/cover_kelas3.jpg',
+        badgeColor: 'from-purple-700 to-indigo-800',
+        titleColor: 'text-purple-950',
+        pages: '46'
+      },
+      4: {
+        fase: 'Fase B',
+        coverImg: '/assets/cover_kelas4.jpg',
+        badgeColor: 'from-amber-700 to-orange-800',
+        titleColor: 'text-orange-950',
+        pages: '48'
+      },
+      5: {
+        fase: 'Fase C',
+        coverImg: '/assets/cover_kelas5.jpg',
+        badgeColor: 'from-rose-700 to-red-800',
+        titleColor: 'text-rose-950',
+        pages: '46'
+      },
+      6: {
+        fase: 'Fase C',
+        coverImg: '/assets/cover_kelas6.jpg',
+        badgeColor: 'from-indigo-800 to-slate-900',
+        titleColor: 'text-indigo-950',
+        pages: '50'
+      }
+    };
+
+    function selectGrade(grade) {
+      currentGrade = grade;
+      const data = gradeData[grade];
+
+      // Update Buttons
+      document.querySelectorAll('.grade-btn').forEach((b, idx) => {
+        if (idx + 1 === grade) {
+          b.className = 'grade-btn px-3 py-1 rounded-lg text-xs font-black bg-emerald-500 text-slate-900 transition-all';
+        } else {
+          b.className = 'grade-btn px-3 py-1 rounded-lg text-xs font-black bg-slate-800 text-slate-300 hover:bg-slate-700 transition-all';
+        }
+      });
+
+      // Update Texts
+      document.getElementById('grade-badge-text').innerText = `KELAS ${grade} SD/MI — SEMESTER 1`;
+      document.getElementById('grade-badge-text').className = `px-3 py-1 bg-gradient-to-r ${data.badgeColor} text-white font-extrabold text-[11px] rounded-lg shadow-sm`;
+      document.getElementById('cp-badge-text').innerText = `CP NO. 020/2026 (${data.fase.toUpperCase()})`;
+      document.getElementById('mockup-book-img').src = data.coverImg;
+      document.getElementById('input-pages').value = data.pages;
+      document.getElementById('page-count-text').innerText = data.pages;
+    }
+
+    function selectMode(mode) {
+      currentMode = mode;
+
+      document.querySelectorAll('.mode-btn').forEach(b => {
+        b.className = 'mode-btn px-3 py-1 rounded-lg text-xs font-black bg-slate-800 text-slate-300 hover:bg-slate-700 transition-all';
+      });
+
+      document.getElementById(`btn-mode-${mode}`).className = 'mode-btn px-3 py-1 rounded-lg text-xs font-black bg-rose-500 text-white transition-all';
+
+      // Toggle views
+      document.getElementById('content-mode-cover').classList.add('hidden');
+      document.getElementById('content-mode-isi').classList.add('hidden');
+      document.getElementById('content-mode-rangkuman').classList.add('hidden');
+
+      if (mode === 'cover') {
+        document.getElementById('content-mode-cover').classList.remove('hidden');
+        document.getElementById('top-pill-text').innerText = 'Belajar PAI Jadi Mudah, Seru, dan Bermakna!';
+      } else if (mode === 'isi') {
+        document.getElementById('content-mode-isi').classList.remove('hidden');
+        document.getElementById('top-pill-text').innerText = 'Bedah Isi Lembar Kerja & Rangkuman Materi';
+      } else if (mode === 'rangkuman') {
+        document.getElementById('content-mode-rangkuman').classList.remove('hidden');
+        document.getElementById('top-pill-text').innerText = 'Paket Lengkap Siap Pakai & Edit';
+      }
+    }
+
+    function updateForm() {
+      document.getElementById('author-name-text').innerText = document.getElementById('input-author').value;
+      document.getElementById('author-ig-text').innerText = '📷 ' + document.getElementById('input-ig').value;
+      document.getElementById('author-wa-text').innerText = document.getElementById('input-wa').value;
+      document.getElementById('page-count-text').innerText = document.getElementById('input-pages').value;
+    }
+
+    function downloadFlyerPng() {
+      const element = document.getElementById('capture-canvas');
+      const filename = `Flyer_9_16_Kelas_${currentGrade}_${currentMode.toUpperCase()}.png`;
+
+      // Render high resolution (scale 2 = 1080x1920)
+      html2canvas(element, {
+        scale: 2,
+        useCORS: true,
+        allowTaint: true,
+        backgroundColor: '#ffffff'
+      }).then(canvas => {
+        const link = document.createElement('a');
+        link.download = filename;
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+      });
+    }
+
+    // Initialize Grade 1
+    selectGrade(1);
+  </script>
+</body>
+</html>
