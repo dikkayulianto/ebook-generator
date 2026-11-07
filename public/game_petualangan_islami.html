@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Petualangan Islami Ceria — Game Edukasi Anak Muslim</title>
+  <title>Petualangan Islami Ceria — Game Edukasi Interaktif PAI</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -38,7 +38,7 @@
 
     /* Mobile Device Frame styling */
     .phone-container {
-      max-width: 440px;
+      max-width: 460px;
       min-height: 100vh;
       margin: 0 auto;
       background: linear-gradient(180deg, #091e3a 0%, #0d3b66 35%, #054a49 70%, #065f46 100%);
@@ -49,7 +49,7 @@
 
     @media (min-width: 640px) {
       .phone-container {
-        min-height: 840px;
+        min-height: 860px;
         margin: 20px auto;
         border-radius: 36px;
         border: 8px solid #1e293b;
@@ -72,57 +72,111 @@
     <!-- ========================================== -->
     <!-- SCREEN 1: WELCOME & REGISTRATION SCREEN    -->
     <!-- ========================================== -->
-    <div id="screen-welcome" class="flex-1 flex flex-col justify-between py-4 animate-fade-in">
-      <!-- Top Brand -->
-      <div class="text-center space-y-2 mt-2">
-        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-400/20 border border-amber-300/40 text-amber-300 text-xs font-black tracking-wider uppercase">
-          <span>🌙</span> Game Edukasi Interaktif <span>⭐</span>
+    <div id="screen-welcome" class="flex-1 flex flex-col justify-between py-2 animate-fade-in">
+      
+      <!-- Top Brand & Leaderboard Button -->
+      <div>
+        <div class="flex justify-between items-center mb-1">
+          <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-400/20 border border-amber-300/40 text-amber-300 text-[10px] font-black uppercase">
+            <span>🌙</span> Game Edukasi PAI <span>⭐</span>
+          </div>
+          <button onclick="openHistoryScreen()" class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-indigo-600 hover:bg-indigo-500 text-white text-[10px] font-black shadow transition-all active:scale-95">
+            <span>🏆</span> Papan Skor (<span id="welcome-history-badge">0</span>)
+          </button>
         </div>
-        <h1 class="text-3xl sm:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-yellow-300 drop-shadow-md tracking-tight">
-          PETUALANGAN<br>ISLAMI CERIA
-        </h1>
-        <p class="text-xs text-emerald-200 font-semibold">
-          Belajar Ibadah, Rukun Iman & Akhlak Jadi Menyenangkan!
-        </p>
-      </div>
 
-      <!-- Mascot Showcase -->
-      <div class="my-4 text-center relative">
-        <div class="w-36 h-36 mx-auto bg-gradient-to-tr from-emerald-500/30 to-amber-500/30 rounded-full flex items-center justify-center border-4 border-amber-400/50 shadow-2xl animate-bounce-slow">
-          <span id="welcome-avatar-display" class="text-7xl">👦</span>
-        </div>
-        <div class="mt-2 text-xs font-bold text-amber-200">
-          Pilih Karaktermu:
-        </div>
-        <div class="flex justify-center gap-3 mt-1.5">
-          <button onclick="setAvatar('👦', 'Ahmad')" id="avatar-btn-boy" class="px-3 py-1.5 rounded-xl bg-amber-400 text-slate-950 font-black text-xs flex items-center gap-1.5 border-2 border-white shadow">
-            👦 Ahmad
-          </button>
-          <button onclick="setAvatar('👧', 'Fatimah')" id="avatar-btn-girl" class="px-3 py-1.5 rounded-xl bg-white/20 text-white font-black text-xs flex items-center gap-1.5 border-2 border-white/40 hover:bg-white/30 transition-all">
-            👧 Fatimah
-          </button>
+        <div class="text-center space-y-1 mt-1">
+          <h1 class="text-2xl sm:text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-yellow-300 drop-shadow-md tracking-tight">
+            PETUALANGAN<br>ISLAMI CERIA
+          </h1>
+          <p class="text-[11px] text-emerald-200 font-semibold">
+            Belajar Ibadah, Rukun Iman & Akhlak Jadi Menyenangkan!
+          </p>
         </div>
       </div>
 
-      <!-- Player Form -->
-      <div class="glass-card rounded-2xl p-5 space-y-4 shadow-xl">
-        <div>
-          <label class="block text-xs font-bold text-amber-300 uppercase tracking-wider mb-1.5">
-            ✏️ Masukkan Namamu:
+      <!-- Mode Selector Tabs: Individu vs Kelompok -->
+      <div class="my-2.5 bg-slate-900/80 p-1.5 rounded-2xl border-2 border-white/20">
+        <div class="grid grid-cols-2 gap-1.5 text-xs font-black text-center">
+          <button type="button" id="tab-mode-single" onclick="setGameMode('individu')" class="py-2 rounded-xl bg-amber-400 text-slate-950 shadow flex items-center justify-center gap-1.5 transition-all">
+            <span>👤</span> Mode Mandiri
+          </button>
+          <button type="button" id="tab-mode-group" onclick="setGameMode('kelompok')" class="py-2 rounded-xl text-slate-300 hover:text-white hover:bg-white/10 flex items-center justify-center gap-1.5 transition-all">
+            <span>👥</span> Mode Kelompok
+          </button>
+        </div>
+      </div>
+
+      <!-- SECTION A: INDIVIDUAL MODE CONFIG -->
+      <div id="section-mode-single" class="space-y-3">
+        <!-- Mascot Showcase -->
+        <div class="text-center relative">
+          <div class="w-24 h-24 mx-auto bg-gradient-to-tr from-emerald-500/30 to-amber-500/30 rounded-full flex items-center justify-center border-4 border-amber-400/50 shadow-xl animate-bounce-slow">
+            <span id="welcome-avatar-display" class="text-5xl">👦</span>
+          </div>
+          <div class="mt-1 text-[11px] font-bold text-amber-200">
+            Pilih Karaktermu:
+          </div>
+          <div class="flex justify-center gap-2 mt-1">
+            <button onclick="setAvatar('👦', 'Ahmad')" id="avatar-btn-boy" class="px-3 py-1 rounded-xl bg-amber-400 text-slate-950 font-black text-xs flex items-center gap-1 border-2 border-white shadow">
+              👦 Ahmad
+            </button>
+            <button onclick="setAvatar('👧', 'Fatimah')" id="avatar-btn-girl" class="px-3 py-1 rounded-xl bg-white/20 text-white font-black text-xs flex items-center gap-1 border-2 border-white/40 hover:bg-white/30 transition-all">
+              👧 Fatimah
+            </button>
+          </div>
+        </div>
+
+        <!-- Single Player Form -->
+        <div class="glass-card rounded-2xl p-4 space-y-2 shadow-xl">
+          <label class="block text-xs font-bold text-amber-300 uppercase tracking-wider">
+            ✏️ Nama Pemain / Siswa:
           </label>
-          <input type="text" id="player-name-input" placeholder="Ketik nama panggilanmu di sini..." maxlength="20" class="w-full bg-slate-900/80 border-2 border-amber-400/60 rounded-xl px-4 py-3 text-sm text-white font-bold placeholder-slate-400 focus:outline-none focus:border-amber-400 focus:ring-2 focus:ring-amber-400/30">
+          <input type="text" id="player-name-input" placeholder="Ketik nama panggilan di sini..." maxlength="20" class="w-full bg-slate-900/80 border-2 border-amber-400/60 rounded-xl px-3.5 py-2.5 text-sm text-white font-bold placeholder-slate-400 focus:outline-none focus:border-amber-400 focus:ring-2 focus:ring-amber-400/30">
         </div>
+      </div>
 
-        <button onclick="startGame()" class="w-full py-3.5 bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-500 hover:from-amber-300 hover:to-yellow-400 text-slate-950 font-black rounded-xl text-sm uppercase tracking-wider shadow-lg shadow-amber-500/30 active:scale-95 transition-all flex items-center justify-center gap-2 animate-glow">
+      <!-- SECTION B: GROUP / TEAM MODE CONFIG -->
+      <div id="section-mode-group" class="hidden space-y-2.5">
+        <div class="glass-card rounded-2xl p-3.5 space-y-2.5 shadow-xl">
+          <div class="flex justify-between items-center">
+            <label class="text-xs font-bold text-amber-300 uppercase tracking-wider flex items-center gap-1">
+              <span>👥</span> Jumlah Kelompok:
+            </label>
+            <div class="flex gap-1">
+              <button onclick="setTeamCount(2)" id="btn-count-2" class="px-2.5 py-1 rounded-lg text-xs font-black bg-amber-400 text-slate-950">2 Tim</button>
+              <button onclick="setTeamCount(3)" id="btn-count-3" class="px-2.5 py-1 rounded-lg text-xs font-black bg-white/20 text-white">3 Tim</button>
+              <button onclick="setTeamCount(4)" id="btn-count-4" class="px-2.5 py-1 rounded-lg text-xs font-black bg-white/20 text-white">4 Tim</button>
+            </div>
+          </div>
+
+          <div class="text-[10px] text-emerald-200">
+            Ketik nama kelompok atau gunakan nama pahlawan Islam:
+          </div>
+
+          <!-- Team Inputs Container -->
+          <div id="team-inputs-container" class="space-y-1.5">
+            <!-- Dynamically populated via JS -->
+          </div>
+
+          <div class="p-2 rounded-xl bg-amber-400/10 border border-amber-300/30 text-[10px] text-amber-200 leading-snug">
+            💡 <strong>Aturan Cerdas Cermat:</strong> Setiap kelompok akan menjawab soal secara bergiliran. Tim yang menjawab benar mendapat +10 Poin!
+          </div>
+        </div>
+      </div>
+
+      <!-- Start Button -->
+      <div class="pt-2">
+        <button onclick="startGame()" class="w-full py-3 bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-500 hover:from-amber-300 hover:to-yellow-400 text-slate-950 font-black rounded-xl text-sm uppercase tracking-wider shadow-lg shadow-amber-500/30 active:scale-95 transition-all flex items-center justify-center gap-2 animate-glow">
           <span>🚀</span> MULAI PETUALANGAN
         </button>
       </div>
 
       <!-- Feature Footer -->
-      <div class="text-center text-[10px] text-emerald-200/80 pt-4 flex justify-around">
-        <span>🎮 5 Dunia Petualangan</span>
-        <span>⭐ Kumpulkan 50 Bintang</span>
-        <span>🏆 Hadiah Piala Juara</span>
+      <div class="text-center text-[10px] text-emerald-200/80 pt-2 flex justify-around border-t border-white/10 mt-2">
+        <span>🎮 5 Tema Seru</span>
+        <span>💾 Simpan Riwayat</span>
+        <span>🏆 Piagam Juara</span>
       </div>
     </div>
 
@@ -131,104 +185,117 @@
     <!-- SCREEN 2: THEME SELECTION SCREEN           -->
     <!-- ========================================== -->
     <div id="screen-themes" class="hidden flex-1 flex flex-col justify-between py-2">
-      <!-- Player Info Bar -->
+      <!-- Player / Teams Info Bar -->
       <div class="flex justify-between items-center bg-white/10 p-2.5 rounded-2xl border border-white/20">
         <div class="flex items-center gap-2">
           <span id="player-avatar-badge" class="text-2xl">👦</span>
           <div>
             <div id="player-name-badge" class="text-xs font-black text-amber-300">Ahmad</div>
-            <div class="text-[10px] text-emerald-200">Penjelajah Muslim Cilik</div>
+            <div id="player-mode-badge" class="text-[10px] text-emerald-200">Penjelajah Muslim Cilik</div>
           </div>
         </div>
-        <div class="flex items-center gap-1.5 bg-amber-400 text-slate-950 px-2.5 py-1 rounded-xl font-black text-xs shadow">
-          <span>⭐</span> <span id="total-stars-badge">0</span> Bintang
+        <div class="flex items-center gap-1.5">
+          <button onclick="openHistoryScreen()" class="px-2.5 py-1 rounded-xl bg-white/20 hover:bg-white/30 text-amber-300 font-bold text-[11px] flex items-center gap-1">
+            🏆 Riwayat
+          </button>
+          <div id="total-stars-badge-container" class="flex items-center gap-1 bg-amber-400 text-slate-950 px-2 py-1 rounded-xl font-black text-[11px] shadow">
+            <span>⭐</span> <span id="total-stars-badge">0</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Teams Roster (Shown in Kelompok Mode) -->
+      <div id="themes-team-roster" class="hidden my-1.5 bg-slate-900/60 p-2 rounded-xl border border-white/10">
+        <div class="text-[10px] font-black text-amber-300 uppercase mb-1">Daftar Tim Bertanding:</div>
+        <div id="themes-team-chips" class="flex flex-wrap gap-1">
+          <!-- chips injected by JS -->
         </div>
       </div>
 
       <!-- Title -->
-      <div class="text-center my-3">
-        <h2 class="text-xl font-black text-amber-300">🎯 PILIH TEMA PERMAINAN</h2>
-        <p class="text-[11px] text-slate-300">Pilih salah satu dunia untuk mulai mengumpulkan bintang!</p>
+      <div class="text-center my-2">
+        <h2 class="text-lg font-black text-amber-300">🎯 PILIH TEMA PERMAINAN</h2>
+        <p class="text-[11px] text-slate-300">Pilih salah satu dunia untuk mulai petualangan!</p>
       </div>
 
       <!-- Theme Cards List -->
-      <div class="space-y-2.5 flex-1 overflow-y-auto pr-1">
+      <div class="space-y-2 flex-1 overflow-y-auto pr-1">
         
         <!-- Theme 1 -->
-        <button onclick="selectTheme(0)" class="w-full text-left bg-gradient-to-r from-emerald-600 to-teal-700 hover:from-emerald-500 hover:to-teal-600 p-3.5 rounded-2xl border-2 border-emerald-300/40 shadow-lg active:scale-98 transition-all flex items-center justify-between group">
-          <div class="flex items-center gap-3">
-            <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center text-2xl shadow-inner">
+        <button onclick="selectTheme(0)" class="w-full text-left bg-gradient-to-r from-emerald-600 to-teal-700 hover:from-emerald-500 hover:to-teal-600 p-3 rounded-2xl border-2 border-emerald-300/40 shadow-lg active:scale-98 transition-all flex items-center justify-between group">
+          <div class="flex items-center gap-2.5">
+            <div class="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center text-xl shadow-inner">
               🕌
             </div>
             <div>
-              <div class="text-sm font-black text-white group-hover:text-amber-200">1. Wudhu & Salat Fardu</div>
-              <div class="text-[11px] text-emerald-100">Tata cara bersuci, adab salat & rakaat</div>
+              <div class="text-xs font-black text-white group-hover:text-amber-200">1. Wudhu & Salat Fardu</div>
+              <div class="text-[10px] text-emerald-100">Tata cara bersuci, adab salat & rakaat</div>
             </div>
           </div>
-          <span class="text-xs font-black bg-white/20 px-2.5 py-1 rounded-lg">10 Soal ➔</span>
+          <span class="text-[10px] font-black bg-white/20 px-2 py-1 rounded-lg">10 Soal ➔</span>
         </button>
 
         <!-- Theme 2 -->
-        <button onclick="selectTheme(1)" class="w-full text-left bg-gradient-to-r from-indigo-600 to-blue-700 hover:from-indigo-500 hover:to-blue-600 p-3.5 rounded-2xl border-2 border-indigo-300/40 shadow-lg active:scale-98 transition-all flex items-center justify-between group">
-          <div class="flex items-center gap-3">
-            <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center text-2xl shadow-inner">
+        <button onclick="selectTheme(1)" class="w-full text-left bg-gradient-to-r from-indigo-600 to-blue-700 hover:from-indigo-500 hover:to-blue-600 p-3 rounded-2xl border-2 border-indigo-300/40 shadow-lg active:scale-98 transition-all flex items-center justify-between group">
+          <div class="flex items-center gap-2.5">
+            <div class="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center text-xl shadow-inner">
               ⭐
             </div>
             <div>
-              <div class="text-sm font-black text-white group-hover:text-amber-200">2. Rukun Iman & Islam</div>
-              <div class="text-[11px] text-indigo-100">6 Rukun Iman & 5 Rukun Islam</div>
+              <div class="text-xs font-black text-white group-hover:text-amber-200">2. Rukun Iman & Islam</div>
+              <div class="text-[10px] text-indigo-100">6 Rukun Iman & 5 Rukun Islam</div>
             </div>
           </div>
-          <span class="text-xs font-black bg-white/20 px-2.5 py-1 rounded-lg">10 Soal ➔</span>
+          <span class="text-[10px] font-black bg-white/20 px-2 py-1 rounded-lg">10 Soal ➔</span>
         </button>
 
         <!-- Theme 3 -->
-        <button onclick="selectTheme(2)" class="w-full text-left bg-gradient-to-r from-amber-600 to-orange-700 hover:from-amber-500 hover:to-orange-600 p-3.5 rounded-2xl border-2 border-amber-300/40 shadow-lg active:scale-98 transition-all flex items-center justify-between group">
-          <div class="flex items-center gap-3">
-            <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center text-2xl shadow-inner">
+        <button onclick="selectTheme(2)" class="w-full text-left bg-gradient-to-r from-amber-600 to-orange-700 hover:from-amber-500 hover:to-orange-600 p-3 rounded-2xl border-2 border-amber-300/40 shadow-lg active:scale-98 transition-all flex items-center justify-between group">
+          <div class="flex items-center gap-2.5">
+            <div class="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center text-xl shadow-inner">
               🌙
             </div>
             <div>
-              <div class="text-sm font-black text-white group-hover:text-amber-200">3. Puasa Ramadhan</div>
-              <div class="text-[11px] text-amber-100">Syarat, rukun, & hikmah puasa</div>
+              <div class="text-xs font-black text-white group-hover:text-amber-200">3. Puasa Ramadhan</div>
+              <div class="text-[10px] text-amber-100">Syarat, rukun, & hikmah puasa</div>
             </div>
           </div>
-          <span class="text-xs font-black bg-white/20 px-2.5 py-1 rounded-lg">10 Soal ➔</span>
+          <span class="text-[10px] font-black bg-white/20 px-2 py-1 rounded-lg">10 Soal ➔</span>
         </button>
 
         <!-- Theme 4 -->
-        <button onclick="selectTheme(3)" class="w-full text-left bg-gradient-to-r from-rose-600 to-pink-700 hover:from-rose-500 hover:to-pink-600 p-3.5 rounded-2xl border-2 border-rose-300/40 shadow-lg active:scale-98 transition-all flex items-center justify-between group">
-          <div class="flex items-center gap-3">
-            <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center text-2xl shadow-inner">
+        <button onclick="selectTheme(3)" class="w-full text-left bg-gradient-to-r from-rose-600 to-pink-700 hover:from-rose-500 hover:to-pink-600 p-3 rounded-2xl border-2 border-rose-300/40 shadow-lg active:scale-98 transition-all flex items-center justify-between group">
+          <div class="flex items-center gap-2.5">
+            <div class="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center text-xl shadow-inner">
               🎁
             </div>
             <div>
-              <div class="text-sm font-black text-white group-hover:text-amber-200">4. Zakat & Sedekah</div>
-              <div class="text-[11px] text-rose-100">Berbagi rezeki & peduli anak yatim</div>
+              <div class="text-xs font-black text-white group-hover:text-amber-200">4. Zakat & Sedekah</div>
+              <div class="text-[10px] text-rose-100">Berbagi rezeki & peduli anak yatim</div>
             </div>
           </div>
-          <span class="text-xs font-black bg-white/20 px-2.5 py-1 rounded-lg">10 Soal ➔</span>
+          <span class="text-[10px] font-black bg-white/20 px-2 py-1 rounded-lg">10 Soal ➔</span>
         </button>
 
         <!-- Theme 5 -->
-        <button onclick="selectTheme(4)" class="w-full text-left bg-gradient-to-r from-purple-600 to-violet-800 hover:from-purple-500 hover:to-violet-700 p-3.5 rounded-2xl border-2 border-purple-300/40 shadow-lg active:scale-98 transition-all flex items-center justify-between group">
-          <div class="flex items-center gap-3">
-            <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center text-2xl shadow-inner">
+        <button onclick="selectTheme(4)" class="w-full text-left bg-gradient-to-r from-purple-600 to-violet-800 hover:from-purple-500 hover:to-violet-700 p-3 rounded-2xl border-2 border-purple-300/40 shadow-lg active:scale-98 transition-all flex items-center justify-between group">
+          <div class="flex items-center gap-2.5">
+            <div class="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center text-xl shadow-inner">
               📖
             </div>
             <div>
-              <div class="text-sm font-black text-white group-hover:text-amber-200">5. Surah Pendek & Doa</div>
-              <div class="text-[11px] text-purple-100">Al-Fatihah, Al-'Asr, doa sehari-hari</div>
+              <div class="text-xs font-black text-white group-hover:text-amber-200">5. Surah Pendek & Doa</div>
+              <div class="text-[10px] text-purple-100">Al-Fatihah, Al-'Asr, doa sehari-hari</div>
             </div>
           </div>
-          <span class="text-xs font-black bg-white/20 px-2.5 py-1 rounded-lg">10 Soal ➔</span>
+          <span class="text-[10px] font-black bg-white/20 px-2 py-1 rounded-lg">10 Soal ➔</span>
         </button>
 
       </div>
 
       <!-- Back / Exit Button -->
-      <button onclick="showScreen('screen-welcome')" class="mt-3 text-center text-xs font-bold text-slate-400 hover:text-white py-2">
-        ← Ganti Pemain / Nama
+      <button onclick="showScreen('screen-welcome')" class="mt-2 text-center text-xs font-bold text-slate-400 hover:text-white py-1.5">
+        ← Ganti Pemain / Mode
       </button>
     </div>
 
@@ -237,49 +304,71 @@
     <!-- SCREEN 3: QUIZ GAMEPLAY SCREEN             -->
     <!-- ========================================== -->
     <div id="screen-game" class="hidden flex-1 flex flex-col justify-between py-2">
+      
       <!-- Top Gameplay Bar -->
-      <div class="flex justify-between items-center mb-2">
-        <button onclick="showScreen('screen-themes')" class="px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-[10px] font-bold text-slate-300">
-          ✕ Keluar
-        </button>
-        <div class="px-3 py-1 bg-amber-400/20 border border-amber-400/40 rounded-full text-amber-300 text-xs font-black flex items-center gap-1.5">
-          <span id="game-theme-name">Wudhu & Salat</span>
+      <div>
+        <div class="flex justify-between items-center mb-1.5">
+          <button onclick="showScreen('screen-themes')" class="px-2 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-[10px] font-bold text-slate-300">
+            ✕ Keluar
+          </button>
+          <div class="px-2.5 py-0.5 bg-amber-400/20 border border-amber-400/40 rounded-full text-amber-300 text-[11px] font-black flex items-center gap-1">
+            <span id="game-theme-name">Wudhu & Salat</span>
+          </div>
+          <div id="game-score-badge-single" class="text-xs font-black text-amber-400 flex items-center gap-1">
+            <span>⭐</span> <span id="game-current-stars">0</span>
+          </div>
         </div>
-        <div class="text-xs font-black text-amber-400 flex items-center gap-1">
-          <span>⭐</span> <span id="game-current-stars">0</span>
-        </div>
-      </div>
 
-      <!-- Progress Bar -->
-      <div class="w-full bg-slate-800 rounded-full h-2 mb-3 overflow-hidden border border-white/10">
-        <div id="game-progress-bar" class="bg-gradient-to-r from-emerald-400 to-amber-400 h-full w-0 transition-all duration-300"></div>
+        <!-- Group Mode: Real-time Multi-Team Scoreboard Bar -->
+        <div id="game-group-scoreboard" class="hidden my-1 bg-slate-900/80 p-2 rounded-xl border border-white/20">
+          <div class="text-[9px] font-black uppercase text-slate-400 mb-1 flex justify-between">
+            <span>🏆 Papan Skor Cerdas Cermat:</span>
+            <span id="game-round-indicator">Putaran 1</span>
+          </div>
+          <div id="game-team-score-cards" class="grid grid-cols-2 sm:grid-cols-4 gap-1.5">
+            <!-- Dynamic team score chips injected here -->
+          </div>
+        </div>
+
+        <!-- Group Mode: Turn Alert Banner -->
+        <div id="game-turn-banner" class="hidden my-1.5 p-2 rounded-xl bg-gradient-to-r from-amber-500/20 via-yellow-400/30 to-amber-500/20 border-2 border-amber-400 text-center animate-pulse">
+          <span class="text-[10px] font-bold text-amber-200 uppercase">🎯 Giliran Menjawab:</span>
+          <div id="game-active-team-name" class="text-sm font-black text-amber-300">
+            🛡️ Kelompok Abu Bakar
+          </div>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="w-full bg-slate-800 rounded-full h-2 my-2 overflow-hidden border border-white/10">
+          <div id="game-progress-bar" class="bg-gradient-to-r from-emerald-400 to-amber-400 h-full w-0 transition-all duration-300"></div>
+        </div>
       </div>
 
       <!-- Question Card -->
-      <div class="glass-card rounded-2xl p-4 sm:p-5 shadow-2xl space-y-3 relative overflow-hidden">
+      <div class="glass-card rounded-2xl p-4 shadow-2xl space-y-2.5 relative overflow-hidden">
         <div class="flex justify-between items-center">
           <span class="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded bg-emerald-500/30 text-emerald-300" id="game-question-num">
             Soal 1 dari 10
           </span>
-          <span class="text-[11px] font-bold text-amber-300">Skor: +10 Poin</span>
+          <span class="text-[11px] font-bold text-amber-300" id="game-points-label">Skor: +10 Poin</span>
         </div>
 
-        <div id="game-stimulus-box" class="bg-slate-900/60 p-2.5 rounded-xl border border-white/10 text-xs text-emerald-200 leading-relaxed hidden">
+        <div id="game-stimulus-box" class="bg-slate-900/60 p-2 rounded-xl border border-white/10 text-xs text-emerald-200 leading-relaxed hidden">
           <!-- Stimulus Story -->
         </div>
 
-        <h3 id="game-question-text" class="text-base sm:text-lg font-bold text-white leading-snug">
+        <h3 id="game-question-text" class="text-sm sm:text-base font-bold text-white leading-snug">
           Pertanyaan kuis akan muncul di sini...
         </h3>
       </div>
 
       <!-- Answer Choices (A, B, C, D) -->
-      <div id="game-choices-container" class="space-y-2 my-4">
+      <div id="game-choices-container" class="space-y-2 my-2">
         <!-- Buttons injected dynamically -->
       </div>
 
       <!-- Feedback Banner (Hidden by default) -->
-      <div id="game-feedback-box" class="hidden p-3 rounded-xl text-center text-xs font-bold transition-all">
+      <div id="game-feedback-box" class="hidden p-2.5 rounded-xl text-center text-xs font-bold transition-all">
         <!-- Feedback message -->
       </div>
 
@@ -294,46 +383,110 @@
     <!-- SCREEN 4: VICTORY & CERTIFICATE SCREEN     -->
     <!-- ========================================== -->
     <div id="screen-victory" class="hidden flex-1 flex flex-col justify-between py-2 text-center animate-fade-in">
-      <!-- Confetti & Trophy -->
-      <div class="space-y-2 mt-2">
-        <div class="text-6xl animate-bounce-slow">🏆</div>
-        <h2 class="text-2xl font-black text-amber-300 uppercase tracking-tight">
+      <!-- Confetti & Trophy Header -->
+      <div class="space-y-1 mt-1">
+        <div class="text-5xl animate-bounce-slow">🏆</div>
+        <h2 id="victory-main-title" class="text-xl font-black text-amber-300 uppercase tracking-tight">
           MASYA ALLAH, HEBAT!
         </h2>
-        <p class="text-xs text-emerald-200">
-          Kamu telah menyelesaikan petualangan dengan nilai memuaskan!
+        <p id="victory-subtitle" class="text-[11px] text-emerald-200">
+          Permainan telah selesai dan hasil telah disimpan otomatis!
         </p>
       </div>
 
-      <!-- Star Rating Display -->
-      <div class="flex justify-center gap-2 text-4xl my-2 text-amber-400 drop-shadow-lg" id="victory-stars-display">
+      <!-- Group Mode: Podium Leaderboard Display -->
+      <div id="victory-group-podium" class="hidden my-2 space-y-1.5">
+        <div class="text-[10px] font-black uppercase text-amber-300 tracking-wider">
+          🏅 HASIL PERINGKAT KELOMPOK:
+        </div>
+        <div id="victory-podium-cards" class="space-y-1.5">
+          <!-- Podium ranking cards injected by JS -->
+        </div>
+      </div>
+
+      <!-- Single Mode: Star Rating -->
+      <div id="victory-stars-display" class="flex justify-center gap-2 text-3xl my-1 text-amber-400 drop-shadow-lg">
         ⭐ ⭐ ⭐
       </div>
 
-      <!-- Printable Certificate Card -->
-      <div id="certificate-card" class="bg-gradient-to-b from-amber-50 to-orange-50 text-slate-900 p-4 rounded-2xl border-4 border-amber-400 shadow-2xl relative">
-        <div class="text-[9px] font-black uppercase text-amber-800 tracking-wider">PIAGAM PENGHARGAAN JUARA</div>
-        <h3 class="text-lg font-black text-emerald-900 mt-1 uppercase" id="cert-player-name">AHMAD</h3>
-        <p class="text-[10px] text-slate-600 mt-0.5">Dianugerahi sebagai:</p>
-        <div class="text-xs font-black text-amber-600 my-1">🌟 ANAK SALEH CERDAS PAI 🌟</div>
-        <p class="text-[9px] text-slate-500 leading-tight">
-          Berhasil menyelesaikan materi: <strong id="cert-theme-name" class="text-slate-800">Wudhu & Salat</strong><br>
-          dengan Skor Akhir: <strong id="cert-score-display" class="text-emerald-700 text-xs font-black">100 / 100</strong>
+      <!-- Printable Certificate Card (Works for both Single and Group!) -->
+      <div id="certificate-card" class="bg-gradient-to-b from-amber-50 to-orange-50 text-slate-900 p-3.5 rounded-2xl border-4 border-amber-400 shadow-2xl relative text-center">
+        <div class="text-[9px] font-black uppercase text-amber-800 tracking-wider" id="cert-heading">PIAGAM PENGHARGAAN JUARA</div>
+        <h3 class="text-base sm:text-lg font-black text-emerald-900 mt-1 uppercase" id="cert-player-name">AHMAD</h3>
+        <p class="text-[10px] text-slate-600 mt-0.5" id="cert-predicate-intro">Dianugerahi sebagai:</p>
+        <div class="text-xs font-black text-amber-600 my-1" id="cert-predicate-title">🌟 ANAK SALEH CERDAS PAI 🌟</div>
+        <p class="text-[9px] text-slate-600 leading-tight">
+          Materi: <strong id="cert-theme-name" class="text-slate-800">Wudhu & Salat</strong><br>
+          <span id="cert-score-line">Skor Akhir: <strong id="cert-score-display" class="text-emerald-700 text-xs font-black">100 / 100</strong></span>
         </p>
-        <div class="mt-3 pt-2 border-t border-amber-200 flex justify-between items-center text-[8px] text-slate-500">
+        <div class="mt-2.5 pt-2 border-t border-amber-200 flex justify-between items-center text-[8px] text-slate-500">
           <span>📅 <span id="cert-date-text">7 November 2026</span></span>
           <span class="font-bold text-emerald-800">Bahan Ajar Bu Guru</span>
         </div>
       </div>
 
       <!-- Action Buttons -->
-      <div class="space-y-2 mt-4">
-        <button onclick="shareOrScreenshot()" class="w-full py-3 bg-gradient-to-r from-amber-400 to-yellow-500 text-slate-950 font-black rounded-xl text-xs uppercase tracking-wider shadow-lg active:scale-95 transition-all flex items-center justify-center gap-2">
-          <span>📸</span> Simpan / Screenshot Sertifikat
+      <div class="space-y-1.5 mt-2">
+        <button onclick="shareOrScreenshot()" class="w-full py-2.5 bg-gradient-to-r from-amber-400 to-yellow-500 text-slate-950 font-black rounded-xl text-xs uppercase tracking-wider shadow-lg active:scale-95 transition-all flex items-center justify-center gap-1.5">
+          <span>📸</span> Simpan / Screenshot Piagam
         </button>
 
-        <button onclick="showScreen('screen-themes')" class="w-full py-2.5 bg-white/20 hover:bg-white/30 text-white font-bold rounded-xl text-xs transition-all">
+        <button onclick="openHistoryScreen()" class="w-full py-2 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all">
+          <span>🏆</span> Buka Papan Skor & Riwayat Tersimpan
+        </button>
+
+        <button onclick="showScreen('screen-themes')" class="w-full py-2 bg-white/20 hover:bg-white/30 text-white font-bold rounded-xl text-xs transition-all">
           🔄 Main Lagi & Pilih Tema Lain
+        </button>
+      </div>
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- SCREEN 5: LEADERBOARD & HISTORY (SAVED)    -->
+    <!-- ========================================== -->
+    <div id="screen-history" class="hidden flex-1 flex flex-col justify-between py-2 animate-fade-in">
+      <!-- Top Title Bar -->
+      <div>
+        <div class="flex justify-between items-center mb-2">
+          <button onclick="closeHistoryScreen()" class="px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-xs font-bold text-slate-300">
+            ← Kembali
+          </button>
+          <h2 class="text-base font-black text-amber-300 flex items-center gap-1.5">
+            <span>🏆</span> RIWAYAT & PAPAN SKOR
+          </h2>
+          <span class="w-12"></span>
+        </div>
+        <p class="text-[11px] text-emerald-200 text-center">
+          Data permainan tersimpan otomatis di HP/Browser ini.
+        </p>
+
+        <!-- Filter Tabs: Semua, Individu, Kelompok -->
+        <div class="grid grid-cols-3 gap-1 my-2 bg-slate-900/80 p-1 rounded-xl border border-white/20 text-[11px] font-bold text-center">
+          <button onclick="filterHistory('semua')" id="hist-tab-all" class="py-1.5 rounded-lg bg-amber-400 text-slate-950 font-black">
+            Semua
+          </button>
+          <button onclick="filterHistory('individu')" id="hist-tab-ind" class="py-1.5 rounded-lg text-slate-300 hover:text-white">
+            👤 Mandiri
+          </button>
+          <button onclick="filterHistory('kelompok')" id="hist-tab-grp" class="py-1.5 rounded-lg text-slate-300 hover:text-white">
+            👥 Kelompok
+          </button>
+        </div>
+      </div>
+
+      <!-- History Records List Container -->
+      <div id="history-records-list" class="flex-1 overflow-y-auto space-y-2 pr-1 my-1">
+        <!-- Records injected dynamically via JS -->
+      </div>
+
+      <!-- Bottom History Controls -->
+      <div class="pt-2 border-t border-white/10 space-y-1.5">
+        <button onclick="clearHistoryData()" class="w-full py-2 bg-rose-600/30 hover:bg-rose-600/50 text-rose-300 border border-rose-500/40 font-bold rounded-xl text-[11px] flex items-center justify-center gap-1">
+          <span>🗑️</span> Hapus Semua Riwayat (Reset untuk Kelas Baru)
+        </button>
+        <button onclick="closeHistoryScreen()" class="w-full py-2.5 bg-amber-400 text-slate-950 font-black rounded-xl text-xs uppercase">
+          Mulai Permainan Baru
         </button>
       </div>
     </div>
@@ -415,7 +568,9 @@
       });
     }
 
+    // ==========================================
     // GAME DATABASE: 5 THEMES, 10 QUESTIONS EACH
+    // ==========================================
     const gameDatabase = [
       // THEME 0: Wudhu & Salat Fardu
       {
@@ -450,252 +605,623 @@
             explanation: "Salat Maghrib terdiri dari 3 rakaat saat senja terbenam."
           },
           {
-            stimulus: "Dalam gerakan salat, dahi, hidung, kedua telapak tangan, lutut, dan jari kaki menempel ke sajadah.",
-            question: "Gerakan mulia yang paling dekat dengan Allah Swt. tersebut disebut apa?",
-            choices: ["Sujud", "Rukuk", "Duduk iftirasy", "Salam"],
+            stimulus: "Aisyah berwudhu dengan tertib sesuai urutan yang diajarkan Rasulullah SAW.",
+            question: "Anggota tubuh yang dibasuh setelah membasuh muka dalam wudhu adalah...",
+            choices: ["Kedua telinga", "Kedua tangan sampai siku", "Kedua kaki", "Mengusap kepala"],
+            answer: 1,
+            explanation: "Urutan wudhu: muka, kedua tangan sampai siku, sebagian kepala, dan kedua kaki."
+          },
+          {
+            stimulus: "Dalam salat berjamaah, ada yang memimpin dan ada yang mengikuti di belakang.",
+            question: "Orang yang memimpin salat berjamaah disebut apa?",
+            choices: ["Makmum", "Muazin", "Imam", "Khatib"],
+            answer: 2,
+            explanation: "Pemimpin salat disebut Imam, sedangkan pengikutnya disebut Makmum."
+          },
+          {
+            stimulus: "Salat fardhu yang dikerjakan pada siang hari dengan jumlah 4 rakaat.",
+            question: "Salat fardhu apakah itu?",
+            choices: ["Salat Subuh", "Salat Zuhur", "Salat Maghrib", "Salat Duha"],
+            answer: 1,
+            explanation: "Salat Zuhur dikerjakan pada siang hari sebanyak 4 rakaat."
+          },
+          {
+            stimulus: "Saat berdiri tegak menghadap kiblat sebelum takbir, kita mengarahkan kiblat ke arah...",
+            question: "Ke manakah arah kiblat umat Islam di seluruh dunia?",
+            choices: ["Ka'bah di Masjidil Haram Makkah", "Masjid Nabawi di Madinah", "Kutub Utara", "Tempat terbit matahari"],
             answer: 0,
-            explanation: "Sujud adalah posisi terdekat seorang hamba kepada Sang Pencipta."
+            explanation: "Ka'bah di Kota Makkah adalah kiblat umat Islam."
+          },
+          {
+            stimulus: "Ketika rukuk, posisi punggung lurus dan kedua tangan memegang lutut.",
+            question: "Apakah bacaan yang disunahkan saat rukuk?",
+            choices: [
+              "Subhana Rabbiyal A'la wa bihamdih",
+              "Subhana Rabbiyal 'Azimi wa bihamdih",
+              "Rabbigfirli warhamni",
+              "Sami'allahu liman hamidah"
+            ],
+            answer: 1,
+            explanation: "Saat rukuk membaca 'Subhana Rabbiyal 'Azimi wa bihamdih'."
+          },
+          {
+            stimulus: "Salat diakhiri dengan menoleh ke kanan dan ke kiri sambil mengucapkan doa kedamaian.",
+            question: "Gerakan penutup salat tersebut adalah...",
+            choices: ["Salam", "Sujud Sahwi", "Tasyahud", "Duduk bersila"],
+            answer: 0,
+            explanation: "Mengucapkan salam ke kanan dan ke kiri adalah rukun penutup salat."
           }
         ]
       },
+
       // THEME 1: Rukun Iman & Islam
       {
         themeName: "Rukun Iman & Islam",
         questions: [
           {
-            stimulus: "Setiap muslim wajib meyakini dalam hati 6 pokok keimanan.",
-            question: "Rukun Iman yang pertama adalah beriman kepada...",
-            choices: ["Malaikat", "Allah Swt.", "Kitab-kitab Allah", "Hari Kiamat"],
+            stimulus: "Iman adalah fondasi utama keyakinan dalam hati seorang muslim.",
+            question: "Ada berapakah jumlah Rukun Iman yang wajib kita yakini?",
+            choices: ["5 Rukun", "6 Rukun", "4 Rukun", "7 Rukun"],
             answer: 1,
-            explanation: "Rukun Iman pertama adalah Iman kepada Allah Swt."
+            explanation: "Rukun Iman ada 6: Iman kepada Allah, Malaikat, Kitab, Rasul, Hari Kiamat, dan Qada & Qadar."
           },
           {
-            stimulus: "Islam dibangun di atas lima fondasi utama.",
-            question: "Rukun Islam yang pertama adalah mengucapkan...",
-            choices: ["Dua Kalimat Syahadat", "Salat 5 Waktu", "Membayar Zakat", "Puasa Ramadan"],
+            stimulus: "Seorang yang baru memeluk agama Islam wajib mengucapkan dua kalimat persaksian.",
+            question: "Apakah nama rukun Islam yang pertama tersebut?",
+            choices: ["Syahadatain", "Salat lima waktu", "Puasa Ramadhan", "Zakat fitrah"],
             answer: 0,
-            explanation: "Rukun Islam pertama adalah mengikrarkan Dua Kalimat Syahadat."
+            explanation: "Mengucapkan dua kalimat syahadat adalah rukun Islam yang pertama."
           },
           {
-            stimulus: "Malaikat adalah makhluk ciptaan Allah yang selalu taat dan diciptakan dari cahaya (nur).",
-            question: "Malaikat yang bertugas menyampaikan wahyu kepada Nabi Muhammad saw. adalah...",
-            choices: ["Malaikat Mikail", "Malaikat Israfil", "Malaikat Jibril", "Malaikat Izrail"],
+            stimulus: "Malaikat diciptakan Allah dari cahaya dan selalu taat melaksanakan perintah-Nya.",
+            question: "Malaikat yang bertugas menyampaikan wahyu kepada para Nabi adalah...",
+            choices: ["Malaikat Mikail", "Malaikat Israfil", "Malaikat Jibril", "Malaikat Malik"],
             answer: 2,
-            explanation: "Malaikat Jibril bertugas menyampaikan wahyu Allah."
+            explanation: "Malaikat Jibril adalah malaikat pembawa wahyu dari Allah SWT."
           },
           {
-            stimulus: "Kitab suci Al-Qur'an diturunkan Allah sebagai pedoman hidup seluruh umat manusia.",
-            question: "Nabi dan Rasul terakhir penutup para nabi pembawa risalah Al-Qur'an adalah...",
-            choices: ["Nabi Ibrahim a.s.", "Nabi Musa a.s.", "Nabi Isa a.s.", "Nabi Muhammad saw."],
+            stimulus: "Umat Islam meyakini kitab-kitab suci yang diturunkan kepada para Rasul.",
+            question: "Kitab suci Al-Qur'an diturunkan Allah kepada nabi terakhir, yaitu...",
+            choices: ["Nabi Musa AS", "Nabi Isa AS", "Nabi Daud AS", "Nabi Muhammad SAW"],
             answer: 3,
-            explanation: "Nabi Muhammad saw. adalah Khatamun Nabiyyin (penutup para nabi)."
+            explanation: "Al-Qur'an diturunkan kepada Nabi Muhammad SAW sebagai penyempurna kitab terdahulu."
           },
           {
-            stimulus: "Alam semesta beserta isinya suatu hari akan hancur dan berganti hari pembalasan.",
-            question: "Meyakini akan datangnya hari hancurnya dunia termasuk Rukun Iman yang ke...",
-            choices: ["Ke-5 (Hari Kiamat/Akhir)", "Ke-2", "Ke-4", "Ke-6"],
+            stimulus: "Ibadah yang menjadi tiang agama Islam dan rukun Islam kedua adalah...",
+            question: "Ibadah apakah yang dimaksud?",
+            choices: ["Salat lima waktu", "Haji ke Makkah", "Membayar zakat", "Menghafal doa"],
+            answer: 0,
+            explanation: "Salat adalah tiang agama dan rukun Islam yang kedua."
+          },
+          {
+            stimulus: "Nabi pertama yang diciptakan Allah SWT sekaligus manusia pertama di bumi adalah...",
+            question: "Siapakah nama nabi pertama tersebut?",
+            choices: ["Nabi Ibrahim AS", "Nabi Nuh AS", "Nabi Adam AS", "Nabi Idris AS"],
+            answer: 2,
+            explanation: "Nabi Adam AS adalah manusia dan nabi pertama yang diciptakan Allah."
+          },
+          {
+            stimulus: "Malaikat yang bertugas membagikan rezeki dan menurunkan hujan atas izin Allah adalah...",
+            question: "Siapakah nama malaikat pembagi rezeki?",
+            choices: ["Malaikat Mikail", "Malaikat Ridwan", "Malaikat Izrail", "Malaikat Munkar"],
+            answer: 0,
+            explanation: "Malaikat Mikail bertugas mengatur rezeki dan menurunkan hujan."
+          },
+          {
+            stimulus: "Rukun Islam kelima diwajibkan bagi muslim yang mampu secara fisik dan finansial.",
+            question: "Ibadah apakah rukun Islam yang kelima?",
+            choices: ["Zakat Mal", "Puasa Syawal", "Ibadah Haji ke Baitullah", "Sedekah subuh"],
+            answer: 2,
+            explanation: "Haji ke Baitullah bagi yang mampu adalah rukun Islam kelima."
+          },
+          {
+            stimulus: "Percaya bahwa segala takdir baik maupun buruk telah ditetapkan oleh Allah SWT.",
+            question: "Hal ini termasuk ke dalam rukun iman yang ke...",
+            choices: ["Rukun Iman ke-3", "Rukun Iman ke-4", "Rukun Iman ke-5", "Rukun Iman ke-6 (Qada & Qadar)"],
+            answer: 3,
+            explanation: "Iman kepada Qada dan Qadar adalah Rukun Iman ke-6."
+          },
+          {
+            stimulus: "Hari berakhirnya seluruh alam semesta dan dibangkitkannya manusia disebut...",
+            question: "Hari apakah yang dimaksud dalam Rukun Iman ke-5?",
+            choices: ["Hari Kiamat / Akhir", "Hari Raya Idul Fitri", "Hari Jumat", "Hari Tasyrik"],
             answer: 0,
             explanation: "Iman kepada Hari Akhir (Kiamat) adalah Rukun Iman ke-5."
           }
         ]
       },
+
       // THEME 2: Puasa Ramadhan
       {
-        themeName: "Puasa Ramadan",
+        themeName: "Puasa Ramadhan",
         questions: [
           {
-            stimulus: "Di bulan suci Ramadan, seluruh umat Islam beriman diwajibkan menunaikan ibadah puasa.",
-            question: "Puasa dalam bahasa Arab disebut apa?",
-            choices: ["Shaum", "Salat", "Zakat", "Haji"],
+            stimulus: "Umat Islam menahan diri dari lapar, dahaga, dan hal yang membatalkan dari terbit fajar hingga terbenam matahari.",
+            question: "Ibadah wajib tersebut dinamakan...",
+            choices: ["Puasa (Saum)", "Tadarus", "Iktikaf", "Tawaf"],
             answer: 0,
-            explanation: "Shaum atau siyam secara bahasa berarti menahan diri."
+            explanation: "Puasa adalah rukun Islam ketiga yang dikerjakan pada bulan suci Ramadhan."
           },
           {
-            stimulus: "Saat berpuasa, kita menahan diri dari makan, minum, dan perbuatan tercela.",
-            question: "Ibadah puasa dimulai sejak terbit fajar hingga waktu apa?",
-            choices: ["Terbit matahari", "Tengah malam", "Terbenam matahari (Maghrib)", "Waktu Zuhur"],
-            answer: 2,
-            explanation: "Puasa dimulai dari fajar shadiq (Subuh) hingga maghrib."
-          },
-          {
-            stimulus: "Makan dan minum sebelum fajar untuk persiapan berpuasa sangat dianjurkan oleh Rasulullah.",
-            question: "Makan di waktu dini hari sebelum puasa disebut makan...",
-            choices: ["Sarapan", "Sahur", "Berbuka", "Makan siang"],
+            stimulus: "Keluarga Salman bangun di sepertiga malam terakhir sebelum azan Subuh untuk makan.",
+            question: "Makan di waktu dini hari sebelum berpuasa disebut...",
+            choices: ["Makan malam", "Sahur", "Sarapan pagi", "Kudapan"],
             answer: 1,
-            explanation: "Makan sahur mendatangkan keberkahan sebelum berpuasa."
+            explanation: "Sahur adalah makan di waktu dini hari sebelum fajar terbit dan disunahkan."
           },
           {
-            stimulus: "Salat sunnah malam hari yang khusus dikerjakan hanya pada bulan suci Ramadan berjamaah.",
-            question: "Salat sunnah tersebut dinamakan salat...",
-            choices: ["Salat Tahajud", "Salat Dhuha", "Salat Tarawih", "Salat Witir"],
-            answer: 2,
-            explanation: "Salat Tarawih adalah ibadah sunnah mulia di malam Ramadan."
-          },
-          {
-            stimulus: "Berpuasa mengajarkan kita merasakan rasa lapar yang dialami fakir miskin.",
-            question: "Hikmah mulia dari ibadah puasa adalah menumbuhkan rasa...",
-            choices: ["Sombong", "Empati dan peduli sesama", "Malas belajar", "Bermewah-mewahan"],
+            stimulus: "Ketika azan Maghrib berkumandang, orang yang berpuasa disunahkan segera...",
+            question: "Kegiatan apakah yang disunahkan saat tiba azan Maghrib?",
+            choices: ["Melanjutkan puasa", "Berbuka puasa (Iftar)", "Tidur malam", "Olahraga"],
             answer: 1,
-            explanation: "Puasa melatih kepekaan sosial dan kepedulian kepada orang yang membutuhkan."
+            explanation: "Menyegerakan berbuka puasa adalah sunah Rasulullah SAW."
+          },
+          {
+            stimulus: "Rasulullah SAW menganjurkan berbuka puasa dengan makanan manis alami.",
+            question: "Buah apakah yang paling utama disunahkan saat berbuka?",
+            choices: ["Buah Kurma", "Buah Durian", "Buah Mangga", "Buah Jeruk"],
+            answer: 0,
+            explanation: "Rasulullah SAW terbiasa berbuka dengan beberapa butir kurma basah atau kurma kering."
+          },
+          {
+            stimulus: "Salat sunah yang hanya dikerjakan pada malam-malam bulan suci Ramadhan setelah salat Isya.",
+            question: "Salat sunah apakah yang dimaksud?",
+            choices: ["Salat Tahajud", "Salat Tarawih", "Salat Witir", "Salat Istikharah"],
+            answer: 1,
+            explanation: "Salat Tarawih dikerjakan khusus pada malam bulan suci Ramadhan."
+          },
+          {
+            stimulus: "Malam kemuliaan yang lebih baik daripada seribu bulan pada bulan Ramadhan disebut...",
+            question: "Malam apakah yang sangat dicari umat Islam tersebut?",
+            choices: ["Malam Nisfu Sya'ban", "Malam Lailatul Qadar", "Malam Isra Miraj", "Malam Tahun Baru Islam"],
+            answer: 1,
+            explanation: "Malam Lailatul Qadar adalah malam kemuliaan yang lebih baik dari 1000 bulan."
+          },
+          {
+            stimulus: "Menahan diri dari berbohong, mencela, dan marah saat puasa bertujuan menjaga...",
+            question: "Apa yang terjaga jika kita menjaga akhlak saat puasa?",
+            choices: ["Pahala puasa", "Uang saku", "Kekuatan fisik", "Pakaian"],
+            answer: 0,
+            explanation: "Menghindari perkataan kotor dan bohong menjaga agar pahala puasa tidak sia-sia."
+          },
+          {
+            stimulus: "Puasa melatih kita merasakan rasa lapar agar kita memiliki rasa...",
+            question: "Sikap terpuji apa yang ditumbuhkan dengan berpuasa?",
+            choices: ["Sombong", "Empati dan peduli pada kaum miskin", "Pelit dan hemat berlebihan", "Mudah marah"],
+            answer: 1,
+            explanation: "Puasa menumbuhkan empati dan rasa peduli terhadap fakir miskin yang sering kelaparan."
+          },
+          {
+            stimulus: "Bulan Ramadhan adalah bulan istimewa karena di dalamnya pertama kali diturunkan...",
+            question: "Peristiwa agung apakah yang terjadi pada bulan Ramadhan?",
+            choices: ["Turunnya kitab suci Al-Qur'an (Nuzulul Qur'an)", "Pembangunan Ka'bah", "Penciptaan matahari", "Banjir Nabi Nuh"],
+            answer: 0,
+            explanation: "Al-Qur'an pertama kali diturunkan pada malam bulan Ramadhan (Nuzulul Qur'an)."
+          },
+          {
+            stimulus: "Setelah sebulan penuh berpuasa, umat Islam merayakan hari kemenangan pada tanggal 1 Syawal.",
+            question: "Hari raya apakah itu?",
+            choices: ["Hari Raya Idul Fitri", "Hari Raya Idul Adha", "Tahun Baru Masehi", "Hari Pahlawan"],
+            answer: 0,
+            explanation: "Idul Fitri dirayakan setiap 1 Syawal sebagai hari kemenangan setelah Ramadhan."
           }
         ]
       },
+
       // THEME 3: Zakat & Sedekah
       {
         themeName: "Zakat & Sedekah",
         questions: [
           {
-            stimulus: "Menjelang hari raya Idulfitri, setiap muslim wajib mengeluarkan zakat berupa makanan pokok (beras).",
-            question: "Zakat penyuci jiwa di akhir bulan Ramadan disebut zakat apa?",
-            choices: ["Zakat Mal", "Zakat Fitrah", "Sedekah jariyah", "Wakaf"],
-            answer: 1,
-            explanation: "Zakat Fitrah wajib dikeluarkan sebelum salat Idulfitri."
-          },
-          {
-            stimulus: "Aisyah tersenyum ramah dan menyapa temannya saat bertemu di sekolah.",
-            question: "Menurut hadis Nabi, senyum manis kepada saudaramu bernilai apa?",
-            choices: ["Hutang", "Sedekah", "Dosa", "Sia-sia"],
-            answer: 1,
-            explanation: "Tabassumuka fi wajhi akhika laka shadaqah (Senyummu bernilai sedekah)."
-          },
-          {
-            stimulus: "Di dekat rumah Faris terdapat anak yatim piatu yang membutuhkan buku dan makanan.",
-            question: "Surah dalam Al-Qur'an yang melarang menghardik anak yatim adalah...",
-            choices: ["Surah Al-Ma'un", "Surah Al-Kafirun", "Surah Al-Ikhlas", "Surah An-Nasr"],
+            stimulus: "Zakat yang wajib dikeluarkan setiap muslim menjelang berakhirnya bulan Ramadhan berupa beras/makanan pokok.",
+            question: "Zakat apakah yang dimaksud?",
+            choices: ["Zakat Fitrah", "Zakat Mal (Harta)", "Zakat Emas", "Zakat Pertanian"],
             answer: 0,
-            explanation: "Surah Al-Ma'un mengecam orang yang menghardik anak yatim."
+            explanation: "Zakat Fitrah wajib dikeluarkan sebelum salat Idul Fitri untuk menyucikan jiwa."
           },
           {
-            stimulus: "Harta yang disedekahkan dengan ikhlas di jalan Allah tidak akan pernah berkurang.",
-            question: "Golongan orang yang berhak menerima zakat disebut apa?",
-            choices: ["Muzakki", "Mustahik (8 Asnaf)", "Saudagar", "Keluarga kaya"],
-            answer: 1,
-            explanation: "Mustahik adalah 8 golongan yang berhak menerima zakat."
+            stimulus: "Memberikan sebagian harta atau bantuan secara sukarela demi mengharap rida Allah.",
+            question: "Ibadah sukarela tersebut dinamakan...",
+            choices: ["Sedekah", "Pajak", "Riba", "Hutang"],
+            answer: 0,
+            explanation: "Sedekah adalah amalan sukarela yang berpahala besar dan menolak bala."
           },
           {
-            stimulus: "Memberi bantuan kepada orang lain sebaiknya dilakukan dengan tulus tanpa riya.",
-            question: "Arti dari sikap ikhlas adalah beramal semata-mata mengharap...",
-            choices: ["Pujian manusia", "Ridha dan pahala dari Allah Swt.", "Balasan uang", "Tepuk tangan"],
+            stimulus: "Rasulullah SAW bersabda: 'Tersenyum di hadapan saudaramu adalah...'",
+            question: "Melengkapi hadis tersebut, tersenyum dinilai sebagai apa?",
+            choices: ["Tanda malas", "Sedekah", "Kelemahan", "Kewajiban bayar"],
             answer: 1,
-            explanation: "Ikhlas berarti memurnikan niat hanya untuk Allah Swt."
+            explanation: "Tersenyum tulus kepada sesama muslim dinilai sebagai sedekah yang bernilai ibadah."
+          },
+          {
+            stimulus: "Orang yang berhak menerima zakat menurut Al-Qur'an Surah At-Taubah ayat 60 terdiri dari...",
+            question: "Ada berapakah golongan (asnaf) penerima zakat?",
+            choices: ["5 Golongan", "8 Golongan", "10 Golongan", "3 Golongan"],
+            answer: 1,
+            explanation: "Ada 8 golongan mustahik zakat, di antaranya fakir, miskin, dan amil zakat."
+          },
+          {
+            stimulus: "Anak yang ditinggal wafat oleh ayahnya sebelum berusia baligh disebut...",
+            question: "Apakah sebutan bagi anak tersebut dalam Islam?",
+            choices: ["Anak Yatim", "Anak Piatu", "Anak Dhuafa", "Anak Angkat"],
+            answer: 0,
+            explanation: "Anak yang ayahnya meninggal sebelum ia baligh disebut anak yatim dan wajib disayangi."
+          },
+          {
+            stimulus: "Perumpamaan orang yang menafkahkan hartanya di jalan Allah seperti sebutir benih yang menumbuhkan...",
+            question: "Berapa banyak bulir dan benih kelipatan pahala dari Allah?",
+            choices: ["100 benih pada tiap bulir (berlipat ganda 700 kali)", "Hanya 1 biji", "Tidak ada pahala", "10 kali lipat saja"],
+            answer: 0,
+            explanation: "Allah melipatgandakan pahala sedekah hingga 700 kali lipat bahkan lebih."
+          },
+          {
+            stimulus: "Tangan yang di atas (memberi) lebih baik daripada...",
+            question: "Lanjutan dari pepatah hadis Rasulullah SAW di atas adalah...",
+            choices: ["Tangan yang di bawah (menerima/meminta)", "Tangan yang diam", "Tangan yang memukul", "Tangan yang bersembunyi"],
+            answer: 0,
+            explanation: "Rasulullah mengajarkan bahwa memberi (tangan di atas) lebih mulia daripada meminta-minta."
+          },
+          {
+            stimulus: "Zakat yang dikeluarkan dari harta perniagaan, tabungan emas, atau hasil ternak yang mencapai nisab disebut...",
+            question: "Apakah jenis zakat tersebut?",
+            choices: ["Zakat Fitrah", "Zakat Mal (Harta)", "Kafarat", "Fidyah"],
+            answer: 1,
+            explanation: "Zakat Mal adalah zakat atas harta kekayaan yang telah memenuhi syarat nisab dan haul."
+          },
+          {
+            stimulus: "Salah satu hikmah penting dari mengeluarkan zakat dan sedekah bagi jiwa kita adalah...",
+            question: "Hikmah apa yang didapatkan oleh orang yang bersedekah?",
+            choices: ["Membersihkan hati dari sifat kikir dan sombong", "Mengurangi simpanan uang", "Supaya dipuji tetangga", "Agar terkenal"],
+            answer: 0,
+            explanation: "Zakat menyucikan harta dan membersihkan hati dari sifat pelit, serakah, dan sombong."
+          },
+          {
+            stimulus: "Amalan yang pahalanya tetap mengalir terus meskipun orangnya sudah meninggal dunia, salah satunya adalah...",
+            question: "Amalan apakah itu?",
+            choices: ["Sedekah Jariyah (seperti wakaf masjid/sumur)", "Pakaian mewah", "Kendaraan bagus", "Foto kenangan"],
+            answer: 0,
+            explanation: "Sedekah jariyah, ilmu yang bermanfaat, dan doa anak saleh pahalanya abadi."
           }
         ]
       },
+
       // THEME 4: Surah Pendek & Doa Harian
       {
         themeName: "Surah Pendek & Doa Harian",
         questions: [
           {
-            stimulus: "Surah pertama dalam mushaf Al-Qur'an yang wajib dibaca pada setiap rakaat salat.",
-            question: "Surah pembuka Al-Qur'an tersebut adalah...",
-            choices: ["Surah Al-Baqarah", "Surah Al-Fatihah", "Surah Yasin", "Surah Al-Ikhlas"],
+            stimulus: "Surah pertama dalam Al-Qur'an yang wajib dibaca pada setiap rakaat salat.",
+            question: "Apakah nama surah pembuka tersebut?",
+            choices: ["Surah Al-Ikhlas", "Surah Al-Fatihah", "Surah An-Nas", "Surah Al-Falaq"],
             answer: 1,
-            explanation: "Surah Al-Fatihah disebut Ummul Qur'an (induk Al-Qur'an)."
+            explanation: "Surah Al-Fatihah adalah Ummul Qur'an dan rukun bacaan dalam salat."
           },
           {
-            stimulus: "Ketika kita hendak makan atau memulai perbuatan baik, kita disunnahkan mengucap basmalah.",
-            question: "Lafal kalimat Basmalah yang benar adalah...",
-            choices: ["Alhamdulillah", "Bismillaahirrahmaanirrahiim", "Subhanallah", "Allahu Akbar"],
-            answer: 1,
-            explanation: "Basmalah mengawali setiap perbuatan baik agar berkah."
-          },
-          {
-            stimulus: "Setelah selesai makan, belajar, atau menerima kabar gembira, kita bersyukur kepada Allah.",
-            question: "Kalimat thayyibah ucapan syukur adalah...",
-            choices: ["Alhamdulillaahi Rabbil 'Aalamiin", "Astaghfirullah", "Masya Allah", "Inna lillahi"],
+            stimulus: "Setiap hendak memulai kegiatan yang baik seperti makan atau belajar, kita membaca...",
+            question: "Apakah kalimat thayyibah yang kita ucapkan?",
+            choices: ["Basmalah (Bismillahirrahmanirrahim)", "Hamdalah (Alhamdulillah)", "Takbir", "Istirja"],
             answer: 0,
-            explanation: "Hamdalah adalah ungkapan rasa syukur atas nikmat Allah."
+            explanation: "Membaca Basmalah mengundang keberkahan Allah dalam setiap aktivitas kita."
           },
           {
-            stimulus: "Surah yang menegaskan bahwa Allah Swt. Maha Esa, tidak beranak dan tidak diperanakkan.",
-            question: "Surah tentang keesaan Allah tersebut adalah...",
-            choices: ["Surah Al-Falaq", "Surah Al-Ikhlas", "Surah An-Nas", "Surah Al-Lahab"],
-            answer: 1,
-            explanation: "Surah Al-Ikhlas mengajarkan pokok ketauhidan mengesakan Allah."
-          },
-          {
-            stimulus: "Surah Al-'Asr menjelaskan bahwa seluruh manusia berada dalam kerugian kecuali orang beriman.",
-            question: "Arti dari lafal 'Wal-'Asri' adalah demi...",
-            choices: ["Demi Waktu / Masa", "Demi Bintang", "Demi Langit", "Demi Matahari"],
+            stimulus: "Setelah selesai makan dan minum, kita bersyukur kepada Allah dengan membaca...",
+            question: "Kalimat syukur apakah yang diucapkan?",
+            choices: ["Alhamdulillah", "Astaghfirullah", "Subhanallah", "Masya Allah"],
             answer: 0,
-            explanation: "Wal-'Asri artinya Demi Masa / Demi Waktu."
+            explanation: "Mengucapkan Alhamdulillah adalah wujud syukur atas nikmat rezeki makan dan minum."
+          },
+          {
+            stimulus: "Surah pendek yang menegaskan tentang kemurnian keesaan Allah: 'Qul Huwallahu Ahad'.",
+            question: "Apakah nama surah tersebut?",
+            choices: ["Surah Al-Falaq", "Surah Al-Ikhlas", "Surah Al-Kafirun", "Surah Al-Ma'un"],
+            answer: 1,
+            explanation: "Surah Al-Ikhlas menjelaskan bahwa Allah Maha Esa dan tidak beranak maupun diperanakkan."
+          },
+          {
+            stimulus: "Doa sebelum tidur yang diajarkan Rasulullah SAW diawali dengan menyebut nama Allah.",
+            question: "Lanjutan doa: 'Bismika Allahumma ahya wa bismika...'",
+            choices: ["amut", "asyrib", "anam", "ajlis"],
+            answer: 0,
+            explanation: "Doa sebelum tidur: Bismika Allahumma ahya wa bismika amut."
+          },
+          {
+            stimulus: "Surah dalam Al-Qur'an yang menjelaskan bahwa manusia berada dalam kerugian kecuali yang beriman dan beramal saleh.",
+            question: "Apakah nama surah yang diawali dengan sumpah 'Demi Masa' tersebut?",
+            choices: ["Surah Al-'Asr", "Surah Al-Kautsar", "Surah At-Tin", "Surah Ad-Duha"],
+            answer: 0,
+            explanation: "Surah Al-'Asr (Wal 'Asr) mengingatkan kita agar memanfaatkan waktu sebaik-baiknya."
+          },
+          {
+            stimulus: "Doa untuk kedua orang tua: 'Rabbigfirli waliwalidayya warhamhuma kama...'",
+            question: "Bagaimanakah lanjutan doa kasih sayang untuk ayah dan ibu tersebut?",
+            choices: ["rabbayani saghira", "arhamar rahimin", "hasbunallah", "alhamdulillah"],
+            answer: 0,
+            explanation: "Lanjutan doa: 'kama rabbayani saghira' (sebagaimana mereka menyayangiku sewaktu kecil)."
+          },
+          {
+            stimulus: "Surah Al-Kautsar menceritakan tentang nikmat yang sangat banyak yang diberikan Allah.",
+            question: "Berapakah jumlah ayat dalam Surah Al-Kautsar?",
+            choices: ["3 Ayat", "4 Ayat", "5 Ayat", "7 Ayat"],
+            answer: 0,
+            explanation: "Surah Al-Kautsar adalah surah terpendek dalam Al-Qur'an dengan 3 ayat."
+          },
+          {
+            stimulus: "Dua surah perlindungan dari kejahatan sihir, malam gulita, dan bisikan setan (Al-Mu'awwidzatain) adalah...",
+            question: "Surah apakah itu?",
+            choices: ["Surah Al-Falaq dan Surah An-Nas", "Surah Al-Baqarah", "Surah Yasin", "Surah Al-Fil"],
+            answer: 0,
+            explanation: "Surah Al-Falaq dan An-Nas adalah surah perlindungan memohon penjagaan Allah."
+          },
+          {
+            stimulus: "Doa memohon ilmu yang bermanfaat dan rezeki yang baik.",
+            question: "Lafaz doa: 'Allahumma inni as-aluka 'ilman nafi'an, wa rizqan thayyiban, wa...'",
+            choices: ["'amalan mutaqabbala", "malan katsiran", "syifaan 'ajilan", "baitan wasi'an"],
+            answer: 0,
+            explanation: "Lanjutan doa: 'wa 'amalan mutaqabbala' (dan amalan yang diterima)."
           }
         ]
       }
     ];
 
-    // STATE VARIABLES
-    let currentPlayer = {
+    // ==========================================
+    // GAME STATE & TEAM MANAGEMENT
+    // ==========================================
+    let gameMode = 'individu'; // 'individu' or 'kelompok'
+
+    let singlePlayer = {
       name: "Ahmad",
       avatar: "👦",
       totalStars: 0
     };
 
+    let groupTeams = [
+      { id: 1, name: "Kelompok Abu Bakar", icon: "🛡️", colorBg: "from-blue-600 to-indigo-700", border: "border-blue-400", score: 0 },
+      { id: 2, name: "Kelompok Umar bin Khattab", icon: "⚔️", colorBg: "from-emerald-600 to-teal-700", border: "border-emerald-400", score: 0 }
+    ];
+
+    const teamPresets = [
+      { name: "Kelompok Abu Bakar", icon: "🛡️", colorBg: "from-blue-600 to-indigo-700", border: "border-blue-400" },
+      { name: "Kelompok Umar bin Khattab", icon: "⚔️", colorBg: "from-emerald-600 to-teal-700", border: "border-emerald-400" },
+      { name: "Kelompok Utsman bin Affan", icon: "📜", colorBg: "from-amber-600 to-orange-700", border: "border-amber-400" },
+      { name: "Kelompok Ali bin Abi Thalib", icon: "🌟", colorBg: "from-purple-600 to-violet-700", border: "border-purple-400" }
+    ];
+
+    let currentTeamTurn = 0;
     let currentThemeIdx = 0;
     let currentQuestionIdx = 0;
     let currentScore = 0;
     let currentStars = 0;
     let answered = false;
 
+    // LOCAL STORAGE KEY
+    const STORAGE_KEY = 'islami_game_history_v1';
+
     // SCREEN SWITCHER
     function showScreen(screenId) {
-      ['screen-welcome', 'screen-themes', 'screen-game', 'screen-victory'].forEach(id => {
-        document.getElementById(id).classList.add('hidden');
+      ['screen-welcome', 'screen-themes', 'screen-game', 'screen-victory', 'screen-history'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.classList.add('hidden');
       });
-      document.getElementById(screenId).classList.remove('hidden');
+      const target = document.getElementById(screenId);
+      if (target) target.classList.remove('hidden');
     }
 
-    // SET AVATAR
+    // ==========================================
+    // MODE SWITCHER (Individu vs Kelompok)
+    // ==========================================
+    function setGameMode(mode) {
+      gameMode = mode;
+      const tabSingle = document.getElementById('tab-mode-single');
+      const tabGroup = document.getElementById('tab-mode-group');
+      const secSingle = document.getElementById('section-mode-single');
+      const secGroup = document.getElementById('section-mode-group');
+
+      if (mode === 'individu') {
+        tabSingle.className = 'py-2 rounded-xl bg-amber-400 text-slate-950 shadow flex items-center justify-center gap-1.5 transition-all';
+        tabGroup.className = 'py-2 rounded-xl text-slate-300 hover:text-white hover:bg-white/10 flex items-center justify-center gap-1.5 transition-all';
+        secSingle.classList.remove('hidden');
+        secGroup.classList.add('hidden');
+      } else {
+        tabGroup.className = 'py-2 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow flex items-center justify-center gap-1.5 transition-all font-black';
+        tabSingle.className = 'py-2 rounded-xl text-slate-300 hover:text-white hover:bg-white/10 flex items-center justify-center gap-1.5 transition-all';
+        secGroup.classList.remove('hidden');
+        secSingle.classList.add('hidden');
+        renderTeamInputs();
+      }
+    }
+
+    function setTeamCount(count) {
+      [2, 3, 4].forEach(c => {
+        const btn = document.getElementById(`btn-count-2`);
+        const b = document.getElementById(`btn-count-${c}`);
+        if (b) {
+          if (c === count) {
+            b.className = 'px-2.5 py-1 rounded-lg text-xs font-black bg-amber-400 text-slate-950 shadow';
+          } else {
+            b.className = 'px-2.5 py-1 rounded-lg text-xs font-black bg-white/20 text-white hover:bg-white/30';
+          }
+        }
+      });
+
+      // Update groupTeams array
+      groupTeams = [];
+      for (let i = 0; i < count; i++) {
+        groupTeams.push({
+          id: i + 1,
+          name: teamPresets[i].name,
+          icon: teamPresets[i].icon,
+          colorBg: teamPresets[i].colorBg,
+          border: teamPresets[i].border,
+          score: 0
+        });
+      }
+      renderTeamInputs();
+    }
+
+    function renderTeamInputs() {
+      const container = document.getElementById('team-inputs-container');
+      if (!container) return;
+      container.innerHTML = '';
+
+      groupTeams.forEach((team, idx) => {
+        const div = document.createElement('div');
+        div.className = 'flex items-center gap-2 bg-slate-900/90 p-1.5 rounded-xl border border-white/20';
+        div.innerHTML = `
+          <span class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center text-lg shrink-0">${team.icon}</span>
+          <div class="flex-1">
+            <input type="text" id="team-input-${idx}" value="${team.name}" maxlength="25"
+              onchange="updateTeamName(${idx}, this.value)"
+              class="w-full bg-transparent text-xs font-bold text-white border-none focus:outline-none focus:ring-0">
+          </div>
+          <span class="text-[10px] font-black text-amber-300 px-2 py-0.5 rounded bg-white/10">Tim ${idx + 1}</span>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    function updateTeamName(idx, val) {
+      if (groupTeams[idx]) {
+        groupTeams[idx].name = val.trim() || `Kelompok ${idx + 1}`;
+      }
+    }
+
+    // SET AVATAR FOR SINGLE MODE
     function setAvatar(emoji, defaultName) {
-      currentPlayer.avatar = emoji;
+      singlePlayer.avatar = emoji;
       document.getElementById('welcome-avatar-display').innerText = emoji;
       
       const boyBtn = document.getElementById('avatar-btn-boy');
       const girlBtn = document.getElementById('avatar-btn-girl');
       
       if (emoji === '👦') {
-        boyBtn.className = 'px-3 py-1.5 rounded-xl bg-amber-400 text-slate-950 font-black text-xs flex items-center gap-1.5 border-2 border-white shadow';
-        girlBtn.className = 'px-3 py-1.5 rounded-xl bg-white/20 text-white font-black text-xs flex items-center gap-1.5 border-2 border-white/40 hover:bg-white/30 transition-all';
+        boyBtn.className = 'px-3 py-1 rounded-xl bg-amber-400 text-slate-950 font-black text-xs flex items-center gap-1 border-2 border-white shadow';
+        girlBtn.className = 'px-3 py-1 rounded-xl bg-white/20 text-white font-black text-xs flex items-center gap-1 border-2 border-white/40 hover:bg-white/30 transition-all';
         if (!document.getElementById('player-name-input').value) {
           document.getElementById('player-name-input').value = 'Ahmad';
         }
       } else {
-        girlBtn.className = 'px-3 py-1.5 rounded-xl bg-pink-500 text-white font-black text-xs flex items-center gap-1.5 border-2 border-white shadow';
-        boyBtn.className = 'px-3 py-1.5 rounded-xl bg-white/20 text-white font-black text-xs flex items-center gap-1.5 border-2 border-white/40 hover:bg-white/30 transition-all';
+        girlBtn.className = 'px-3 py-1 rounded-xl bg-pink-500 text-white font-black text-xs flex items-center gap-1 border-2 border-white shadow';
+        boyBtn.className = 'px-3 py-1 rounded-xl bg-white/20 text-white font-black text-xs flex items-center gap-1 border-2 border-white/40 hover:bg-white/30 transition-all';
         if (!document.getElementById('player-name-input').value || document.getElementById('player-name-input').value === 'Ahmad') {
           document.getElementById('player-name-input').value = 'Fatimah';
         }
       }
     }
 
-    // START GAME / ENTER APP
+    // ==========================================
+    // START GAME / ENTER THEMES
+    // ==========================================
     function startGame() {
-      const input = document.getElementById('player-name-input').value.trim();
-      currentPlayer.name = input || (currentPlayer.avatar === '👦' ? 'Ahmad' : 'Fatimah');
+      if (gameMode === 'individu') {
+        const input = document.getElementById('player-name-input').value.trim();
+        singlePlayer.name = input || (singlePlayer.avatar === '👦' ? 'Ahmad' : 'Fatimah');
 
-      document.getElementById('player-avatar-badge').innerText = currentPlayer.avatar;
-      document.getElementById('player-name-badge').innerText = currentPlayer.name;
-      document.getElementById('total-stars-badge').innerText = currentPlayer.totalStars;
+        document.getElementById('player-avatar-badge').innerText = singlePlayer.avatar;
+        document.getElementById('player-name-badge').innerText = singlePlayer.name;
+        document.getElementById('player-mode-badge').innerText = 'Mode Mandiri • Siswa Cilik';
+        document.getElementById('total-stars-badge-container').classList.remove('hidden');
+        document.getElementById('themes-team-roster').classList.add('hidden');
+      } else {
+        // Collect team names from inputs
+        groupTeams.forEach((t, idx) => {
+          const inp = document.getElementById(`team-input-${idx}`);
+          if (inp && inp.value.trim()) {
+            t.name = inp.value.trim();
+          }
+          t.score = 0; // reset
+        });
+
+        document.getElementById('player-avatar-badge').innerText = '👥';
+        document.getElementById('player-name-badge').innerText = `${groupTeams.length} Kelompok Bertanding`;
+        document.getElementById('player-mode-badge').innerText = 'Mode Cerdas Cermat Islam';
+        document.getElementById('total-stars-badge-container').classList.add('hidden');
+
+        // Show team chips in themes screen
+        const roster = document.getElementById('themes-team-roster');
+        const chips = document.getElementById('themes-team-chips');
+        chips.innerHTML = '';
+        groupTeams.forEach(t => {
+          const chip = document.createElement('span');
+          chip.className = 'px-2 py-0.5 rounded-lg bg-white/20 text-amber-200 text-[10px] font-bold flex items-center gap-1';
+          chip.innerHTML = `${t.icon} ${t.name}`;
+          chips.appendChild(chip);
+        });
+        roster.classList.remove('hidden');
+      }
 
       showScreen('screen-themes');
     }
 
-    // SELECT THEME
+    // ==========================================
+    // SELECT THEME & LOAD GAMEPLAY
+    // ==========================================
     function selectTheme(themeIdx) {
       currentThemeIdx = themeIdx;
       currentQuestionIdx = 0;
       currentScore = 0;
       currentStars = 0;
+      currentTeamTurn = 0;
+
+      // Reset team scores
+      if (gameMode === 'kelompok') {
+        groupTeams.forEach(t => t.score = 0);
+      }
 
       const theme = gameDatabase[themeIdx];
       document.getElementById('game-theme-name').innerText = theme.themeName;
-      document.getElementById('game-current-stars').innerText = currentStars;
+
+      // Toggle Single vs Group Gameplay Header
+      const singleScoreBadge = document.getElementById('game-score-badge-single');
+      const groupScoreboard = document.getElementById('game-group-scoreboard');
+      const turnBanner = document.getElementById('game-turn-banner');
+
+      if (gameMode === 'individu') {
+        singleScoreBadge.classList.remove('hidden');
+        groupScoreboard.classList.add('hidden');
+        turnBanner.classList.add('hidden');
+        document.getElementById('game-current-stars').innerText = currentStars;
+        document.getElementById('game-points-label').innerText = 'Skor: +10 Poin';
+      } else {
+        singleScoreBadge.classList.add('hidden');
+        groupScoreboard.classList.remove('hidden');
+        turnBanner.classList.remove('hidden');
+        document.getElementById('game-points-label').innerText = 'Poin Soal: 10 Poin';
+        updateGroupScoreboard();
+      }
 
       loadQuestion();
       showScreen('screen-game');
     }
 
-    // LOAD CURRENT QUESTION
+    function updateGroupScoreboard() {
+      const container = document.getElementById('game-team-score-cards');
+      if (!container) return;
+      container.innerHTML = '';
+
+      groupTeams.forEach((team, idx) => {
+        const isCurrent = (idx === currentTeamTurn);
+        const card = document.createElement('div');
+        card.className = `p-1.5 rounded-xl border text-center transition-all ${
+          isCurrent 
+            ? 'bg-amber-400 text-slate-950 border-amber-300 shadow-md font-black ring-2 ring-amber-300 scale-102' 
+            : 'bg-slate-800/80 text-white border-white/10 opacity-70'
+        }`;
+        card.innerHTML = `
+          <div class="text-[10px] truncate">${team.icon} ${team.name}</div>
+          <div class="text-xs font-black">${team.score} Poin</div>
+        `;
+        container.appendChild(card);
+      });
+
+      // Update active turn banner
+      const activeTeam = groupTeams[currentTeamTurn];
+      document.getElementById('game-active-team-name').innerHTML = `${activeTeam.icon} ${activeTeam.name}`;
+      document.getElementById('game-round-indicator').innerText = `Giliran: Tim ${currentTeamTurn + 1}`;
+    }
+
+    // ==========================================
+    // LOAD QUESTION
+    // ==========================================
     function loadQuestion() {
       answered = false;
       const theme = gameDatabase[currentThemeIdx];
@@ -723,6 +1249,11 @@
       document.getElementById('game-feedback-box').classList.add('hidden');
       document.getElementById('btn-next-question').classList.add('hidden');
 
+      // Update team indicators if group mode
+      if (gameMode === 'kelompok') {
+        updateGroupScoreboard();
+      }
+
       // Render Choices
       const container = document.getElementById('game-choices-container');
       container.innerHTML = '';
@@ -731,7 +1262,7 @@
       q.choices.forEach((choice, idx) => {
         const btn = document.createElement('button');
         btn.id = `choice-btn-${idx}`;
-        btn.className = 'w-full text-left bg-slate-900/90 hover:bg-slate-800 p-3 sm:p-3.5 rounded-xl border-2 border-white/20 text-xs sm:text-sm font-bold text-white flex items-center gap-3 transition-all active:scale-98 shadow-md';
+        btn.className = 'w-full text-left bg-slate-900/90 hover:bg-slate-800 p-2.5 sm:p-3 rounded-xl border-2 border-white/20 text-xs sm:text-sm font-bold text-white flex items-center gap-2.5 transition-all active:scale-98 shadow-md';
         btn.innerHTML = `
           <span class="w-6 h-6 rounded-lg bg-white/20 text-amber-300 font-black text-xs flex items-center justify-center shrink-0">${letters[idx]}</span>
           <span class="flex-1">${choice}</span>
@@ -741,7 +1272,9 @@
       });
     }
 
+    // ==========================================
     // SELECT ANSWER
+    // ==========================================
     function selectAnswer(chosenIdx) {
       if (answered) return;
       answered = true;
@@ -754,20 +1287,30 @@
       const chosenBtn = document.getElementById(`choice-btn-${chosenIdx}`);
       const correctBtn = document.getElementById(`choice-btn-${q.answer}`);
 
-      if (chosenIdx === q.answer) {
+      const isCorrect = (chosenIdx === q.answer);
+
+      if (isCorrect) {
         // CORRECT!
         playSoundCorrect();
-        currentScore += 10;
-        currentStars += 1;
-        currentPlayer.totalStars += 1;
-        document.getElementById('game-current-stars').innerText = currentStars;
+
+        if (gameMode === 'individu') {
+          currentScore += 10;
+          currentStars += 1;
+          singlePlayer.totalStars += 1;
+          document.getElementById('game-current-stars').innerText = currentStars;
+        } else {
+          // Add score to active team
+          groupTeams[currentTeamTurn].score += 10;
+          updateGroupScoreboard();
+        }
 
         chosenBtn.classList.remove('bg-slate-900/90', 'border-white/20');
         chosenBtn.classList.add('bg-emerald-600', 'border-emerald-300', 'shadow-emerald-500/50');
         chosenBtn.innerHTML += ` <span class="text-lg">✅</span>`;
 
-        feedbackBox.className = 'p-3 rounded-xl text-center text-xs font-bold bg-emerald-500/20 border border-emerald-400 text-emerald-300 animate-bounce-slow';
-        feedbackBox.innerHTML = `🌟 <strong>MASYA ALLAH, BENAR!</strong><br><span class="text-[11px] font-normal text-emerald-100">${q.explanation}</span>`;
+        const winnerLabel = (gameMode === 'kelompok') ? ` untuk ${groupTeams[currentTeamTurn].name}` : '';
+        feedbackBox.className = 'p-2.5 rounded-xl text-center text-xs font-bold bg-emerald-500/20 border border-emerald-400 text-emerald-300 animate-bounce-slow';
+        feedbackBox.innerHTML = `🌟 <strong>MASYA ALLAH, BENAR (+10 Poin${winnerLabel})!</strong><br><span class="text-[11px] font-normal text-emerald-100">${q.explanation}</span>`;
       } else {
         // WRONG
         playSoundWrong();
@@ -776,76 +1319,367 @@
         chosenBtn.innerHTML += ` <span class="text-lg">❌</span>`;
 
         // Highlight correct
-        correctBtn.classList.remove('bg-slate-900/90', 'border-white/20');
-        correctBtn.classList.add('bg-emerald-600', 'border-emerald-300');
-        correctBtn.innerHTML += ` <span class="text-xs bg-white text-emerald-800 px-1.5 py-0.5 rounded font-black">Jawaban Tepat</span>`;
+        if (correctBtn) {
+          correctBtn.classList.remove('bg-slate-900/90', 'border-white/20');
+          correctBtn.classList.add('bg-emerald-600', 'border-emerald-300');
+          correctBtn.innerHTML += ` <span class="text-xs bg-white text-emerald-800 px-1.5 py-0.5 rounded font-black">Jawaban Tepat</span>`;
+        }
 
-        feedbackBox.className = 'p-3 rounded-xl text-center text-xs font-bold bg-rose-500/20 border border-rose-400 text-rose-300';
-        feedbackBox.innerHTML = `💡 <strong>HAMPIR TEPAT!</strong><br><span class="text-[11px] font-normal text-slate-200">${q.explanation}</span>`;
+        const teamLabel = (gameMode === 'kelompok') ? ` (${groupTeams[currentTeamTurn].name})` : '';
+        feedbackBox.className = 'p-2.5 rounded-xl text-center text-xs font-bold bg-rose-500/20 border border-rose-400 text-rose-300';
+        feedbackBox.innerHTML = `💡 <strong>HAMPIR TEPAT${teamLabel}!</strong><br><span class="text-[11px] font-normal text-slate-200">${q.explanation}</span>`;
       }
 
       feedbackBox.classList.remove('hidden');
       nextBtn.classList.remove('hidden');
     }
 
+    // ==========================================
     // NEXT QUESTION OR FINISH
+    // ==========================================
     function nextQuestion() {
       const theme = gameDatabase[currentThemeIdx];
       currentQuestionIdx++;
 
+      // Advance team turn in group mode
+      if (gameMode === 'kelompok') {
+        currentTeamTurn = (currentTeamTurn + 1) % groupTeams.length;
+      }
+
       if (currentQuestionIdx < theme.questions.length) {
         loadQuestion();
       } else {
-        // FINISH THEME -> VICTORY SCREEN
         finishGame();
       }
     }
 
-    // FINISH GAME
+    // ==========================================
+    // FINISH GAME & PERSIST RESULTS
+    // ==========================================
     function finishGame() {
       playSoundVictory();
 
       // Confetti shower
       if (typeof confetti === 'function') {
         confetti({
-          particleCount: 120,
-          spread: 80,
+          particleCount: 150,
+          spread: 90,
           origin: { y: 0.6 }
         });
       }
 
       const theme = gameDatabase[currentThemeIdx];
       const maxScore = theme.questions.length * 10;
-
-      // Update Certificate
-      document.getElementById('cert-player-name').innerText = currentPlayer.name;
-      document.getElementById('cert-theme-name').innerText = theme.themeName;
-      document.getElementById('cert-score-display').innerText = `${currentScore} / ${maxScore}`;
-
       const today = new Date();
-      const options = { day: 'numeric', month: 'long', year: 'numeric' };
-      document.getElementById('cert-date-text').innerText = today.toLocaleDateString('id-ID', options);
+      const dateFormatted = today.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
+      const timeFormatted = today.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+      document.getElementById('cert-date-text').innerText = `${dateFormatted}`;
 
-      // Star rating display
+      const certHeading = document.getElementById('cert-heading');
+      const certPlayerName = document.getElementById('cert-player-name');
+      const certPredIntro = document.getElementById('cert-predicate-intro');
+      const certPredTitle = document.getElementById('cert-predicate-title');
+      const certThemeName = document.getElementById('cert-theme-name');
+      const certScoreDisplay = document.getElementById('cert-score-display');
+      const groupPodium = document.getElementById('victory-group-podium');
       const starsDisplay = document.getElementById('victory-stars-display');
-      if (currentScore === maxScore) {
-        starsDisplay.innerHTML = '⭐ ⭐ ⭐';
-      } else if (currentScore >= maxScore * 0.7) {
-        starsDisplay.innerHTML = '⭐ ⭐ ⚪';
+
+      let savedRecord = null;
+
+      if (gameMode === 'individu') {
+        // SINGLE PLAYER VICTORY
+        groupPodium.classList.add('hidden');
+        starsDisplay.classList.remove('hidden');
+
+        document.getElementById('victory-main-title').innerText = 'MASYA ALLAH, HEBAT!';
+        document.getElementById('victory-subtitle').innerText = 'Kamu telah menyelesaikan kuis dengan sukses!';
+
+        certHeading.innerText = 'PIAGAM PENGHARGAAN SISWA';
+        certPlayerName.innerText = singlePlayer.name;
+        certPredIntro.innerText = 'Dianugerahi sebagai:';
+        certPredTitle.innerText = '🌟 ANAK SALEH CERDAS PAI 🌟';
+        certThemeName.innerText = theme.themeName;
+        certScoreDisplay.innerText = `${currentScore} / ${maxScore}`;
+
+        if (currentScore === maxScore) {
+          starsDisplay.innerHTML = '⭐ ⭐ ⭐';
+        } else if (currentScore >= maxScore * 0.7) {
+          starsDisplay.innerHTML = '⭐ ⭐ ⚪';
+        } else {
+          starsDisplay.innerHTML = '⭐ ⚪ ⚪';
+        }
+
+        savedRecord = {
+          id: Date.now(),
+          date: `${dateFormatted}, ${timeFormatted} WIB`,
+          mode: 'individu',
+          name: singlePlayer.name,
+          avatar: singlePlayer.avatar,
+          themeName: theme.themeName,
+          score: currentScore,
+          maxScore: maxScore,
+          stars: (currentScore === maxScore ? 3 : (currentScore >= maxScore * 0.7 ? 2 : 1))
+        };
       } else {
-        starsDisplay.innerHTML = '⭐ ⚪ ⚪';
+        // GROUP / TEAM CERDAS CERMAT VICTORY
+        starsDisplay.classList.add('hidden');
+        groupPodium.classList.remove('hidden');
+
+        // Sort teams descending by score
+        const sortedTeams = [...groupTeams].sort((a, b) => b.score - a.score);
+        const champion = sortedTeams[0];
+
+        document.getElementById('victory-main-title').innerText = '🏆 HASIL CERDAS CERMAT PAI';
+        document.getElementById('victory-subtitle').innerText = `Selamat kepada ${champion.name} sebagai Juara 1!`;
+
+        // Render Podium Cards
+        const podiumContainer = document.getElementById('victory-podium-cards');
+        podiumContainer.innerHTML = '';
+        const medals = ['🥇', '🥈', '🥉', '🎖️'];
+
+        sortedTeams.forEach((t, i) => {
+          const row = document.createElement('div');
+          row.className = `p-2 rounded-xl flex items-center justify-between border ${
+            i === 0 
+              ? 'bg-amber-400 text-slate-950 border-amber-300 font-black shadow-md ring-2 ring-amber-300' 
+              : 'bg-slate-900/80 text-white border-white/20'
+          }`;
+          row.innerHTML = `
+            <div class="flex items-center gap-2">
+              <span class="text-xl">${medals[i]}</span>
+              <div class="text-left">
+                <div class="text-xs font-black">${t.icon} ${t.name}</div>
+                <div class="text-[9px] opacity-80">${i === 0 ? 'JUARA 1 - KELOMPOK TELADAN' : `Peringkat ${i + 1}`}</div>
+              </div>
+            </div>
+            <div class="text-sm font-black">${t.score} Pts</div>
+          `;
+          podiumContainer.appendChild(row);
+        });
+
+        // Certificate for Champion Team
+        certHeading.innerText = 'PIAGAM PENGHARGAAN JUARA 1 KELOMPOK';
+        certPlayerName.innerText = `${champion.icon} ${champion.name}`;
+        certPredIntro.innerText = 'Dianugerahi sebagai:';
+        certPredTitle.innerText = '🏆 KELOMPOK TELADAN CERDAS CERMAT PAI 🏆';
+        certThemeName.innerText = theme.themeName;
+        certScoreDisplay.innerText = `${champion.score} Poin (Juara 1)`;
+
+        savedRecord = {
+          id: Date.now(),
+          date: `${dateFormatted}, ${timeFormatted} WIB`,
+          mode: 'kelompok',
+          name: `${champion.name} (Juara 1)`,
+          avatar: champion.icon,
+          themeName: theme.themeName,
+          score: champion.score,
+          winner: champion.name,
+          teams: sortedTeams.map(t => ({ name: t.name, icon: t.icon, score: t.score }))
+        };
       }
+
+      // Persist to LocalStorage
+      saveToHistory(savedRecord);
 
       showScreen('screen-victory');
     }
 
-    // SHARE / SCREENSHOT TIP
-    function shareOrScreenshot() {
-      alert(`🎉 Selamat ${currentPlayer.name}!\n\nSilakan ambil tangkapan layar (Screenshot) pada Piagam Penghargaan ini untuk ditunjukkan ke Ayah, Ibu, atau Bapak/Ibu Guru!`);
+    // ==========================================
+    // PERSISTENCE ENGINE (LocalStorage)
+    // ==========================================
+    function getHistoryList() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        return raw ? JSON.parse(raw) : [];
+      } catch (e) {
+        console.error('Failed to load history:', e);
+        return [];
+      }
     }
 
-    // Pre-fill name if available
+    function saveToHistory(record) {
+      if (!record) return;
+      try {
+        const list = getHistoryList();
+        list.unshift(record); // newest on top
+        // keep max 50 records
+        if (list.length > 50) list.pop();
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+        updateHistoryBadges();
+      } catch (e) {
+        console.error('Failed to save record:', e);
+      }
+    }
+
+    function updateHistoryBadges() {
+      const list = getHistoryList();
+      const badge = document.getElementById('welcome-history-badge');
+      if (badge) badge.innerText = list.length;
+    }
+
+    // ==========================================
+    // SCREEN 5: HISTORY & LEADERBOARD UI
+    // ==========================================
+    let currentHistoryFilter = 'semua';
+
+    function openHistoryScreen() {
+      renderHistoryList();
+      showScreen('screen-history');
+    }
+
+    function closeHistoryScreen() {
+      showScreen('screen-welcome');
+    }
+
+    function filterHistory(filterType) {
+      currentHistoryFilter = filterType;
+      ['all', 'ind', 'grp'].forEach(t => {
+        const btn = document.getElementById(`hist-tab-${t}`);
+        if (btn) btn.className = 'py-1.5 rounded-lg text-slate-300 hover:text-white';
+      });
+
+      if (filterType === 'semua') {
+        document.getElementById('hist-tab-all').className = 'py-1.5 rounded-lg bg-amber-400 text-slate-950 font-black';
+      } else if (filterType === 'individu') {
+        document.getElementById('hist-tab-ind').className = 'py-1.5 rounded-lg bg-amber-400 text-slate-950 font-black';
+      } else {
+        document.getElementById('hist-tab-grp').className = 'py-1.5 rounded-lg bg-amber-400 text-slate-950 font-black';
+      }
+
+      renderHistoryList();
+    }
+
+    function renderHistoryList() {
+      const list = getHistoryList();
+      const container = document.getElementById('history-records-list');
+      if (!container) return;
+      container.innerHTML = '';
+
+      let filtered = list;
+      if (currentHistoryFilter === 'individu') {
+        filtered = list.filter(item => item.mode === 'individu');
+      } else if (currentHistoryFilter === 'kelompok') {
+        filtered = list.filter(item => item.mode === 'kelompok');
+      }
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div class="text-center py-10 glass-card rounded-2xl p-6 text-slate-300">
+            <span class="text-4xl block mb-2">📜</span>
+            <div class="font-bold text-sm text-white">Belum Ada Riwayat Tersimpan</div>
+            <p class="text-xs text-slate-400 mt-1">Ayo mainkan kuis mandiri atau cerdas cermat kelompok untuk mencatat rekor di sini!</p>
+          </div>
+        `;
+        return;
+      }
+
+      filtered.forEach((rec, idx) => {
+        const item = document.createElement('div');
+        item.className = 'glass-card rounded-xl p-3 border border-white/20 text-left space-y-1.5 transition-all hover:border-amber-400/50';
+
+        const isGroup = (rec.mode === 'kelompok');
+        const modeBadge = isGroup
+          ? '<span class="px-2 py-0.5 rounded-md bg-purple-500/30 text-purple-300 text-[9px] font-black uppercase">👥 Kelompok</span>'
+          : '<span class="px-2 py-0.5 rounded-md bg-emerald-500/30 text-emerald-300 text-[9px] font-black uppercase">👤 Mandiri</span>';
+
+        let detailHtml = '';
+        if (isGroup && rec.teams) {
+          detailHtml = `
+            <div class="mt-1.5 pt-1.5 border-t border-white/10 flex flex-wrap gap-1 text-[10px]">
+              ${rec.teams.map((t, ti) => `
+                <span class="px-1.5 py-0.5 rounded bg-slate-900/60 text-slate-200">
+                  ${ti === 0 ? '🥇' : '•'} ${t.icon} ${t.name}: <strong>${t.score} pts</strong>
+                </span>
+              `).join('')}
+            </div>
+          `;
+        }
+
+        item.innerHTML = `
+          <div class="flex justify-between items-start">
+            <div class="flex items-center gap-2">
+              <span class="text-2xl">${rec.avatar || (isGroup ? '👥' : '👦')}</span>
+              <div>
+                <div class="text-xs font-black text-white flex items-center gap-1.5">
+                  <span>${rec.name}</span>
+                </div>
+                <div class="text-[10px] text-amber-300 font-semibold">${rec.themeName}</div>
+              </div>
+            </div>
+            <div class="text-right">
+              ${modeBadge}
+              <div class="text-xs font-black text-amber-400 mt-1">
+                ${isGroup ? `${rec.score} Poin` : `${rec.score} / ${rec.maxScore} Poin`}
+              </div>
+            </div>
+          </div>
+          ${detailHtml}
+          <div class="flex justify-between items-center text-[9px] text-slate-400 pt-1">
+            <span>📅 ${rec.date}</span>
+            <button onclick="previewSavedCertificate(${rec.id})" class="text-emerald-300 hover:text-emerald-200 font-bold underline">
+              Lihat Piagam ➔
+            </button>
+          </div>
+        `;
+        container.appendChild(item);
+      });
+    }
+
+    function previewSavedCertificate(recId) {
+      const list = getHistoryList();
+      const rec = list.find(r => r.id === recId);
+      if (!rec) return;
+
+      const certHeading = document.getElementById('cert-heading');
+      const certPlayerName = document.getElementById('cert-player-name');
+      const certPredIntro = document.getElementById('cert-predicate-intro');
+      const certPredTitle = document.getElementById('cert-predicate-title');
+      const certThemeName = document.getElementById('cert-theme-name');
+      const certScoreDisplay = document.getElementById('cert-score-display');
+      const certDateText = document.getElementById('cert-date-text');
+
+      if (rec.mode === 'kelompok') {
+        certHeading.innerText = 'PIAGAM PENGHARGAAN JUARA 1 KELOMPOK';
+        certPlayerName.innerText = rec.name;
+        certPredIntro.innerText = 'Dianugerahi sebagai:';
+        certPredTitle.innerText = '🏆 KELOMPOK TELADAN CERDAS CERMAT PAI 🏆';
+        certThemeName.innerText = rec.themeName;
+        certScoreDisplay.innerText = `${rec.score} Poin (Juara 1)`;
+      } else {
+        certHeading.innerText = 'PIAGAM PENGHARGAAN SISWA';
+        certPlayerName.innerText = rec.name;
+        certPredIntro.innerText = 'Dianugerahi sebagai:';
+        certPredTitle.innerText = '🌟 ANAK SALEH CERDAS PAI 🌟';
+        certThemeName.innerText = rec.themeName;
+        certScoreDisplay.innerText = `${rec.score} / ${rec.maxScore || 100}`;
+      }
+
+      certDateText.innerText = rec.date;
+      document.getElementById('victory-group-podium').classList.add('hidden');
+      document.getElementById('victory-stars-display').classList.add('hidden');
+      document.getElementById('victory-main-title').innerText = '📜 ARSIP PIAGAM PENGHARGAAN';
+      document.getElementById('victory-subtitle').innerText = 'Data tersimpan dari riwayat kuis sebelumnya.';
+
+      showScreen('screen-victory');
+    }
+
+    function clearHistoryData() {
+      if (confirm("⚠️ Apakah Anda yakin ingin menghapus seluruh riwayat permainan yang tersimpan?\n\n(Tindakan ini cocok untuk me-reset data sebelum kelas/kelompok baru dimulai)")) {
+        localStorage.removeItem(STORAGE_KEY);
+        updateHistoryBadges();
+        renderHistoryList();
+      }
+    }
+
+    // SHARE / SCREENSHOT TIP
+    function shareOrScreenshot() {
+      alert(`🎉 Selamat!\n\nSilakan ambil tangkapan layar (Screenshot) pada Piagam Penghargaan ini untuk ditunjukkan ke Ayah, Ibu, atau Bapak/Ibu Guru!`);
+    }
+
+    // Initialize Default States
     setAvatar('👦', 'Ahmad');
+    setTeamCount(2);
+    updateHistoryBadges();
   </script>
 </body>
 </html>

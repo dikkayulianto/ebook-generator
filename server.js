@@ -2844,3 +2844,5 @@ app.use("/exports", express.static(exportsDir));
 app.listen(PORT, () => {
   console.log(`🚀 E-Book AI Generator Server berjalan di http://localhost:${PORT}`);
 });
+
+module.exports = app;
