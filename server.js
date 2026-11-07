@@ -1231,6 +1231,140 @@ Struktur JSON yang HARUS dikembalikan:
   return prompt;
 }
 
+// Prompt Builder for Asesmen Sumatif Akhir Semester (SAS): 15 PG, 5 Isian, 5 Essay
+function getSasPrompt(subject, grade, semester, curriculum, customNotes, referenceText) {
+  const g = parseInt(grade) || 1;
+  const optionsDesc = g <= 3 ? "3 opsi (A, B, C) untuk siswa Kelas 1-3 SD (Fase A/awal B)" : "4 opsi (A, B, C, D) untuk siswa Kelas 4-6 SD (Fase B/C)";
+
+  let prompt = `Anda adalah tim ahli penyusun naskah ujian Asesmen Sumatif Akhir Semester (SAS) tingkat Sekolah Dasar (SD/MI) nasional di bawah Kementerian Pendidikan dan Kebudayaan serta Kementerian Agama RI.
+Tugas Anda adalah menyusun "NASKAH SOAL ASESMEN SUMATIF AKHIR SEMESTER (SAS) RESMI, MENDALAM, DAN STANDAR NASIONAL" untuk:
+- Mata Pelajaran: ${subject}
+- Tingkat: Kelas ${grade} SD
+- Periode: Semester ${semester}
+- Acuan Kurikulum: ${curriculum || 'Kurikulum Merdeka (CP No. 020 Tahun 2026)'}
+- Komposisi Butir Soal: 15 Pilihan Ganda (PG), 5 Isian Singkat, dan 5 Uraian/Essay (Total 25 Butir Soal Lengkap Kunci & Rubrik)
+- Opsi Pilihan Ganda: ${optionsDesc}
+
+=======================================================
+ATURAN UTAMA SUMBER REFERENSI (SANGAT KETAT & MUTLAK):
+=======================================================`;
+
+  if (referenceText && referenceText.trim().length > 0) {
+    prompt += `
+1. REFERENSI DOKUMEN PENGGUNA TERDETEKSI (PRIORITAS NOMOR SATU):
+   Pengguna telah mengunggah dokumen sumber materi/buku teks berikut ini:
+   """
+   ${referenceText.substring(0, 30000)}
+   """
+   ATURAN WAJIB DOKUMEN REFERENSI:
+   - SELURUH BUTIR SOAL (15 PG, 5 Isian, 5 Essay) WAJIB 100% DISUSUN BERDASARKAN DAN MENYESUAIKAN PERSIS DENGAN MATERI PADA DOKUMEN REFERENSI DI ATAS!
+   - Gunakan nama-nama bab, pokok bahasan, contoh kasus, kisah teladan, ayat/surah, istilah kamus cilik, dan konsep kunci yang persis tertulis dalam dokumen referensi di atas.
+   - JANGAN membuat soal di luar cakupan materi yang ada pada dokumen referensi di atas!
+   - Bagikan distribusi 15 PG, 5 Isian, dan 5 Uraian secara proporsional dan adil ke seluruh bab/materi yang ada di dalam dokumen referensi tersebut.`;
+  } else {
+    prompt += `
+1. TANPA DOKUMEN UNGGAHAN (STANDAR RESMI CP NO. 020 TAHUN 2026):
+   Susun naskah soal berdasarkan standar resmi materi Kurikulum Merdeka untuk Kelas ${grade} Semester ${semester}:
+   - Soal mencakup seluruh materi pokok Semester ${semester} secara komprehensif, terstruktur dari Bab 1 hingga Bab terakhir (Bab 5).
+   - Proporsional: Setiap bab terwakili rata 3 butir soal PG, 1 butir soal Isian, dan 1 butir soal Essay.`;
+  }
+
+  if (customNotes) {
+    prompt += `\n\nCATATAN KHUSUS DARI PENGGUNA:\n${customNotes}`;
+  }
+
+  prompt += `
+
+=======================================================
+KRITERIA KUALITAS BUTIR SOAL (STANDAR ASESMEN NASIONAL):
+=======================================================
+1. SOAL PILIHAN GANDA (15 BUTIR SOAL, NO 1 s.d. 15):
+   - Soal kontekstual dan berbasis stimulus (cerita kehidupan nyata anak di sekolah/rumah, penggalan ayat/terjemahan, tabel, studi kasus moral).
+   - Memuat kombinasi level kognitif: LOTS/MOTS (C1-C2 pemahaman konsep) dan HOTS (C3 aplikasi, C4 analisis pemecahan masalah).
+   - Pokok soal (stem) dirumuskan secara tegas dan jelas, tidak menimbulkan makna ganda.
+   - Pilihan jawaban homogen, logis, dan panjangnya relatif seimbang.
+   - Kunci jawaban dan pembahasan singkat yang jelas disertakan untuk setiap butir soal.
+
+2. SOAL ISIAN SINGKAT (5 BUTIR SOAL, NO 16 s.d. 20):
+   - Menguji ingatan konsep kunci, istilah penting, angka/hukum tajwid/nama surah/rukun secara presisi.
+   - Menggunakan format kalimat pernyataan yang dilengkapi titik-titik (....) di tengah atau di akhir kalimat.
+   - Kunci jawaban padat, pasti, dan tidak ambigu.
+
+3. SOAL URAIAN / ESSAY (5 BUTIR SOAL, NO 21 s.d. 25):
+   - Berupa soal HOTS (High Order Thinking Skills) yang menuntut penalaran, analisis, argumentasi, dan solusi nyata akhlak islami siswa SD.
+   - Disertai contoh jawaban ideal dan kriteria penskoran yang jelas.
+
+4. KUNCI JAWABAN & PEDOMAN PENSKORAN LENGKAP:
+   - Rekap kunci PG (1-15).
+   - Kunci Isian (16-20).
+   - Kunci & Rubrik Uraian (21-25) dengan pembobotan nilai (skor PG: 15 x 2 = 30 poin, skor Isian: 5 x 4 = 20 poin, skor Uraian: 5 x 10 = 50 poin, total 100 poin).
+
+=======================================================
+FORMAT OUTPUT WAJIB BERUPA JSON VALID (TANPA MARKDOWN):
+=======================================================
+JSON output HARUS valid tanpa awalan/akhiran markdown seperti \`\`\`json. Struktur JSON:
+{
+  "subject": "${subject}",
+  "grade": ${grade},
+  "semester": ${semester},
+  "curriculum": "${curriculum || 'Kurikulum Merdeka'}",
+  "academicYear": "2026/2027",
+  "timeAllocation": "90 Menit",
+  "fase": "${g <= 2 ? 'Fase A' : (g <= 4 ? 'Fase B' : 'Fase C')}",
+  "instructions": [
+    "Berdoalah sebelum mengerjakan soal.",
+    "Tuliskan nama lengkap dan nomor presensi pada kolom identitas yang tersedia.",
+    "Bacalah setiap butir soal dengan teliti dan cermat sebelum menjawab.",
+    "Dahulukan menjawab soal-soal yang kamu anggap paling mudah.",
+    "Periksa dan teliti kembali seluruh hasil pekerjaanmu sebelum diserahkan kepada bapak/ibu guru."
+  ],
+  "pilihanGanda": [
+    {
+      "nomor": 1,
+      "bab": "Nama Bab Terkait",
+      "stimulus": "Narasi cerita / konteks singkat jika ada (kosongkan jika tidak perlu)",
+      "pertanyaan": "Teks pertanyaan yang jelas",
+      "pilihan": {
+        "A": "Pilihan A",
+        "B": "Pilihan B",
+        "C": "Pilihan C"${g > 3 ? ',\n        "D": "Pilihan D"' : ''}
+      },
+      "kunci": "A",
+      "pembahasan": "Pembahasan singkat mengapa pilihan tersebut tepat"
+    }
+  ],
+  "isian": [
+    {
+      "nomor": 16,
+      "bab": "Nama Bab Terkait",
+      "pertanyaan": "Kalimat pertanyaan isian dengan titik-titik (....)",
+      "kunci": "Kunci jawaban isian",
+      "skorMaksimal": 4
+    }
+  ],
+  "uraian": [
+    {
+      "nomor": 21,
+      "bab": "Nama Bab Terkait",
+      "stimulus": "Studi kasus kontekstual kehidupan sehari-hari anak",
+      "pertanyaan": "Pertanyaan analisis / uraian HOTS",
+      "kunci": "Uraian jawaban lengkap dan mendalam",
+      "rubrik": "Kriteria skor: Lengkap dan tepat (10), Cukup lengkap (6-8), Kurang lengkap (2-4)",
+      "skorMaksimal": 10
+    }
+  ],
+  "pedomanPenskoran": {
+    "skorPg": 30,
+    "skorIsian": 20,
+    "skorUraian": 50,
+    "skorTotal": 100,
+    "rumusNilai": "Nilai Akhir (NA) = (Total Skor Perolehan / 100) x 100"
+  }
+}`;
+
+  return prompt;
+}
+
 // Template Builder for 8-Page Modul Ajar Deep Learning
 async function renderModulAjarHtml(modulData) {
   const g = parseInt(modulData.grade) || 1;
@@ -1823,8 +1957,618 @@ async function renderModulAjarHtml(modulData) {
 </html>`;
 }
 
+// Template Builder for Naskah Soal Asesmen Sumatif Akhir Semester (SAS): 15 PG, 5 Isian, 5 Essay
+async function renderSasHtml(sasData) {
+  const g = parseInt(sasData.grade) || 1;
+  const sem = parseInt(sasData.semester) || 1;
+  const subject = sasData.subject || 'Pendidikan Agama Islam dan Budi Pekerti (PAI & BP)';
+  const curriculum = sasData.curriculum || 'Kurikulum Merdeka (CP No. 020 Tahun 2026)';
+  const academicYear = sasData.academicYear || '2026/2027';
+  const timeAllocation = sasData.timeAllocation || '90 Menit';
+  const fase = sasData.fase || (g <= 2 ? 'FASE A' : (g <= 4 ? 'FASE B' : 'FASE C'));
 
-// API: Generate E-Book Siswa ATAU Modul Ajar Deep Learning Per-Bab
+  const instructions = sasData.instructions || [
+    'Berdoalah sebelum mengerjakan soal.',
+    'Tuliskan nama lengkap dan nomor presensi pada kolom identitas yang tersedia.',
+    'Bacalah setiap butir soal dengan teliti dan cermat sebelum menjawab.',
+    'Dahulukan menjawab soal-soal yang kamu anggap paling mudah.',
+    'Periksa dan teliti kembali seluruh hasil pekerjaanmu sebelum diserahkan kepada bapak/ibu guru.'
+  ];
+
+  const pgList = sasData.pilihanGanda || [];
+  const isianList = sasData.isian || [];
+  const uraianList = sasData.uraian || [];
+
+  // Render Pilihan Ganda Items
+  const pgHtml = pgList.map((item, idx) => {
+    const no = item.nomor || (idx + 1);
+    const stimulus = item.stimulus ? `<div class="stimulus-box">📖 ${item.stimulus}</div>` : '';
+    const choices = item.pilihan || {};
+    const keys = Object.keys(choices);
+
+    const choicesHtml = keys.map(k => `
+      <div class="choice-opt">
+        <span class="choice-key"><strong>${k}.</strong></span>
+        <span class="choice-val">${choices[k]}</span>
+      </div>
+    `).join('');
+
+    return `
+      <div class="question-item">
+        <div class="question-header">
+          <span class="question-num">${no}.</span>
+          <div class="question-body">
+            ${stimulus}
+            <div class="question-text">${item.pertanyaan}</div>
+            <div class="choices-grid">
+              ${choicesHtml}
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  // Render Isian Items
+  const isianHtml = isianList.map((item, idx) => {
+    const no = item.nomor || (16 + idx);
+    return `
+      <div class="question-item">
+        <div class="question-header">
+          <span class="question-num">${no}.</span>
+          <div class="question-body">
+            <div class="question-text">${item.pertanyaan}</div>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  // Render Uraian Items
+  const uraianHtml = uraianList.map((item, idx) => {
+    const no = item.nomor || (21 + idx);
+    const stimulus = item.stimulus ? `<div class="stimulus-box">📖 ${item.stimulus}</div>` : '';
+    return `
+      <div class="question-item uraian-item">
+        <div class="question-header">
+          <span class="question-num">${no}.</span>
+          <div class="question-body">
+            ${stimulus}
+            <div class="question-text"><strong>${item.pertanyaan}</strong></div>
+            <div class="answer-space">
+              <div class="writing-line"></div>
+              <div class="writing-line"></div>
+              <div class="writing-line"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  // Render Kunci PG Table
+  const pgKeyRows = pgList.map((p, idx) => {
+    const no = p.nomor || (idx + 1);
+    return `
+      <tr>
+        <td style="text-align: center; font-weight: 700;">${no}</td>
+        <td style="text-align: center; font-weight: 800; color: #047857; background: #ecfdf5;">${p.kunci || '-'}</td>
+        <td style="font-size: 8pt; color: #475569;">${p.bab || '-'}</td>
+        <td style="font-size: 8pt;">${p.pembahasan || '-'}</td>
+      </tr>
+    `;
+  }).join('');
+
+  // Render Kunci Isian Table
+  const isianKeyRows = isianList.map((is, idx) => {
+    const no = is.nomor || (16 + idx);
+    return `
+      <tr>
+        <td style="text-align: center; font-weight: 700;">${no}</td>
+        <td style="font-weight: 700; color: #0f766e;">${is.kunci || '-'}</td>
+        <td style="font-size: 8pt; color: #475569;">${is.bab || '-'}</td>
+        <td style="text-align: center; font-weight: 600;">${is.skorMaksimal || 4} Poin</td>
+      </tr>
+    `;
+  }).join('');
+
+  // Render Kunci Uraian Table
+  const uraianKeyRows = uraianList.map((ur, idx) => {
+    const no = ur.nomor || (21 + idx);
+    return `
+      <tr>
+        <td style="text-align: center; font-weight: 700; vertical-align: top;">${no}</td>
+        <td style="vertical-align: top;">
+          <div style="font-weight: 600; color: #1e293b; margin-bottom: 4px;">${ur.pertanyaan}</div>
+          <div style="color: #047857; font-size: 8.5pt;"><strong>Kunci Jawaban:</strong> ${ur.kunci}</div>
+        </td>
+        <td style="vertical-align: top; font-size: 8pt; color: #64748b;">${ur.rubrik || 'Lengkap: 10, Sebagian: 6-8, Kurang: 2-4'}</td>
+        <td style="text-align: center; font-weight: 700; vertical-align: top; color: #b45309;">${ur.skorMaksimal || 10} Poin</td>
+      </tr>
+    `;
+  }).join('');
+
+  return `<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Naskah Soal SAS — ${subject} Kelas ${g} Semester ${sem}</title>
+  <style>
+    @page {
+      size: A4 portrait;
+      margin: 12mm 15mm 12mm 15mm;
+    }
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+      font-size: 9pt;
+      line-height: 1.4;
+      color: #0f172a;
+      background: #f1f5f9;
+      margin: 0;
+      padding: 20px;
+    }
+    .print-container {
+      max-width: 210mm;
+      margin: 0 auto;
+    }
+    .page-sheet {
+      background: #ffffff;
+      padding: 14mm 15mm;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+      border-radius: 4px;
+      position: relative;
+    }
+    @media print {
+      body {
+        background: #ffffff;
+        padding: 0;
+      }
+      .print-container {
+        max-width: 100%;
+        margin: 0;
+      }
+      .page-sheet {
+        box-shadow: none;
+        padding: 0;
+        margin-bottom: 0;
+        border-radius: 0;
+      }
+      .page-break {
+        page-break-before: always;
+        break-before: page;
+      }
+      .no-print {
+        display: none !important;
+      }
+    }
+
+    /* KOP SURAT RESMI UJIAN */
+    .kop-wrapper {
+      text-align: center;
+      position: relative;
+      padding-bottom: 8px;
+      border-bottom: 3px double #0f172a;
+      margin-bottom: 12px;
+    }
+    .kop-kementerian {
+      font-size: 9.5pt;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: #1e293b;
+    }
+    .kop-dinas {
+      font-size: 11pt;
+      font-weight: 800;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      color: #0f172a;
+    }
+    .kop-kkg {
+      font-size: 9pt;
+      font-weight: 600;
+      color: #475569;
+    }
+    .kop-title {
+      font-size: 12pt;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #047857;
+      margin-top: 4px;
+    }
+    .kop-ta {
+      font-size: 9pt;
+      font-weight: 600;
+      color: #334155;
+    }
+
+    /* TABEL IDENTITAS SISWA & UJIAN */
+    .identitas-grid {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 10px;
+      font-size: 8.8pt;
+    }
+    .identitas-grid td {
+      padding: 3px 6px;
+      vertical-align: middle;
+    }
+    .identitas-border-box {
+      border: 1.5px solid #0f172a;
+      border-radius: 4px;
+      background: #f8fafc;
+    }
+    .score-cell {
+      border-left: 1.5px solid #0f172a;
+      text-align: center;
+      width: 110px;
+      padding: 4px !important;
+      background: #f1f5f9;
+    }
+    .score-title {
+      font-size: 7.5pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: #475569;
+    }
+    .score-val {
+      font-size: 16pt;
+      font-weight: 900;
+      color: #047857;
+      height: 28px;
+    }
+
+    /* PETUNJUK */
+    .petunjuk-card {
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+      border-left: 4px solid #047857;
+      border-radius: 4px;
+      padding: 6px 10px;
+      margin-bottom: 12px;
+      font-size: 8pt;
+      color: #334155;
+    }
+    .petunjuk-title {
+      font-weight: 700;
+      color: #047857;
+      margin-bottom: 2px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .petunjuk-list {
+      margin: 0;
+      padding-left: 16px;
+    }
+
+    /* SECTION HEADERS */
+    .section-banner {
+      background: linear-gradient(135deg, #047857, #059669);
+      color: #ffffff;
+      padding: 4px 10px;
+      font-size: 9pt;
+      font-weight: 700;
+      border-radius: 4px;
+      margin: 12px 0 8px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .section-subtitle {
+      font-size: 8pt;
+      font-weight: normal;
+      font-style: italic;
+      color: #d1fae5;
+    }
+
+    /* QUESTION STYLING */
+    .question-item {
+      margin-bottom: 8px;
+      font-size: 8.8pt;
+      page-break-inside: avoid;
+    }
+    .question-header {
+      display: flex;
+      gap: 6px;
+      align-items: flex-start;
+    }
+    .question-num {
+      font-weight: 700;
+      min-width: 20px;
+      color: #0f172a;
+    }
+    .question-body {
+      flex: 1;
+    }
+    .stimulus-box {
+      background: #f8fafc;
+      border-left: 3px solid #10b981;
+      padding: 4px 8px;
+      border-radius: 0 4px 4px 0;
+      margin-bottom: 4px;
+      font-size: 8.2pt;
+      color: #334155;
+    }
+    .question-text {
+      color: #0f172a;
+      line-height: 1.35;
+    }
+    .choices-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px 14px;
+      margin-top: 3px;
+    }
+    .choice-opt {
+      display: flex;
+      gap: 5px;
+      align-items: flex-start;
+    }
+    .choice-key {
+      font-weight: 700;
+      color: #047857;
+      min-width: 14px;
+    }
+    .choice-val {
+      color: #1e293b;
+    }
+
+    .uraian-item {
+      margin-bottom: 12px;
+    }
+    .writing-line {
+      border-bottom: 1px dashed #cbd5e1;
+      height: 18px;
+      margin-top: 2px;
+    }
+
+    /* TEACHER EVALUATION SHEET */
+    .teacher-badge {
+      display: inline-block;
+      background: #dc2626;
+      color: #ffffff;
+      font-size: 7.5pt;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
+    .teacher-title {
+      font-size: 11pt;
+      font-weight: 800;
+      color: #991b1b;
+      margin: 0 0 10px 0;
+      text-transform: uppercase;
+    }
+    .key-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 8.2pt;
+      margin-bottom: 12px;
+    }
+    .key-table th {
+      background: #047857;
+      color: #ffffff;
+      padding: 4px 6px;
+      font-weight: 700;
+      border: 1px solid #047857;
+      text-align: left;
+    }
+    .key-table td {
+      padding: 4px 6px;
+      border: 1px solid #e2e8f0;
+    }
+    .key-table tr:nth-child(even) {
+      background: #f8fafc;
+    }
+
+    .scoring-summary-box {
+      background: #f0fdf4;
+      border: 1.5px solid #86efac;
+      border-radius: 6px;
+      padding: 8px 12px;
+      font-size: 8.5pt;
+      color: #166534;
+      margin-bottom: 16px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="print-container">
+    
+    <!-- ================= HALAMAN LEMBAR NASKAH SOAL SISWA ================= -->
+    <div class="page-sheet">
+      <!-- KOP RESMI -->
+      <div class="kop-wrapper">
+        <div class="kop-kementerian">KEMENTERIAN AGAMA / DINAS PENDIDIKAN DAN KEBUDAYAAN</div>
+        <div class="kop-dinas">KELOMPOK KERJA GURU (KKG) PENDIDIKAN AGAMA ISLAM</div>
+        <div class="kop-title">PENILAIAN SUMATIF AKHIR SEMESTER (SAS) ${sem === 1 ? 'GANJIL' : 'GENAP'}</div>
+        <div class="kop-ta">TAHUN PELAJARAN ${academicYear}</div>
+      </div>
+
+      <!-- IDENTITAS SISWA & UJIAN -->
+      <table class="identitas-grid identitas-border-box">
+        <tr>
+          <td style="width: 18%;"><strong>Mata Pelajaran</strong></td>
+          <td style="width: 3%;">:</td>
+          <td style="width: 32%;">${subject}</td>
+          <td style="width: 18%;"><strong>Nama Siswa</strong></td>
+          <td style="width: 3%;">:</td>
+          <td style="width: 26%;">......................................................</td>
+          <td rowspan="3" class="score-cell">
+            <div class="score-title">Nilai Akhir</div>
+            <div class="score-val">......</div>
+            <div style="font-size: 7pt; color: #64748b; margin-top: 2px;">Paraf Guru</div>
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Kelas / Fase</strong></td>
+          <td>:</td>
+          <td>Kelas ${g} SD / ${fase}</td>
+          <td><strong>Nomor Presensi</strong></td>
+          <td>:</td>
+          <td>......................................................</td>
+        </tr>
+        <tr>
+          <td><strong>Waktu / Kurikulum</strong></td>
+          <td>:</td>
+          <td>${timeAllocation} / ${curriculum}</td>
+          <td><strong>Hari / Tanggal</strong></td>
+          <td>:</td>
+          <td>......................................................</td>
+        </tr>
+      </table>
+
+      <!-- PETUNJUK PENGERJAAN -->
+      <div class="petunjuk-card">
+        <div class="petunjuk-title">📋 Petunjuk Umum Pengerjaan Soal:</div>
+        <ol class="petunjuk-list">
+          ${instructions.map(ins => `<li>${ins}</li>`).join('')}
+        </ol>
+      </div>
+
+      <!-- BAGIAN I: PILIHAN GANDA (15 SOAL) -->
+      <div class="section-banner">
+        <span>A. PILIHAN GANDA (15 BUTIR SOAL)</span>
+        <span class="section-subtitle">Berilah tanda silang (X) pada huruf ${g <= 3 ? 'A, B, atau C' : 'A, B, C, atau D'} di depan jawaban yang paling benar!</span>
+      </div>
+
+      <div class="pg-container">
+        ${pgHtml}
+      </div>
+
+      <!-- BAGIAN II: ISIAN SINGKAT (5 SOAL) -->
+      <div class="section-banner" style="background: linear-gradient(135deg, #0284c7, #0369a1); margin-top: 14px;">
+        <span>B. ISIAN SINGKAT (5 BUTIR SOAL)</span>
+        <span class="section-subtitle">Isilah titik-titik di bawah ini dengan jawaban yang singkat, tepat, dan benar!</span>
+      </div>
+
+      <div class="isian-container">
+        ${isianHtml}
+      </div>
+
+      <!-- BAGIAN III: URAIAN / ESSAY (5 SOAL) -->
+      <div class="section-banner" style="background: linear-gradient(135deg, #7c3aed, #6d28d9); margin-top: 14px;">
+        <span>C. URAIAN / ESSAY (5 BUTIR SOAL)</span>
+        <span class="section-subtitle">Jawablah pertanyaan-pertanyaan di bawah ini secara lengkap, jelas, dan santun!</span>
+      </div>
+
+      <div class="uraian-container">
+        ${uraianHtml}
+      </div>
+
+      <div style="text-align: center; font-size: 8pt; color: #64748b; margin-top: 14px; border-top: 1px solid #e2e8f0; padding-top: 6px;">
+        ✨ <i>"Kejujuran adalah perhiasan orang yang beriman. Selamat mengerjakan dengan mandiri dan teliti!"</i> ✨
+      </div>
+    </div>
+
+
+    <!-- ================= HALAMAN TERPISAH: KUNCI JAWABAN & RUBRIK (PEGANGAN GURU) ================= -->
+    <div class="page-sheet page-break">
+      <div style="border-bottom: 2px solid #991b1b; padding-bottom: 6px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: flex-end;">
+        <div>
+          <span class="teacher-badge">DOKUMEN RAHASIA KHUSUS GURU</span>
+          <h2 class="teacher-title">KUNCI JAWABAN & PEDOMAN PENSKORAN ASESMEN SUMATIF AKHIR SEMESTER (SAS)</h2>
+          <div style="font-size: 8.5pt; color: #475569;">
+            Mata Pelajaran: <strong>${subject}</strong> | Kelas: <strong>${g} SD (${fase})</strong> | Semester: <strong>${sem}</strong> | Tahun Ajaran: <strong>${academicYear}</strong>
+          </div>
+        </div>
+      </div>
+
+      <!-- REKAPITULASI BOBOT SKOR & RUMUS NILAI -->
+      <div class="scoring-summary-box">
+        <strong>📊 Pedoman Konversi & Rumus Penilaian Akhir (Skor Maksimal = 100):</strong>
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-top: 4px;">
+          <div>• <strong>Pilihan Ganda (15 Soal):</strong> 15 x 2 Poin = <strong>30 Poin</strong></div>
+          <div>• <strong>Isian Singkat (5 Soal):</strong> 5 x 4 Poin = <strong>20 Poin</strong></div>
+          <div>• <strong>Uraian/Essay (5 Soal):</strong> 5 x 10 Poin = <strong>50 Poin</strong></div>
+        </div>
+        <div style="margin-top: 4px; font-weight: 700; color: #15803d;">
+          Rumus: Nilai Akhir (NA) = Skor Pilihan Ganda + Skor Isian Singkat + Skor Uraian = (Total Skor / 100) x 100
+        </div>
+      </div>
+
+      <!-- TABEL KUNCI PILIHAN GANDA (1-15) -->
+      <h3 style="font-size: 9pt; font-weight: 700; color: #047857; margin: 10px 0 4px 0;">A. Kunci Jawaban & Pembahasan Pilihan Ganda (No. 1 s.d. 15)</h3>
+      <table class="key-table">
+        <thead>
+          <tr>
+            <th style="width: 5%; text-align: center;">No</th>
+            <th style="width: 8%; text-align: center;">Kunci</th>
+            <th style="width: 25%;">Materi / Bab Pokok</th>
+            <th>Pembahasan & Indikator Soal</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${pgKeyRows}
+        </tbody>
+      </table>
+
+      <!-- TABEL KUNCI ISIAN (16-20) -->
+      <h3 style="font-size: 9pt; font-weight: 700; color: #0284c7; margin: 12px 0 4px 0;">B. Kunci Jawaban Isian Singkat (No. 16 s.d. 20)</h3>
+      <table class="key-table">
+        <thead>
+          <tr>
+            <th style="width: 5%; text-align: center;">No</th>
+            <th style="width: 35%;">Kunci Jawaban Tepat</th>
+            <th style="width: 45%;">Materi / Pokok Bahasan</th>
+            <th style="width: 15%; text-align: center;">Bobot Skor</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${isianKeyRows}
+        </tbody>
+      </table>
+
+      <!-- TABEL KUNCI & RUBRIK URAIAN (21-25) -->
+      <h3 style="font-size: 9pt; font-weight: 700; color: #7c3aed; margin: 12px 0 4px 0;">C. Kunci Jawaban & Rubrik Penskoran Uraian (No. 21 s.d. 25)</h3>
+      <table class="key-table">
+        <thead>
+          <tr>
+            <th style="width: 5%; text-align: center;">No</th>
+            <th style="width: 55%;">Pertanyaan & Jawaban Ideal</th>
+            <th style="width: 25%;">Kriteria & Rubrik Skor</th>
+            <th style="width: 15%; text-align: center;">Skor Maks</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${uraianKeyRows}
+        </tbody>
+      </table>
+
+      <!-- TANDA TANGAN -->
+      <div style="margin-top: 24px; display: flex; justify-content: space-between; font-size: 8.8pt; padding: 0 30px;">
+        <div style="text-align: center;">
+          Mengetahui,<br>
+          Kepala SD Negeri ...........................<br><br><br><br>
+          ( .................................................... )<br>
+          NIP. ..............................................
+        </div>
+        <div style="text-align: center;">
+          ........................., ............................... 2026<br>
+          Guru Mata Pelajaran,<br><br><br><br>
+          ( .................................................... )<br>
+          NIP. ..............................................
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>`;
+}
+
+
+// API: Generate E-Book Siswa, Modul Ajar Deep Learning, ATAU Soal SAS (Sumatif Akhir Semester)
 app.post('/api/generate', async (req, res) => {
   try {
     const { 
@@ -1844,6 +2588,35 @@ app.post('/api/generate', async (req, res) => {
       model, 
       endpoint 
     } = req.body;
+
+    // === MODE: NASKAH SOAL SAS (15 PG, 5 ISIAN, 5 ESSAY) ===
+    if (mode === 'soal_sas') {
+      console.log(`📝 Menghasilkan Naskah Soal SAS (15 PG, 5 Isian, 5 Essay): ${subject} Kelas ${grade} Sem ${semester}...`);
+      const prompt = getSasPrompt(subject, grade, semester, curriculum, customNotes, referenceText);
+
+      let sasData;
+      if (provider === 'gemini') {
+        if (!apiKey) return res.status(400).json({ error: 'API Key Gemini diperlukan' });
+        sasData = await callGemini(prompt, apiKey, model || 'gemini-3.8-flash');
+      } else {
+        sasData = await callOpenAICompatible(prompt, endpoint || 'http://localhost:11434/v1', apiKey, model);
+      }
+
+      const htmlOutput = await renderSasHtml(sasData);
+
+      const sanitizedTitle = `Naskah_Soal_SAS_${subject}_Kelas_${grade}_Sem_${semester}`.replace(/[^a-zA-Z0-9_-]/g, '_');
+      const fileName = `${sanitizedTitle}_${Date.now()}.html`;
+      const filePath = path.join(exportsDir, fileName);
+      fs.writeFileSync(filePath, htmlOutput, 'utf8');
+
+      return res.json({
+        success: true,
+        mode: 'soal_sas',
+        sasData,
+        htmlOutput,
+        savedFile: `/exports/${fileName}`
+      });
+    }
 
     // === MODE: MODUL AJAR PER-BAB ===
     if (mode === 'modul_ajar') {

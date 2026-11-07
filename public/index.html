@@ -29,6 +29,9 @@
         <a href="/lynkid_showcase.html" class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold bg-pink-100 hover:bg-pink-200 text-pink-800 transition-all shadow-sm">
           🌸 Aset Toko & Cover Penjualan
         </a>
+        <button onclick="loadPrototypeSAS()" class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold bg-indigo-600 hover:bg-indigo-500 text-white transition-all shadow-sm">
+          📝 Contoh Soal SAS (25 Soal)
+        </button>
         <button onclick="loadPrototypeModul()" class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold bg-amber-400 hover:bg-amber-300 text-amber-950 transition-all shadow-sm">
           🌟 Contoh Modul Ajar (8 Hal)
         </button>
@@ -46,17 +49,24 @@
     <div class="lg:col-span-5 bg-white rounded-2xl shadow-sm border border-slate-200 p-6 flex flex-col justify-between">
       <div class="space-y-4">
         
-        <!-- Mode Switcher: Buku Siswa vs Modul Ajar Per-Bab -->
-        <div class="bg-gradient-to-r from-emerald-50 to-teal-50 p-2.5 rounded-xl border border-emerald-200">
+        <!-- Mode Switcher: Buku Siswa vs Modul Ajar vs Soal SAS -->
+        <div class="bg-gradient-to-r from-emerald-50 via-teal-50 to-indigo-50 p-2.5 rounded-xl border border-emerald-200">
           <label class="block text-xs font-bold uppercase tracking-wider text-emerald-800 mb-1.5 text-center">🎯 Pilih Menu Dokumen</label>
-          <div class="grid grid-cols-2 gap-2">
-            <button type="button" id="tab-mode-ebook" onclick="switchDocMode('ebook')" class="py-2.5 px-3 text-xs font-bold rounded-lg border flex flex-col items-center justify-center gap-1 transition-all bg-emerald-600 text-white border-emerald-600 shadow-sm">
+          <div class="grid grid-cols-3 gap-1.5">
+            <button type="button" id="tab-mode-ebook" onclick="switchDocMode('ebook')" class="py-2 px-1 text-xs font-bold rounded-lg border flex flex-col items-center justify-center gap-0.5 transition-all bg-emerald-600 text-white border-emerald-600 shadow-sm text-center">
               <span class="text-base">📘</span>
-              <span>Buku Siswa (1 Sem)</span>
+              <span>Buku Siswa</span>
+              <span class="text-[9.5px] opacity-80">(1 Sem)</span>
             </button>
-            <button type="button" id="tab-mode-modul" onclick="switchDocMode('modul_ajar')" class="py-2.5 px-3 text-xs font-bold rounded-lg border flex flex-col items-center justify-center gap-1 transition-all bg-white text-slate-700 border-slate-300 hover:bg-slate-100">
+            <button type="button" id="tab-mode-modul" onclick="switchDocMode('modul_ajar')" class="py-2 px-1 text-xs font-bold rounded-lg border flex flex-col items-center justify-center gap-0.5 transition-all bg-white text-slate-700 border-slate-300 hover:bg-slate-100 text-center">
               <span class="text-base">🚀</span>
-              <span>Modul Ajar (Per-Bab)</span>
+              <span>Modul Ajar</span>
+              <span class="text-[9.5px] opacity-80">(Per-Bab)</span>
+            </button>
+            <button type="button" id="tab-mode-sas" onclick="switchDocMode('soal_sas')" class="py-2 px-1 text-xs font-bold rounded-lg border flex flex-col items-center justify-center gap-0.5 transition-all bg-white text-slate-700 border-slate-300 hover:bg-slate-100 text-center">
+              <span class="text-base">📝</span>
+              <span>Soal SAS</span>
+              <span class="text-[9.5px] opacity-80">(15 PG+5+5)</span>
             </button>
           </div>
         </div>
@@ -311,20 +321,30 @@
       currentMode = mode;
       const tabEbook = document.getElementById('tab-mode-ebook');
       const tabModul = document.getElementById('tab-mode-modul');
+      const tabSas = document.getElementById('tab-mode-sas');
       const modulOptions = document.getElementById('modul-ajar-options');
       const formHeading = document.getElementById('form-heading');
       const btnGen = document.getElementById('btn-generate');
 
+      // Reset classes
+      const inactiveClass = "py-2 px-1 text-xs font-bold rounded-lg border flex flex-col items-center justify-center gap-0.5 transition-all bg-white text-slate-700 border-slate-300 hover:bg-slate-100 text-center";
+      tabEbook.className = inactiveClass;
+      tabModul.className = inactiveClass;
+      if (tabSas) tabSas.className = inactiveClass;
+
       if (mode === 'modul_ajar') {
-        tabModul.className = "py-2.5 px-3 text-xs font-bold rounded-lg border flex flex-col items-center justify-center gap-1 transition-all bg-emerald-600 text-white border-emerald-600 shadow-sm";
-        tabEbook.className = "py-2.5 px-3 text-xs font-bold rounded-lg border flex flex-col items-center justify-center gap-1 transition-all bg-white text-slate-700 border-slate-300 hover:bg-slate-100";
+        tabModul.className = "py-2 px-1 text-xs font-bold rounded-lg border flex flex-col items-center justify-center gap-0.5 transition-all bg-emerald-600 text-white border-emerald-600 shadow-sm text-center";
         modulOptions.classList.remove('hidden');
         formHeading.innerText = "🚀 Parameter Modul Ajar Deep Learning";
         btnGen.innerText = "🚀 Generate Modul Ajar Deep Learning (8 Hal)";
         onGradeOrSemesterChange();
+      } else if (mode === 'soal_sas') {
+        if (tabSas) tabSas.className = "py-2 px-1 text-xs font-bold rounded-lg border flex flex-col items-center justify-center gap-0.5 transition-all bg-indigo-600 text-white border-indigo-600 shadow-sm text-center";
+        modulOptions.classList.add('hidden');
+        formHeading.innerText = "📝 Parameter Soal SAS (Sumatif Akhir Semester)";
+        btnGen.innerText = "📝 Generate Soal SAS (15 PG, 5 Isian, 5 Essay)";
       } else {
-        tabEbook.className = "py-2.5 px-3 text-xs font-bold rounded-lg border flex flex-col items-center justify-center gap-1 transition-all bg-emerald-600 text-white border-emerald-600 shadow-sm";
-        tabModul.className = "py-2.5 px-3 text-xs font-bold rounded-lg border flex flex-col items-center justify-center gap-1 transition-all bg-white text-slate-700 border-slate-300 hover:bg-slate-100";
+        tabEbook.className = "py-2 px-1 text-xs font-bold rounded-lg border flex flex-col items-center justify-center gap-0.5 transition-all bg-emerald-600 text-white border-emerald-600 shadow-sm text-center";
         modulOptions.classList.add('hidden');
         formHeading.innerText = "⚙️ Parameter E-Book Siswa";
         btnGen.innerText = "✨ Generate E-Book Siswa (1 Sem)";
@@ -364,6 +384,17 @@
       document.getElementById('preview-heading').innerText = "📄 Contoh: Modul Ajar Deep Learning Bab 1";
       document.getElementById('preview-status').innerText = "Contoh Siap";
       document.getElementById('preview-status').className = 'text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded font-medium';
+      document.getElementById('btn-open-fullscreen').disabled = false;
+      document.getElementById('btn-print').disabled = false;
+    }
+
+    function loadPrototypeSAS() {
+      currentSavedUrl = '/soal_sas_prototype.html';
+      const frame = document.getElementById('preview-frame');
+      frame.src = currentSavedUrl;
+      document.getElementById('preview-heading').innerText = "📄 Contoh: Naskah Soal SAS (15 PG, 5 Isian, 5 Essay)";
+      document.getElementById('preview-status').innerText = "Contoh Siap";
+      document.getElementById('preview-status').className = 'text-xs bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded font-medium';
       document.getElementById('btn-open-fullscreen').disabled = false;
       document.getElementById('btn-print').disabled = false;
     }
@@ -456,6 +487,9 @@
       if (currentMode === 'modul_ajar') {
         loadingText.innerText = `Menyusun Modul Ajar Deep Learning Bab ${chapterNumber} (8 Halaman Lengkap)...`;
         previewStatus.innerText = 'Menyusun Modul Ajar...';
+      } else if (currentMode === 'soal_sas') {
+        loadingText.innerText = 'Menyusun Naskah Soal SAS (15 PG + 5 Isian + 5 Essay) & Kunci Jawaban...';
+        previewStatus.innerText = 'Menyusun Soal SAS...';
       } else {
         loadingText.innerText = 'Menyusun materi & merender layout A4...';
         previewStatus.innerText = 'Sedang Generate E-Book...';
@@ -494,7 +528,7 @@
 
         document.getElementById('btn-open-fullscreen').disabled = false;
         document.getElementById('btn-print').disabled = false;
-        previewStatus.innerText = currentMode === 'modul_ajar' ? 'Modul Ajar Siap!' : 'E-Book Selesai!';
+        previewStatus.innerText = currentMode === 'modul_ajar' ? 'Modul Ajar Siap!' : (currentMode === 'soal_sas' ? 'Naskah Soal SAS Siap!' : 'E-Book Selesai!');
         previewStatus.className = 'text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded font-medium';
       } catch (err) {
         alert('Terjadi kesalahan: ' + err.message);

@@ -1,0 +1,1282 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Naskah Soal SAS — Pendidikan Agama Islam dan Budi Pekerti (PAI & BP) Kelas 5 Semester 1</title>
+  <style>
+    @page {
+      size: A4 portrait;
+      margin: 12mm 15mm 12mm 15mm;
+    }
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+      font-size: 9pt;
+      line-height: 1.4;
+      color: #0f172a;
+      background: #f1f5f9;
+      margin: 0;
+      padding: 20px;
+    }
+    .print-container {
+      max-width: 210mm;
+      margin: 0 auto;
+    }
+    .page-sheet {
+      background: #ffffff;
+      padding: 14mm 15mm;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+      border-radius: 4px;
+      position: relative;
+    }
+    @media print {
+      body {
+        background: #ffffff;
+        padding: 0;
+      }
+      .print-container {
+        max-width: 100%;
+        margin: 0;
+      }
+      .page-sheet {
+        box-shadow: none;
+        padding: 0;
+        margin-bottom: 0;
+        border-radius: 0;
+      }
+      .page-break {
+        page-break-before: always;
+        break-before: page;
+      }
+      .no-print {
+        display: none !important;
+      }
+    }
+
+    /* KOP SURAT RESMI UJIAN */
+    .kop-wrapper {
+      text-align: center;
+      position: relative;
+      padding-bottom: 8px;
+      border-bottom: 3px double #0f172a;
+      margin-bottom: 12px;
+    }
+    .kop-kementerian {
+      font-size: 9.5pt;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: #1e293b;
+    }
+    .kop-dinas {
+      font-size: 11pt;
+      font-weight: 800;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      color: #0f172a;
+    }
+    .kop-kkg {
+      font-size: 9pt;
+      font-weight: 600;
+      color: #475569;
+    }
+    .kop-title {
+      font-size: 12pt;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #047857;
+      margin-top: 4px;
+    }
+    .kop-ta {
+      font-size: 9pt;
+      font-weight: 600;
+      color: #334155;
+    }
+
+    /* TABEL IDENTITAS SISWA & UJIAN */
+    .identitas-grid {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 10px;
+      font-size: 8.8pt;
+    }
+    .identitas-grid td {
+      padding: 3px 6px;
+      vertical-align: middle;
+    }
+    .identitas-border-box {
+      border: 1.5px solid #0f172a;
+      border-radius: 4px;
+      background: #f8fafc;
+    }
+    .score-cell {
+      border-left: 1.5px solid #0f172a;
+      text-align: center;
+      width: 110px;
+      padding: 4px !important;
+      background: #f1f5f9;
+    }
+    .score-title {
+      font-size: 7.5pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: #475569;
+    }
+    .score-val {
+      font-size: 16pt;
+      font-weight: 900;
+      color: #047857;
+      height: 28px;
+    }
+
+    /* PETUNJUK */
+    .petunjuk-card {
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+      border-left: 4px solid #047857;
+      border-radius: 4px;
+      padding: 6px 10px;
+      margin-bottom: 12px;
+      font-size: 8pt;
+      color: #334155;
+    }
+    .petunjuk-title {
+      font-weight: 700;
+      color: #047857;
+      margin-bottom: 2px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .petunjuk-list {
+      margin: 0;
+      padding-left: 16px;
+    }
+
+    /* SECTION HEADERS */
+    .section-banner {
+      background: linear-gradient(135deg, #047857, #059669);
+      color: #ffffff;
+      padding: 4px 10px;
+      font-size: 9pt;
+      font-weight: 700;
+      border-radius: 4px;
+      margin: 12px 0 8px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .section-subtitle {
+      font-size: 8pt;
+      font-weight: normal;
+      font-style: italic;
+      color: #d1fae5;
+    }
+
+    /* QUESTION STYLING */
+    .question-item {
+      margin-bottom: 8px;
+      font-size: 8.8pt;
+      page-break-inside: avoid;
+    }
+    .question-header {
+      display: flex;
+      gap: 6px;
+      align-items: flex-start;
+    }
+    .question-num {
+      font-weight: 700;
+      min-width: 20px;
+      color: #0f172a;
+    }
+    .question-body {
+      flex: 1;
+    }
+    .stimulus-box {
+      background: #f8fafc;
+      border-left: 3px solid #10b981;
+      padding: 4px 8px;
+      border-radius: 0 4px 4px 0;
+      margin-bottom: 4px;
+      font-size: 8.2pt;
+      color: #334155;
+    }
+    .question-text {
+      color: #0f172a;
+      line-height: 1.35;
+    }
+    .choices-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px 14px;
+      margin-top: 3px;
+    }
+    .choice-opt {
+      display: flex;
+      gap: 5px;
+      align-items: flex-start;
+    }
+    .choice-key {
+      font-weight: 700;
+      color: #047857;
+      min-width: 14px;
+    }
+    .choice-val {
+      color: #1e293b;
+    }
+
+    .uraian-item {
+      margin-bottom: 12px;
+    }
+    .writing-line {
+      border-bottom: 1px dashed #cbd5e1;
+      height: 18px;
+      margin-top: 2px;
+    }
+
+    /* TEACHER EVALUATION SHEET */
+    .teacher-badge {
+      display: inline-block;
+      background: #dc2626;
+      color: #ffffff;
+      font-size: 7.5pt;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
+    .teacher-title {
+      font-size: 11pt;
+      font-weight: 800;
+      color: #991b1b;
+      margin: 0 0 10px 0;
+      text-transform: uppercase;
+    }
+    .key-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 8.2pt;
+      margin-bottom: 12px;
+    }
+    .key-table th {
+      background: #047857;
+      color: #ffffff;
+      padding: 4px 6px;
+      font-weight: 700;
+      border: 1px solid #047857;
+      text-align: left;
+    }
+    .key-table td {
+      padding: 4px 6px;
+      border: 1px solid #e2e8f0;
+    }
+    .key-table tr:nth-child(even) {
+      background: #f8fafc;
+    }
+
+    .scoring-summary-box {
+      background: #f0fdf4;
+      border: 1.5px solid #86efac;
+      border-radius: 6px;
+      padding: 8px 12px;
+      font-size: 8.5pt;
+      color: #166534;
+      margin-bottom: 16px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="print-container">
+    
+    <!-- ================= HALAMAN LEMBAR NASKAH SOAL SISWA ================= -->
+    <div class="page-sheet">
+      <!-- KOP RESMI -->
+      <div class="kop-wrapper">
+        <div class="kop-kementerian">KEMENTERIAN AGAMA / DINAS PENDIDIKAN DAN KEBUDAYAAN</div>
+        <div class="kop-dinas">KELOMPOK KERJA GURU (KKG) PENDIDIKAN AGAMA ISLAM</div>
+        <div class="kop-title">PENILAIAN SUMATIF AKHIR SEMESTER (SAS) GANJIL</div>
+        <div class="kop-ta">TAHUN PELAJARAN 2026/2027</div>
+      </div>
+
+      <!-- IDENTITAS SISWA & UJIAN -->
+      <table class="identitas-grid identitas-border-box">
+        <tr>
+          <td style="width: 18%;"><strong>Mata Pelajaran</strong></td>
+          <td style="width: 3%;">:</td>
+          <td style="width: 32%;">Pendidikan Agama Islam dan Budi Pekerti (PAI & BP)</td>
+          <td style="width: 18%;"><strong>Nama Siswa</strong></td>
+          <td style="width: 3%;">:</td>
+          <td style="width: 26%;">......................................................</td>
+          <td rowspan="3" class="score-cell">
+            <div class="score-title">Nilai Akhir</div>
+            <div class="score-val">......</div>
+            <div style="font-size: 7pt; color: #64748b; margin-top: 2px;">Paraf Guru</div>
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Kelas / Fase</strong></td>
+          <td>:</td>
+          <td>Kelas 5 SD / Fase C</td>
+          <td><strong>Nomor Presensi</strong></td>
+          <td>:</td>
+          <td>......................................................</td>
+        </tr>
+        <tr>
+          <td><strong>Waktu / Kurikulum</strong></td>
+          <td>:</td>
+          <td>90 Menit / Kurikulum Merdeka (CP No. 020 Tahun 2026)</td>
+          <td><strong>Hari / Tanggal</strong></td>
+          <td>:</td>
+          <td>......................................................</td>
+        </tr>
+      </table>
+
+      <!-- PETUNJUK PENGERJAAN -->
+      <div class="petunjuk-card">
+        <div class="petunjuk-title">📋 Petunjuk Umum Pengerjaan Soal:</div>
+        <ol class="petunjuk-list">
+          <li>Berdoalah sebelum mengerjakan soal.</li><li>Tuliskan nama lengkap dan nomor presensi pada kolom identitas yang tersedia.</li><li>Bacalah setiap butir soal dengan teliti dan cermat sebelum menjawab.</li><li>Dahulukan menjawab soal-soal yang kamu anggap paling mudah.</li><li>Periksa dan teliti kembali seluruh hasil pekerjaanmu sebelum diserahkan kepada bapak/ibu guru.</li>
+        </ol>
+      </div>
+
+      <!-- BAGIAN I: PILIHAN GANDA (15 SOAL) -->
+      <div class="section-banner">
+        <span>A. PILIHAN GANDA (15 BUTIR SOAL)</span>
+        <span class="section-subtitle">Berilah tanda silang (X) pada huruf A, B, C, atau D di depan jawaban yang paling benar!</span>
+      </div>
+
+      <div class="pg-container">
+        
+      <div class="question-item">
+        <div class="question-header">
+          <span class="question-num">1.</span>
+          <div class="question-body">
+            <div class="stimulus-box">📖 Faris membaca ayat suci Al-Qur'an setiap sore dengan penuh ketelitian.</div>
+            <div class="question-text">Pertanyaan butir nomor 1 menguji pemahaman materi konsep penting?</div>
+            <div class="choices-grid">
+              
+      <div class="choice-opt">
+        <span class="choice-key"><strong>A.</strong></span>
+        <span class="choice-val">Pilihan jawaban A yang logis</span>
+      </div>
+    
+      <div class="choice-opt">
+        <span class="choice-key"><strong>B.</strong></span>
+        <span class="choice-val">Pilihan jawaban B yang tepat</span>
+      </div>
+    
+      <div class="choice-opt">
+        <span class="choice-key"><strong>C.</strong></span>
+        <span class="choice-val">Pilihan jawaban C alternatif</span>
+      </div>
+    
+      <div class="choice-opt">
+        <span class="choice-key"><strong>D.</strong></span>
+        <span class="choice-val">Pilihan jawaban D pengecoh</span>
+      </div>
+    
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="question-item">
+        <div class="question-header">
+          <span class="question-num">2.</span>
+          <div class="question-body">
+            
+            <div class="question-text">Pertanyaan butir nomor 2 menguji pemahaman materi konsep penting?</div>
+            <div class="choices-grid">
+              
+      <div class="choice-opt">
+        <span class="choice-key"><strong>A.</strong></span>
+        <span class="choice-val">Pilihan jawaban A yang logis</span>
+      </div>
+    
+      <div class="choice-opt">
+        <span class="choice-key"><strong>B.</strong></span>
+        <span class="choice-val">Pilihan jawaban B yang tepat</span>
+      </div>
+    
+      <div class="choice-opt">
+        <span class="choice-key"><strong>C.</strong></span>
+        <span class="choice-val">Pilihan jawaban C alternatif</span>
+      </div>
+    
+      <div class="choice-opt">
+        <span class="choice-key"><strong>D.</strong></span>
+        <span class="choice-val">Pilihan jawaban D pengecoh</span>
+      </div>
+    
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="question-item">
+        <div class="question-header">
+          <span class="question-num">3.</span>
+          <div class="question-body">
+            <div class="stimulus-box">📖 Faris membaca ayat suci Al-Qur'an setiap sore dengan penuh ketelitian.</div>
+            <div class="question-text">Pertanyaan butir nomor 3 menguji pemahaman materi konsep penting?</div>
+            <div class="choices-grid">
+              
+      <div class="choice-opt">
+        <span class="choice-key"><strong>A.</strong></span>
+        <span class="choice-val">Pilihan jawaban A yang logis</span>
+      </div>
+    
+      <div class="choice-opt">
+        <span class="choice-key"><strong>B.</strong></span>
+        <span class="choice-val">Pilihan jawaban B yang tepat</span>
+      </div>
+    
+      <div class="choice-opt">
+        <span class="choice-key"><strong>C.</strong></span>
+        <span class="choice-val">Pilihan jawaban C alternatif</span>
+      </div>
+    
+      <div class="choice-opt">
+        <span class="choice-key"><strong>D.</strong></span>
+        <span class="choice-val">Pilihan jawaban D pengecoh</span>
+      </div>
+    
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="question-item">
+        <div class="question-header">
+          <span class="question-num">4.</span>
+          <div class="question-body">
+            
+            <div class="question-text">Pertanyaan butir nomor 4 menguji pemahaman materi konsep penting?</div>
+            <div class="choices-grid">
+              
+      <div class="choice-opt">
+        <span class="choice-key"><strong>A.</strong></span>
+        <span class="choice-val">Pilihan jawaban A yang logis</span>
+      </div>
+    
+      <div class="choice-opt">
+        <span class="choice-key"><strong>B.</strong></span>
+        <span class="choice-val">Pilihan jawaban B yang tepat</span>
+      </div>
+    
+      <div class="choice-opt">
+        <span class="choice-key"><strong>C.</strong></span>
+        <span class="choice-val">Pilihan jawaban C alternatif</span>
+      </div>
+    
+      <div class="choice-opt">
+        <span class="choice-key"><strong>D.</strong></span>
+        <span class="choice-val">Pilihan jawaban D pengecoh</span>
+      </div>
+    
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="question-item">
+        <div class="question-header">
+          <span class="question-num">5.</span>
+          <div class="question-body">
+            <div class="stimulus-box">📖 Faris membaca ayat suci Al-Qur'an setiap sore dengan penuh ketelitian.</div>
+            <div class="question-text">Pertanyaan butir nomor 5 menguji pemahaman materi konsep penting?</div>
+            <div class="choices-grid">
+              
+      <div class="choice-opt">
+        <span class="choice-key"><strong>A.</strong></span>
+        <span class="choice-val">Pilihan jawaban A yang logis</span>
+      </div>
+    
+      <div class="choice-opt">
+        <span class="choice-key"><strong>B.</strong></span>
+        <span class="choice-val">Pilihan jawaban B yang tepat</span>
+      </div>
+    
+      <div class="choice-opt">
+        <span class="choice-key"><strong>C.</strong></span>
+        <span class="choice-val">Pilihan jawaban C alternatif</span>
+      </div>
+    
+      <div class="choice-opt">
+        <span class="choice-key"><strong>D.</strong></span>
+        <span class="choice-val">Pilihan jawaban D pengecoh</span>
+      </div>
+    
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="question-item">
+        <div class="question-header">
+          <span class="question-num">6.</span>
+          <div class="question-body">
+            
+            <div class="question-text">Pertanyaan butir nomor 6 menguji pemahaman materi konsep penting?</div>
+            <div class="choices-grid">
+              
+      <div class="choice-opt">
+        <span class="choice-key"><strong>A.</strong></span>
+        <span class="choice-val">Pilihan jawaban A yang logis</span>
+      </div>
+    
+      <div class="choice-opt">
+        <span class="choice-key"><strong>B.</strong></span>
+        <span class="choice-val">Pilihan jawaban B yang tepat</span>
+      </div>
+    
+      <div class="choice-opt">
+        <span class="choice-key"><strong>C.</strong></span>
+        <span class="choice-val">Pilihan jawaban C alternatif</span>
+      </div>
+    
+      <div class="choice-opt">
+        <span class="choice-key"><strong>D.</strong></span>
+        <span class="choice-val">Pilihan jawaban D pengecoh</span>
+      </div>
+    
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="question-item">
+        <div class="question-header">
+          <span class="question-num">7.</span>
+          <div class="question-body">
+            <div class="stimulus-box">📖 Faris membaca ayat suci Al-Qur'an setiap sore dengan penuh ketelitian.</div>
+            <div class="question-text">Pertanyaan butir nomor 7 menguji pemahaman materi konsep penting?</div>
+            <div class="choices-grid">
+              
+      <div class="choice-opt">
+        <span class="choice-key"><strong>A.</strong></span>
+        <span class="choice-val">Pilihan jawaban A yang logis</span>
+      </div>
+    
+      <div class="choice-opt">
+        <span class="choice-key"><strong>B.</strong></span>
+        <span class="choice-val">Pilihan jawaban B yang tepat</span>
+      </div>
+    
+      <div class="choice-opt">
+        <span class="choice-key"><strong>C.</strong></span>
+        <span class="choice-val">Pilihan jawaban C alternatif</span>
+      </div>
+    
+      <div class="choice-opt">
+        <span class="choice-key"><strong>D.</strong></span>
+        <span class="choice-val">Pilihan jawaban D pengecoh</span>
+      </div>
+    
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="question-item">
+        <div class="question-header">
+          <span class="question-num">8.</span>
+          <div class="question-body">
+            
+            <div class="question-text">Pertanyaan butir nomor 8 menguji pemahaman materi konsep penting?</div>
+            <div class="choices-grid">
+              
+      <div class="choice-opt">
+        <span class="choice-key"><strong>A.</strong></span>
+        <span class="choice-val">Pilihan jawaban A yang logis</span>
+      </div>
+    
+      <div class="choice-opt">
+        <span class="choice-key"><strong>B.</strong></span>
+        <span class="choice-val">Pilihan jawaban B yang tepat</span>
+      </div>
+    
+      <div class="choice-opt">
+        <span class="choice-key"><strong>C.</strong></span>
+        <span class="choice-val">Pilihan jawaban C alternatif</span>
+      </div>
+    
+      <div class="choice-opt">
+        <span class="choice-key"><strong>D.</strong></span>
+        <span class="choice-val">Pilihan jawaban D pengecoh</span>
+      </div>
+    
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="question-item">
+        <div class="question-header">
+          <span class="question-num">9.</span>
+          <div class="question-body">
+            <div class="stimulus-box">📖 Faris membaca ayat suci Al-Qur'an setiap sore dengan penuh ketelitian.</div>
+            <div class="question-text">Pertanyaan butir nomor 9 menguji pemahaman materi konsep penting?</div>
+            <div class="choices-grid">
+              
+      <div class="choice-opt">
+        <span class="choice-key"><strong>A.</strong></span>
+        <span class="choice-val">Pilihan jawaban A yang logis</span>
+      </div>
+    
+      <div class="choice-opt">
+        <span class="choice-key"><strong>B.</strong></span>
+        <span class="choice-val">Pilihan jawaban B yang tepat</span>
+      </div>
+    
+      <div class="choice-opt">
+        <span class="choice-key"><strong>C.</strong></span>
+        <span class="choice-val">Pilihan jawaban C alternatif</span>
+      </div>
+    
+      <div class="choice-opt">
+        <span class="choice-key"><strong>D.</strong></span>
+        <span class="choice-val">Pilihan jawaban D pengecoh</span>
+      </div>
+    
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="question-item">
+        <div class="question-header">
+          <span class="question-num">10.</span>
+          <div class="question-body">
+            
+            <div class="question-text">Pertanyaan butir nomor 10 menguji pemahaman materi konsep penting?</div>
+            <div class="choices-grid">
+              
+      <div class="choice-opt">
+        <span class="choice-key"><strong>A.</strong></span>
+        <span class="choice-val">Pilihan jawaban A yang logis</span>
+      </div>
+    
+      <div class="choice-opt">
+        <span class="choice-key"><strong>B.</strong></span>
+        <span class="choice-val">Pilihan jawaban B yang tepat</span>
+      </div>
+    
+      <div class="choice-opt">
+        <span class="choice-key"><strong>C.</strong></span>
+        <span class="choice-val">Pilihan jawaban C alternatif</span>
+      </div>
+    
+      <div class="choice-opt">
+        <span class="choice-key"><strong>D.</strong></span>
+        <span class="choice-val">Pilihan jawaban D pengecoh</span>
+      </div>
+    
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="question-item">
+        <div class="question-header">
+          <span class="question-num">11.</span>
+          <div class="question-body">
+            <div class="stimulus-box">📖 Faris membaca ayat suci Al-Qur'an setiap sore dengan penuh ketelitian.</div>
+            <div class="question-text">Pertanyaan butir nomor 11 menguji pemahaman materi konsep penting?</div>
+            <div class="choices-grid">
+              
+      <div class="choice-opt">
+        <span class="choice-key"><strong>A.</strong></span>
+        <span class="choice-val">Pilihan jawaban A yang logis</span>
+      </div>
+    
+      <div class="choice-opt">
+        <span class="choice-key"><strong>B.</strong></span>
+        <span class="choice-val">Pilihan jawaban B yang tepat</span>
+      </div>
+    
+      <div class="choice-opt">
+        <span class="choice-key"><strong>C.</strong></span>
+        <span class="choice-val">Pilihan jawaban C alternatif</span>
+      </div>
+    
+      <div class="choice-opt">
+        <span class="choice-key"><strong>D.</strong></span>
+        <span class="choice-val">Pilihan jawaban D pengecoh</span>
+      </div>
+    
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="question-item">
+        <div class="question-header">
+          <span class="question-num">12.</span>
+          <div class="question-body">
+            
+            <div class="question-text">Pertanyaan butir nomor 12 menguji pemahaman materi konsep penting?</div>
+            <div class="choices-grid">
+              
+      <div class="choice-opt">
+        <span class="choice-key"><strong>A.</strong></span>
+        <span class="choice-val">Pilihan jawaban A yang logis</span>
+      </div>
+    
+      <div class="choice-opt">
+        <span class="choice-key"><strong>B.</strong></span>
+        <span class="choice-val">Pilihan jawaban B yang tepat</span>
+      </div>
+    
+      <div class="choice-opt">
+        <span class="choice-key"><strong>C.</strong></span>
+        <span class="choice-val">Pilihan jawaban C alternatif</span>
+      </div>
+    
+      <div class="choice-opt">
+        <span class="choice-key"><strong>D.</strong></span>
+        <span class="choice-val">Pilihan jawaban D pengecoh</span>
+      </div>
+    
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="question-item">
+        <div class="question-header">
+          <span class="question-num">13.</span>
+          <div class="question-body">
+            <div class="stimulus-box">📖 Faris membaca ayat suci Al-Qur'an setiap sore dengan penuh ketelitian.</div>
+            <div class="question-text">Pertanyaan butir nomor 13 menguji pemahaman materi konsep penting?</div>
+            <div class="choices-grid">
+              
+      <div class="choice-opt">
+        <span class="choice-key"><strong>A.</strong></span>
+        <span class="choice-val">Pilihan jawaban A yang logis</span>
+      </div>
+    
+      <div class="choice-opt">
+        <span class="choice-key"><strong>B.</strong></span>
+        <span class="choice-val">Pilihan jawaban B yang tepat</span>
+      </div>
+    
+      <div class="choice-opt">
+        <span class="choice-key"><strong>C.</strong></span>
+        <span class="choice-val">Pilihan jawaban C alternatif</span>
+      </div>
+    
+      <div class="choice-opt">
+        <span class="choice-key"><strong>D.</strong></span>
+        <span class="choice-val">Pilihan jawaban D pengecoh</span>
+      </div>
+    
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="question-item">
+        <div class="question-header">
+          <span class="question-num">14.</span>
+          <div class="question-body">
+            
+            <div class="question-text">Pertanyaan butir nomor 14 menguji pemahaman materi konsep penting?</div>
+            <div class="choices-grid">
+              
+      <div class="choice-opt">
+        <span class="choice-key"><strong>A.</strong></span>
+        <span class="choice-val">Pilihan jawaban A yang logis</span>
+      </div>
+    
+      <div class="choice-opt">
+        <span class="choice-key"><strong>B.</strong></span>
+        <span class="choice-val">Pilihan jawaban B yang tepat</span>
+      </div>
+    
+      <div class="choice-opt">
+        <span class="choice-key"><strong>C.</strong></span>
+        <span class="choice-val">Pilihan jawaban C alternatif</span>
+      </div>
+    
+      <div class="choice-opt">
+        <span class="choice-key"><strong>D.</strong></span>
+        <span class="choice-val">Pilihan jawaban D pengecoh</span>
+      </div>
+    
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="question-item">
+        <div class="question-header">
+          <span class="question-num">15.</span>
+          <div class="question-body">
+            <div class="stimulus-box">📖 Faris membaca ayat suci Al-Qur'an setiap sore dengan penuh ketelitian.</div>
+            <div class="question-text">Pertanyaan butir nomor 15 menguji pemahaman materi konsep penting?</div>
+            <div class="choices-grid">
+              
+      <div class="choice-opt">
+        <span class="choice-key"><strong>A.</strong></span>
+        <span class="choice-val">Pilihan jawaban A yang logis</span>
+      </div>
+    
+      <div class="choice-opt">
+        <span class="choice-key"><strong>B.</strong></span>
+        <span class="choice-val">Pilihan jawaban B yang tepat</span>
+      </div>
+    
+      <div class="choice-opt">
+        <span class="choice-key"><strong>C.</strong></span>
+        <span class="choice-val">Pilihan jawaban C alternatif</span>
+      </div>
+    
+      <div class="choice-opt">
+        <span class="choice-key"><strong>D.</strong></span>
+        <span class="choice-val">Pilihan jawaban D pengecoh</span>
+      </div>
+    
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      </div>
+
+      <!-- BAGIAN II: ISIAN SINGKAT (5 SOAL) -->
+      <div class="section-banner" style="background: linear-gradient(135deg, #0284c7, #0369a1); margin-top: 14px;">
+        <span>B. ISIAN SINGKAT (5 BUTIR SOAL)</span>
+        <span class="section-subtitle">Isilah titik-titik di bawah ini dengan jawaban yang singkat, tepat, dan benar!</span>
+      </div>
+
+      <div class="isian-container">
+        
+      <div class="question-item">
+        <div class="question-header">
+          <span class="question-num">16.</span>
+          <div class="question-body">
+            <div class="question-text">Kalimat pernyataan isian konsep bab 1 yang harus diisi titik-titiknya adalah (....)</div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="question-item">
+        <div class="question-header">
+          <span class="question-num">17.</span>
+          <div class="question-body">
+            <div class="question-text">Kalimat pernyataan isian konsep bab 2 yang harus diisi titik-titiknya adalah (....)</div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="question-item">
+        <div class="question-header">
+          <span class="question-num">18.</span>
+          <div class="question-body">
+            <div class="question-text">Kalimat pernyataan isian konsep bab 3 yang harus diisi titik-titiknya adalah (....)</div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="question-item">
+        <div class="question-header">
+          <span class="question-num">19.</span>
+          <div class="question-body">
+            <div class="question-text">Kalimat pernyataan isian konsep bab 4 yang harus diisi titik-titiknya adalah (....)</div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="question-item">
+        <div class="question-header">
+          <span class="question-num">20.</span>
+          <div class="question-body">
+            <div class="question-text">Kalimat pernyataan isian konsep bab 5 yang harus diisi titik-titiknya adalah (....)</div>
+          </div>
+        </div>
+      </div>
+    
+      </div>
+
+      <!-- BAGIAN III: URAIAN / ESSAY (5 SOAL) -->
+      <div class="section-banner" style="background: linear-gradient(135deg, #7c3aed, #6d28d9); margin-top: 14px;">
+        <span>C. URAIAN / ESSAY (5 BUTIR SOAL)</span>
+        <span class="section-subtitle">Jawablah pertanyaan-pertanyaan di bawah ini secara lengkap, jelas, dan santun!</span>
+      </div>
+
+      <div class="uraian-container">
+        
+      <div class="question-item uraian-item">
+        <div class="question-header">
+          <span class="question-num">21.</span>
+          <div class="question-body">
+            <div class="stimulus-box">📖 Ketika ada teman yang membutuhkan bantuan dalam memahami pelajaran agama...</div>
+            <div class="question-text"><strong>Jelaskan bagaimana langkah nyata yang dapat kamu lakukan untuk menerapkan nilai bab 1 dalam kehidupan sehari-hari!</strong></div>
+            <div class="answer-space">
+              <div class="writing-line"></div>
+              <div class="writing-line"></div>
+              <div class="writing-line"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="question-item uraian-item">
+        <div class="question-header">
+          <span class="question-num">22.</span>
+          <div class="question-body">
+            <div class="stimulus-box">📖 Ketika ada teman yang membutuhkan bantuan dalam memahami pelajaran agama...</div>
+            <div class="question-text"><strong>Jelaskan bagaimana langkah nyata yang dapat kamu lakukan untuk menerapkan nilai bab 2 dalam kehidupan sehari-hari!</strong></div>
+            <div class="answer-space">
+              <div class="writing-line"></div>
+              <div class="writing-line"></div>
+              <div class="writing-line"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="question-item uraian-item">
+        <div class="question-header">
+          <span class="question-num">23.</span>
+          <div class="question-body">
+            <div class="stimulus-box">📖 Ketika ada teman yang membutuhkan bantuan dalam memahami pelajaran agama...</div>
+            <div class="question-text"><strong>Jelaskan bagaimana langkah nyata yang dapat kamu lakukan untuk menerapkan nilai bab 3 dalam kehidupan sehari-hari!</strong></div>
+            <div class="answer-space">
+              <div class="writing-line"></div>
+              <div class="writing-line"></div>
+              <div class="writing-line"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="question-item uraian-item">
+        <div class="question-header">
+          <span class="question-num">24.</span>
+          <div class="question-body">
+            <div class="stimulus-box">📖 Ketika ada teman yang membutuhkan bantuan dalam memahami pelajaran agama...</div>
+            <div class="question-text"><strong>Jelaskan bagaimana langkah nyata yang dapat kamu lakukan untuk menerapkan nilai bab 4 dalam kehidupan sehari-hari!</strong></div>
+            <div class="answer-space">
+              <div class="writing-line"></div>
+              <div class="writing-line"></div>
+              <div class="writing-line"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="question-item uraian-item">
+        <div class="question-header">
+          <span class="question-num">25.</span>
+          <div class="question-body">
+            <div class="stimulus-box">📖 Ketika ada teman yang membutuhkan bantuan dalam memahami pelajaran agama...</div>
+            <div class="question-text"><strong>Jelaskan bagaimana langkah nyata yang dapat kamu lakukan untuk menerapkan nilai bab 5 dalam kehidupan sehari-hari!</strong></div>
+            <div class="answer-space">
+              <div class="writing-line"></div>
+              <div class="writing-line"></div>
+              <div class="writing-line"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      </div>
+
+      <div style="text-align: center; font-size: 8pt; color: #64748b; margin-top: 14px; border-top: 1px solid #e2e8f0; padding-top: 6px;">
+        ✨ <i>"Kejujuran adalah perhiasan orang yang beriman. Selamat mengerjakan dengan mandiri dan teliti!"</i> ✨
+      </div>
+    </div>
+
+
+    <!-- ================= HALAMAN TERPISAH: KUNCI JAWABAN & RUBRIK (PEGANGAN GURU) ================= -->
+    <div class="page-sheet page-break">
+      <div style="border-bottom: 2px solid #991b1b; padding-bottom: 6px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: flex-end;">
+        <div>
+          <span class="teacher-badge">DOKUMEN RAHASIA KHUSUS GURU</span>
+          <h2 class="teacher-title">KUNCI JAWABAN & PEDOMAN PENSKORAN ASESMEN SUMATIF AKHIR SEMESTER (SAS)</h2>
+          <div style="font-size: 8.5pt; color: #475569;">
+            Mata Pelajaran: <strong>Pendidikan Agama Islam dan Budi Pekerti (PAI & BP)</strong> | Kelas: <strong>5 SD (Fase C)</strong> | Semester: <strong>1</strong> | Tahun Ajaran: <strong>2026/2027</strong>
+          </div>
+        </div>
+      </div>
+
+      <!-- REKAPITULASI BOBOT SKOR & RUMUS NILAI -->
+      <div class="scoring-summary-box">
+        <strong>📊 Pedoman Konversi & Rumus Penilaian Akhir (Skor Maksimal = 100):</strong>
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-top: 4px;">
+          <div>• <strong>Pilihan Ganda (15 Soal):</strong> 15 x 2 Poin = <strong>30 Poin</strong></div>
+          <div>• <strong>Isian Singkat (5 Soal):</strong> 5 x 4 Poin = <strong>20 Poin</strong></div>
+          <div>• <strong>Uraian/Essay (5 Soal):</strong> 5 x 10 Poin = <strong>50 Poin</strong></div>
+        </div>
+        <div style="margin-top: 4px; font-weight: 700; color: #15803d;">
+          Rumus: Nilai Akhir (NA) = Skor Pilihan Ganda + Skor Isian Singkat + Skor Uraian = (Total Skor / 100) x 100
+        </div>
+      </div>
+
+      <!-- TABEL KUNCI PILIHAN GANDA (1-15) -->
+      <h3 style="font-size: 9pt; font-weight: 700; color: #047857; margin: 10px 0 4px 0;">A. Kunci Jawaban & Pembahasan Pilihan Ganda (No. 1 s.d. 15)</h3>
+      <table class="key-table">
+        <thead>
+          <tr>
+            <th style="width: 5%; text-align: center;">No</th>
+            <th style="width: 8%; text-align: center;">Kunci</th>
+            <th style="width: 25%;">Materi / Bab Pokok</th>
+            <th>Pembahasan & Indikator Soal</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+      <tr>
+        <td style="text-align: center; font-weight: 700;">1</td>
+        <td style="text-align: center; font-weight: 800; color: #047857; background: #ecfdf5;">B</td>
+        <td style="font-size: 8pt; color: #475569;">Bab 1</td>
+        <td style="font-size: 8pt;">Pembahasan untuk butir nomor 1 sangat jelas dan rinci.</td>
+      </tr>
+    
+      <tr>
+        <td style="text-align: center; font-weight: 700;">2</td>
+        <td style="text-align: center; font-weight: 800; color: #047857; background: #ecfdf5;">B</td>
+        <td style="font-size: 8pt; color: #475569;">Bab 1</td>
+        <td style="font-size: 8pt;">Pembahasan untuk butir nomor 2 sangat jelas dan rinci.</td>
+      </tr>
+    
+      <tr>
+        <td style="text-align: center; font-weight: 700;">3</td>
+        <td style="text-align: center; font-weight: 800; color: #047857; background: #ecfdf5;">B</td>
+        <td style="font-size: 8pt; color: #475569;">Bab 1</td>
+        <td style="font-size: 8pt;">Pembahasan untuk butir nomor 3 sangat jelas dan rinci.</td>
+      </tr>
+    
+      <tr>
+        <td style="text-align: center; font-weight: 700;">4</td>
+        <td style="text-align: center; font-weight: 800; color: #047857; background: #ecfdf5;">B</td>
+        <td style="font-size: 8pt; color: #475569;">Bab 2</td>
+        <td style="font-size: 8pt;">Pembahasan untuk butir nomor 4 sangat jelas dan rinci.</td>
+      </tr>
+    
+      <tr>
+        <td style="text-align: center; font-weight: 700;">5</td>
+        <td style="text-align: center; font-weight: 800; color: #047857; background: #ecfdf5;">B</td>
+        <td style="font-size: 8pt; color: #475569;">Bab 2</td>
+        <td style="font-size: 8pt;">Pembahasan untuk butir nomor 5 sangat jelas dan rinci.</td>
+      </tr>
+    
+      <tr>
+        <td style="text-align: center; font-weight: 700;">6</td>
+        <td style="text-align: center; font-weight: 800; color: #047857; background: #ecfdf5;">B</td>
+        <td style="font-size: 8pt; color: #475569;">Bab 2</td>
+        <td style="font-size: 8pt;">Pembahasan untuk butir nomor 6 sangat jelas dan rinci.</td>
+      </tr>
+    
+      <tr>
+        <td style="text-align: center; font-weight: 700;">7</td>
+        <td style="text-align: center; font-weight: 800; color: #047857; background: #ecfdf5;">B</td>
+        <td style="font-size: 8pt; color: #475569;">Bab 3</td>
+        <td style="font-size: 8pt;">Pembahasan untuk butir nomor 7 sangat jelas dan rinci.</td>
+      </tr>
+    
+      <tr>
+        <td style="text-align: center; font-weight: 700;">8</td>
+        <td style="text-align: center; font-weight: 800; color: #047857; background: #ecfdf5;">B</td>
+        <td style="font-size: 8pt; color: #475569;">Bab 3</td>
+        <td style="font-size: 8pt;">Pembahasan untuk butir nomor 8 sangat jelas dan rinci.</td>
+      </tr>
+    
+      <tr>
+        <td style="text-align: center; font-weight: 700;">9</td>
+        <td style="text-align: center; font-weight: 800; color: #047857; background: #ecfdf5;">B</td>
+        <td style="font-size: 8pt; color: #475569;">Bab 3</td>
+        <td style="font-size: 8pt;">Pembahasan untuk butir nomor 9 sangat jelas dan rinci.</td>
+      </tr>
+    
+      <tr>
+        <td style="text-align: center; font-weight: 700;">10</td>
+        <td style="text-align: center; font-weight: 800; color: #047857; background: #ecfdf5;">B</td>
+        <td style="font-size: 8pt; color: #475569;">Bab 4</td>
+        <td style="font-size: 8pt;">Pembahasan untuk butir nomor 10 sangat jelas dan rinci.</td>
+      </tr>
+    
+      <tr>
+        <td style="text-align: center; font-weight: 700;">11</td>
+        <td style="text-align: center; font-weight: 800; color: #047857; background: #ecfdf5;">B</td>
+        <td style="font-size: 8pt; color: #475569;">Bab 4</td>
+        <td style="font-size: 8pt;">Pembahasan untuk butir nomor 11 sangat jelas dan rinci.</td>
+      </tr>
+    
+      <tr>
+        <td style="text-align: center; font-weight: 700;">12</td>
+        <td style="text-align: center; font-weight: 800; color: #047857; background: #ecfdf5;">B</td>
+        <td style="font-size: 8pt; color: #475569;">Bab 4</td>
+        <td style="font-size: 8pt;">Pembahasan untuk butir nomor 12 sangat jelas dan rinci.</td>
+      </tr>
+    
+      <tr>
+        <td style="text-align: center; font-weight: 700;">13</td>
+        <td style="text-align: center; font-weight: 800; color: #047857; background: #ecfdf5;">B</td>
+        <td style="font-size: 8pt; color: #475569;">Bab 5</td>
+        <td style="font-size: 8pt;">Pembahasan untuk butir nomor 13 sangat jelas dan rinci.</td>
+      </tr>
+    
+      <tr>
+        <td style="text-align: center; font-weight: 700;">14</td>
+        <td style="text-align: center; font-weight: 800; color: #047857; background: #ecfdf5;">B</td>
+        <td style="font-size: 8pt; color: #475569;">Bab 5</td>
+        <td style="font-size: 8pt;">Pembahasan untuk butir nomor 14 sangat jelas dan rinci.</td>
+      </tr>
+    
+      <tr>
+        <td style="text-align: center; font-weight: 700;">15</td>
+        <td style="text-align: center; font-weight: 800; color: #047857; background: #ecfdf5;">B</td>
+        <td style="font-size: 8pt; color: #475569;">Bab 5</td>
+        <td style="font-size: 8pt;">Pembahasan untuk butir nomor 15 sangat jelas dan rinci.</td>
+      </tr>
+    
+        </tbody>
+      </table>
+
+      <!-- TABEL KUNCI ISIAN (16-20) -->
+      <h3 style="font-size: 9pt; font-weight: 700; color: #0284c7; margin: 12px 0 4px 0;">B. Kunci Jawaban Isian Singkat (No. 16 s.d. 20)</h3>
+      <table class="key-table">
+        <thead>
+          <tr>
+            <th style="width: 5%; text-align: center;">No</th>
+            <th style="width: 35%;">Kunci Jawaban Tepat</th>
+            <th style="width: 45%;">Materi / Pokok Bahasan</th>
+            <th style="width: 15%; text-align: center;">Bobot Skor</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+      <tr>
+        <td style="text-align: center; font-weight: 700;">16</td>
+        <td style="font-weight: 700; color: #0f766e;">Kunci konsep 1</td>
+        <td style="font-size: 8pt; color: #475569;">Bab 1</td>
+        <td style="text-align: center; font-weight: 600;">4 Poin</td>
+      </tr>
+    
+      <tr>
+        <td style="text-align: center; font-weight: 700;">17</td>
+        <td style="font-weight: 700; color: #0f766e;">Kunci konsep 2</td>
+        <td style="font-size: 8pt; color: #475569;">Bab 2</td>
+        <td style="text-align: center; font-weight: 600;">4 Poin</td>
+      </tr>
+    
+      <tr>
+        <td style="text-align: center; font-weight: 700;">18</td>
+        <td style="font-weight: 700; color: #0f766e;">Kunci konsep 3</td>
+        <td style="font-size: 8pt; color: #475569;">Bab 3</td>
+        <td style="text-align: center; font-weight: 600;">4 Poin</td>
+      </tr>
+    
+      <tr>
+        <td style="text-align: center; font-weight: 700;">19</td>
+        <td style="font-weight: 700; color: #0f766e;">Kunci konsep 4</td>
+        <td style="font-size: 8pt; color: #475569;">Bab 4</td>
+        <td style="text-align: center; font-weight: 600;">4 Poin</td>
+      </tr>
+    
+      <tr>
+        <td style="text-align: center; font-weight: 700;">20</td>
+        <td style="font-weight: 700; color: #0f766e;">Kunci konsep 5</td>
+        <td style="font-size: 8pt; color: #475569;">Bab 5</td>
+        <td style="text-align: center; font-weight: 600;">4 Poin</td>
+      </tr>
+    
+        </tbody>
+      </table>
+
+      <!-- TABEL KUNCI & RUBRIK URAIAN (21-25) -->
+      <h3 style="font-size: 9pt; font-weight: 700; color: #7c3aed; margin: 12px 0 4px 0;">C. Kunci Jawaban & Rubrik Penskoran Uraian (No. 21 s.d. 25)</h3>
+      <table class="key-table">
+        <thead>
+          <tr>
+            <th style="width: 5%; text-align: center;">No</th>
+            <th style="width: 55%;">Pertanyaan & Jawaban Ideal</th>
+            <th style="width: 25%;">Kriteria & Rubrik Skor</th>
+            <th style="width: 15%; text-align: center;">Skor Maks</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+      <tr>
+        <td style="text-align: center; font-weight: 700; vertical-align: top;">21</td>
+        <td style="vertical-align: top;">
+          <div style="font-weight: 600; color: #1e293b; margin-bottom: 4px;">Jelaskan bagaimana langkah nyata yang dapat kamu lakukan untuk menerapkan nilai bab 1 dalam kehidupan sehari-hari!</div>
+          <div style="color: #047857; font-size: 8.5pt;"><strong>Kunci Jawaban:</strong> Langkah nyata penerapan nilai bab 1 mencakup sikap peduli, membantu dengan ikhlas, dan mengajak kepada kebaikan.</div>
+        </td>
+        <td style="vertical-align: top; font-size: 8pt; color: #64748b;">Skor 10 jika memuat 3 tindakan nyata dan alasan logis; Skor 6 jika memuat 2 tindakan; Skor 3 jika hanya 1 tindakan.</td>
+        <td style="text-align: center; font-weight: 700; vertical-align: top; color: #b45309;">10 Poin</td>
+      </tr>
+    
+      <tr>
+        <td style="text-align: center; font-weight: 700; vertical-align: top;">22</td>
+        <td style="vertical-align: top;">
+          <div style="font-weight: 600; color: #1e293b; margin-bottom: 4px;">Jelaskan bagaimana langkah nyata yang dapat kamu lakukan untuk menerapkan nilai bab 2 dalam kehidupan sehari-hari!</div>
+          <div style="color: #047857; font-size: 8.5pt;"><strong>Kunci Jawaban:</strong> Langkah nyata penerapan nilai bab 2 mencakup sikap peduli, membantu dengan ikhlas, dan mengajak kepada kebaikan.</div>
+        </td>
+        <td style="vertical-align: top; font-size: 8pt; color: #64748b;">Skor 10 jika memuat 3 tindakan nyata dan alasan logis; Skor 6 jika memuat 2 tindakan; Skor 3 jika hanya 1 tindakan.</td>
+        <td style="text-align: center; font-weight: 700; vertical-align: top; color: #b45309;">10 Poin</td>
+      </tr>
+    
+      <tr>
+        <td style="text-align: center; font-weight: 700; vertical-align: top;">23</td>
+        <td style="vertical-align: top;">
+          <div style="font-weight: 600; color: #1e293b; margin-bottom: 4px;">Jelaskan bagaimana langkah nyata yang dapat kamu lakukan untuk menerapkan nilai bab 3 dalam kehidupan sehari-hari!</div>
+          <div style="color: #047857; font-size: 8.5pt;"><strong>Kunci Jawaban:</strong> Langkah nyata penerapan nilai bab 3 mencakup sikap peduli, membantu dengan ikhlas, dan mengajak kepada kebaikan.</div>
+        </td>
+        <td style="vertical-align: top; font-size: 8pt; color: #64748b;">Skor 10 jika memuat 3 tindakan nyata dan alasan logis; Skor 6 jika memuat 2 tindakan; Skor 3 jika hanya 1 tindakan.</td>
+        <td style="text-align: center; font-weight: 700; vertical-align: top; color: #b45309;">10 Poin</td>
+      </tr>
+    
+      <tr>
+        <td style="text-align: center; font-weight: 700; vertical-align: top;">24</td>
+        <td style="vertical-align: top;">
+          <div style="font-weight: 600; color: #1e293b; margin-bottom: 4px;">Jelaskan bagaimana langkah nyata yang dapat kamu lakukan untuk menerapkan nilai bab 4 dalam kehidupan sehari-hari!</div>
+          <div style="color: #047857; font-size: 8.5pt;"><strong>Kunci Jawaban:</strong> Langkah nyata penerapan nilai bab 4 mencakup sikap peduli, membantu dengan ikhlas, dan mengajak kepada kebaikan.</div>
+        </td>
+        <td style="vertical-align: top; font-size: 8pt; color: #64748b;">Skor 10 jika memuat 3 tindakan nyata dan alasan logis; Skor 6 jika memuat 2 tindakan; Skor 3 jika hanya 1 tindakan.</td>
+        <td style="text-align: center; font-weight: 700; vertical-align: top; color: #b45309;">10 Poin</td>
+      </tr>
+    
+      <tr>
+        <td style="text-align: center; font-weight: 700; vertical-align: top;">25</td>
+        <td style="vertical-align: top;">
+          <div style="font-weight: 600; color: #1e293b; margin-bottom: 4px;">Jelaskan bagaimana langkah nyata yang dapat kamu lakukan untuk menerapkan nilai bab 5 dalam kehidupan sehari-hari!</div>
+          <div style="color: #047857; font-size: 8.5pt;"><strong>Kunci Jawaban:</strong> Langkah nyata penerapan nilai bab 5 mencakup sikap peduli, membantu dengan ikhlas, dan mengajak kepada kebaikan.</div>
+        </td>
+        <td style="vertical-align: top; font-size: 8pt; color: #64748b;">Skor 10 jika memuat 3 tindakan nyata dan alasan logis; Skor 6 jika memuat 2 tindakan; Skor 3 jika hanya 1 tindakan.</td>
+        <td style="text-align: center; font-weight: 700; vertical-align: top; color: #b45309;">10 Poin</td>
+      </tr>
+    
+        </tbody>
+      </table>
+
+      <!-- TANDA TANGAN -->
+      <div style="margin-top: 24px; display: flex; justify-content: space-between; font-size: 8.8pt; padding: 0 30px;">
+        <div style="text-align: center;">
+          Mengetahui,<br>
+          Kepala SD Negeri ...........................<br><br><br><br>
+          ( .................................................... )<br>
+          NIP. ..............................................
+        </div>
+        <div style="text-align: center;">
+          ........................., ............................... 2026<br>
+          Guru Mata Pelajaran,<br><br><br><br>
+          ( .................................................... )<br>
+          NIP. ..............................................
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
