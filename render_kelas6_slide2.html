@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Render Kelas 6 Slide 2</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700;800&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      width: 1080px;
+      height: 1920px;
+      overflow: hidden;
+      font-family: 'Nunito', sans-serif;
+      background: radial-gradient(circle at 50% 25%, #4c1d95 0%, #2e0854 50%, #120326 100%);
+      color: #ffffff;
+      position: relative;
+    }
+    .font-fredoka { font-family: 'Fredoka', sans-serif; }
+    .gold-gradient {
+      background: linear-gradient(135deg, #fef08a 0%, #facc15 50%, #ca8a04 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .paper-shadow {
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 30px rgba(168, 85, 247, 0.3);
+    }
+    .glass-card {
+      background: rgba(35, 10, 70, 0.7);
+      backdrop-filter: blur(16px);
+      border: 2px solid rgba(216, 180, 254, 0.3);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    }
+  </style>
+</head>
+<body class="flex flex-col justify-between p-14 relative select-none">
+
+  <!-- Background Pattern -->
+  <div class="absolute inset-0 pointer-events-none opacity-20" style="background-image: radial-gradient(#d8b4fe 1.5px, transparent 1.5px); background-size: 36px 36px;"></div>
+
+  <!-- HEADER -->
+  <div class="relative z-10 flex flex-col items-center text-center space-y-3 pt-4">
+    <div class="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-purple-900/80 border-2 border-amber-400/60 shadow">
+      <span class="text-lg">🔍</span>
+      <span class="text-amber-300 font-extrabold text-base tracking-wider uppercase font-fredoka">
+        SPILL LEMBAR NASKAH SOAL SAS KELAS 6 SD
+      </span>
+    </div>
+    <h1 class="text-5xl font-black font-fredoka gold-gradient drop-shadow-md">
+      INTIP KUALITAS NASKAH UJIAN KELAS 6
+    </h1>
+    <p class="text-xl text-purple-200 font-bold max-w-2xl">
+      Disusun proporsional: 15 Pilihan Ganda HOTS + 5 Isian Singkat + 5 Uraian Analitis Lengkap Kunci & Rubrik
+    </p>
+  </div>
+
+  <!-- CENTER: 3 REALISTIC EXAM PAPERS PREVIEW -->
+  <div class="relative z-10 flex items-center justify-center my-4 h-[950px]">
+    <!-- Paper 1 (Left - Pilihan Ganda) -->
+    <div class="absolute -left-2 transform -rotate-6 w-[430px] h-[590px] bg-white text-slate-900 rounded-2xl p-6 paper-shadow border border-slate-200 flex flex-col justify-between text-xs">
+      <div>
+        <div class="border-b-2 border-slate-800 pb-2 text-center">
+          <p class="font-extrabold text-sm uppercase text-purple-900">NASKAH ASESMEN SUMATIF AKHIR SEMESTER (SAS)</p>
+          <p class="text-[10px] text-slate-600 font-bold">Mata Pelajaran: PAI & BP • Kelas VI (Enam) • Semester 1</p>
+        </div>
+        <div class="mt-4 space-y-3 text-[11px] font-sans">
+          <p class="font-bold text-purple-950">I. Pilihan Ganda (Beri tanda silang (X) pada A, B, C, atau D):</p>
+          <div class="bg-purple-50 p-2.5 rounded-lg border border-purple-200">
+            <p class="font-bold">1. Perhatikan kutipan Surah Ad-Duha berikut:</p>
+            <p class="text-center font-serif text-sm my-1 font-bold text-purple-900">وَوَجَدَكَ ضَاۤلًّا فَهَدٰىۖ</p>
+            <p>Pesan utama yang dapat diteladani siswa dalam kehidupan sehari-hari adalah...</p>
+            <p class="mt-1 text-[10px] text-slate-700">A. Selalu bersyukur & bersemangat menuntut ilmu<br>B. Berdiam diri menunggu bantuan<br>C. Menyombongkan kepintaran<br>D. Mengeluh atas kesulitan</p>
+          </div>
+          <div class="bg-slate-50 p-2 rounded-lg border border-slate-200">
+            <p class="font-bold">2. Sikap meneladani Asmaul Husna Al-Afuw adalah...</p>
+            <p class="text-[10px] text-slate-700">A. Memaafkan kesalahan teman tanpa dendam<br>B. Membalas perbuatan buruk teman</p>
+          </div>
+        </div>
+      </div>
+      <div class="pt-2 border-t border-slate-200 flex justify-between text-[10px] text-slate-500 font-bold">
+        <span>Kurikulum Merdeka 2026</span>
+        <span>Halaman 1 dari 4</span>
+      </div>
+    </div>
+
+    <!-- Paper 2 (Center - Isian & Uraian HOTS) -->
+    <div class="relative z-20 w-[470px] h-[640px] bg-white text-slate-900 rounded-2xl p-7 paper-shadow border-2 border-amber-400 flex flex-col justify-between text-xs">
+      <div>
+        <div class="border-b-2 border-purple-900 pb-2.5 text-center">
+          <span class="bg-amber-400 text-slate-950 font-black text-[10px] px-3 py-1 rounded-full uppercase">Bagian II & III (HOTS)</span>
+          <p class="font-black text-base uppercase text-purple-950 mt-1 font-fredoka">SOAL ISIAN & PENALARAN ANALITIS</p>
+          <p class="text-[11px] text-slate-600 font-bold">Materi: Makanan Halal/Haram & Khulafaur Rasyidin</p>
+        </div>
+        <div class="mt-4 space-y-3.5 text-xs font-sans">
+          <div class="bg-amber-50/80 p-3 rounded-xl border border-amber-200">
+            <p class="font-bold text-amber-950">II. Isian Singkat:</p>
+            <p class="mt-1">1. Hewan sembelihan yang halal dikonsumsi harus disembelih dengan menyebut nama ...</p>
+            <p class="mt-1">2. Khalifah yang terkenal dengan ketegasannya membela kebenaran dan dijuluki Al-Faruq adalah ...</p>
+          </div>
+          <div class="bg-purple-50 p-3 rounded-xl border border-purple-200">
+            <p class="font-bold text-purple-950">III. Uraian & Studi Kasus HOTS:</p>
+            <p class="mt-1 leading-relaxed">
+              <strong>Studi Kasus:</strong> Ahmad diajak temannya makan di sebuah restoran yang tidak memiliki sertifikat halal dan menyajikan menu berbahan meragukan. Jelaskan 2 tindakan bijak yang sebaiknya dilakukan Ahmad sesuai syariat!
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="pt-3 border-t border-slate-200 flex justify-between items-center text-[11px] text-purple-900 font-black">
+        <span>⭐ Standar Kompetensi Kelulusan SD</span>
+        <span class="bg-purple-100 px-2 py-0.5 rounded">Halaman 2 dari 4</span>
+      </div>
+    </div>
+
+    <!-- Paper 3 (Right - Kunci & Rubrik) -->
+    <div class="absolute -right-2 transform rotate-6 w-[430px] h-[590px] bg-slate-900 text-slate-100 rounded-2xl p-6 paper-shadow border-2 border-purple-500/50 flex flex-col justify-between text-xs">
+      <div>
+        <div class="border-b border-purple-400/40 pb-2 text-center">
+          <span class="bg-emerald-500 text-white font-black text-[10px] px-2.5 py-0.5 rounded-full uppercase">Panduan Guru</span>
+          <p class="font-black text-sm uppercase text-amber-300 mt-1">KUNCI JAWABAN & RUBRIK PENILAIAN</p>
+        </div>
+        <div class="mt-4 space-y-3 text-[11px]">
+          <div class="bg-purple-950/60 p-2.5 rounded-lg border border-purple-800">
+            <p class="font-bold text-amber-300">Tabel Kunci Jawaban PG:</p>
+            <p class="text-[10px] text-purple-200 font-mono mt-1">1. A | 2. A | 3. C | 4. B | 5. D | 6. A ...</p>
+          </div>
+          <div class="bg-purple-950/60 p-2.5 rounded-lg border border-purple-800">
+            <p class="font-bold text-amber-300">Pedoman Penskoran:</p>
+            <p class="text-[10px] text-slate-300 mt-0.5">• Pilihan Ganda: Skor 1 x 15 = 15<br>• Isian: Skor 2 x 5 = 10<br>• Uraian: Skor 5 x 5 = 25<br>• Nilai Akhir: (Total Skor / 50) x 100</p>
+          </div>
+        </div>
+      </div>
+      <div class="pt-2 border-t border-purple-800 flex justify-between text-[10px] text-purple-300 font-bold">
+        <span>Format Word Siap Cetak</span>
+        <span>Rubrik Guru Lengkap</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOTTOM FEATURE BADGES & BANNER -->
+  <div class="relative z-10 flex flex-col items-center space-y-4 pb-4">
+    <div class="flex items-center justify-center gap-6 w-full max-w-3xl">
+      <div class="glass-card rounded-2xl px-6 py-4 flex items-center gap-3">
+        <span class="text-3xl">✏️</span>
+        <div>
+          <h4 class="font-black text-base text-amber-300 font-fredoka">Word (.docx) 100% Bisa Diedit</h4>
+          <p class="text-xs text-purple-200 font-bold">Tinggal ganti kop nama sekolah & guru</p>
+        </div>
+      </div>
+      <div class="glass-card rounded-2xl px-6 py-4 flex items-center gap-3">
+        <span class="text-3xl">🖨️</span>
+        <div>
+          <h4 class="font-black text-base text-amber-300 font-fredoka">PDF Standar A4 Siap Cetak</h4>
+          <p class="text-xs text-purple-200 font-bold">Tata letak rapi, langsung dibagikan ke siswa</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Callout Banner -->
+    <div class="w-full max-w-3xl rounded-2xl bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-500 py-4 px-6 text-slate-950 text-center font-black text-xl font-fredoka shadow-xl">
+      ⚡ Tinggal Ganti Nama Sekolah, Langsung Siap Diujikan Tanpa Ketik dari Nol! ⚡
+    </div>
+
+    <!-- Footer -->
+    <p class="text-sm font-extrabold text-amber-300/90 font-fredoka tracking-wide">
+      Bahan Ajar Bu Guru • lynk.id/bahanajarbuguru
+    </p>
+  </div>
+
+</body>
+</html>

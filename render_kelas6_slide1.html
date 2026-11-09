@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Render Kelas 6 Slide 1</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700;800&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      width: 1080px;
+      height: 1920px;
+      overflow: hidden;
+      font-family: 'Nunito', sans-serif;
+      background: radial-gradient(circle at 50% 20%, #4c1d95 0%, #2e0854 45%, #120326 100%);
+      color: #ffffff;
+      position: relative;
+    }
+    .font-fredoka { font-family: 'Fredoka', sans-serif; }
+    .gold-gradient {
+      background: linear-gradient(135deg, #fef08a 0%, #facc15 50%, #ca8a04 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .gold-button {
+      background: linear-gradient(135deg, #fde047 0%, #eab308 50%, #ca8a04 100%);
+      box-shadow: 0 10px 30px rgba(234, 179, 8, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.6);
+    }
+    .glass-card {
+      background: rgba(30, 10, 60, 0.65);
+      backdrop-filter: blur(16px);
+      border: 2px solid rgba(216, 180, 254, 0.25);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    }
+    .book-shadow {
+      box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.8), 0 0 50px rgba(168, 85, 247, 0.4);
+    }
+  </style>
+</head>
+<body class="flex flex-col justify-between p-14 relative select-none">
+
+  <!-- Background Ornaments -->
+  <div class="absolute inset-0 pointer-events-none opacity-20" style="background-image: radial-gradient(#d8b4fe 1.5px, transparent 1.5px); background-size: 36px 36px;"></div>
+  <div class="absolute -top-32 -left-32 w-96 h-96 rounded-full bg-purple-600/30 blur-3xl pointer-events-none"></div>
+  <div class="absolute top-1/2 -right-32 w-96 h-96 rounded-full bg-amber-500/20 blur-3xl pointer-events-none"></div>
+  <div class="absolute -bottom-32 -left-32 w-96 h-96 rounded-full bg-purple-700/30 blur-3xl pointer-events-none"></div>
+
+  <!-- TOP HEADER SECTION -->
+  <div class="relative z-10 flex flex-col items-center text-center space-y-4 pt-4">
+    <!-- Badge -->
+    <div class="inline-flex items-center gap-2.5 px-6 py-2.5 rounded-full bg-purple-900/80 border-2 border-amber-400/60 shadow-lg">
+      <span class="text-xl">✨</span>
+      <span class="text-amber-300 font-extrabold text-lg tracking-wider uppercase font-fredoka">
+        KURIKULUM MERDEKA • CP No. 020 TAHUN 2026
+      </span>
+      <span class="text-xl">✨</span>
+    </div>
+
+    <!-- Top Callout -->
+    <p class="text-purple-200 text-xl font-bold tracking-wide">
+      Persiapan Ujian Sumatif Akhir Semester (SAS) Kelas 6 SD Lebih Siap & Mantap!
+    </p>
+
+    <!-- Main Title -->
+    <div class="space-y-1">
+      <h1 class="text-5xl font-black font-fredoka gold-gradient tracking-tight drop-shadow-md">
+        KUMPULAN SOAL SAS PAI KELAS 6 SD
+      </h1>
+      <p class="text-2xl font-black text-amber-200/90 font-fredoka">
+        SEMESTER 1 • STANDAR ASESMEN TINGKAT AKHIR SD
+      </p>
+    </div>
+  </div>
+
+  <!-- CENTERPIECE: 3D BOOK MOCKUP -->
+  <div class="relative z-10 flex flex-col items-center justify-center my-4">
+    <div class="relative">
+      <!-- Glow Ring Behind Book -->
+      <div class="absolute -inset-4 rounded-3xl bg-gradient-to-r from-amber-400/40 via-purple-500/40 to-amber-400/40 blur-xl opacity-80 animate-pulse"></div>
+      
+      <!-- Book Image Container -->
+      <div class="relative rounded-3xl overflow-hidden border-4 border-amber-400/80 book-shadow w-[480px] h-[480px] bg-slate-900 flex items-center justify-center">
+        <img src="/assets/soal_sas_cover_kelas6.jpg" alt="Cover SAS PAI Kelas 6" class="w-full h-full object-cover">
+      </div>
+
+      <!-- Floating Badges -->
+      <div class="absolute -top-4 -left-6 bg-amber-400 text-slate-950 px-5 py-2.5 rounded-2xl font-black text-base shadow-xl border-2 border-white flex items-center gap-2 font-fredoka">
+        <span>⭐</span> 100% Siap Diujikan
+      </div>
+      <div class="absolute -bottom-4 -right-6 bg-purple-900 text-amber-300 px-5 py-2.5 rounded-2xl font-black text-base shadow-xl border-2 border-amber-400/80 flex items-center gap-2 font-fredoka">
+        <span>📄</span> Word .docx + PDF A4
+      </div>
+    </div>
+  </div>
+
+  <!-- 4 FEATURE GLASSMORPHISM CARDS (2x2 GRID) -->
+  <div class="relative z-10 grid grid-cols-2 gap-4 w-full max-w-4xl mx-auto">
+    <div class="glass-card rounded-2xl p-5 flex items-center gap-4">
+      <div class="w-14 h-14 rounded-xl bg-amber-400/20 border border-amber-400/40 flex items-center justify-center text-3xl shrink-0">
+        📝
+      </div>
+      <div>
+        <h4 class="font-black text-lg text-white font-fredoka leading-snug">15 Soal Pilihan Ganda HOTS</h4>
+        <p class="text-sm text-purple-200 mt-0.5 font-bold">Surah Ad-Duha, Halal/Haram, Khulafaur Rasyidin</p>
+      </div>
+    </div>
+
+    <div class="glass-card rounded-2xl p-5 flex items-center gap-4">
+      <div class="w-14 h-14 rounded-xl bg-purple-400/20 border border-purple-400/40 flex items-center justify-center text-3xl shrink-0">
+        🧠
+      </div>
+      <div>
+        <h4 class="font-black text-lg text-white font-fredoka leading-snug">5 Isian & 5 Uraian Analitis</h4>
+        <p class="text-sm text-purple-200 mt-0.5 font-bold">Melatih nalar kritis persiapan ujian akhir SD</p>
+      </div>
+    </div>
+
+    <div class="glass-card rounded-2xl p-5 flex items-center gap-4">
+      <div class="w-14 h-14 rounded-xl bg-emerald-400/20 border border-emerald-400/40 flex items-center justify-center text-3xl shrink-0">
+        🔑
+      </div>
+      <div>
+        <h4 class="font-black text-lg text-white font-fredoka leading-snug">Kunci Jawaban & Kisi-Kisi</h4>
+        <p class="text-sm text-purple-200 mt-0.5 font-bold">Lengkap dengan pedoman penskoran & rubrik</p>
+      </div>
+    </div>
+
+    <div class="glass-card rounded-2xl p-5 flex items-center gap-4">
+      <div class="w-14 h-14 rounded-xl bg-blue-400/20 border border-blue-400/40 flex items-center justify-center text-3xl shrink-0">
+        💻
+      </div>
+      <div>
+        <h4 class="font-black text-lg text-white font-fredoka leading-snug">Format Word & PDF Siap Cetak</h4>
+        <p class="text-sm text-purple-200 mt-0.5 font-bold">Tinggal ganti nama sekolah di Word, bebas repot</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOTTOM CTA & BRANDING SECTION -->
+  <div class="relative z-10 flex flex-col items-center text-center space-y-4 pb-2">
+    <!-- Big CTA Button -->
+    <div class="w-full max-w-2xl gold-button rounded-3xl py-5 px-8 text-slate-950 font-black text-2xl tracking-wide font-fredoka flex items-center justify-center gap-3 active:scale-98 transition-all">
+      <span>👉</span>
+      <span>DAPATKAN SEKARANG DI LYNK.ID</span>
+      <span>👈</span>
+    </div>
+
+    <!-- Store Brand Info -->
+    <div class="space-y-1">
+      <p class="text-xl font-extrabold text-amber-300 font-fredoka tracking-wide">
+        Bahan Ajar Bu Guru • lynk.id/bahanajarbuguru
+      </p>
+      <p class="text-sm text-purple-300 font-bold">
+        ⚡ Download Instan • Praktis Siap Pakai • Bebas Pusing Lembur Guru & Wali Murid
+      </p>
+    </div>
+  </div>
+
+</body>
+</html>
