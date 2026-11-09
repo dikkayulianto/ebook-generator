@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flyer Promosi TikTok & IG — Soal SAS PAI Kelas 4 SD</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700;800&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Nunito', sans-serif; }
+    h1, h2, h3, h4, .font-fredoka { font-family: 'Fredoka', sans-serif; }
+    
+    /* 9:16 Frame Preview Container */
+    .preview-9-16 {
+      aspect-ratio: 9 / 16;
+      width: 100%;
+      max-width: 380px;
+    }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col">
+
+  <!-- TOP BAR -->
+  <header class="bg-slate-900 border-b border-slate-800 sticky top-0 z-50 px-4 py-3 shadow-md">
+    <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-3">
+      <div class="flex items-center gap-3">
+        <a href="/" class="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-sm font-bold">
+          ← Dashboard
+        </a>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="px-2.5 py-0.5 rounded-full bg-orange-500/20 text-orange-400 border border-orange-500/40 text-[10px] font-black uppercase">
+              Rasio 9:16 (TikTok & IG Carousel)
+            </span>
+            <span class="px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-400 border border-amber-500/40 text-[10px] font-black uppercase">
+              Kelas 4 SD
+            </span>
+          </div>
+          <h1 class="text-base sm:text-lg font-black text-white">Flyer Promosi Ebook Soal SAS PAI Kelas 4</h1>
+        </div>
+      </div>
+
+      <!-- Grade Switcher Buttons -->
+      <div class="flex items-center gap-1.5 bg-slate-800/80 p-1.5 rounded-xl border border-slate-700">
+        <span class="text-xs font-bold text-slate-400 px-1">Pilih Kelas:</span>
+        <a href="/flyer_sas_kelas1.html" class="px-2.5 py-1 rounded-lg text-xs font-bold bg-slate-700 text-slate-300 hover:text-white">Kelas 1</a>
+        <a href="/flyer_sas_kelas2.html" class="px-2.5 py-1 rounded-lg text-xs font-bold bg-slate-700 text-slate-300 hover:text-white">Kelas 2</a>
+        <a href="/flyer_sas_kelas3.html" class="px-2.5 py-1 rounded-lg text-xs font-bold bg-slate-700 text-slate-300 hover:text-white">Kelas 3</a>
+        <a href="/flyer_sas_kelas4.html" class="px-2.5 py-1 rounded-lg text-xs font-black bg-orange-500 text-white shadow">Kelas 4</a>
+        <a href="/flyer_sas_kelas5.html" class="px-2.5 py-1 rounded-lg text-xs font-bold bg-slate-700 text-slate-300 hover:text-white">Kelas 5</a>
+        <a href="/flyer_sas_kelas6.html" class="px-2.5 py-1 rounded-lg text-xs font-bold bg-slate-700 text-slate-300 hover:text-white">Kelas 6</a>
+      </div>
+
+      <!-- Quick Action Buttons -->
+      <div class="flex items-center gap-2">
+        <a href="/assets/flyer_sas_kelas4_slide1.jpg" download="Slide1_Cover_SAS_Kelas4.jpg" class="px-3 py-1.5 bg-orange-600 hover:bg-orange-500 text-white rounded-lg text-xs font-black transition-all shadow flex items-center gap-1">
+          <span>📥</span> Unduh Slide 1
+        </a>
+        <a href="/assets/flyer_sas_kelas4_slide2.jpg" download="Slide2_Spill_Isi_SAS_Kelas4.jpg" class="px-3 py-1.5 bg-amber-600 hover:bg-amber-500 text-white rounded-lg text-xs font-black transition-all shadow flex items-center gap-1">
+          <span>📥</span> Unduh Slide 2
+        </a>
+        <a href="/assets/flyer_sas_kelas4_slide3.jpg" download="Slide3_CTA_SAS_Kelas4.jpg" class="px-3 py-1.5 bg-amber-500 hover:bg-amber-400 text-slate-950 rounded-lg text-xs font-black transition-all shadow flex items-center gap-1">
+          <span>📥</span> Unduh Slide 3
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN WORKSPACE -->
+  <main class="max-w-7xl mx-auto px-4 py-6 flex-1 w-full grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+    
+    <!-- LEFT: 3-SLIDE CAROUSEL PREVIEW (7 COLS) -->
+    <div class="lg:col-span-7 space-y-4">
+      
+      <!-- Slide Switcher Tabs -->
+      <div class="bg-slate-900 p-2 rounded-2xl border border-slate-800 flex items-center justify-between gap-2">
+        <div class="grid grid-cols-3 gap-2 flex-1">
+          <button onclick="setSlide(1)" id="tab-slide-1" class="py-2.5 px-2 rounded-xl bg-orange-600 text-white font-black text-xs transition-all flex flex-col items-center justify-center">
+            <span class="text-sm">📌</span>
+            <span>Slide 1: Cover</span>
+            <span class="text-[9px] opacity-80">(Hook Utama)</span>
+          </button>
+          <button onclick="setSlide(2)" id="tab-slide-2" class="py-2.5 px-2 rounded-xl bg-slate-800 text-slate-300 hover:text-white font-black text-xs transition-all flex flex-col items-center justify-center">
+            <span class="text-sm">🔍</span>
+            <span>Slide 2: Spill Isi</span>
+            <span class="text-[9px] opacity-80">(Naskah & Kunci)</span>
+          </button>
+          <button onclick="setSlide(3)" id="tab-slide-3" class="py-2.5 px-2 rounded-xl bg-slate-800 text-slate-300 hover:text-white font-black text-xs transition-all flex flex-col items-center justify-center">
+            <span class="text-sm">🎁</span>
+            <span>Slide 3: Paket & CTA</span>
+            <span class="text-[9px] opacity-80">(Link di Bio)</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Live Mockup Display (Smartphone 9:16 Aspect Ratio) -->
+      <div class="bg-slate-900/60 p-4 rounded-3xl border border-slate-800 flex flex-col items-center justify-center relative shadow-2xl">
+        <div class="preview-9-16 rounded-2xl overflow-hidden border-4 border-slate-700 shadow-2xl relative bg-black">
+          
+          <!-- Slide 1 Image -->
+          <img id="img-slide-1" src="/assets/flyer_sas_kelas4_slide1.jpg" alt="Slide 1 Cover SAS Kelas 4" class="w-full h-full object-cover">
+          
+          <!-- Slide 2 Image (Hidden initially) -->
+          <img id="img-slide-2" src="/assets/flyer_sas_kelas4_slide2.jpg" alt="Slide 2 Spill Isi SAS Kelas 4" class="w-full h-full object-cover hidden">
+          
+          <!-- Slide 3 Image (Hidden initially) -->
+          <img id="img-slide-3" src="/assets/flyer_sas_kelas4_slide3.jpg" alt="Slide 3 CTA SAS Kelas 4" class="w-full h-full object-cover hidden">
+
+          <!-- Watermark / Slide Badge -->
+          <div class="absolute top-3 left-3 bg-slate-950/80 backdrop-blur border border-white/20 text-white font-black text-[10px] px-2.5 py-1 rounded-full shadow">
+            <span id="slide-indicator-badge">SLIDE 1 / 3</span>
+          </div>
+
+          <!-- Direct Download Icon -->
+          <a id="btn-download-current" href="/assets/flyer_sas_kelas4_slide1.jpg" download="Slide1_Cover_SAS_Kelas4.jpg" class="absolute bottom-3 right-3 bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs px-3 py-1.5 rounded-xl shadow-lg flex items-center gap-1 active:scale-95 transition-all">
+            <span>💾</span> Unduh Gambar
+          </a>
+        </div>
+
+        <!-- Thumbnails Gallery -->
+        <div class="grid grid-cols-3 gap-3 mt-4 w-full max-w-sm">
+          <div onclick="setSlide(1)" class="cursor-pointer rounded-xl border-2 border-orange-500 overflow-hidden shadow-md aspect-[9/16] bg-slate-800" id="thumb-1">
+            <img src="/assets/flyer_sas_kelas4_slide1.jpg" class="w-full h-full object-cover">
+          </div>
+          <div onclick="setSlide(2)" class="cursor-pointer rounded-xl border-2 border-transparent hover:border-slate-500 overflow-hidden shadow-md aspect-[9/16] bg-slate-800" id="thumb-2">
+            <img src="/assets/flyer_sas_kelas4_slide2.jpg" class="w-full h-full object-cover">
+          </div>
+          <div onclick="setSlide(3)" class="cursor-pointer rounded-xl border-2 border-transparent hover:border-slate-500 overflow-hidden shadow-md aspect-[9/16] bg-slate-800" id="thumb-3">
+            <img src="/assets/flyer_sas_kelas4_slide3.jpg" class="w-full h-full object-cover">
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+    <!-- RIGHT: CAPTION & TIPS POSTING (5 COLS) -->
+    <div class="lg:col-span-5 space-y-4">
+      
+      <!-- Caption Card -->
+      <div class="bg-slate-900 rounded-3xl p-5 border border-slate-800 shadow-xl space-y-3">
+        <div class="flex justify-between items-center">
+          <div class="flex items-center gap-2">
+            <span class="text-xl">✍️</span>
+            <h3 class="font-black text-white text-sm">Caption Post TikTok & Instagram (Kelas 4)</h3>
+          </div>
+          <button onclick="copyCaption()" id="btn-copy-caption" class="px-3 py-1 rounded-xl bg-pink-600 hover:bg-pink-500 text-white font-black text-xs shadow flex items-center gap-1 transition-all active:scale-95">
+            <span>📋</span> Salin Caption
+          </button>
+        </div>
+
+        <div class="relative">
+          <textarea id="caption-text" rows="14" class="w-full bg-slate-950 border border-slate-700 rounded-2xl p-3.5 text-xs text-slate-200 font-mono leading-relaxed focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 select-all" readonly>🚨 BAPAK/IBU GURU PAI & ORANG TUA KELAS 4 SD, PERSIAPAN UJIAN SAS 1 JADI PRAKTIS & SIAP PAKAI! 🌟
+
+Menjelang Ujian Sumatif Akhir Semester (SAS), guru sering dikejar waktu merumuskan kisi-kisi dan naskah asesmen Kurikulum Merdeka yang tepat.
+
+Kini hadir KUMPULAN NASKAH SOAL SAS PAI & BUDI PEKERTI KELAS 4 SD (SEMESTER 1) yang komprehensif, terstruktur rapi, dan sesuai regulasi CP No. 020 Tahun 2026! ✨
+
+📚 Materi Lengkap Sesuai Kurikulum Merdeka Semester 1:
+🔹 Bab 1: Menghayati Al-Qur'an Surah Al-Hujurat Ayat 13 (Keragaman Bangsa & Suku)
+🔹 Bab 2: Meneladani Asmaul Husna (Al-Malik, Al-Aziz, Al-Quddus, As-Salam, Al-Mu'min)
+🔹 Bab 3: Indahnya Saling Menghargai dalam Keragaman
+🔹 Bab 4: Menyambut Usia Baligh (Tanda Biologis & Kewajiban Syariat)
+🔹 Bab 5: Kisah Hijrah Nabi Muhammad SAW ke Madinah
+
+📦 Paket Lengkap yang Anda Dapatkan:
+✅ 15 Soal Pilihan Ganda (PG) Berbobot & Disertai Stimulus Soal
+✅ 5 Soal Isian Singkat Terukur
+✅ 5 Soal Uraian / Penalaran HOTS Tingkat Tinggi
+✅ Kunci Jawaban Lengkap & Pembahasan Soal
+✅ Kisi-kisi Asesmen & Format Rubrik Penilaian Guru
+✅ Format Microsoft Word (.docx) — 100% Bisa Diedit Nama Sekolah & Kop Surat!
+✅ Format PDF High Definition — Langsung Cetak A4 Siap Diujikan!
+
+🎯 Standar Capaian Pembelajaran (CP) No. 020 Tahun 2026!
+
+Tinggal masukkan identitas sekolah Anda, langsung cetak dan siap dibagikan ke siswa. Bebas pusing, bebas lembur semalaman! 💡
+
+👉 HARGA PROMO SPESIAL TERBATAS!
+Dapatkan filenya sekarang dengan cara:
+🔗 KLIK LINK DI BIO PROFIL KAMI
+👉 lynk.id/bahanajarbuguru
+
+Atau kirim pesan DM / WhatsApp untuk respon langsung! 📲
+
+#soalsas #soalpaikelas4 #paikelas4 #kurikulummerdeka #sumatifakhirsemester #gurupai #bahanajarbuguru #soalsd #perangkatajar #modulajarpai #ujiansekolah</textarea>
+        </div>
+
+        <p class="text-[11px] text-orange-400">
+          💡 <strong>Tips TikTok & Reels:</strong> Unggah 3 slide gambar di atas secara berurutan, pilih sound nasyid atau instrumental edukasi yang hangat, dan sertakan hook di 3 detik pertama video!
+        </p>
+      </div>
+
+      <!-- Feature Summary Card -->
+      <div class="bg-gradient-to-br from-orange-950/80 to-slate-900 rounded-3xl p-5 border border-orange-800/40 shadow-xl space-y-3">
+        <h4 class="font-black text-amber-300 text-xs uppercase tracking-wider flex items-center gap-1.5">
+          <span>⭐</span> Keunggulan Paket Soal SAS Kelas 4:
+        </h4>
+        <ul class="text-xs space-y-2 text-slate-300">
+          <li class="flex items-start gap-2">
+            <span class="text-orange-400 font-bold">✔</span>
+            <span><strong>Fokus Analisis & Penalaran (HOTS):</strong> Soal usia baligh dan keragaman disajikan dengan studi kasus nyata kehidupan anak sekolah.</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-orange-400 font-bold">✔</span>
+            <span><strong>Fleksibilitas Penuh:</strong> File Word .docx asli memudahkan guru menambahkan logo sekolah dan menyesuaikan bobot penilaian.</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-orange-400 font-bold">✔</span>
+            <span><strong>Arsip Evaluasi Rapih:</strong> Dilengkapi kisi-kisi terperinci dan rubrik penskoran untuk kelengkapan administrasi guru penggerak.</span>
+          </li>
+        </ul>
+
+        <!-- Navigation Buttons -->
+        <div class="pt-2 border-t border-slate-800 flex justify-between items-center text-xs">
+          <a href="/flyer_sas_kelas3.html" class="text-slate-400 hover:text-white font-bold">← Kelas 3</a>
+          <a href="/flyer_sas_kelas5.html" class="text-amber-400 hover:text-amber-300 font-bold">Lanjut Kelas 5 ➔</a>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <script>
+    let currentSlide = 1;
+
+    function setSlide(num) {
+      currentSlide = num;
+
+      // Update images
+      document.getElementById('img-slide-1').classList.add('hidden');
+      document.getElementById('img-slide-2').classList.add('hidden');
+      document.getElementById('img-slide-3').classList.add('hidden');
+      document.getElementById(`img-slide-${num}`).classList.remove('hidden');
+
+      // Update tabs
+      [1, 2, 3].forEach(n => {
+        const tab = document.getElementById(`tab-slide-${n}`);
+        const thumb = document.getElementById(`thumb-${n}`);
+        if (n === num) {
+          tab.className = 'py-2.5 px-2 rounded-xl bg-orange-600 text-white font-black text-xs transition-all flex flex-col items-center justify-center shadow-lg';
+          thumb.className = 'cursor-pointer rounded-xl border-2 border-orange-500 overflow-hidden shadow-md aspect-[9/16] bg-slate-800 scale-102';
+        } else {
+          tab.className = 'py-2.5 px-2 rounded-xl bg-slate-800 text-slate-300 hover:text-white font-black text-xs transition-all flex flex-col items-center justify-center';
+          thumb.className = 'cursor-pointer rounded-xl border-2 border-transparent hover:border-slate-500 overflow-hidden shadow-md aspect-[9/16] bg-slate-800 opacity-70';
+        }
+      });
+
+      // Update indicator badge
+      document.getElementById('slide-indicator-badge').innerText = `SLIDE ${num} / 3`;
+
+      // Update download button url
+      const dlBtn = document.getElementById('btn-download-current');
+      dlBtn.href = `/assets/flyer_sas_kelas4_slide${num}.jpg`;
+      dlBtn.download = `Slide${num}_SAS_Kelas4.jpg`;
+    }
+
+    function copyCaption() {
+      const textarea = document.getElementById('caption-text');
+      textarea.select();
+      textarea.setSelectionRange(0, 99999);
+      navigator.clipboard.writeText(textarea.value).then(() => {
+        const btn = document.getElementById('btn-copy-caption');
+        btn.innerHTML = '<span>✅</span> Tersalin!';
+        btn.className = 'px-3 py-1 rounded-xl bg-emerald-600 text-white font-black text-xs shadow flex items-center gap-1';
+        setTimeout(() => {
+          btn.innerHTML = '<span>📋</span> Salin Caption';
+          btn.className = 'px-3 py-1 rounded-xl bg-pink-600 hover:bg-pink-500 text-white font-black text-xs shadow flex items-center gap-1';
+        }, 2500);
+      });
+    }
+  </script>
+</body>
+</html>
