@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Render Kelas 6 Slide 3</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700;800&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      width: 1080px;
+      height: 1920px;
+      overflow: hidden;
+      font-family: 'Nunito', sans-serif;
+      background: radial-gradient(circle at 50% 25%, #4c1d95 0%, #2e0854 50%, #120326 100%);
+      color: #ffffff;
+      position: relative;
+    }
+    .font-fredoka { font-family: 'Fredoka', sans-serif; }
+    .gold-gradient {
+      background: linear-gradient(135deg, #fef08a 0%, #facc15 50%, #ca8a04 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .gold-button {
+      background: linear-gradient(135deg, #fde047 0%, #eab308 50%, #ca8a04 100%);
+      box-shadow: 0 12px 35px rgba(234, 179, 8, 0.45), inset 0 2px 4px rgba(255, 255, 255, 0.7);
+    }
+    .glass-card {
+      background: rgba(35, 10, 70, 0.7);
+      backdrop-filter: blur(16px);
+      border: 2px solid rgba(216, 180, 254, 0.3);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    }
+    .bundle-box {
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 50px rgba(234, 179, 8, 0.3);
+    }
+  </style>
+</head>
+<body class="flex flex-col justify-between p-14 relative select-none">
+
+  <!-- Background Ornaments -->
+  <div class="absolute inset-0 pointer-events-none opacity-20" style="background-image: radial-gradient(#d8b4fe 1.5px, transparent 1.5px); background-size: 36px 36px;"></div>
+
+  <!-- HEADER -->
+  <div class="relative z-10 flex flex-col items-center text-center space-y-3 pt-4">
+    <div class="inline-flex items-center gap-2.5 px-6 py-2 rounded-full bg-amber-400 text-slate-950 font-black text-sm tracking-wider uppercase font-fredoka shadow-lg">
+      <span>🎁</span> PROMO SPESIAL PERSIAPAN UJIAN SEMESTER 1
+    </div>
+    <h1 class="text-5xl font-black font-fredoka gold-gradient drop-shadow-md">
+      PAKET LENGKAP SOAL SAS KELAS 6 SD
+    </h1>
+    <p class="text-xl text-purple-200 font-bold max-w-2xl">
+      Semua yang Anda butuhkan untuk asesmen sumatif PAI kelas akhir SD, dalam 1 paket lengkap siap pakai!
+    </p>
+  </div>
+
+  <!-- CENTER: 3D BUNDLE PACKAGE & COMPONENTS -->
+  <div class="relative z-10 flex flex-col items-center justify-center my-4 space-y-8">
+    
+    <!-- Big 3D Package Card -->
+    <div class="relative w-[500px] bg-gradient-to-br from-purple-900 via-indigo-950 to-slate-950 rounded-3xl p-8 border-4 border-amber-400/90 bundle-box flex flex-col items-center text-center">
+      <div class="w-24 h-24 rounded-2xl bg-amber-400/20 border-2 border-amber-400/60 flex items-center justify-center text-5xl mb-4 shadow-inner">
+        📦
+      </div>
+      <span class="px-4 py-1 rounded-full bg-amber-400 text-slate-950 font-black text-xs uppercase font-fredoka">
+        E-Book & Perangkat Asesmen
+      </span>
+      <h3 class="text-3xl font-black text-white font-fredoka mt-2">
+        PAKET SOAL SAS PAI KELAS 6
+      </h3>
+      <p class="text-sm text-purple-200 mt-1 font-bold">
+        Kurikulum Merdeka 2026 • Semester 1
+      </p>
+
+      <div class="mt-5 w-full grid grid-cols-2 gap-3 text-left">
+        <div class="bg-purple-950/80 p-3 rounded-xl border border-purple-700/50">
+          <span class="text-amber-400 font-black text-xs">📄 File Word (.docx)</span>
+          <p class="text-[11px] text-slate-300 mt-0.5">Bisa diedit leluasa</p>
+        </div>
+        <div class="bg-purple-950/80 p-3 rounded-xl border border-purple-700/50">
+          <span class="text-amber-400 font-black text-xs">🖨️ File PDF Siap Cetak</span>
+          <p class="text-[11px] text-slate-300 mt-0.5">Kualitas A4 tajam</p>
+        </div>
+        <div class="bg-purple-950/80 p-3 rounded-xl border border-purple-700/50">
+          <span class="text-amber-400 font-black text-xs">🔑 Kunci & Rubrik</span>
+          <p class="text-[11px] text-slate-300 mt-0.5">Penilaian otomatis</p>
+        </div>
+        <div class="bg-purple-950/80 p-3 rounded-xl border border-purple-700/50">
+          <span class="text-amber-400 font-black text-xs">📋 Kisi-Kisi CP 020</span>
+          <p class="text-[11px] text-slate-300 mt-0.5">Format administrasi</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3 Benefit Pillars -->
+    <div class="grid grid-cols-3 gap-4 w-full max-w-4xl">
+      <div class="glass-card rounded-2xl p-4 text-center">
+        <span class="text-3xl">⏱️</span>
+        <h4 class="font-black text-sm text-amber-300 font-fredoka mt-1">Hemat Waktu</h4>
+        <p class="text-xs text-purple-200 mt-0.5">Bebas lembur ketik naskah ujian dari nol</p>
+      </div>
+      <div class="glass-card rounded-2xl p-4 text-center">
+        <span class="text-3xl">🎯</span>
+        <h4 class="font-black text-sm text-amber-300 font-fredoka mt-1">Sesuai Regulasi</h4>
+        <p class="text-xs text-purple-200 mt-0.5">Capaian Pembelajaran resmi No. 020/2026</p>
+      </div>
+      <div class="glass-card rounded-2xl p-4 text-center">
+        <span class="text-3xl">⚡</span>
+        <h4 class="font-black text-sm text-amber-300 font-fredoka mt-1">Download Instan</h4>
+        <p class="text-xs text-purple-200 mt-0.5">Langsung dapat file setelah pembayaran</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- BOTTOM CALL TO ACTION -->
+  <div class="relative z-10 flex flex-col items-center text-center space-y-4 pb-2">
+    <!-- Big CTA Button -->
+    <div class="w-full max-w-2xl gold-button rounded-3xl py-5 px-8 text-slate-950 font-black text-2xl tracking-wide font-fredoka flex items-center justify-center gap-3">
+      <span>👉</span>
+      <span>KLIK LINK DI BIO PROFIL KAMI</span>
+      <span>👈</span>
+    </div>
+
+    <!-- Store Info -->
+    <div class="space-y-1">
+      <p class="text-xl font-extrabold text-amber-300 font-fredoka tracking-wide">
+        Bahan Ajar Bu Guru • lynk.id/bahanajarbuguru
+      </p>
+      <p class="text-sm text-purple-300 font-bold">
+        Atau kirim pesan DM / WhatsApp untuk respon langsung! 📲
+      </p>
+    </div>
+  </div>
+
+</body>
+</html>
