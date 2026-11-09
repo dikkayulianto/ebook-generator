@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>SAS PAI Kelas 6 - Slide 1 (768x1376)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700;800&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      width: 768px;
+      height: 1376px;
+      overflow: hidden;
+      font-family: 'Nunito', sans-serif;
+      background: radial-gradient(circle at 50% 18%, #4c1d95 0%, #2e0854 40%, #15032a 85%, #0b0117 100%);
+      color: #ffffff;
+      position: relative;
+    }
+    .font-fredoka { font-family: 'Fredoka', sans-serif; }
+    .gold-gradient {
+      background: linear-gradient(135deg, #fffbeb 0%, #fef08a 25%, #facc15 50%, #ca8a04 85%, #854d0e 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .gold-text-glow {
+      text-shadow: 0 4px 20px rgba(250, 204, 21, 0.4), 0 2px 4px rgba(0,0,0,0.8);
+    }
+    .gold-button {
+      background: linear-gradient(135deg, #fef08a 0%, #facc15 30%, #eab308 60%, #ca8a04 100%);
+      box-shadow: 0 8px 25px rgba(234, 179, 8, 0.5), inset 0 2px 3px rgba(255, 255, 255, 0.8), inset 0 -3px 4px rgba(161, 98, 7, 0.6);
+    }
+    .glass-card {
+      background: rgba(36, 12, 68, 0.72);
+      backdrop-filter: blur(14px);
+      border: 1.5px solid rgba(216, 180, 254, 0.35);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 1px 2px rgba(255, 255, 255, 0.2);
+    }
+    
+    /* 3D BOOK ENGINE */
+    .scene-3d {
+      perspective: 1400px;
+      perspective-origin: 50% 50%;
+    }
+    .book-3d {
+      position: relative;
+      width: 380px;
+      height: 480px;
+      transform-style: preserve-3d;
+      transform: rotateY(-20deg) rotateX(10deg) rotateZ(-1.5deg);
+      transition: transform 0.5s;
+    }
+    .book-front {
+      position: absolute;
+      inset: 0;
+      border-radius: 6px 16px 16px 6px;
+      overflow: hidden;
+      box-shadow: inset 4px 0 10px rgba(0, 0, 0, 0.5), 0 0 20px rgba(234, 179, 8, 0.3);
+      border: 1px solid rgba(250, 204, 21, 0.4);
+    }
+    .book-front::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(115deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.05) 35%, transparent 55%, rgba(0,0,0,0.3) 100%);
+      pointer-events: none;
+    }
+    .book-spine {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 38px;
+      height: 480px;
+      background: linear-gradient(90deg, #1e0838 0%, #3b0764 40%, #581c87 70%, #2e0854 100%);
+      transform: rotateY(-90deg) translateX(-38px);
+      transform-origin: left top;
+      border-radius: 6px 0 0 6px;
+      border: 1px solid rgba(250, 204, 21, 0.3);
+      box-shadow: inset 0 0 8px rgba(0,0,0,0.8);
+    }
+    .book-pages-right {
+      position: absolute;
+      right: 0;
+      top: 4px;
+      width: 36px;
+      height: 472px;
+      background: repeating-linear-gradient(90deg, #f8fafc 0px, #e2e8f0 1.5px, #f1f5f9 3px);
+      transform: rotateY(90deg) translateZ(0px);
+      transform-origin: right center;
+      border-radius: 0 4px 4px 0;
+      box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    }
+    .book-pages-bottom {
+      position: absolute;
+      bottom: 0;
+      left: 6px;
+      width: 370px;
+      height: 36px;
+      background: repeating-linear-gradient(0deg, #f8fafc 0px, #e2e8f0 1.5px, #f1f5f9 3px);
+      transform: rotateX(-90deg) translateZ(0px);
+      transform-origin: center bottom;
+      box-shadow: inset 0 0 8px rgba(0,0,0,0.4);
+    }
+    .book-shadow-ground {
+      position: absolute;
+      width: 440px;
+      height: 80px;
+      bottom: -45px;
+      left: -20px;
+      background: radial-gradient(ellipse at center, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 45%, transparent 70%);
+      transform: rotateX(85deg) translateZ(-20px);
+      filter: blur(10px);
+    }
+  </style>
+</head>
+<body class="flex flex-col justify-between p-8 relative select-none">
+
+  <!-- Background Ambience & Golden Particles -->
+  <div class="absolute inset-0 pointer-events-none opacity-20" style="background-image: radial-gradient(#fde047 1px, transparent 1px); background-size: 32px 32px;"></div>
+  <div class="absolute top-10 left-1/2 -translate-x-1/2 w-96 h-96 rounded-full bg-purple-500/20 blur-3xl pointer-events-none"></div>
+  <div class="absolute bottom-20 left-10 w-80 h-80 rounded-full bg-amber-400/15 blur-3xl pointer-events-none"></div>
+
+  <!-- TOP HEADER SECTION -->
+  <div class="relative z-10 flex flex-col items-center text-center space-y-2 pt-2">
+    <!-- Top Pill Badge -->
+    <div class="inline-flex items-center gap-2 px-5 py-1.5 rounded-full bg-purple-950/90 border border-amber-400/80 shadow-md">
+      <span class="text-sm">✨</span>
+      <span class="text-amber-300 font-extrabold text-xs tracking-wider uppercase font-fredoka">
+        KURIKULUM MERDEKA • CP No. 020 TAHUN 2026
+      </span>
+      <span class="text-sm">✨</span>
+    </div>
+
+    <!-- Banner Callout -->
+    <p class="text-purple-200 text-sm font-black tracking-wide drop-shadow">
+      Persiapan Ujian Sumatif Akhir Semester (SAS) Kelas 6 SD Lebih Siap & Mantap!
+    </p>
+
+    <!-- Main Headline Typography -->
+    <div class="space-y-0.5">
+      <h1 class="text-3xl font-black font-fredoka gold-gradient gold-text-glow tracking-tight leading-tight">
+        KUMPULAN SOAL SAS PAI KELAS 6 SD
+      </h1>
+      <p class="text-sm font-extrabold text-amber-200/90 font-fredoka tracking-wide">
+        SEMESTER 1 • STANDAR ASESMEN TINGKAT AKHIR SD
+      </p>
+    </div>
+  </div>
+
+  <!-- CENTERPIECE: 3D REALISTIC ISOMETRIC BOOK MOCKUP -->
+  <div class="relative z-20 flex flex-col items-center justify-center my-1 scene-3d">
+    <div class="book-3d">
+      <!-- Ground Shadow -->
+      <div class="book-shadow-ground"></div>
+
+      <!-- Book Spine (Left Thickness) -->
+      <div class="book-spine flex items-center justify-center">
+        <span class="text-[9px] font-black text-amber-300 font-fredoka tracking-widest uppercase transform rotate-90 whitespace-nowrap opacity-90">
+          SOAL SAS PAI KELAS 6 SD • SEMESTER 1
+        </span>
+      </div>
+
+      <!-- Book Pages Edge (Right & Bottom Thickness) -->
+      <div class="book-pages-right"></div>
+      <div class="book-pages-bottom"></div>
+
+      <!-- Book Front Cover -->
+      <div class="book-front">
+        <img src="/assets/soal_sas_cover_kelas6.jpg" alt="Cover Soal SAS PAI Kelas 6" class="w-full h-full object-cover">
+      </div>
+
+      <!-- Floating Seals & Badges -->
+      <div class="absolute -top-3 -left-4 bg-gradient-to-r from-amber-400 to-yellow-300 text-slate-950 px-3.5 py-1.5 rounded-xl font-black text-xs shadow-xl border border-white flex items-center gap-1.5 font-fredoka">
+        <span>⭐</span> 100% Siap Ujian
+      </div>
+      <div class="absolute -bottom-3 -right-4 bg-purple-950 text-amber-300 px-3.5 py-1.5 rounded-xl font-black text-xs shadow-xl border border-amber-400 flex items-center gap-1.5 font-fredoka">
+        <span>📄</span> Word .docx + PDF A4
+      </div>
+    </div>
+  </div>
+
+  <!-- 4 FLOATING GLASSMORPHISM FEATURE CARDS (2x2 GRID) -->
+  <div class="relative z-20 grid grid-cols-2 gap-3 w-full max-w-xl mx-auto my-1">
+    <div class="glass-card rounded-2xl p-3 flex items-center gap-3">
+      <div class="w-10 h-10 rounded-xl bg-amber-400/20 border border-amber-400/40 flex items-center justify-center text-xl shrink-0">
+        📝
+      </div>
+      <div>
+        <h4 class="font-black text-xs text-white font-fredoka leading-tight">15 Soal Pilihan Ganda HOTS</h4>
+        <p class="text-[10px] text-purple-200 mt-0.5 font-bold">Surah Ad-Duha & Halal/Haram</p>
+      </div>
+    </div>
+
+    <div class="glass-card rounded-2xl p-3 flex items-center gap-3">
+      <div class="w-10 h-10 rounded-xl bg-purple-400/20 border border-purple-400/40 flex items-center justify-center text-xl shrink-0">
+        🧠
+      </div>
+      <div>
+        <h4 class="font-black text-xs text-white font-fredoka leading-tight">5 Isian & 5 Uraian Analitis</h4>
+        <p class="text-[10px] text-purple-200 mt-0.5 font-bold">Melatih nalar kritis akhir SD</p>
+      </div>
+    </div>
+
+    <div class="glass-card rounded-2xl p-3 flex items-center gap-3">
+      <div class="w-10 h-10 rounded-xl bg-emerald-400/20 border border-emerald-400/40 flex items-center justify-center text-xl shrink-0">
+        🔑
+      </div>
+      <div>
+        <h4 class="font-black text-xs text-white font-fredoka leading-tight">Kunci Jawaban & Kisi-Kisi</h4>
+        <p class="text-[10px] text-purple-200 mt-0.5 font-bold">Rubrik penskoran lengkap guru</p>
+      </div>
+    </div>
+
+    <div class="glass-card rounded-2xl p-3 flex items-center gap-3">
+      <div class="w-10 h-10 rounded-xl bg-blue-400/20 border border-blue-400/40 flex items-center justify-center text-xl shrink-0">
+        💻
+      </div>
+      <div>
+        <h4 class="font-black text-xs text-white font-fredoka leading-tight">Format Word & PDF A4</h4>
+        <p class="text-[10px] text-purple-200 mt-0.5 font-bold">Tinggal ganti kop nama sekolah</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOTTOM CTA BUTTON & BRANDING -->
+  <div class="relative z-20 flex flex-col items-center text-center space-y-2 pb-2">
+    <!-- Big 3D Golden Pill Button -->
+    <div class="w-full max-w-lg gold-button rounded-2xl py-3.5 px-6 text-slate-950 font-black text-base tracking-wide font-fredoka flex items-center justify-center gap-2">
+      <span>👉</span>
+      <span>DAPATKAN SEKARANG DI LYNK.ID</span>
+      <span>👈</span>
+    </div>
+
+    <!-- Store Info -->
+    <div class="space-y-0.5">
+      <p class="text-sm font-black text-amber-300 font-fredoka tracking-wide">
+        Bahan Ajar Bu Guru • lynk.id/bahanajarbuguru
+      </p>
+      <p class="text-[10px] text-purple-300 font-bold">
+        ⚡ Download Instan • Praktis Siap Pakai • Bebas Lembur Guru & Wali Murid
+      </p>
+    </div>
+  </div>
+
+</body>
+</html>
