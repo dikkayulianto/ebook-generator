@@ -3,64 +3,104 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bahan Ajar Bu Guru — Perangkat Pembelajaran & Soal PAI SD Kurikulum Merdeka</title>
+  <title>Bahan Ajar Bu Guru — Perangkat Pembelajaran & Bank Soal PAI SD Kurikulum Merdeka</title>
   
   <!-- SEO & Social Sharing (OpenGraph) -->
-  <meta name="description" content="Portal materi dan perangkat ajar Pendidikan Agama Islam & Budi Pekerti SD Kurikulum Merdeka (CP No. 020/2026): Buku Siswa 1 Semester, Modul Ajar Deep Learning, Bank Soal SAS Kelas 1–6 SD format Word dan PDF.">
+  <meta name="description" content="Portal resmi Bahan Ajar Bu Guru: Buku Siswa PAI SD Kelas 1-6, Modul Ajar Deep Learning, dan Kumpulan Soal SAS Kurikulum Merdeka (CP No. 020/2026) format Word & PDF siap pakai.">
   <meta property="og:title" content="Bahan Ajar Bu Guru — Portal Perangkat Ajar PAI SD">
   <meta property="og:description" content="Buku Siswa, Modul Ajar, Bank Soal SAS Kelas 1-6 SD, dan Game Edukasi Islami Siap Pakai. 100% Word (.docx) Editable & PDF Siap Cetak.">
   <meta property="og:image" content="/assets/banner_header_buguru.jpg">
   <meta property="og:url" content="https://lynk.id/bahanajarbuguru">
 
-  <!-- Tailwind CSS & Google Fonts -->
+  <!-- Tailwind CSS & Google Fonts (Clean Edu: Plus Jakarta Sans) -->
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Lora:ital,wght@0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
+            serif: ['"Newsreader"', 'Georgia', 'serif'],
+          },
+          colors: {
+            brand: {
+              50: '#f0fdf4',
+              100: '#dcfce7',
+              200: '#bbf7d0',
+              500: '#22c55e',
+              700: '#15803d',
+              800: '#166534',
+              900: '#14532d',
+              950: '#052e16',
+            },
+            warm: {
+              50: '#fdfbf7',
+              100: '#f7f3ea',
+              200: '#ece3d0',
+              800: '#78350f',
+              900: '#451a03',
+            }
+          }
+        }
+      }
+    }
+  </script>
 
   <style>
     body {
-      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
       color: #1e293b;
       background-color: #f8fafc;
       -webkit-font-smoothing: antialiased;
     }
-    .font-serif-title {
-      font-family: 'Lora', Georgia, serif;
-    }
     
-    /* Clean custom scrollbar */
-    ::-webkit-scrollbar { width: 7px; height: 7px; }
+    /* Clean Edu Scrollbar */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
     ::-webkit-scrollbar-track { background: #f1f5f9; }
-    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
     ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
 
-    /* Focus accessibility styling */
+    /* Accessibility Focus Rings */
     a:focus-visible, button:focus-visible {
-      outline: 2px solid #047857;
+      outline: 2px solid #166534;
       outline-offset: 2px;
+    }
+
+    /* Subtle Card Elevation */
+    .edu-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      transition: all 0.2s ease-in-out;
+    }
+    .edu-card:hover {
+      border-color: #cbd5e1;
+      box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.05), 0 8px 10px -6px rgba(15, 23, 42, 0.03);
     }
   </style>
 </head>
-<body class="flex flex-col min-h-screen pb-16 md:pb-0">
+<body class="flex flex-col min-h-screen pb-20 md:pb-0">
 
-  <!-- TOP ANNOUNCEMENT BAR -->
-  <aside aria-label="Pengumuman Kurikulum" class="bg-emerald-950 text-emerald-100 text-xs py-2 px-4 text-center font-medium border-b border-emerald-900 flex items-center justify-center gap-2">
+  <!-- TOP ANNOUNCEMENT BAR (Clean Edu Banner) -->
+  <aside aria-label="Informasi Regulasi Kurikulum" class="bg-brand-950 text-brand-100 text-[11px] sm:text-xs py-2 px-4 text-center font-medium border-b border-brand-900 flex items-center justify-center gap-2">
     <span>Pembaruan Capaian Pembelajaran (CP) No. 020 Tahun 2026: Seluruh naskah soal dan modul ajar telah diselaraskan.</span>
-    <a href="https://lynk.id/bahanajarbuguru" target="_blank" rel="noopener noreferrer" class="hidden sm:inline font-semibold text-amber-300 hover:text-amber-200 underline ml-1">Kunjungi Toko Lynk.id</a>
+    <a href="https://lynk.id/bahanajarbuguru" target="_blank" rel="noopener noreferrer" class="hidden sm:inline font-bold text-amber-300 hover:text-amber-200 underline ml-1">Kunjungi Toko Lynk.id</a>
   </aside>
 
-  <!-- SITE HEADER / NAVBAR -->
-  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-slate-200">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between">
+  <!-- STICKY HEADER & NAVBAR -->
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between">
       
-      <!-- Teacher / Brand Identity -->
+      <!-- Brand Logo & Teacher Identity -->
       <a href="/" class="flex items-center gap-3 group">
-        <div class="w-10 h-10 rounded-full overflow-hidden border border-emerald-600/30 shrink-0 bg-emerald-50">
+        <div class="w-10 h-10 rounded-full overflow-hidden border border-brand-700/30 shrink-0 bg-brand-50 shadow-sm">
           <img src="/assets/avatar_profile_buguru.jpg" alt="Foto Profil Bahan Ajar Bu Guru" class="w-full h-full object-cover">
         </div>
         <div>
-          <span class="font-extrabold text-slate-900 text-base tracking-tight group-hover:text-emerald-800 transition-colors block">
+          <span class="font-bold text-slate-900 text-base sm:text-lg tracking-tight group-hover:text-brand-800 transition-colors block">
             Bahan Ajar Bu Guru
           </span>
           <p class="text-[11px] text-slate-500 font-medium hidden sm:block">
@@ -70,102 +110,102 @@
       </a>
 
       <!-- Desktop Nav Links -->
-      <nav aria-label="Navigasi Utama" class="hidden md:flex items-center gap-6 text-xs font-semibold text-slate-600">
-        <a href="#katalog-buku" class="hover:text-emerald-800 transition-colors">Buku Siswa</a>
-        <a href="#modul-ajar" class="hover:text-emerald-800 transition-colors">Modul Ajar</a>
-        <a href="#bank-soal" class="hover:text-emerald-800 transition-colors">Bank Soal SAS</a>
-        <a href="#game-edukasi" class="hover:text-emerald-800 transition-colors">Game Interaktif</a>
-        <a href="#keunggulan" class="hover:text-emerald-800 transition-colors">Standar Mutu</a>
-        <a href="#faq" class="hover:text-emerald-800 transition-colors">FAQ</a>
+      <nav aria-label="Navigasi Utama" class="hidden md:flex items-center gap-7 text-xs font-semibold text-slate-600">
+        <a href="#katalog-buku" class="hover:text-brand-800 transition-colors">Buku Siswa</a>
+        <a href="#modul-ajar" class="hover:text-brand-800 transition-colors">Modul Ajar</a>
+        <a href="#bank-soal" class="hover:text-brand-800 transition-colors">Bank Soal SAS</a>
+        <a href="#game-edukasi" class="hover:text-brand-800 transition-colors">Game Interaktif</a>
+        <a href="#keunggulan" class="hover:text-brand-800 transition-colors">Standar Mutu</a>
+        <a href="#faq" class="hover:text-brand-800 transition-colors">FAQ</a>
       </nav>
 
       <!-- Primary Action CTA -->
       <div class="flex items-center gap-2">
-        <a href="https://lynk.id/bahanajarbuguru" target="_blank" rel="noopener noreferrer" class="px-4 py-2 rounded-lg bg-emerald-800 hover:bg-emerald-700 text-white font-semibold text-xs transition-colors flex items-center gap-1.5 shadow-sm">
-          <span>Buka Toko di Lynk.id</span>
+        <a href="https://lynk.id/bahanajarbuguru" target="_blank" rel="noopener noreferrer" class="px-4 py-2.5 rounded-lg bg-brand-800 hover:bg-brand-900 text-white font-semibold text-xs transition-colors flex items-center gap-2 shadow-sm active:scale-[0.98]">
+          <span>Katalog Lynk.id</span>
         </a>
       </div>
 
     </div>
   </header>
 
-  <!-- MAIN CONTENT CONTAINER -->
+  <!-- MAIN BODY CONTAINER -->
   <main class="max-w-7xl mx-auto px-4 sm:px-6 py-8 space-y-12 flex-1 w-full">
 
-    <!-- HERO SECTION: EDITORIAL BANNER -->
-    <section class="rounded-2xl bg-emerald-900 text-white p-6 sm:p-10 border border-emerald-800 shadow-sm">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+    <!-- HERO SECTION: CLEAN EDU EDITORIAL HERO -->
+    <section class="rounded-2xl bg-white border border-slate-200 shadow-sm overflow-hidden">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center p-6 sm:p-10 lg:p-12">
         
         <!-- Left Column: Primary Pitch -->
-        <div class="lg:col-span-8 space-y-4">
-          <p class="text-xs font-bold uppercase tracking-wider text-emerald-300">
-            Kurikulum Merdeka SD • Acuan CP No. 020 Tahun 2026
-          </p>
+        <div class="lg:col-span-8 space-y-5">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-brand-50 border border-brand-200 text-brand-800 text-xs font-semibold">
+            <span>Kurikulum Merdeka 2026 • CP No. 020 Kemendikbudristek</span>
+          </div>
 
-          <h1 class="text-2xl sm:text-4xl lg:text-4xl font-extrabold text-white leading-tight font-serif-title">
-            Perangkat Pembelajaran PAI & Budi Pekerti SD yang Rapi, Lengkap, dan Siap Pakai.
+          <h1 class="text-2xl sm:text-4xl lg:text-[42px] font-extrabold text-slate-900 leading-[1.2] tracking-tight">
+            Perangkat Pembelajaran PAI & Budi Pekerti SD yang Rapi, Praktis, dan Siap Pakai.
           </h1>
 
-          <p class="text-sm sm:text-base text-emerald-100/90 leading-relaxed max-w-2xl">
-            Solusi praktis bagi Bapak/Ibu Guru dan orang tua. Menyediakan <strong>Buku Siswa 1 Semester</strong>, <strong>Modul Ajar Deep Learning per Bab</strong>, dan <strong>Naskah Soal SAS Kelas 1–6 SD</strong> dalam format <em>Word (.docx)</em> yang dapat diedit nama sekolahnya, serta <em>PDF</em> siap cetak.
+          <p class="text-sm sm:text-base text-slate-600 leading-relaxed max-w-2xl font-normal">
+            Selamat datang di portal resmi <strong>Bahan Ajar Bu Guru</strong>. Kami menghadirkan <strong>Buku Siswa 1 Semester</strong>, <strong>Modul Ajar Deep Learning per Bab</strong>, dan <strong>Naskah Soal SAS Kelas 1–6 SD</strong> dalam format <em>Word (.docx)</em> yang dapat disunting bebas nama sekolahnya, serta <em>PDF</em> beresolusi tinggi siap cetak.
           </p>
 
           <!-- Direct Actions -->
           <div class="pt-2 flex flex-wrap items-center gap-3">
-            <a href="https://lynk.id/bahanajarbuguru" target="_blank" rel="noopener noreferrer" class="px-5 py-3 rounded-lg bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-xs transition-colors shadow-sm">
-              Katalog Pembelian di Lynk.id
+            <a href="https://lynk.id/bahanajarbuguru" target="_blank" rel="noopener noreferrer" class="px-6 py-3 rounded-lg bg-brand-800 hover:bg-brand-900 text-white font-bold text-xs sm:text-sm transition-colors shadow-sm">
+              Buka Katalog Toko di Lynk.id
             </a>
-            <a href="/game_petualangan_islami.html" target="_blank" class="px-4 py-3 rounded-lg bg-emerald-950/70 hover:bg-emerald-950 border border-emerald-700 text-emerald-200 text-xs font-medium transition-colors">
-              Uji Coba Game Edukasi Siswa
+            <a href="/game_petualangan_islami.html" target="_blank" class="px-5 py-3 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs sm:text-sm font-semibold transition-colors">
+              Coba Game Edukasi Siswa
             </a>
-            <a href="#katalog-buku" class="px-4 py-3 rounded-lg bg-white/10 hover:bg-white/15 text-white text-xs font-medium transition-colors">
+            <a href="#katalog-buku" class="px-4 py-3 rounded-lg border border-slate-300 hover:bg-slate-50 text-slate-700 text-xs sm:text-sm font-medium transition-colors">
               Lihat Cuplikan Dokumen
             </a>
           </div>
 
           <!-- Technical Guarantees -->
-          <div class="pt-4 border-t border-emerald-800/80 grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs text-emerald-200/90">
+          <div class="pt-6 border-t border-slate-100 grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs">
             <div>
-              <span class="font-bold text-white block">Kelas 1 s.d. 6 SD</span>
-              <span class="text-[11px] text-emerald-300">Fase A, B, dan C</span>
+              <span class="font-bold text-slate-900 block">Kelas 1 s.d. 6 SD</span>
+              <span class="text-slate-500 text-[11px]">Fase A, Fase B, Fase C</span>
             </div>
             <div>
-              <span class="font-bold text-white block">Format Asli Word</span>
-              <span class="text-[11px] text-emerald-300">Dapat diedit penuh</span>
+              <span class="font-bold text-slate-900 block">Format Asli Word</span>
+              <span class="text-slate-500 text-[11px]">Bisa diedit nama sekolah</span>
             </div>
             <div>
-              <span class="font-bold text-white block">Dokumen PDF A4</span>
-              <span class="text-[11px] text-emerald-300">Siap langsung dicetak</span>
+              <span class="font-bold text-slate-900 block">Dokumen PDF A4</span>
+              <span class="text-slate-500 text-[11px]">Siap langsung dicetak</span>
             </div>
             <div>
-              <span class="font-bold text-white block">Unduhan Otomatis</span>
-              <span class="text-[11px] text-emerald-300">Instan via Lynk.id</span>
+              <span class="font-bold text-slate-900 block">Unduhan Instan</span>
+              <span class="text-slate-500 text-[11px]">Otomatis via Lynk.id</span>
             </div>
           </div>
 
         </div>
 
-        <!-- Right Column: Teacher Identity Card -->
+        <!-- Right Column: Profile & Teacher Trust Card -->
         <div class="lg:col-span-4 flex justify-center">
-          <div class="w-full max-w-sm bg-emerald-950/90 border border-emerald-800 rounded-xl p-6 text-center space-y-4">
-            <div class="w-24 h-24 mx-auto rounded-full overflow-hidden border-2 border-emerald-400/50">
+          <div class="w-full max-w-sm bg-warm-50 border border-warm-200 rounded-xl p-6 text-center space-y-4 shadow-sm">
+            <div class="w-24 h-24 mx-auto rounded-full overflow-hidden border-2 border-brand-700/30 shadow-sm bg-white">
               <img src="/assets/avatar_profile_buguru.jpg" alt="Foto Profil Bahan Ajar Bu Guru" class="w-full h-full object-cover">
             </div>
             <div>
-              <h2 class="text-base font-bold text-white">Bahan Ajar Bu Guru</h2>
-              <p class="text-xs text-emerald-300 mt-0.5">Praktisi Guru PAI SD</p>
+              <h2 class="text-base font-bold text-slate-900">Bahan Ajar Bu Guru</h2>
+              <p class="text-xs text-brand-800 font-semibold mt-0.5">Praktisi Guru PAI SD</p>
             </div>
-            <p class="text-xs text-slate-300 leading-relaxed">
-              Materi disusun dengan bahasa yang santun, ilustrasi ramah anak, dan kaidah pedagogik aktif guna membantu guru mengajar secara bermakna tanpa terbebani administrasi manual.
+            <p class="text-xs text-slate-600 leading-relaxed font-serif italic text-[13px]">
+              "Menghadirkan bahan ajar agama Islam yang menyenangkan, terstruktur rapi, dan memfasilitasi pembelajaran bermakna bagi generasi muslim Indonesia."
             </p>
-            <div class="pt-3 border-t border-emerald-900 grid grid-cols-2 gap-2 text-center text-xs">
-              <div class="p-2 bg-emerald-900/40 rounded-lg">
-                <span class="font-bold text-white block">Format Resmi</span>
-                <span class="text-[10px] text-emerald-300">Kemendikbudristek</span>
+            <div class="pt-3 border-t border-warm-200 grid grid-cols-2 gap-2 text-center text-xs">
+              <div class="p-2.5 bg-white rounded-lg border border-warm-200">
+                <span class="font-bold text-slate-900 block">Format Resmi</span>
+                <span class="text-[10px] text-slate-500">Kemendikbudristek</span>
               </div>
-              <div class="p-2 bg-emerald-900/40 rounded-lg">
-                <span class="font-bold text-white block">Paket & Satuan</span>
-                <span class="text-[10px] text-emerald-300">Sesuai kebutuhan</span>
+              <div class="p-2.5 bg-white rounded-lg border border-warm-200">
+                <span class="font-bold text-slate-900 block">Paket & Satuan</span>
+                <span class="text-[10px] text-slate-500">Sesuai kebutuhan</span>
               </div>
             </div>
           </div>
@@ -174,23 +214,23 @@
       </div>
     </section>
 
-    <!-- FILTER TOOLBAR: KATEGORI & JENJANG KELAS -->
-    <section class="bg-white rounded-xl p-5 border border-slate-200 space-y-4">
+    <!-- FILTER TOOLBAR: KATEGORI PRODUK & KELAS -->
+    <section class="bg-white rounded-xl p-5 border border-slate-200 shadow-sm space-y-4">
       <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
         <div>
           <h2 class="text-sm font-bold text-slate-900">
-            Pilih Kategori Produk & Jenjang Kelas
+            Jelajahi Berdasarkan Kategori & Jenjang
           </h2>
-          <p class="text-xs text-slate-500">Gunakan filter di bawah untuk memilah katalog sesuai kebutuhan Anda:</p>
+          <p class="text-xs text-slate-500">Pilih kategori produk dan jenjang kelas yang Anda perlukan di bawah ini:</p>
         </div>
-        <div class="text-[11px] font-semibold text-emerald-800 bg-emerald-50 px-3 py-1 rounded border border-emerald-200">
-          Unduhan instan via Lynk.id setelah transaksi
+        <div class="text-[11px] font-semibold text-brand-800 bg-brand-50 px-3 py-1 rounded border border-brand-200">
+          Tersedia Pembelian Satuan & Paket Lengkap di Lynk.id
         </div>
       </div>
 
       <!-- Category Filter Buttons -->
       <div class="flex items-center gap-2 overflow-x-auto pb-1 text-xs font-semibold" id="category-pills">
-        <button onclick="filterCategory('all')" id="cat-all" class="px-3.5 py-2 rounded-lg bg-emerald-800 text-white shrink-0 transition-colors">
+        <button onclick="filterCategory('all')" id="cat-all" class="px-3.5 py-2 rounded-lg bg-brand-800 text-white shrink-0 transition-colors">
           Semua Koleksi
         </button>
         <button onclick="filterCategory('buku')" id="cat-buku" class="px-3.5 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 shrink-0 transition-colors">
@@ -210,7 +250,7 @@
       <!-- Grade Filter Buttons -->
       <div class="flex items-center gap-1.5 overflow-x-auto pb-1 text-xs font-medium border-t border-slate-100 pt-3">
         <span class="text-slate-400 text-[11px] px-1 font-semibold shrink-0">Jenjang:</span>
-        <button onclick="filterGrade('all')" id="grade-all" class="px-3 py-1 rounded bg-emerald-100 text-emerald-900 font-bold shrink-0 transition-colors">Semua Kelas</button>
+        <button onclick="filterGrade('all')" id="grade-all" class="px-3 py-1 rounded bg-brand-100 text-brand-900 font-bold shrink-0 transition-colors">Semua Kelas</button>
         <button onclick="filterGrade(1)" id="grade-1" class="px-3 py-1 rounded bg-slate-100 hover:bg-slate-200 text-slate-700 shrink-0 transition-colors">Kelas 1</button>
         <button onclick="filterGrade(2)" id="grade-2" class="px-3 py-1 rounded bg-slate-100 hover:bg-slate-200 text-slate-700 shrink-0 transition-colors">Kelas 2</button>
         <button onclick="filterGrade(3)" id="grade-3" class="px-3 py-1 rounded bg-slate-100 hover:bg-slate-200 text-slate-700 shrink-0 transition-colors">Kelas 3</button>
@@ -225,14 +265,14 @@
       
       <div class="flex flex-col sm:flex-row items-start sm:items-end justify-between border-b border-slate-200 pb-3 gap-2">
         <div>
-          <span class="text-[11px] font-bold uppercase tracking-wider text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded border border-emerald-200">
-            Bagian 1
+          <span class="text-[11px] font-bold uppercase tracking-wider text-brand-800 bg-brand-50 px-2.5 py-0.5 rounded border border-brand-200">
+            Katalog 1
           </span>
-          <h2 class="text-xl sm:text-2xl font-bold text-slate-900 mt-2 font-serif-title">
+          <h2 class="text-xl sm:text-2xl font-bold text-slate-900 mt-2">
             Buku Siswa PAI & Budi Pekerti (Kelas 1–6 SD)
           </h2>
           <p class="text-xs text-slate-500 mt-0.5">
-            Materi lengkap 1 semester dengan ilustrasi ramah anak, tata letak standar penerbit A4, dan acuan CP No. 020 Tahun 2026.
+            Buku materi 1 semester penuh dengan ilustrasi ramah anak, tata letak standar penerbit A4, dan acuan CP No. 020 Tahun 2026.
           </p>
         </div>
         <div class="flex items-center gap-2">
@@ -246,10 +286,10 @@
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
 
         <!-- KELAS 1 BUKU SISWA -->
-        <article class="product-item bg-white rounded-xl border border-slate-200 p-5 flex flex-col justify-between" data-category="buku" data-grade="1">
+        <article class="product-item edu-card rounded-xl p-5 flex flex-col justify-between" data-category="buku" data-grade="1">
           <div>
             <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-3">
-              <span class="text-[11px] font-bold text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded border border-emerald-200">
+              <span class="text-[11px] font-bold text-brand-800 bg-brand-50 px-2.5 py-0.5 rounded border border-brand-200">
                 Fase A • Kelas 1 SD
               </span>
               <span class="text-xs font-bold text-slate-900">
@@ -274,14 +314,14 @@
             <a href="/buku_siswa_pai_kelas1_semester1.html" target="_blank" class="flex-1 py-2 text-center text-xs font-medium text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors">
               Buka Sampel
             </a>
-            <a href="https://lynk.id/bahanajarbuguru" target="_blank" rel="noopener noreferrer" class="flex-1 py-2 text-center text-xs font-semibold text-white bg-emerald-800 hover:bg-emerald-700 rounded-lg transition-colors">
+            <a href="https://lynk.id/bahanajarbuguru" target="_blank" rel="noopener noreferrer" class="flex-1 py-2 text-center text-xs font-semibold text-white bg-brand-800 hover:bg-brand-900 rounded-lg transition-colors">
               Beli di Lynk.id
             </a>
           </div>
         </article>
 
         <!-- KELAS 2 BUKU SISWA -->
-        <article class="product-item bg-white rounded-xl border border-slate-200 p-5 flex flex-col justify-between" data-category="buku" data-grade="2">
+        <article class="product-item edu-card rounded-xl p-5 flex flex-col justify-between" data-category="buku" data-grade="2">
           <div>
             <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-3">
               <span class="text-[11px] font-bold text-teal-800 bg-teal-50 px-2.5 py-0.5 rounded border border-teal-200">
@@ -309,14 +349,14 @@
             <button onclick="openPreviewModal('Buku Siswa PAI Kelas 2 SD', 'Asmaul Husna, Hijaiyah Bersambung, Azan/Ikamah, Nabi Nuh a.s.', '/assets/cover_penjualan_buku_kelas2.jpg', 'Rp 35.000')" class="flex-1 py-2 text-center text-xs font-medium text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors">
               Detail Bab
             </button>
-            <a href="https://lynk.id/bahanajarbuguru" target="_blank" rel="noopener noreferrer" class="flex-1 py-2 text-center text-xs font-semibold text-white bg-teal-800 hover:bg-teal-700 rounded-lg transition-colors">
+            <a href="https://lynk.id/bahanajarbuguru" target="_blank" rel="noopener noreferrer" class="flex-1 py-2 text-center text-xs font-semibold text-white bg-teal-800 hover:bg-teal-900 rounded-lg transition-colors">
               Beli di Lynk.id
             </a>
           </div>
         </article>
 
         <!-- KELAS 3 BUKU SISWA -->
-        <article class="product-item bg-white rounded-xl border border-slate-200 p-5 flex flex-col justify-between" data-category="buku" data-grade="3">
+        <article class="product-item edu-card rounded-xl p-5 flex flex-col justify-between" data-category="buku" data-grade="3">
           <div>
             <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-3">
               <span class="text-[11px] font-bold text-slate-700 bg-slate-100 px-2.5 py-0.5 rounded border border-slate-300">
@@ -344,14 +384,14 @@
             <button onclick="openPreviewModal('Buku Siswa PAI Kelas 3 SD', 'Surah Al-Humazah/Al-Kautsar, Sifat Wajib Allah, Berbakti Orang Tua, Sholat Sunnah Rawatib', '/assets/cover_penjualan_buku_kelas3.jpg', 'Rp 35.000')" class="flex-1 py-2 text-center text-xs font-medium text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors">
               Detail Bab
             </button>
-            <a href="https://lynk.id/bahanajarbuguru" target="_blank" rel="noopener noreferrer" class="flex-1 py-2 text-center text-xs font-semibold text-white bg-slate-800 hover:bg-slate-700 rounded-lg transition-colors">
+            <a href="https://lynk.id/bahanajarbuguru" target="_blank" rel="noopener noreferrer" class="flex-1 py-2 text-center text-xs font-semibold text-white bg-slate-800 hover:bg-slate-900 rounded-lg transition-colors">
               Beli di Lynk.id
             </a>
           </div>
         </article>
 
         <!-- KELAS 4 BUKU SISWA -->
-        <article class="product-item bg-white rounded-xl border border-slate-200 p-5 flex flex-col justify-between" data-category="buku" data-grade="4">
+        <article class="product-item edu-card rounded-xl p-5 flex flex-col justify-between" data-category="buku" data-grade="4">
           <div>
             <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-3">
               <span class="text-[11px] font-bold text-amber-900 bg-amber-50 px-2.5 py-0.5 rounded border border-amber-200">
@@ -379,17 +419,17 @@
             <button onclick="openPreviewModal('Buku Siswa PAI Kelas 4 SD', 'Surah Al-Hujurat: 13, Asmaul Husna, Usia Baligh, Hijrah Rasulullah SAW', '/assets/cover_penjualan_buku_kelas4.jpg', 'Rp 35.000')" class="flex-1 py-2 text-center text-xs font-medium text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors">
               Detail Bab
             </button>
-            <a href="https://lynk.id/bahanajarbuguru" target="_blank" rel="noopener noreferrer" class="flex-1 py-2 text-center text-xs font-semibold text-white bg-amber-800 hover:bg-amber-700 rounded-lg transition-colors">
+            <a href="https://lynk.id/bahanajarbuguru" target="_blank" rel="noopener noreferrer" class="flex-1 py-2 text-center text-xs font-semibold text-white bg-amber-800 hover:bg-amber-900 rounded-lg transition-colors">
               Beli di Lynk.id
             </a>
           </div>
         </article>
 
         <!-- KELAS 5 BUKU SISWA -->
-        <article class="product-item bg-white rounded-xl border border-slate-200 p-5 flex flex-col justify-between" data-category="buku" data-grade="5">
+        <article class="product-item edu-card rounded-xl p-5 flex flex-col justify-between" data-category="buku" data-grade="5">
           <div>
             <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-3">
-              <span class="text-[11px] font-bold text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded border border-emerald-200">
+              <span class="text-[11px] font-bold text-brand-800 bg-brand-50 px-2.5 py-0.5 rounded border border-brand-200">
                 Fase C • Kelas 5 SD
               </span>
               <span class="text-xs font-bold text-slate-900">
@@ -414,14 +454,14 @@
             <button onclick="openPreviewModal('Buku Siswa PAI Kelas 5 SD', 'Surah Al-Ma\'un & Yatim, Asmaul Husna, Zakat/Infak/Sedekah, Fathu Makkah', '/assets/cover_penjualan_buku_kelas5.jpg', 'Rp 35.000')" class="flex-1 py-2 text-center text-xs font-medium text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors">
               Detail Bab
             </button>
-            <a href="https://lynk.id/bahanajarbuguru" target="_blank" rel="noopener noreferrer" class="flex-1 py-2 text-center text-xs font-semibold text-white bg-emerald-800 hover:bg-emerald-700 rounded-lg transition-colors">
+            <a href="https://lynk.id/bahanajarbuguru" target="_blank" rel="noopener noreferrer" class="flex-1 py-2 text-center text-xs font-semibold text-white bg-brand-800 hover:bg-brand-900 rounded-lg transition-colors">
               Beli di Lynk.id
             </a>
           </div>
         </article>
 
         <!-- KELAS 6 BUKU SISWA -->
-        <article class="product-item bg-white rounded-xl border border-slate-200 p-5 flex flex-col justify-between" data-category="buku" data-grade="6">
+        <article class="product-item edu-card rounded-xl p-5 flex flex-col justify-between" data-category="buku" data-grade="6">
           <div>
             <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-3">
               <span class="text-[11px] font-bold text-slate-800 bg-slate-100 px-2.5 py-0.5 rounded border border-slate-300">
@@ -449,7 +489,7 @@
             <button onclick="openPreviewModal('Buku Siswa PAI Kelas 6 SD', 'Surah Ad-Duha, Asmaul Husna Al-Ghaffar, Makanan Halal/Haram, Khulafaur Rasyidin', '/assets/cover_penjualan_buku_kelas6.jpg', 'Rp 35.000')" class="flex-1 py-2 text-center text-xs font-medium text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors">
               Detail Bab
             </button>
-            <a href="https://lynk.id/bahanajarbuguru" target="_blank" rel="noopener noreferrer" class="flex-1 py-2 text-center text-xs font-semibold text-white bg-slate-900 hover:bg-slate-800 rounded-lg transition-colors">
+            <a href="https://lynk.id/bahanajarbuguru" target="_blank" rel="noopener noreferrer" class="flex-1 py-2 text-center text-xs font-semibold text-white bg-slate-900 hover:bg-slate-950 rounded-lg transition-colors">
               Beli di Lynk.id
             </a>
           </div>
@@ -464,10 +504,10 @@
       <div class="flex flex-col sm:flex-row items-start sm:items-end justify-between border-b border-slate-200 pb-3 gap-2">
         <div>
           <span class="text-[11px] font-bold uppercase tracking-wider text-amber-900 bg-amber-50 px-2.5 py-0.5 rounded border border-amber-200">
-            Bagian 2
+            Katalog 2
           </span>
-          <h2 class="text-xl sm:text-2xl font-bold text-slate-900 mt-2 font-serif-title">
-            Modul Ajar Deep Learning PAI SD (8 Halaman Lengkap)
+          <h2 class="text-xl sm:text-2xl font-bold text-slate-900 mt-2">
+            Modul Ajar Deep Learning PAI SD (Format 8 Halaman Lengkap)
           </h2>
           <p class="text-xs text-slate-500 mt-0.5">
             Dokumen administrasi guru berstandar supervisi akreditasi: Siklus Mindful, Meaningful & Joyful Learning dilengkapi LKPD dan Rubrik Penilaian.
@@ -481,12 +521,12 @@
       </div>
 
       <!-- Feature Highlight Card -->
-      <div class="bg-white rounded-xl p-6 sm:p-8 border border-slate-200 grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+      <div class="edu-card rounded-xl p-6 sm:p-8 grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
         <div class="lg:col-span-8 space-y-3">
           <span class="bg-amber-100 text-amber-900 font-bold text-[11px] px-2.5 py-0.5 rounded border border-amber-200">
             File Word (.docx) 100% Dapat Diedit
           </span>
-          <h3 class="text-xl sm:text-2xl font-bold text-slate-900 font-serif-title">
+          <h3 class="text-xl sm:text-2xl font-bold text-slate-900">
             Paket Administrasi Guru: Dari Tujuan Pembelajaran hingga Lembar Kerja Siswa
           </h3>
           <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
@@ -503,7 +543,7 @@
             <p class="text-xs text-slate-500 font-semibold">Harga Paket Modul Ajar</p>
             <p class="text-2xl font-extrabold text-slate-900">Mulai Rp 25.000</p>
             <p class="text-[11px] text-slate-500">Tersedia per-bab maupun 1 semester</p>
-            <a href="https://lynk.id/bahanajarbuguru" target="_blank" rel="noopener noreferrer" class="mt-2 block w-full py-2.5 rounded-lg bg-emerald-800 hover:bg-emerald-700 text-white font-semibold text-xs transition-colors">
+            <a href="https://lynk.id/bahanajarbuguru" target="_blank" rel="noopener noreferrer" class="mt-2 block w-full py-2.5 rounded-lg bg-brand-800 hover:bg-brand-900 text-white font-semibold text-xs transition-colors">
               Pesan di Lynk.id
             </a>
           </div>
@@ -518,9 +558,9 @@
       <div class="flex flex-col sm:flex-row items-start sm:items-end justify-between border-b border-slate-200 pb-3 gap-2">
         <div>
           <span class="text-[11px] font-bold uppercase tracking-wider text-slate-700 bg-slate-100 px-2.5 py-0.5 rounded border border-slate-300">
-            Bagian 3
+            Katalog 3
           </span>
-          <h2 class="text-xl sm:text-2xl font-bold text-slate-900 mt-2 font-serif-title">
+          <h2 class="text-xl sm:text-2xl font-bold text-slate-900 mt-2">
             Bank Soal SAS (Sumatif Akhir Semester) PAI Kelas 1–6 SD
           </h2>
           <p class="text-xs text-slate-500 mt-0.5">
@@ -553,10 +593,10 @@
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
 
         <!-- KELAS 1 SOAL SAS -->
-        <article class="product-item bg-white rounded-xl border border-slate-200 p-5 flex flex-col justify-between" data-category="soal" data-grade="1">
+        <article class="product-item edu-card rounded-xl p-5 flex flex-col justify-between" data-category="soal" data-grade="1">
           <div>
             <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-3">
-              <span class="text-[11px] font-bold text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded border border-emerald-200">
+              <span class="text-[11px] font-bold text-brand-800 bg-brand-50 px-2.5 py-0.5 rounded border border-brand-200">
                 SAS Kelas 1 SD • Semester 1
               </span>
               <span class="text-xs font-bold text-slate-900">
@@ -582,14 +622,14 @@
             <a href="/flyer_sas_kelas1.html" class="flex-1 py-2 text-center text-xs font-medium text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors">
               Flyer 9:16
             </a>
-            <a href="https://lynk.id/bahanajarbuguru" target="_blank" rel="noopener noreferrer" class="flex-1 py-2 text-center text-xs font-semibold text-white bg-emerald-800 hover:bg-emerald-700 rounded-lg transition-colors">
+            <a href="https://lynk.id/bahanajarbuguru" target="_blank" rel="noopener noreferrer" class="flex-1 py-2 text-center text-xs font-semibold text-white bg-brand-800 hover:bg-brand-900 rounded-lg transition-colors">
               Beli di Lynk.id
             </a>
           </div>
         </article>
 
         <!-- KELAS 2 SOAL SAS -->
-        <article class="product-item bg-white rounded-xl border border-slate-200 p-5 flex flex-col justify-between" data-category="soal" data-grade="2">
+        <article class="product-item edu-card rounded-xl p-5 flex flex-col justify-between" data-category="soal" data-grade="2">
           <div>
             <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-3">
               <span class="text-[11px] font-bold text-teal-800 bg-teal-50 px-2.5 py-0.5 rounded border border-teal-200">
@@ -618,14 +658,14 @@
             <a href="/flyer_sas_kelas2.html" class="flex-1 py-2 text-center text-xs font-medium text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors">
               Flyer 9:16
             </a>
-            <a href="https://lynk.id/bahanajarbuguru" target="_blank" rel="noopener noreferrer" class="flex-1 py-2 text-center text-xs font-semibold text-white bg-teal-800 hover:bg-teal-700 rounded-lg transition-colors">
+            <a href="https://lynk.id/bahanajarbuguru" target="_blank" rel="noopener noreferrer" class="flex-1 py-2 text-center text-xs font-semibold text-white bg-teal-800 hover:bg-teal-900 rounded-lg transition-colors">
               Beli di Lynk.id
             </a>
           </div>
         </article>
 
         <!-- KELAS 3 SOAL SAS -->
-        <article class="product-item bg-white rounded-xl border border-slate-200 p-5 flex flex-col justify-between" data-category="soal" data-grade="3">
+        <article class="product-item edu-card rounded-xl p-5 flex flex-col justify-between" data-category="soal" data-grade="3">
           <div>
             <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-3">
               <span class="text-[11px] font-bold text-slate-700 bg-slate-100 px-2.5 py-0.5 rounded border border-slate-300">
@@ -654,14 +694,14 @@
             <a href="/flyer_sas_kelas3.html" class="flex-1 py-2 text-center text-xs font-medium text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors">
               Flyer 9:16
             </a>
-            <a href="https://lynk.id/bahanajarbuguru" target="_blank" rel="noopener noreferrer" class="flex-1 py-2 text-center text-xs font-semibold text-white bg-slate-800 hover:bg-slate-700 rounded-lg transition-colors">
+            <a href="https://lynk.id/bahanajarbuguru" target="_blank" rel="noopener noreferrer" class="flex-1 py-2 text-center text-xs font-semibold text-white bg-slate-800 hover:bg-slate-900 rounded-lg transition-colors">
               Beli di Lynk.id
             </a>
           </div>
         </article>
 
         <!-- KELAS 4 SOAL SAS -->
-        <article class="product-item bg-white rounded-xl border border-slate-200 p-5 flex flex-col justify-between" data-category="soal" data-grade="4">
+        <article class="product-item edu-card rounded-xl p-5 flex flex-col justify-between" data-category="soal" data-grade="4">
           <div>
             <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-3">
               <span class="text-[11px] font-bold text-amber-900 bg-amber-50 px-2.5 py-0.5 rounded border border-amber-200">
@@ -690,17 +730,17 @@
             <a href="/flyer_sas_kelas4.html" class="flex-1 py-2 text-center text-xs font-medium text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors">
               Flyer 9:16
             </a>
-            <a href="https://lynk.id/bahanajarbuguru" target="_blank" rel="noopener noreferrer" class="flex-1 py-2 text-center text-xs font-semibold text-white bg-amber-800 hover:bg-amber-700 rounded-lg transition-colors">
+            <a href="https://lynk.id/bahanajarbuguru" target="_blank" rel="noopener noreferrer" class="flex-1 py-2 text-center text-xs font-semibold text-white bg-amber-800 hover:bg-amber-900 rounded-lg transition-colors">
               Beli di Lynk.id
             </a>
           </div>
         </article>
 
         <!-- KELAS 5 SOAL SAS -->
-        <article class="product-item bg-white rounded-xl border border-slate-200 p-5 flex flex-col justify-between" data-category="soal" data-grade="5">
+        <article class="product-item edu-card rounded-xl p-5 flex flex-col justify-between" data-category="soal" data-grade="5">
           <div>
             <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-3">
-              <span class="text-[11px] font-bold text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded border border-emerald-200">
+              <span class="text-[11px] font-bold text-brand-800 bg-brand-50 px-2.5 py-0.5 rounded border border-brand-200">
                 SAS Kelas 5 SD • Semester 1
               </span>
               <span class="text-xs font-bold text-slate-900">
@@ -726,14 +766,14 @@
             <a href="/flyer_sas_kelas5.html" class="flex-1 py-2 text-center text-xs font-medium text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors">
               Flyer 9:16
             </a>
-            <a href="https://lynk.id/bahanajarbuguru" target="_blank" rel="noopener noreferrer" class="flex-1 py-2 text-center text-xs font-semibold text-white bg-emerald-800 hover:bg-emerald-700 rounded-lg transition-colors">
+            <a href="https://lynk.id/bahanajarbuguru" target="_blank" rel="noopener noreferrer" class="flex-1 py-2 text-center text-xs font-semibold text-white bg-brand-800 hover:bg-brand-900 rounded-lg transition-colors">
               Beli di Lynk.id
             </a>
           </div>
         </article>
 
         <!-- KELAS 6 SOAL SAS -->
-        <article class="product-item bg-white rounded-xl border border-slate-200 p-5 flex flex-col justify-between" data-category="soal" data-grade="6">
+        <article class="product-item edu-card rounded-xl p-5 flex flex-col justify-between" data-category="soal" data-grade="6">
           <div>
             <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-3">
               <span class="text-[11px] font-bold text-slate-800 bg-slate-100 px-2.5 py-0.5 rounded border border-slate-300">
@@ -762,7 +802,7 @@
             <a href="/flyer_sas_kelas6.html" class="flex-1 py-2 text-center text-xs font-medium text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors">
               Flyer 9:16
             </a>
-            <a href="https://lynk.id/bahanajarbuguru" target="_blank" rel="noopener noreferrer" class="flex-1 py-2 text-center text-xs font-semibold text-white bg-slate-900 hover:bg-slate-800 rounded-lg transition-colors">
+            <a href="https://lynk.id/bahanajarbuguru" target="_blank" rel="noopener noreferrer" class="flex-1 py-2 text-center text-xs font-semibold text-white bg-slate-900 hover:bg-slate-950 rounded-lg transition-colors">
               Beli di Lynk.id
             </a>
           </div>
@@ -776,11 +816,11 @@
       
       <div class="flex flex-col sm:flex-row items-start sm:items-end justify-between border-b border-slate-200 pb-3 gap-2">
         <div>
-          <span class="text-[11px] font-bold uppercase tracking-wider text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded border border-emerald-200">
+          <span class="text-[11px] font-bold uppercase tracking-wider text-brand-800 bg-brand-50 px-2.5 py-0.5 rounded border border-brand-200">
             Media Pembelajaran Interaktif
           </span>
-          <h2 class="text-xl sm:text-2xl font-bold text-slate-900 mt-2 font-serif-title">
-            Game Kuis: Petualangan Islami Ceria
+          <h2 class="text-xl sm:text-2xl font-bold text-slate-900 mt-2">
+            Game Kuis Edukasi: Petualangan Islami Ceria
           </h2>
           <p class="text-xs text-slate-500 mt-0.5">
             Aktivitas interaktif berbasis browser ponsel. Siswa dapat bermain kuis materi agama Islam secara mandiri atau berkelompok di kelas tanpa perlu instalasi aplikasi tambahan.
@@ -789,13 +829,13 @@
       </div>
 
       <!-- Game Feature Presentation -->
-      <div class="bg-white rounded-xl p-6 sm:p-8 border border-slate-200 grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+      <div class="edu-card rounded-xl p-6 sm:p-8 grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
         
         <div class="md:col-span-8 space-y-3">
-          <p class="text-xs font-bold text-emerald-800 uppercase tracking-wider">
+          <p class="text-xs font-bold text-brand-800 uppercase tracking-wider">
             Responsif di Layar HP Siswa & Proyektor Kelas
           </p>
-          <h3 class="text-xl sm:text-2xl font-bold text-slate-900 font-serif-title">
+          <h3 class="text-xl sm:text-2xl font-bold text-slate-900">
             Materi Agama Islam yang Disampaikan Lewat Kuis Interaktif
           </h3>
           <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
@@ -807,7 +847,7 @@
             <span class="bg-slate-50 px-3 py-1 rounded border border-slate-200">Bebas iklan komersial</span>
           </div>
           <div class="pt-3 flex flex-wrap gap-3">
-            <a href="/game_petualangan_islami.html" target="_blank" class="px-5 py-2.5 rounded-lg bg-emerald-800 hover:bg-emerald-700 text-white font-semibold text-xs transition-colors">
+            <a href="/game_petualangan_islami.html" target="_blank" class="px-5 py-2.5 rounded-lg bg-brand-800 hover:bg-brand-900 text-white font-semibold text-xs transition-colors">
               Mainkan Demo Langsung
             </a>
             <a href="https://lynk.id/bahanajarbuguru" target="_blank" rel="noopener noreferrer" class="px-4 py-2.5 rounded-lg bg-white hover:bg-slate-50 text-slate-700 font-medium text-xs border border-slate-300 transition-colors">
@@ -838,7 +878,7 @@
         <span class="text-[11px] font-bold uppercase tracking-wider text-slate-500">
           Standar Mutu
         </span>
-        <h2 class="text-xl sm:text-2xl font-bold text-slate-900 font-serif-title">
+        <h2 class="text-xl sm:text-2xl font-bold text-slate-900">
           Mengapa Menggunakan Bahan Ajar Ini?
         </h2>
         <p class="text-xs text-slate-500">
@@ -884,7 +924,7 @@
     <section class="bg-slate-900 text-white rounded-xl p-6 sm:p-10 space-y-6">
       
       <div class="text-center max-w-xl mx-auto space-y-1.5">
-        <h2 class="text-xl sm:text-2xl font-bold font-serif-title text-white">
+        <h2 class="text-xl sm:text-2xl font-bold text-white">
           Alur Pemesanan Dokumen di Lynk.id
         </h2>
         <p class="text-xs text-slate-400">
@@ -895,19 +935,19 @@
       <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
         
         <div class="bg-slate-800/80 border border-slate-700 rounded-lg p-5 text-center space-y-2">
-          <span class="inline-block w-7 h-7 rounded-full bg-emerald-700 text-white font-bold text-xs leading-7">1</span>
+          <span class="inline-block w-7 h-7 rounded-full bg-brand-700 text-white font-bold text-xs leading-7">1</span>
           <h3 class="font-bold text-sm text-white">Pilih Produk</h3>
           <p class="text-xs text-slate-300">Pilih modul, buku siswa, atau paket soal SAS yang Anda perlukan di tautan produk.</p>
         </div>
 
         <div class="bg-slate-800/80 border border-slate-700 rounded-lg p-5 text-center space-y-2">
-          <span class="inline-block w-7 h-7 rounded-full bg-emerald-700 text-white font-bold text-xs leading-7">2</span>
+          <span class="inline-block w-7 h-7 rounded-full bg-brand-700 text-white font-bold text-xs leading-7">2</span>
           <h3 class="font-bold text-sm text-white">Selesaikan Pembayaran</h3>
           <p class="text-xs text-slate-300">Lakukan pembayaran melalui QRIS (GoPay, OVO, Dana, ShopeePay) atau transfer bank nasional.</p>
         </div>
 
         <div class="bg-slate-800/80 border border-slate-700 rounded-lg p-5 text-center space-y-2">
-          <span class="inline-block w-7 h-7 rounded-full bg-emerald-700 text-white font-bold text-xs leading-7">3</span>
+          <span class="inline-block w-7 h-7 rounded-full bg-brand-700 text-white font-bold text-xs leading-7">3</span>
           <h3 class="font-bold text-sm text-white">Unduh Berkas</h3>
           <p class="text-xs text-slate-300">Tautan unduhan Word & PDF langsung aktif di layar dan cadangan dikirim ke kontak Anda.</p>
         </div>
@@ -915,7 +955,7 @@
       </div>
 
       <div class="pt-2 text-center">
-        <a href="https://lynk.id/bahanajarbuguru" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-emerald-700 hover:bg-emerald-600 text-white font-semibold text-xs transition-colors shadow-sm">
+        <a href="https://lynk.id/bahanajarbuguru" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-brand-700 hover:bg-brand-600 text-white font-semibold text-xs transition-colors shadow-sm">
           Buka Toko Resmi: lynk.id/bahanajarbuguru
         </a>
       </div>
@@ -929,7 +969,7 @@
         <span class="text-[11px] font-bold uppercase tracking-wider text-slate-500">
           Informasi Tambahan
         </span>
-        <h2 class="text-xl sm:text-2xl font-bold text-slate-900 font-serif-title">
+        <h2 class="text-xl sm:text-2xl font-bold text-slate-900">
           Pertanyaan yang Sering Diajukan
         </h2>
         <p class="text-xs text-slate-500">
@@ -943,7 +983,7 @@
         <div class="border border-slate-200 rounded-lg overflow-hidden">
           <button onclick="toggleFaq(1)" class="w-full p-4 text-left font-bold text-slate-900 text-xs sm:text-sm flex justify-between items-center bg-slate-50 hover:bg-slate-100 transition-colors">
             <span>Apakah naskah soal dan modul ajar dapat disunting nama sekolahnya?</span>
-            <span id="faq-icon-1" class="text-emerald-800 font-bold text-sm ml-2">＋</span>
+            <span id="faq-icon-1" class="text-brand-800 font-bold text-sm ml-2">＋</span>
           </button>
           <div id="faq-content-1" class="p-4 text-xs text-slate-600 leading-relaxed border-t border-slate-200 hidden bg-white">
             Seluruh naskah soal SAS dan Modul Ajar disediakan dalam format <strong>Microsoft Word (.docx)</strong> sehingga Bapak/Ibu Guru dapat leluasa mengganti kop nama sekolah, nama pengampu, nomor ujian, maupun menyesuaikan butir pertanyaan. Versi PDF siap cetak juga disertakan di dalam paket.
@@ -954,7 +994,7 @@
         <div class="border border-slate-200 rounded-lg overflow-hidden">
           <button onclick="toggleFaq(2)" class="w-full p-4 text-left font-bold text-slate-900 text-xs sm:text-sm flex justify-between items-center bg-slate-50 hover:bg-slate-100 transition-colors">
             <span>Apakah acuan materi telah sesuai dengan regulasi kurikulum terbaru?</span>
-            <span id="faq-icon-2" class="text-emerald-800 font-bold text-sm ml-2">＋</span>
+            <span id="faq-icon-2" class="text-brand-800 font-bold text-sm ml-2">＋</span>
           </button>
           <div id="faq-content-2" class="p-4 text-xs text-slate-600 leading-relaxed border-t border-slate-200 hidden bg-white">
             Ya. Penyusunan materi mengacu pada <strong>Capaian Pembelajaran (CP) No. 020 Tahun 2026</strong> Kemendikbudristek untuk seluruh jenjang: Fase A (Kelas 1–2), Fase B (Kelas 3–4), dan Fase C (Kelas 5–6).
@@ -965,7 +1005,7 @@
         <div class="border border-slate-200 rounded-lg overflow-hidden">
           <button onclick="toggleFaq(3)" class="w-full p-4 text-left font-bold text-slate-900 text-xs sm:text-sm flex justify-between items-center bg-slate-50 hover:bg-slate-100 transition-colors">
             <span>Bagaimana pengiriman file setelah pembayaran selesai?</span>
-            <span id="faq-icon-3" class="text-emerald-800 font-bold text-sm ml-2">＋</span>
+            <span id="faq-icon-3" class="text-brand-800 font-bold text-sm ml-2">＋</span>
           </button>
           <div id="faq-content-3" class="p-4 text-xs text-slate-600 leading-relaxed border-t border-slate-200 hidden bg-white">
             Pengiriman berlangsung otomatis melalui platform Lynk.id. Segera setelah konfirmasi pembayaran QRIS atau transfer diterima, tombol unduh berkas akan langsung tampil di halaman browser, dan tautan cadangan dikirim ke nomor kontak/email yang diisikan.
@@ -976,7 +1016,7 @@
         <div class="border border-slate-200 rounded-lg overflow-hidden">
           <button onclick="toggleFaq(4)" class="w-full p-4 text-left font-bold text-slate-900 text-xs sm:text-sm flex justify-between items-center bg-slate-50 hover:bg-slate-100 transition-colors">
             <span>Apakah game edukasi memerlukan instalasi aplikasi khusus?</span>
-            <span id="faq-icon-4" class="text-emerald-800 font-bold text-sm ml-2">＋</span>
+            <span id="faq-icon-4" class="text-brand-800 font-bold text-sm ml-2">＋</span>
           </button>
           <div id="faq-content-4" class="p-4 text-xs text-slate-600 leading-relaxed border-t border-slate-200 hidden bg-white">
             Tidak perlu. Game kuis interaktif berjalan langsung melalui browser ponsel (Chrome, Safari, dsb.) secara responsif, sehingga dapat dimainkan siswa tanpa membebani memori perangkat.
@@ -1003,9 +1043,9 @@
       </div>
 
       <div class="flex flex-wrap items-center gap-4 text-xs font-medium">
-        <a href="https://lynk.id/bahanajarbuguru" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-800 transition-colors">Toko Lynk.id</a>
-        <a href="/game_petualangan_islami.html" target="_blank" class="hover:text-emerald-800 transition-colors">Game Interaktif</a>
-        <a href="/generator.html" class="hover:text-emerald-800 transition-colors">Generator Soal & Cover</a>
+        <a href="https://lynk.id/bahanajarbuguru" target="_blank" rel="noopener noreferrer" class="hover:text-brand-800 transition-colors">Toko Lynk.id</a>
+        <a href="/game_petualangan_islami.html" target="_blank" class="hover:text-brand-800 transition-colors">Game Interaktif</a>
+        <a href="/generator.html" class="hover:text-brand-800 transition-colors">Generator Soal & Cover</a>
       </div>
 
       <p class="text-[11px] text-slate-400">
@@ -1014,21 +1054,21 @@
     </div>
   </footer>
 
-  <!-- MOBILE BOTTOM STICKY NAVIGATION -->
-  <nav aria-label="Navigasi Bawah Mobile" class="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur border-t border-slate-200 py-2 px-3 flex items-center justify-around text-center text-[11px] font-semibold">
-    <a href="/" class="text-emerald-800 py-1">
-      Beranda
+  <!-- MOBILE BOTTOM STICKY NAVIGATION (For TikTok & Instagram visitors) -->
+  <nav aria-label="Navigasi Bawah Mobile" class="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur border-t border-slate-200 py-2 px-3 flex items-center justify-around text-center text-[11px] font-semibold shadow-lg">
+    <a href="/" class="text-brand-800 py-1 flex flex-col items-center">
+      <span>Beranda</span>
     </a>
-    <a href="#katalog-buku" class="text-slate-600 hover:text-emerald-800 py-1">
-      Buku
+    <a href="#katalog-buku" class="text-slate-600 hover:text-brand-800 py-1 flex flex-col items-center">
+      <span>Buku</span>
     </a>
-    <a href="#modul-ajar" class="text-slate-600 hover:text-emerald-800 py-1">
-      Modul
+    <a href="#modul-ajar" class="text-slate-600 hover:text-brand-800 py-1 flex flex-col items-center">
+      <span>Modul</span>
     </a>
-    <a href="#bank-soal" class="text-slate-600 hover:text-emerald-800 py-1">
-      Soal
+    <a href="#bank-soal" class="text-slate-600 hover:text-brand-800 py-1 flex flex-col items-center">
+      <span>Soal</span>
     </a>
-    <a href="https://lynk.id/bahanajarbuguru" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 bg-emerald-800 text-white rounded-md font-bold text-xs shadow-sm">
+    <a href="https://lynk.id/bahanajarbuguru" target="_blank" rel="noopener noreferrer" class="px-3.5 py-1.5 bg-brand-800 text-white rounded-md font-bold text-xs shadow-sm">
       Lynk.id
     </a>
   </nav>
@@ -1067,7 +1107,7 @@
         <button onclick="closePreviewModal()" class="flex-1 py-2 rounded-lg border border-slate-300 text-slate-700 font-medium hover:bg-slate-100 transition-colors">
           Tutup
         </button>
-        <a id="modal-buy-btn" href="https://lynk.id/bahanajarbuguru" target="_blank" rel="noopener noreferrer" class="flex-1 py-2 rounded-lg bg-emerald-800 hover:bg-emerald-700 text-white font-semibold text-center transition-colors">
+        <a id="modal-buy-btn" href="https://lynk.id/bahanajarbuguru" target="_blank" rel="noopener noreferrer" class="flex-1 py-2 rounded-lg bg-brand-800 hover:bg-brand-900 text-white font-semibold text-center transition-colors">
           Beli di Lynk.id
         </a>
       </div>
@@ -1087,7 +1127,7 @@
         const btn = document.getElementById(`cat-${c}`);
         if (!btn) return;
         if (c === cat) {
-          btn.className = 'px-3.5 py-2 rounded-lg bg-emerald-800 text-white shrink-0 transition-colors font-semibold';
+          btn.className = 'px-3.5 py-2 rounded-lg bg-brand-800 text-white shrink-0 transition-colors font-semibold';
         } else {
           btn.className = 'px-3.5 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 shrink-0 transition-colors font-semibold';
         }
@@ -1102,7 +1142,7 @@
         const btn = document.getElementById(`grade-${g}`);
         if (!btn) return;
         if (String(g) === String(grade)) {
-          btn.className = 'px-3 py-1 rounded bg-emerald-100 text-emerald-900 font-bold shrink-0 transition-colors';
+          btn.className = 'px-3 py-1 rounded bg-brand-100 text-brand-900 font-bold shrink-0 transition-colors';
         } else {
           btn.className = 'px-3 py-1 rounded bg-slate-100 hover:bg-slate-200 text-slate-700 shrink-0 transition-colors font-medium';
         }
