@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Render Soal SAS dengan Watermark</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800;900&family=Amiri:wght@700&display=swap" rel="stylesheet">
+  
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      width: 1080px;
+      height: 1920px;
+      overflow: hidden;
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+      color: #0f172a;
+      background: #0f172a;
+      position: relative;
+    }
+    .font-arabic { font-family: 'Amiri', serif; }
+    
+    /* Paper 3D Shadow */
+    .exam-paper-shadow {
+      box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.65), 0 0 40px rgba(0, 0, 0, 0.35);
+    }
+
+    /* DIAGONAL WATERMARK PATTERN OVERLAY */
+    .watermark-overlay {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 50;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      opacity: 0.28;
+    }
+    .watermark-row {
+      display: flex;
+      white-space: nowrap;
+      transform: rotate(-24deg) scale(1.1);
+      gap: 30px;
+      font-size: 20px;
+      font-weight: 900;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #dc2626;
+      user-select: none;
+    }
+
+    /* Central Stamp */
+    .watermark-stamp {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(-18deg);
+      border: 5px dashed #dc2626;
+      background: rgba(254, 242, 242, 0.88);
+      color: #991b1b;
+      padding: 16px 32px;
+      border-radius: 16px;
+      text-align: center;
+      z-index: 60;
+      box-shadow: 0 15px 35px rgba(220, 38, 38, 0.25);
+      backdrop-filter: blur(2px);
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body class="flex flex-col justify-between p-12 relative select-none">
+
+  <!-- Background Decorative Grid Texture -->
+  <div class="absolute inset-0 opacity-15 pointer-events-none" style="background-image: radial-gradient(#38bdf8 1.5px, transparent 1.5px); background-size: 32px 32px;"></div>
+
+  <!-- TOP HEADER -->
+  <div class="relative z-10 flex flex-col items-center text-center space-y-4 pt-2">
+    
+    <!-- Top Pill Badge -->
+    <div class="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-slate-800/95 border border-slate-700 shadow-md">
+      <span class="w-3 h-3 rounded-full bg-amber-400"></span>
+      <span id="header-badge" class="text-amber-300 font-bold text-base tracking-wider uppercase">
+        SPILL LEMBAR NASKAH SOAL SAS KELAS 1 SD
+      </span>
+    </div>
+
+    <h1 id="header-title" class="text-5xl font-extrabold text-white tracking-tight leading-tight max-w-4xl">
+      Intip Kualitas Naskah Ujian SAS Kelas 1
+    </h1>
+
+    <p id="header-desc" class="text-xl text-slate-300 font-medium max-w-3xl leading-relaxed">
+      Disusun berstandar CP No. 020/2026: 15 Pilihan Ganda + 5 Isian + 5 Uraian HOTS Lengkap Kunci & Rubrik
+    </p>
+
+  </div>
+
+  <!-- CENTER: 2 REALISTIC EXAM SHEETS (PAGE 1 & PAGE 2) WITH WATERMARKS -->
+  <div class="relative z-10 flex items-center justify-center my-2 h-[1120px]">
+
+    <!-- ============================================== -->
+    <!-- SHEET 1: PILIHAN GANDA (LEFT PAPER) -->
+    <!-- ============================================== -->
+    <div class="absolute -left-2 transform -rotate-4 w-[520px] h-[780px] bg-white text-slate-900 rounded-2xl p-7 exam-paper-shadow border border-slate-300 flex flex-col justify-between relative overflow-hidden">
+      
+      <!-- WATERMARK OVERLAY (SHEET 1) -->
+      <div class="watermark-overlay">
+        <div class="watermark-row">
+          <span>CONTOH PREVIEW</span> • <span>BAHAN AJAR BU GURU</span> • <span>LYNK.ID/BAHANAJARBUGURU</span> • <span>CONTOH PREVIEW</span>
+        </div>
+        <div class="watermark-row">
+          <span>FILE ASLI EDITABLE DI LYNK.ID</span> • <span>BAHAN AJAR BU GURU</span> • <span>CP NO. 020/2026</span>
+        </div>
+        <div class="watermark-row">
+          <span>CONTOH PREVIEW</span> • <span>BAHAN AJAR BU GURU</span> • <span>LYNK.ID/BAHANAJARBUGURU</span> • <span>CONTOH PREVIEW</span>
+        </div>
+        <div class="watermark-row">
+          <span>FILE ASLI EDITABLE DI LYNK.ID</span> • <span>BAHAN AJAR BU GURU</span> • <span>CP NO. 020/2026</span>
+        </div>
+      </div>
+
+      <!-- Content of Sheet 1 -->
+      <div class="relative z-10">
+        <!-- Exam KOP -->
+        <div class="border-b-2 border-slate-900 pb-2.5 text-center">
+          <p class="font-extrabold text-xs uppercase tracking-wide text-slate-900" id="paper-kop-school">
+            PENILAIAN SUMATIF AKHIR SEMESTER (SAS) 1
+          </p>
+          <p class="text-[11px] text-slate-700 font-bold mt-0.5" id="paper-kop-sub">
+            Mata Pelajaran: PAI & BP • Kelas: 1 SD • Kurikulum Merdeka
+          </p>
+        </div>
+
+        <!-- Student Identity Row -->
+        <div class="my-2.5 py-1 px-2.5 bg-slate-50 border border-slate-300 rounded text-[10px] grid grid-cols-2 gap-1 text-slate-700 font-semibold">
+          <div>Nama Siswa : ...................................</div>
+          <div>No. Absen : ................</div>
+          <div>Hari / Tgl   : ...................................</div>
+          <div>Waktu     : 90 Menit</div>
+        </div>
+
+        <!-- Questions List Part I -->
+        <div class="space-y-3 text-[11px] leading-relaxed text-slate-800">
+          <div class="font-bold text-emerald-950 text-xs border-b border-emerald-800/30 pb-0.5">
+            I. Pilihan Ganda (Beri tanda silang (X) pada huruf A, B, atau C)
+          </div>
+
+          <!-- Q1 -->
+          <div class="bg-slate-50/90 p-2.5 rounded-lg border border-slate-200" id="sheet1-q1">
+            <p class="font-bold text-slate-950">1. Perhatikan bunyi lafal berikut:</p>
+            <p class="text-center font-arabic text-xl my-1 text-emerald-900 font-bold" id="sheet1-arabic">بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ</p>
+            <p id="sheet1-q1-text">Lafal basmalah di atas dibaca ketika hendak...</p>
+            <div class="mt-1 space-y-0.5 text-slate-700 font-medium pl-1" id="sheet1-q1-options">
+              <p>A. Mengawali setiap perbuatan baik</p>
+              <p>B. Selesai mengerjakan tugas</p>
+              <p>C. Bangun dari tidur siang</p>
+            </div>
+          </div>
+
+          <!-- Q2 -->
+          <div class="bg-slate-50/90 p-2 rounded-lg border border-slate-200" id="sheet1-q2">
+            <p class="font-bold text-slate-950" id="sheet1-q2-text">2. Rukun Iman yang pertama adalah beriman kepada...</p>
+            <div class="mt-1 space-y-0.5 text-slate-700 font-medium pl-1" id="sheet1-q2-options">
+              <p>A. Malaikat Allah</p>
+              <p>B. Allah SWT</p>
+              <p>C. Kitab-kitab suci</p>
+            </div>
+          </div>
+
+          <!-- Q3 -->
+          <div class="bg-slate-50/90 p-2 rounded-lg border border-slate-200" id="sheet1-q3">
+            <p class="font-bold text-slate-950" id="sheet1-q3-text">3. Bersuci dari hadas kecil dilakukan dengan cara...</p>
+            <div class="mt-0.5 text-slate-700 font-medium pl-1" id="sheet1-q3-options">
+              <p>A. Mandi &nbsp;&nbsp;&nbsp; B. Wudhu &nbsp;&nbsp;&nbsp; C. Mencuci tangan</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="pt-2 border-t border-slate-300 flex justify-between text-[10px] text-slate-500 font-bold relative z-10">
+        <span>Format Microsoft Word (.docx)</span>
+        <span>Halaman 1 dari 4</span>
+      </div>
+    </div>
+
+    <!-- ============================================== -->
+    <!-- SHEET 2: ISIAN & URAIAN HOTS (RIGHT PAPER) -->
+    <!-- ============================================== -->
+    <div class="absolute -right-2 transform rotate-3 w-[530px] h-[820px] bg-white text-slate-900 rounded-2xl p-7 exam-paper-shadow border-2 border-amber-400 flex flex-col justify-between relative overflow-hidden">
+      
+      <!-- CENTRAL RED STAMP -->
+      <div class="watermark-stamp">
+        <p class="text-xs font-black uppercase tracking-wider text-red-700">DOKUMEN CONTOH / PREVIEW</p>
+        <p class="text-base font-extrabold text-red-950 mt-0.5">FILE ASLI WORD (.DOCX) LENGKAP</p>
+        <p class="text-[11px] font-bold text-red-800">Dapatkan di: lynk.id/bahanajarbuguru</p>
+      </div>
+
+      <!-- WATERMARK OVERLAY (SHEET 2) -->
+      <div class="watermark-overlay">
+        <div class="watermark-row">
+          <span>CONTOH PREVIEW</span> • <span>BAHAN AJAR BU GURU</span> • <span>LYNK.ID/BAHANAJARBUGURU</span> • <span>CONTOH PREVIEW</span>
+        </div>
+        <div class="watermark-row">
+          <span>FILE ASLI EDITABLE DI LYNK.ID</span> • <span>BAHAN AJAR BU GURU</span> • <span>CP NO. 020/2026</span>
+        </div>
+        <div class="watermark-row">
+          <span>CONTOH PREVIEW</span> • <span>BAHAN AJAR BU GURU</span> • <span>LYNK.ID/BAHANAJARBUGURU</span> • <span>CONTOH PREVIEW</span>
+        </div>
+        <div class="watermark-row">
+          <span>FILE ASLI EDITABLE DI LYNK.ID</span> • <span>BAHAN AJAR BU GURU</span> • <span>CP NO. 020/2026</span>
+        </div>
+      </div>
+
+      <!-- Content of Sheet 2 -->
+      <div class="relative z-10 space-y-3.5">
+        <div class="border-b-2 border-brand-900 pb-2 text-center">
+          <span class="bg-amber-400 text-slate-950 font-black text-[10px] px-3 py-0.5 rounded-full uppercase">
+            BAGIAN II & III (PENALARAN HOTS)
+          </span>
+          <p class="font-extrabold text-xs uppercase tracking-wide text-slate-900 mt-1" id="sheet2-header">
+            SOAL ISIAN SINGKAT & URAIAN ANALITIS
+          </p>
+          <p class="text-[10px] text-slate-600 font-bold" id="sheet2-sub">
+            Lengkap dengan Kunci Jawaban & Rubrik Penilaian
+          </p>
+        </div>
+
+        <!-- Section II: Isian Singkat -->
+        <div class="space-y-2 text-[11px]">
+          <p class="font-bold text-slate-900 border-b border-slate-200 pb-0.5">II. Isian Singkat (Jawablah dengan tepat):</p>
+          <div class="bg-amber-50/90 p-2.5 rounded-lg border border-amber-200 space-y-1.5" id="sheet2-isian">
+            <p><strong>1.</strong> Huruf hijaiyah yang tidak bisa menyambung ke huruf sesudahnya berjumlah ... huruf.</p>
+            <p><strong>2.</strong> Mengucapkan perkataan yang jujur dan santun kepada teman merupakan contoh adab ...</p>
+            <p><strong>3.</strong> Air yang suci dan dapat mensucikan untuk berwudhu disebut air ...</p>
+          </div>
+        </div>
+
+        <!-- Section III: Uraian HOTS -->
+        <div class="space-y-2 text-[11px]">
+          <p class="font-bold text-slate-900 border-b border-slate-200 pb-0.5">III. Uraian Penalaran (HOTS):</p>
+          <div class="bg-slate-50/90 p-2.5 rounded-lg border border-slate-200 space-y-2" id="sheet2-uraian">
+            <p><strong>1.</strong> Ahmad melihat temannya tersandung dan bukunya berserakan di lantai kelas. Jelaskan apa yang sebaiknya dilakukan Ahmad sesuai dengan ajaran Islam tentang tolong-menolong!</p>
+            <p><strong>2.</strong> Sebutkan urutan berwudhu yang benar dimulai dari membasuh kedua telapak tangan hingga membasuh kedua kaki!</p>
+          </div>
+        </div>
+
+        <!-- Answer Key & Rubric Preview Box -->
+        <div class="bg-brand-50/90 border border-brand-300 rounded-lg p-2.5 text-[10px] text-brand-950 space-y-1">
+          <p class="font-bold uppercase tracking-wide text-brand-900">Kunci Jawaban & Pedoman Penskoran:</p>
+          <p>• Pilihan Ganda: Skor 1 x 15 Soal = Bobot 60%</p>
+          <p>• Isian Singkat: Skor 2 x 5 Soal = Bobot 20%</p>
+          <p>• Uraian HOTS: Skor 4 x 5 Soal = Bobot 20% (Total Nilai = 100)</p>
+        </div>
+
+      </div>
+
+      <div class="pt-2 border-t border-slate-300 flex justify-between text-[10px] text-slate-500 font-bold relative z-10">
+        <span>Kunci Jawaban Lengkap Disertakan</span>
+        <span>Halaman 3 dari 4</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- BOTTOM FOOTER & CALL TO ACTION -->
+  <div class="relative z-10 bg-slate-900/95 border-2 border-slate-700 rounded-2xl p-6 flex items-center justify-between shadow-2xl backdrop-blur">
+    
+    <div class="space-y-1">
+      <div class="flex items-center gap-2">
+        <span class="bg-emerald-500 text-slate-950 font-black text-xs px-2.5 py-0.5 rounded">100% WORD</span>
+        <span class="text-white font-bold text-base">Tinggal Edit Kop Nama Sekolah & Langsung Cetak!</span>
+      </div>
+      <p class="text-xs text-slate-300">
+        Dapatkan naskah lengkap tanpa watermark dalam format <strong>Word (.docx)</strong> & <strong>PDF A4</strong> siap pakai.
+      </p>
+    </div>
+
+    <div class="bg-amber-400 text-slate-950 px-6 py-3 rounded-xl font-extrabold text-sm text-center shadow-lg">
+      <span class="block text-[10px] uppercase font-bold text-slate-800">DOWNLOAD DI LINK BIO:</span>
+      <span class="text-base tracking-tight font-black">lynk.id/bahanajarbuguru</span>
+    </div>
+
+  </div>
+
+  <!-- JAVASCRIPT TO DYNAMICALLY INJECT GRADE-SPECIFIC QUESTIONS -->
+  <script>
+    const gradeData = {
+      1: {
+        badge: "SPILL LEMBAR NASKAH SOAL SAS KELAS 1 SD",
+        title: "Intip Kualitas Naskah Ujian SAS Kelas 1",
+        desc: "Disusun berstandar CP No. 020/2026: 15 Pilihan Ganda + 5 Isian + 5 Uraian HOTS Lengkap Kunci & Rubrik",
+        kopSchool: "PENILAIAN SUMATIF AKHIR SEMESTER (SAS) 1",
+        kopSub: "Mata Pelajaran: PAI & BP • Kelas: 1 SD • Kurikulum Merdeka",
+        arabic: "بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ",
+        q1Text: "Lafal basmalah di atas dibaca ketika hendak...",
+        q1Options: ["A. Mengawali setiap perbuatan baik", "B. Selesai mengerjakan tugas", "C. Bangun dari tidur siang"],
+        q2Text: "2. Rukun Iman yang pertama adalah beriman kepada...",
+        q2Options: ["A. Malaikat Allah", "B. Allah SWT", "C. Kitab-kitab suci"],
+        q3Text: "3. Bersuci dari hadas kecil dilakukan dengan cara...",
+        q3Options: "A. Mandi &nbsp;&nbsp;&nbsp; B. Wudhu &nbsp;&nbsp;&nbsp; C. Mencuci tangan",
+        sheet2Header: "SOAL ISIAN SINGKAT & URAIAN ANALITIS",
+        sheet2Sub: "Materi: Huruf Hijaiyah, Rukun Iman, Basmalah & Bersuci",
+        isian: [
+          "1. Huruf hijaiyah yang tidak bisa menyambung ke huruf sesudahnya berjumlah ... huruf.",
+          "2. Mengucapkan perkataan yang jujur dan santun kepada teman merupakan contoh adab ...",
+          "3. Air yang suci dan dapat mensucikan untuk berwudhu disebut air ..."
+        ],
+        uraian: [
+          "1. Ahmad melihat temannya tersandung dan bukunya berserakan di lantai kelas. Jelaskan apa yang sebaiknya dilakukan Ahmad sesuai dengan ajaran Islam tentang tolong-menolong!",
+          "2. Sebutkan urutan berwudhu yang benar dimulai dari membasuh kedua telapak tangan hingga membasuh kedua kaki!"
+        ]
+      },
+      2: {
+        badge: "SPILL LEMBAR NASKAH SOAL SAS KELAS 2 SD",
+        title: "Intip Kualitas Naskah Ujian SAS Kelas 2",
+        desc: "Disusun berstandar CP No. 020/2026: Asmaul Husna, Huruf Bersambung, Azan/Ikamah & Kisah Nabi Nuh a.s.",
+        kopSchool: "PENILAIAN SUMATIF AKHIR SEMESTER (SAS) 1",
+        kopSub: "Mata Pelajaran: PAI & BP • Kelas: 2 SD • Kurikulum Merdeka",
+        arabic: "اَللّٰهُ الْحَفِيْظُ • اَللّٰهُ الْوَلِيُّ",
+        q1Text: "Asmaul Husna Al-Hafiz artinya Allah Maha...",
+        q1Options: ["A. Memelihara dan Menjaga", "B. Mendengar", "C. Menciptakan"],
+        q2Text: "2. Lafal azan yang dikumandangkan sebagai panggilan shalat wajib adalah...",
+        q2Options: ["A. Hayya 'alas-salah", "B. Qad qamatis-salah", "C. Subhanallah"],
+        q3Text: "3. Perahu besar dibuat oleh Nabi Nuh a.s. atas perintah Allah untuk menyelamatkan...",
+        q3Options: "A. Kaum yang beriman & pasang-pasangan hewan   B. Kaum kafir   C. Harta benda",
+        sheet2Header: "SOAL ISIAN SINGKAT & URAIAN ANALITIS KELAS 2",
+        sheet2Sub: "Materi: Asmaul Husna, Hijaiyah Bersambung & Shalat",
+        isian: [
+          "1. Asmaul Husna Al-Khabir menunjukkan bahwa Allah Maha ... atas segala sesuatu.",
+          "2. Panggilan yang dikumandangkan tepat saat shalat berjamaah akan segera dimulai disebut ...",
+          "3. Putra Nabi Nuh a.s. yang durhaka dan menolak naik ke atas perahu bernama ..."
+        ],
+        uraian: [
+          "1. Jelaskan perbedaan pokok antara Azan dan Ikamah beserta fungsinya masing-masing!",
+          "2. Tuliskan 2 contoh perilaku sehari-hari yang mencerminkan keteladanan sifat Asmaul Husna Al-Wali (Allah Maha Melindungi)!"
+        ]
+      },
+      3: {
+        badge: "SPILL LEMBAR NASKAH SOAL SAS KELAS 3 SD",
+        title: "Intip Kualitas Naskah Ujian SAS Kelas 3",
+        desc: "Disusun berstandar CP No. 020/2026: Surah Al-Humazah, Sifat Wajib Allah, Berbakti Orang Tua & Shalat Rawatib",
+        kopSchool: "PENILAIAN SUMATIF AKHIR SEMESTER (SAS) 1",
+        kopSub: "Mata Pelajaran: PAI & BP • Kelas: 3 SD • Kurikulum Merdeka",
+        arabic: "وَيْلٌ لِّكُلِّ هُمَزَةٍ لُّمَزَةٍۙ",
+        q1Text: "Kutipan ayat Surah Al-Humazah di atas memperingatkan kita agar menjauhi sikap...",
+        q1Options: ["A. Pengumpat dan pencela orang lain", "B. Pemalas dalam belajar", "C. Boros uang jajan"],
+        q2Text: "2. Shalat sunah rawatib yang dikerjakan sebelum shalat fardhu disebut shalat sunah...",
+        q2Options: ["A. Qabliyah", "B. Ba'diyah", "C. Witir"],
+        q3Text: "3. Sifat wajib Allah 'Wujud' memiliki arti bahwa Allah itu...",
+        q3Options: "A. Ada   B. Terdahulu   C. Kekal selamanya",
+        sheet2Header: "SOAL ISIAN SINGKAT & URAIAN ANALITIS KELAS 3",
+        sheet2Sub: "Materi: Surah Pendek, Sifat Wajib & Adab Islami",
+        isian: [
+          "1. Surah Al-Kautsar mengajarkan umat Islam untuk bersyukur dan menyembelih hewan ...",
+          "2. Shalat sunah dua rakaat sebelum shalat Subuh memiliki keutamaan lebih baik daripada dunia dan seisinya, dinamakan shalat rawatib ...",
+          "3. Ridha Allah SWT berada pada ridha kedua ..."
+        ],
+        uraian: [
+          "1. Sebutkan 3 contoh perbuatan terpuji yang mencerminkan rasa hormat dan patuh kepada guru di sekolah!",
+          "2. Jelaskan bahaya sifat suka menggunjing dan mencari-cari aib teman sesuai kandungan Surah Al-Humazah!"
+        ]
+      },
+      4: {
+        badge: "SPILL LEMBAR NASKAH SOAL SAS KELAS 4 SD",
+        title: "Intip Kualitas Naskah Ujian SAS Kelas 4",
+        desc: "Disusun berstandar CP No. 020/2026: Surah Al-Hujurat 13, Usia Baligh, Keragaman & Hijrah ke Madinah",
+        kopSchool: "PENILAIAN SUMATIF AKHIR SEMESTER (SAS) 1",
+        kopSub: "Mata Pelajaran: PAI & BP • Kelas: 4 SD • Kurikulum Merdeka",
+        arabic: "يٰٓاَيُّهَا النَّاسُ اِنَّا خَلَقْنٰكُمْ مِّنْ ذَكَرٍ وَّاُنْثٰى",
+        q1Text: "Potongan Surah Al-Hujurat: 13 di atas menegaskan bahwa keragaman manusia diciptakan agar saling...",
+        q1Options: ["A. Mengenal dan menghargai (Lita'arafu)", "B. Bersaing dan membanggakan diri", "C. Menjauhi satu sama lain"],
+        q2Text: "2. Anak yang telah memasuki usia baligh memiliki kewajiban menjalankan syariat Islam, disebut...",
+        q2Options: ["A. Mukallaf", "B. Mumayyiz", "C. Mustahik"],
+        q3Text: "3. Sahabat yang menemani Rasulullah SAW saat bersembunyi di Gua Tsur saat hijrah adalah...",
+        q3Options: "A. Abu Bakar Ash-Shiddiq   B. Umar bin Khattab   C. Ali bin Abi Thalib",
+        sheet2Header: "SOAL ISIAN SINGKAT & URAIAN ANALITIS KELAS 4",
+        sheet2Sub: "Materi: Keragaman, Baligh & Peristiwa Hijrah",
+        isian: [
+          "1. Asmaul Husna Al-Malik menunjukkan bahwa Allah adalah Penguasa / Raja alam semesta, sedangkan Al-Quddus artinya Maha ...",
+          "2. Salah satu tanda baligh bagi anak perempuan menurut ketentuan biologi dan fikih Islam adalah mengalami haid pada usia minimal ... tahun.",
+          "3. Masjid pertama yang dibangun oleh Rasulullah SAW ketika singgah di perjalanan hijrah adalah Masjid ..."
+        ],
+        uraian: [
+          "1. Jelaskan 3 tanda fisik maupun tanda usia seseorang telah memasuki masa baligh menurut ajaran Islam!",
+          "2. Bagaimana sikap seorang muslim dalam menghadapi perbedaan suku, bahasa, dan budaya di lingkungan sekolah sesuai prinsip Surah Al-Hujurat ayat 13?"
+        ]
+      },
+      5: {
+        badge: "SPILL LEMBAR NASKAH SOAL SAS KELAS 5 SD",
+        title: "Intip Kualitas Naskah Ujian SAS Kelas 5",
+        desc: "Disusun berstandar CP No. 020/2026: Surah Al-Ma'un, Zakat/Infak/Sedekah, Asmaul Husna & Fathu Makkah",
+        kopSchool: "PENILAIAN SUMATIF AKHIR SEMESTER (SAS) 1",
+        kopSub: "Mata Pelajaran: PAI & BP • Kelas: 5 SD • Kurikulum Merdeka",
+        arabic: "اَرَءَيْتَ الَّذِيْ يُكَذِّبُ بِالدِّيْنِۗ",
+        q1Text: "Ciri orang yang mendustakan agama menurut Surah Al-Ma'un di atas adalah...",
+        q1Options: ["A. Menghardik anak yatim & enggan menolong", "B. Suka berpuasa sunnah", "C. Shalat berjamaah tepat waktu"],
+        q2Text: "2. Mengeluarkan sebagian harta yang hukumnya wajib bagi setiap jiwa muslim di bulan Ramadhan adalah...",
+        q2Options: ["A. Zakat Fitrah", "B. Zakat Mal", "C. Sedekah jariyah"],
+        q3Text: "3. Asmaul Husna Al-Qayyum artinya Allah Maha...",
+        q3Options: "A. Mandiri / Berdiri Sendiri   B. Perkasa   C. Mengampuni",
+        sheet2Header: "SOAL ISIAN SINGKAT & URAIAN ANALITIS KELAS 5",
+        sheet2Sub: "Materi: Surah Al-Ma'un, Zakat/Sedekah & Fathu Makkah",
+        isian: [
+          "1. Golongan orang yang berhak menerima zakat disebut mustahik, yang terbagi dalam ... golongan/asnaf.",
+          "2. Penaklukan kota Makkah oleh pasukan Rasulullah SAW tanpa pertumpahan darah pada tahun 8 Hijriah dikenal sebagai peristiwa ...",
+          "3. Memberikan sesuatu kepada orang lain dengan rasa kasih sayang tanpa mengharap imbalan disebut ..."
+        ],
+        uraian: [
+          "1. Jelaskan perbedaan mendasar antara zakat, infak, sedekah, dan hadiah beserta hukum pelaksanaannya!",
+          "2. Tuliskan 3 keteladanan sikap mulia Rasulullah SAW saat peristiwa Fathu Makkah yang patut diterapkan dalam kehidupan masa kini!"
+        ]
+      },
+      6: {
+        badge: "SPILL LEMBAR NASKAH SOAL SAS KELAS 6 SD",
+        title: "Intip Kualitas Naskah Ujian SAS Kelas 6",
+        desc: "Disusun berstandar CP No. 020/2026: Surah Ad-Duha, Makanan Halal/Haram, Toleransi & Khulafaur Rasyidin",
+        kopSchool: "PENILAIAN SUMATIF AKHIR SEMESTER (SAS) 1",
+        kopSub: "Mata Pelajaran: PAI & BP • Kelas: 6 SD • Kurikulum Merdeka",
+        arabic: "وَوَجَدَكَ ضَاۤلًّا فَهَدٰىۖ",
+        q1Text: "Pesan utama yang dapat diteladani siswa dari kutipan Surah Ad-Duha di atas adalah...",
+        q1Options: ["A. Selalu bersyukur dan tekun menuntut ilmu", "B. Menyombongkan kepintaran", "C. Pasrah tanpa berikhtiar"],
+        q2Text: "2. Sikap meneladani Asmaul Husna Al-Afuw (Maha Pemaaf) dalam kehidupan sehari-hari adalah...",
+        q2Options: ["A. Ikhlas memaafkan kesalahan teman tanpa dendam", "B. Membalas perkataan buruk teman", "C. Menghindari teman yang bersalah"],
+        q3Text: "3. Daging ayam yang sehat disembelih tanpa membaca basmalah secara sengaja hukumnya menjadi...",
+        q3Options: "A. Haram dikonsumsi   B. Tetap halal   C. Makruh",
+        sheet2Header: "SOAL ISIAN SINGKAT & URAIAN ANALITIS KELAS 6",
+        sheet2Sub: "Materi: Ad-Duha, Makanan Halal/Haram & Khulafaur Rasyidin",
+        isian: [
+          "1. Khalifah kedua yang terkenal sangat tegas, berani membela kebenaran, dan bergelar Al-Faruq adalah ...",
+          "2. Makanan yang bersih, bergizi, menyehatkan, dan tidak membahayakan tubuh disebut makanan yang ...",
+          "3. Menghargai dan menghormati ibadah pemeluk agama lain tanpa mencampuri urusan akidahnya merupakan cerminan sikap ..."
+        ],
+        uraian: [
+          "1. Jelaskan 3 syarat utama agar suatu makanan dan minuman dikategorikan halal menurut syariat Islam!",
+          "2. Sebutkan masing-masing 1 jasa besar dari keempat Khulafaur Rasyidin (Abu Bakar, Umar, Utsman, Ali) bagi kemajuan dakwah Islam!"
+        ]
+      }
+    };
+
+    // Parse URL parameter
+    const urlParams = new URLSearchParams(window.location.search);
+    const grade = parseInt(urlParams.get('grade')) || 1;
+    const data = gradeData[grade] || gradeData[1];
+
+    // Inject data
+    document.getElementById('header-badge').innerText = data.badge;
+    document.getElementById('header-title').innerText = data.title;
+    document.getElementById('header-desc').innerText = data.desc;
+    document.getElementById('paper-kop-school').innerText = data.kopSchool;
+    document.getElementById('paper-kop-sub').innerText = data.kopSub;
+    document.getElementById('sheet1-arabic').innerText = data.arabic;
+    document.getElementById('sheet1-q1-text').innerText = data.q1Text;
+
+    // Sheet 1 Options
+    const optDiv = document.getElementById('sheet1-q1-options');
+    optDiv.innerHTML = data.q1Options.map(opt => `<p>${opt}</p>`).join('');
+
+    document.getElementById('sheet1-q2-text').innerText = data.q2Text;
+    document.getElementById('sheet1-q2-options').innerHTML = data.q2Options.map(opt => `<p>${opt}</p>`).join('');
+
+    document.getElementById('sheet1-q3-text').innerText = data.q3Text;
+    document.getElementById('sheet1-q3-options').innerHTML = `<p>${data.q3Options}</p>`;
+
+    document.getElementById('sheet2-header').innerText = data.sheet2Header;
+    document.getElementById('sheet2-sub').innerText = data.sheet2Sub;
+
+    // Sheet 2 Isian
+    document.getElementById('sheet2-isian').innerHTML = data.isian.map(item => `<p>${item}</p>`).join('');
+    // Sheet 2 Uraian
+    document.getElementById('sheet2-uraian').innerHTML = data.uraian.map(item => `<p>${item}</p>`).join('');
+  </script>
+</body>
+</html>
