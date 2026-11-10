@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Materi Posting Soal SAS PAI SD (Watermark & Caption Siap Pakai)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+      background: #0f172a;
+      color: #f8fafc;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+  <!-- TOP HEADER -->
+  <header class="bg-slate-900 border-b border-slate-800 sticky top-0 z-50 px-4 py-3 shadow-md">
+    <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-3">
+      <div class="flex items-center gap-3">
+        <a href="/" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold transition-colors">
+          ← Kembali ke Beranda
+        </a>
+        <div>
+          <span class="text-xs font-bold text-amber-400 block">KONTEN MEDIA SOSIAL RESMI</span>
+          <h1 class="text-base sm:text-lg font-extrabold text-white">Materi Posting Soal SAS (Watermark & Caption)</h1>
+        </div>
+      </div>
+      <div class="flex items-center gap-2">
+        <a href="https://lynk.id/bahanajarbuguru" target="_blank" class="px-4 py-1.5 rounded-lg bg-emerald-700 hover:bg-emerald-600 text-white font-bold text-xs transition-colors">
+          Buka Toko di Lynk.id
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN WORKSPACE -->
+  <main class="max-w-7xl mx-auto px-4 py-8 flex-1 w-full grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+    
+    <!-- LEFT: WATERMARKED IMAGE PREVIEW & DOWNLOADS (7 COLS) -->
+    <div class="lg:col-span-7 space-y-6">
+      
+      <!-- Grade Selector Bar -->
+      <div class="bg-slate-900 p-3 rounded-xl border border-slate-800 space-y-2">
+        <div class="flex justify-between items-center">
+          <span class="text-xs font-bold text-slate-300">Pilih Jenjang Kelas Soal SAS:</span>
+          <span class="text-[11px] text-amber-300 bg-amber-950/60 px-2 py-0.5 rounded border border-amber-800">
+            Format 9:16 (TikTok & IG Reels/Carousel)
+          </span>
+        </div>
+        <div class="grid grid-cols-6 gap-1.5">
+          <button onclick="selectGrade(1)" id="btn-grade-1" class="py-2 rounded-lg bg-emerald-600 text-white font-bold text-xs shadow">Kelas 1</button>
+          <button onclick="selectGrade(2)" id="btn-grade-2" class="py-2 rounded-lg bg-slate-800 text-slate-300 hover:text-white font-bold text-xs">Kelas 2</button>
+          <button onclick="selectGrade(3)" id="btn-grade-3" class="py-2 rounded-lg bg-slate-800 text-slate-300 hover:text-white font-bold text-xs">Kelas 3</button>
+          <button onclick="selectGrade(4)" id="btn-grade-4" class="py-2 rounded-lg bg-slate-800 text-slate-300 hover:text-white font-bold text-xs">Kelas 4</button>
+          <button onclick="selectGrade(5)" id="btn-grade-5" class="py-2 rounded-lg bg-slate-800 text-slate-300 hover:text-white font-bold text-xs">Kelas 5</button>
+          <button onclick="selectGrade(6)" id="btn-grade-6" class="py-2 rounded-lg bg-slate-800 text-slate-300 hover:text-white font-bold text-xs">Kelas 6</button>
+        </div>
+      </div>
+
+      <!-- Watermark Notice -->
+      <div class="p-3.5 bg-emerald-950/50 border border-emerald-700/60 rounded-xl text-xs text-emerald-200 flex items-start gap-2.5">
+        <span class="text-base text-emerald-400">🛡️</span>
+        <div>
+          <p class="font-bold text-white">Watermark Resmi Aktif</p>
+          <p class="text-[11px] text-emerald-300 mt-0.5">
+            Gambar soal telah dilengkapi watermark diagonal dan cap preview resmi agar followers dapat melihat kualitas naskah tanpa bisa menyalinnya secara cuma-cuma, serta mengarahkan pembelian berkas Word (.docx) ke <strong>lynk.id/bahanajarbuguru</strong>.
+          </p>
+        </div>
+      </div>
+
+      <!-- Live Mockup Display (Smartphone 9:16 Aspect Ratio) -->
+      <div class="bg-slate-900 rounded-2xl p-5 border border-slate-800 flex flex-col items-center justify-center space-y-4 shadow-xl">
+        <div class="w-full max-w-sm aspect-[9/16] rounded-xl overflow-hidden border-2 border-slate-700 shadow-2xl relative bg-black">
+          <img id="preview-image" src="/assets/watermark_soal_sas_kelas1.png" alt="Pratinjau Soal SAS Ber-watermark" class="w-full h-full object-cover">
+          <div class="absolute top-3 left-3 bg-slate-950/80 backdrop-blur border border-white/20 text-white font-bold text-[10px] px-2.5 py-1 rounded-full shadow">
+            <span id="label-grade-badge">SOAL SAS KELAS 1 SD • DENGAN WATERMARK</span>
+          </div>
+        </div>
+
+        <!-- Download Action -->
+        <div class="w-full max-w-sm flex items-center gap-3">
+          <a id="btn-download" href="/assets/watermark_soal_sas_kelas1.png" download="Soal_SAS_PAI_Kelas1_Watermark.png" class="flex-1 py-3 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs text-center transition-colors shadow">
+            Unduh Gambar Ber-Watermark (Kelas 1)
+          </a>
+          <a id="btn-view-full" href="/assets/watermark_soal_sas_kelas1.png" target="_blank" class="px-4 py-3 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium text-xs transition-colors">
+            Lihat Penuh
+          </a>
+        </div>
+      </div>
+
+      <!-- Quick All Classes Downloads -->
+      <div class="bg-slate-900 rounded-xl p-4 border border-slate-800 space-y-2">
+        <span class="text-xs font-bold text-slate-300 block">Unduh Gambar Soal Ber-Watermark Langsung:</span>
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs">
+          <a href="/assets/watermark_soal_sas_kelas1.png" download="Soal_SAS_Kelas1_Watermark.png" class="p-2 bg-slate-800 hover:bg-slate-700 rounded text-center text-slate-200 font-semibold border border-slate-700">Unduh Kelas 1</a>
+          <a href="/assets/watermark_soal_sas_kelas2.png" download="Soal_SAS_Kelas2_Watermark.png" class="p-2 bg-slate-800 hover:bg-slate-700 rounded text-center text-slate-200 font-semibold border border-slate-700">Unduh Kelas 2</a>
+          <a href="/assets/watermark_soal_sas_kelas3.png" download="Soal_SAS_Kelas3_Watermark.png" class="p-2 bg-slate-800 hover:bg-slate-700 rounded text-center text-slate-200 font-semibold border border-slate-700">Unduh Kelas 3</a>
+          <a href="/assets/watermark_soal_sas_kelas4.png" download="Soal_SAS_Kelas4_Watermark.png" class="p-2 bg-slate-800 hover:bg-slate-700 rounded text-center text-slate-200 font-semibold border border-slate-700">Unduh Kelas 4</a>
+          <a href="/assets/watermark_soal_sas_kelas5.png" download="Soal_SAS_Kelas5_Watermark.png" class="p-2 bg-slate-800 hover:bg-slate-700 rounded text-center text-slate-200 font-semibold border border-slate-700">Unduh Kelas 5</a>
+          <a href="/assets/watermark_soal_sas_kelas6.png" download="Soal_SAS_Kelas6_Watermark.png" class="p-2 bg-slate-800 hover:bg-slate-700 rounded text-center text-slate-200 font-semibold border border-slate-700">Unduh Kelas 6</a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT: CAPTIONS FOR TIKTOK & INSTAGRAM (5 COLS) -->
+    <div class="lg:col-span-5 space-y-5">
+      
+      <!-- Caption Style Selector -->
+      <div class="bg-slate-900 rounded-xl p-4 border border-slate-800 space-y-3">
+        <div class="flex justify-between items-center">
+          <h2 class="text-sm font-bold text-white">Pilihan Caption Siap Pakai</h2>
+          <span class="text-[11px] text-slate-400">Pilih gaya bahasa di bawah</span>
+        </div>
+        <div class="grid grid-cols-3 gap-1.5 text-xs">
+          <button onclick="setCaptionStyle('curhat')" id="tab-cap-curhat" class="py-2 px-2 rounded-lg bg-emerald-600 text-white font-bold text-center">Gaya Curhat Guru</button>
+          <button onclick="setCaptionStyle('lengkap')" id="tab-cap-lengkap" class="py-2 px-2 rounded-lg bg-slate-800 text-slate-300 hover:text-white font-bold text-center">Spesifikasi Detail</button>
+          <button onclick="setCaptionStyle('singkat')" id="tab-cap-singkat" class="py-2 px-2 rounded-lg bg-slate-800 text-slate-300 hover:text-white font-bold text-center">Singkat / TikTok</button>
+        </div>
+      </div>
+
+      <!-- Caption Textbox & Copy Button -->
+      <div class="bg-slate-900 rounded-xl p-5 border border-slate-800 space-y-3 shadow-xl">
+        <div class="flex justify-between items-center">
+          <span id="caption-title-label" class="text-xs font-bold text-amber-300 uppercase tracking-wide">
+            Opsi 1: Gaya Curhat Guru (Relatable & Solutif)
+          </span>
+          <button onclick="copyCurrentCaption()" id="btn-copy-cap" class="px-3.5 py-1.5 rounded-lg bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-xs transition-colors flex items-center gap-1 shadow">
+            Salin Caption
+          </button>
+        </div>
+
+        <textarea id="caption-area" rows="18" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3.5 text-xs text-slate-200 font-sans leading-relaxed focus:outline-none focus:border-emerald-500 select-all" readonly></textarea>
+        
+        <p class="text-[11px] text-slate-400 italic">
+          Tip: Salin caption di atas, lalu tempelkan langsung di deskripsi postingan Instagram Carousel atau video slide TikTok Anda.
+        </p>
+      </div>
+
+      <!-- Hashtags Recommendation -->
+      <div class="bg-slate-900 rounded-xl p-4 border border-slate-800 space-y-2">
+        <span class="text-xs font-bold text-slate-300 block">Kumpulan Hashtag Rekomendasi:</span>
+        <div class="p-3 bg-slate-950 rounded-lg text-xs text-slate-400 font-mono select-all">
+          #guruPAISD #soalSAS #kurikulummerdeka #bahanajarbuguru #perangkatPAI #soalPAS #asesmenmadrasah #guruSD #pendidikanagamaislam #soalHOTS
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <script>
+    let currentGrade = 1;
+    let currentStyle = 'curhat';
+
+    const captions = {
+      curhat: (grade) => `Bapak/Ibu Guru PAI SD, masih pusing dan lembur ketik naskah soal SAS dari nol? 
+
+Pekan Sumatif Akhir Semester (SAS) Semester 1 sudah di depan mata. Daripada waktu habis buat menyusun butir soal, kunci jawaban, dan kisi-kisi satu per satu, sekarang sudah ada solusi praktisnya!
+
+Ini dia bocoran isi naskah Soal SAS PAI & BP Kelas ${grade} SD Kurikulum Merdeka yang siap pakai:
+15 Soal Pilihan Ganda berbobot dengan stimulus yang jelas
+5 Soal Isian Singkat yang menguji pemahaman konsep
+5 Soal Uraian Penalaran (HOTS) melatih daya analisis siswa
+Lengkap Kunci Jawaban & Rubrik Penilaian Resmi
+Sesuai Capaian Pembelajaran (CP) No. 020 Tahun 2026 Kemendikbudristek
+
+Kelebihan utamanya:
+Format asli Microsoft Word (.docx) 100% bisa diedit! Bapak/Ibu tinggal mengganti nama sekolah, kop ujian, dan nama guru pengampu. Disertakan juga versi PDF siap cetak A4.
+
+Dapatkan naskah lengkap tanpa watermark sekarang:
+Klik link di bio profil kami: lynk.id/bahanajarbuguru
+(Tersedia untuk Kelas 1 s.d. 6 SD, bisa beli satuan maupun paket lengkap!)
+
+Semoga bermanfaat dan memudahkan tugas administrasi Bapak/Ibu Guru semua. Selamat mempersiapkan ujian!
+
+#guruPAISD #soalSAS #kurikulummerdeka #bahanajarbuguru #perangkatPAI #soalPAS #guruSD #soalHOTS #pendidikanagamaislam`,
+
+      lengkap: (grade) => `KUMPULAN NASKAH SOAL SAS PAI & BUDI PEKERTI KELAS ${grade} SD (SEMESTER 1)
+Acuan Resmi: Kurikulum Merdeka • CP No. 020 Tahun 2026 Kemendikbudristek
+
+Bapak/Ibu Guru PAI dan wali murid yang memerlukan perangkat evaluasi akhir semester siap pakai, paket naskah soal ini telah disusun secara komprehensif:
+
+SPESIFIKASI NASKAH SOAL:
+1. Pilihan Ganda: 15 butir soal proporsional
+2. Isian Singkat: 5 butir soal pemahaman materi pokok
+3. Uraian Analitis (HOTS): 5 butir soal penalaran kontekstual
+4. Kunci Jawaban Lengkap: Disertai pedoman penskoran & rubrik penilaian
+5. Kisi-kisi Asesmen: Selaras dengan elemen CP No. 020/2026
+
+FORMAT DOKUMEN:
+• File Microsoft Word (.docx): Dapat diedit penuh (kop sekolah, nama pengampu, butir soal)
+• File PDF A4: Siap langsung dicetak dengan tata letak rapi standar penerbit
+
+CARA MENDAPATKAN BERKAS:
+Unduh berkas asli tanpa watermark melalui tautan di bio kami:
+https://lynk.id/bahanajarbuguru
+
+Tersedia pembelian satuan per jenjang (Kelas 1–6) maupun paket hemat lengkap. Berkas dapat langsung diunduh secara instan 24 jam setelah pembayaran QRIS/Transfer.
+
+#guruPAISD #soalSAS #kurikulummerdeka #bahanajarbuguru #perangkatPAI #guruSD #pendidikanagamaislam`,
+
+      singkat: (grade) => `Spill naskah soal Ujian SAS PAI Kelas ${grade} SD Kurikulum Merdeka!
+
+Gak perlu repot ketik dari nol. Format Word (.docx) asli tinggal ganti kop nama sekolah & cetak!
+
+Paket lengkap:
+- 15 Pilihan Ganda
+- 5 Isian Singkat
+- 5 Uraian HOTS
+- Kunci Jawaban & Rubrik Penilaian
+- Sesuai CP No. 020/2026
+
+Download file aslinya tanpa watermark di link bio ya:
+lynk.id/bahanajarbuguru
+
+#guruPAISD #soalSAS #kurikulummerdeka #bahanajarbuguru #perangkatPAI #guruSD`
+    };
+
+    function selectGrade(grade) {
+      currentGrade = grade;
+
+      // Update grade buttons
+      for (let i = 1; i <= 6; i++) {
+        const btn = document.getElementById(`btn-grade-${i}`);
+        if (i === grade) {
+          btn.className = 'py-2 rounded-lg bg-emerald-600 text-white font-bold text-xs shadow';
+        } else {
+          btn.className = 'py-2 rounded-lg bg-slate-800 text-slate-300 hover:text-white font-bold text-xs';
+        }
+      }
+
+      // Update image preview & download links
+      const imgPath = `/assets/watermark_soal_sas_kelas${grade}.png`;
+      document.getElementById('preview-image').src = imgPath;
+      document.getElementById('label-grade-badge').innerText = `SOAL SAS KELAS ${grade} SD • DENGAN WATERMARK`;
+      
+      const btnDownload = document.getElementById('btn-download');
+      btnDownload.href = imgPath;
+      btnDownload.download = `Soal_SAS_PAI_Kelas${grade}_Watermark.png`;
+      btnDownload.innerText = `Unduh Gambar Ber-Watermark (Kelas ${grade})`;
+
+      document.getElementById('btn-view-full').href = imgPath;
+
+      // Update caption
+      updateCaption();
+    }
+
+    function setCaptionStyle(style) {
+      currentStyle = style;
+
+      const styles = ['curhat', 'lengkap', 'singkat'];
+      styles.forEach(s => {
+        const tab = document.getElementById(`tab-cap-${s}`);
+        if (s === style) {
+          tab.className = 'py-2 px-2 rounded-lg bg-emerald-600 text-white font-bold text-center';
+        } else {
+          tab.className = 'py-2 px-2 rounded-lg bg-slate-800 text-slate-300 hover:text-white font-bold text-center';
+        }
+      });
+
+      const labelMap = {
+        curhat: "Opsi 1: Gaya Curhat Guru (Relatable & Solutif)",
+        lengkap: "Opsi 2: Spesifikasi Detail & Administrasi Resmi",
+        singkat: "Opsi 3: Singkat / Khusus TikTok & Reels"
+      };
+      document.getElementById('caption-title-label').innerText = labelMap[style];
+
+      updateCaption();
+    }
+
+    function updateCaption() {
+      const text = captions[currentStyle](currentGrade);
+      document.getElementById('caption-area').value = text;
+    }
+
+    function copyCurrentCaption() {
+      const area = document.getElementById('caption-area');
+      area.select();
+      navigator.clipboard.writeText(area.value);
+
+      const btn = document.getElementById('btn-copy-cap');
+      const oldText = btn.innerText;
+      btn.innerText = 'Berhasil Disalin! ✓';
+      btn.className = 'px-3.5 py-1.5 rounded-lg bg-emerald-500 text-slate-950 font-bold text-xs transition-colors flex items-center gap-1 shadow';
+
+      setTimeout(() => {
+        btn.innerText = oldText;
+        btn.className = 'px-3.5 py-1.5 rounded-lg bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-xs transition-colors flex items-center gap-1 shadow';
+      }, 2000);
+    }
+
+    // Initialize
+    selectGrade(1);
+  </script>
+</body>
+</html>
