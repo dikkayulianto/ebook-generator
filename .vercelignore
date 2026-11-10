@@ -2,3 +2,5 @@ server.js
 uploads
 exports
 .gemini
+.agents
+*.log

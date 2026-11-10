@@ -1,8 +1,6 @@
 {
   "version": 2,
-  "rewrites": [
-    { "source": "/assets/(.*)", "destination": "/public/assets/$1" },
-    { "source": "/", "destination": "/public/index.html" },
-    { "source": "/(.*)", "destination": "/public/$1" }
-  ]
+  "framework": null,
+  "outputDirectory": "public",
+  "cleanUrls": true
 }
