@@ -2841,6 +2841,221 @@ app.post('/api/generate', async (req, res) => {
 // Serve exported HTML files
 app.use("/exports", express.static(exportsDir));
 
+// === ADMIN CMS & CONTENT MANAGEMENT ENDPOINTS ===
+const publicDir = path.join(__dirname, 'public');
+const dataDir = path.join(publicDir, 'data');
+const materiDir = path.join(publicDir, 'materi');
+const portalContentPath = path.join(dataDir, 'portal_content.json');
+
+if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir, { recursive: true });
+if (!fs.existsSync(materiDir)) fs.mkdirSync(materiDir, { recursive: true });
+
+function resolveSafePublicHtml(relPath) {
+  if (!relPath || typeof relPath !== 'string') return null;
+  const cleaned = relPath.replace(/^\/+/, '');
+  const resolved = path.resolve(publicDir, cleaned);
+  if (!resolved.startsWith(publicDir + path.sep)) return null;
+  if (!resolved.toLowerCase().endsWith('.html')) return null;
+  return { cleaned, resolved };
+}
+
+const PROTECTED_CORE_FILES = new Set([
+  'index.html',
+  'admin.html',
+  'generator.html',
+  'posting_soal_sas.html'
+]);
+
+app.get('/api/admin/status', (req, res) => {
+  res.json({
+    ok: true,
+    mode: 'local-writable',
+    hasPortalContent: fs.existsSync(portalContentPath)
+  });
+});
+
+app.get('/api/admin/content', (req, res) => {
+  try {
+    if (!fs.existsSync(portalContentPath)) {
+      return res.status(404).json({ error: 'File portal_content.json belum tersedia.' });
+    }
+    const raw = fs.readFileSync(portalContentPath, 'utf8');
+    res.json(JSON.parse(raw));
+  } catch (err) {
+    res.status(500).json({ error: 'Gagal membaca konten portal: ' + err.message });
+  }
+});
+
+app.post('/api/admin/content', (req, res) => {
+  try {
+    const payload = req.body;
+    if (!payload || typeof payload !== 'object' || !payload.site || !Array.isArray(payload.bukuItems)) {
+      return res.status(400).json({ error: 'Struktur JSON konten portal tidak valid.' });
+    }
+    fs.writeFileSync(portalContentPath, JSON.stringify(payload, null, 2), 'utf8');
+    res.json({ success: true, updatedAt: new Date().toISOString() });
+  } catch (err) {
+    res.status(500).json({ error: 'Gagal menyimpan konten portal: ' + err.message });
+  }
+});
+
+app.get('/api/admin/exports', (req, res) => {
+  try {
+    if (!fs.existsSync(exportsDir)) return res.json({ files: [] });
+    const entries = fs.readdirSync(exportsDir, { withFileTypes: true });
+    const files = entries
+      .filter((e) => e.isFile() && e.name.toLowerCase().endsWith('.html'))
+      .map((e) => {
+        const full = path.join(exportsDir, e.name);
+        const stat = fs.statSync(full);
+        return {
+          name: e.name,
+          url: `/exports/${e.name}`,
+          sizeBytes: stat.size,
+          modifiedAt: stat.mtime.toISOString()
+        };
+      })
+      .sort((a, b) => new Date(b.modifiedAt) - new Date(a.modifiedAt));
+    res.json({ files });
+  } catch (err) {
+    res.status(500).json({ error: 'Gagal membaca folder exports: ' + err.message });
+  }
+});
+
+app.get('/api/admin/assets', (req, res) => {
+  try {
+    const images = new Set();
+    const scanDirs = [
+      { dir: path.join(publicDir, 'assets'), prefix: '/assets' },
+      { dir: path.join(__dirname, 'assets'), prefix: '/assets' }
+    ];
+    for (const item of scanDirs) {
+      if (!fs.existsSync(item.dir)) continue;
+      for (const f of fs.readdirSync(item.dir)) {
+        if (/\.(jpg|jpeg|png|webp)$/i.test(f)) {
+          images.add(`${item.prefix}/${f}`);
+        }
+      }
+    }
+    res.json({ assets: Array.from(images).sort() });
+  } catch (err) {
+    res.status(500).json({ error: 'Gagal membaca daftar gambar aset: ' + err.message });
+  }
+});
+
+app.post('/api/admin/publish-export', (req, res) => {
+  try {
+    const { exportFileName, targetSlug } = req.body || {};
+    if (!exportFileName || typeof exportFileName !== 'string') {
+      return res.status(400).json({ error: 'Nama file export diperlukan.' });
+    }
+    const safeExportName = path.basename(exportFileName);
+    const sourcePath = path.join(exportsDir, safeExportName);
+    if (!fs.existsSync(sourcePath)) {
+      return res.status(404).json({ error: 'File sumber di folder exports tidak ditemukan.' });
+    }
+
+    const baseSlug = (targetSlug || safeExportName.replace(/\.html$/i, ''))
+      .toLowerCase()
+      .replace(/[^a-z0-9_-]+/g, '-')
+      .replace(/^-+|-+$/g, '');
+    if (!baseSlug) {
+      return res.status(400).json({ error: 'Nama file tujuan tidak valid.' });
+    }
+
+    const destFileName = `${baseSlug}.html`;
+    const destPath = path.join(materiDir, destFileName);
+    fs.copyFileSync(sourcePath, destPath);
+
+    res.json({
+      success: true,
+      fileName: destFileName,
+      publicUrl: `/materi/${destFileName}`
+    });
+  } catch (err) {
+    res.status(500).json({ error: 'Gagal mempublikasikan file ke folder public/materi: ' + err.message });
+  }
+});
+
+app.get('/api/admin/html-files', (req, res) => {
+  try {
+    const results = [];
+    const scanHtml = (dirPath, urlPrefix, groupLabel) => {
+      if (!fs.existsSync(dirPath)) return;
+      for (const entry of fs.readdirSync(dirPath, { withFileTypes: true })) {
+        if (!entry.isFile() || !entry.name.toLowerCase().endsWith('.html')) continue;
+        if (urlPrefix === '/' && PROTECTED_CORE_FILES.has(entry.name.toLowerCase())) continue;
+        const full = path.join(dirPath, entry.name);
+        const stat = fs.statSync(full);
+        results.push({
+          name: entry.name,
+          path: `${urlPrefix}${entry.name}`,
+          group: groupLabel,
+          deletable: urlPrefix === '/materi/',
+          sizeBytes: stat.size,
+          modifiedAt: stat.mtime.toISOString()
+        });
+      }
+    };
+
+    scanHtml(materiDir, '/materi/', 'Materi Terpublikasi (Dari Generator)');
+    scanHtml(publicDir, '/', 'Halaman Materi & Flyer Portal');
+    results.sort((a, b) => new Date(b.modifiedAt) - new Date(a.modifiedAt));
+    res.json({ files: results });
+  } catch (err) {
+    res.status(500).json({ error: 'Gagal memuat daftar file materi HTML: ' + err.message });
+  }
+});
+
+app.get('/api/admin/html-file', (req, res) => {
+  try {
+    const check = resolveSafePublicHtml(req.query.path);
+    if (!check || PROTECTED_CORE_FILES.has(check.cleaned.toLowerCase())) {
+      return res.status(400).json({ error: 'Jalur file tidak diizinkan untuk diedit di editor ini.' });
+    }
+    if (!fs.existsSync(check.resolved)) {
+      return res.status(404).json({ error: 'File tidak ditemukan.' });
+    }
+    const content = fs.readFileSync(check.resolved, 'utf8');
+    res.json({ path: '/' + check.cleaned.replace(/\\/g, '/'), content });
+  } catch (err) {
+    res.status(500).json({ error: 'Gagal membaca file HTML: ' + err.message });
+  }
+});
+
+app.post('/api/admin/html-file', (req, res) => {
+  try {
+    const { filePath, content } = req.body || {};
+    const check = resolveSafePublicHtml(filePath);
+    if (!check || PROTECTED_CORE_FILES.has(check.cleaned.toLowerCase())) {
+      return res.status(400).json({ error: 'Jalur file tidak diizinkan untuk ditulis.' });
+    }
+    if (typeof content !== 'string' || content.trim().length < 20) {
+      return res.status(400).json({ error: 'Isi HTML tidak valid atau terlalu pendek.' });
+    }
+    fs.writeFileSync(check.resolved, content, 'utf8');
+    res.json({ success: true, path: '/' + check.cleaned.replace(/\\/g, '/'), updatedAt: new Date().toISOString() });
+  } catch (err) {
+    res.status(500).json({ error: 'Gagal menyimpan file HTML: ' + err.message });
+  }
+});
+
+app.delete('/api/admin/html-file', (req, res) => {
+  try {
+    const check = resolveSafePublicHtml(req.query.path);
+    if (!check || !check.cleaned.toLowerCase().startsWith('materi/')) {
+      return res.status(400).json({ error: 'Hanya file di folder /materi/ yang dapat dihapus lewat Admin.' });
+    }
+    if (!fs.existsSync(check.resolved)) {
+      return res.status(404).json({ error: 'File tidak ditemukan.' });
+    }
+    fs.unlinkSync(check.resolved);
+    res.json({ success: true });
+  } catch (err) {
+    res.status(500).json({ error: 'Gagal menghapus file: ' + err.message });
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`🚀 E-Book AI Generator Server berjalan di http://localhost:${PORT}`);
 });

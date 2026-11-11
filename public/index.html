@@ -86,8 +86,8 @@
 
   <!-- TOP ANNOUNCEMENT BAR (Clean Edu Banner) -->
   <aside aria-label="Informasi Regulasi Kurikulum" class="bg-brand-950 text-brand-100 text-[11px] sm:text-xs py-2 px-4 text-center font-medium border-b border-brand-900 flex items-center justify-center gap-2">
-    <span>Pembaruan Capaian Pembelajaran (CP) No. 020 Tahun 2026: Seluruh naskah soal dan modul ajar telah diselaraskan.</span>
-    <a href="https://lynk.id/bahanajarbuguru" target="_blank" rel="noopener noreferrer" class="hidden sm:inline font-bold text-amber-300 hover:text-amber-200 underline ml-1">Kunjungi Toko Lynk.id</a>
+    <span id="cms-announcement-text">Pembaruan Capaian Pembelajaran (CP) No. 020 Tahun 2026: Seluruh naskah soal dan modul ajar telah diselaraskan.</span>
+    <a id="cms-announcement-cta" href="https://lynk.id/bahanajarbuguru" target="_blank" rel="noopener noreferrer" class="hidden sm:inline font-bold text-amber-300 hover:text-amber-200 underline ml-1">Kunjungi Toko Lynk.id</a>
   </aside>
 
   <!-- STICKY HEADER & NAVBAR -->
@@ -145,20 +145,20 @@
         <!-- Left Column: Primary Pitch -->
         <div class="lg:col-span-8 space-y-5">
           <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-brand-50 border border-brand-200 text-brand-800 text-xs font-semibold">
-            <span>Kurikulum Merdeka 2026 • CP No. 020 Kemendikbudristek</span>
+            <span id="cms-hero-badge">Kurikulum Merdeka 2026 • CP No. 020 Kemendikbudristek</span>
           </div>
 
-          <h1 class="text-2xl sm:text-4xl lg:text-[42px] font-extrabold text-slate-900 leading-[1.2] tracking-tight">
+          <h1 id="cms-hero-title" class="text-2xl sm:text-4xl lg:text-[42px] font-extrabold text-slate-900 leading-[1.2] tracking-tight">
             Perangkat Pembelajaran PAI & Budi Pekerti SD yang Rapi, Praktis, dan Siap Pakai.
           </h1>
 
-          <p class="text-sm sm:text-base text-slate-600 leading-relaxed max-w-2xl font-normal">
+          <p id="cms-hero-subtitle" class="text-sm sm:text-base text-slate-600 leading-relaxed max-w-2xl font-normal">
             Selamat datang di portal resmi <strong>Bahan Ajar Bu Guru</strong>. Kami menghadirkan <strong>Buku Siswa 1 Semester</strong>, <strong>Modul Ajar Deep Learning per Bab</strong>, dan <strong>Naskah Soal SAS Kelas 1–6 SD</strong> dalam format <em>Word (.docx)</em> yang dapat disunting bebas nama sekolahnya, serta <em>PDF</em> beresolusi tinggi siap cetak.
           </p>
 
           <!-- Direct Actions -->
           <div class="pt-2 flex flex-wrap items-center gap-3">
-            <a href="https://lynk.id/bahanajarbuguru" target="_blank" rel="noopener noreferrer" class="px-6 py-3 rounded-lg bg-brand-800 hover:bg-brand-900 text-white font-bold text-xs sm:text-sm transition-colors shadow-sm">
+            <a id="cms-primary-cta" href="https://lynk.id/bahanajarbuguru" target="_blank" rel="noopener noreferrer" class="px-6 py-3 rounded-lg bg-brand-800 hover:bg-brand-900 text-white font-bold text-xs sm:text-sm transition-colors shadow-sm">
               Buka Katalog Toko di Lynk.id
             </a>
             <a href="/game_petualangan_islami.html" target="_blank" class="px-5 py-3 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs sm:text-sm font-semibold transition-colors">
@@ -195,13 +195,13 @@
         <div class="lg:col-span-4 flex justify-center">
           <div class="w-full max-w-sm bg-warm-50 border border-warm-200 rounded-xl p-6 text-center space-y-4 shadow-sm">
             <div class="w-24 h-24 mx-auto rounded-full overflow-hidden border-2 border-brand-700/30 shadow-sm bg-white">
-              <img src="/assets/avatar_profile_buguru.jpg" alt="Foto Profil Bahan Ajar Bu Guru" class="w-full h-full object-cover">
+              <img id="cms-profile-avatar" src="/assets/avatar_profile_buguru.jpg" alt="Foto Profil Bahan Ajar Bu Guru" class="w-full h-full object-cover">
             </div>
             <div>
-              <h2 class="text-base font-bold text-slate-900">Bahan Ajar Bu Guru</h2>
-              <p class="text-xs text-brand-800 font-semibold mt-0.5">Praktisi Guru PAI SD</p>
+              <h2 id="cms-profile-name" class="text-base font-bold text-slate-900">Bahan Ajar Bu Guru</h2>
+              <p id="cms-profile-role" class="text-xs text-brand-800 font-semibold mt-0.5">Praktisi Guru PAI SD</p>
             </div>
-            <p class="text-xs text-slate-600 leading-relaxed font-serif italic text-[13px]">
+            <p id="cms-profile-quote" class="text-xs text-slate-600 leading-relaxed font-serif italic text-[13px]">
               "Menghadirkan bahan ajar agama Islam yang menyenangkan, terstruktur rapi, dan memfasilitasi pembelajaran bermakna bagi generasi muslim Indonesia."
             </p>
             <div class="pt-3 border-t border-warm-200 grid grid-cols-2 gap-2 text-center text-xs">
@@ -271,25 +271,25 @@
       
       <div class="flex flex-col sm:flex-row items-start sm:items-end justify-between border-b border-slate-200 pb-3 gap-2">
         <div>
-          <span class="text-[11px] font-bold uppercase tracking-wider text-brand-800 bg-brand-50 px-2.5 py-0.5 rounded border border-brand-200">
+          <span id="cms-buku-badge" class="text-[11px] font-bold uppercase tracking-wider text-brand-800 bg-brand-50 px-2.5 py-0.5 rounded border border-brand-200">
             Katalog 1
           </span>
-          <h2 class="text-xl sm:text-2xl font-bold text-slate-900 mt-2">
+          <h2 id="cms-buku-heading" class="text-xl sm:text-2xl font-bold text-slate-900 mt-2">
             Buku Siswa PAI & Budi Pekerti (Kelas 1–6 SD)
           </h2>
-          <p class="text-xs text-slate-500 mt-0.5">
+          <p id="cms-buku-subheading" class="text-xs text-slate-500 mt-0.5">
             Buku materi 1 semester penuh dengan ilustrasi ramah anak, tata letak standar penerbit A4, dan acuan CP No. 020 Tahun 2026.
           </p>
         </div>
         <div class="flex items-center gap-2">
-          <a href="/buku_siswa_pai_kelas1_semester1.html" target="_blank" class="text-xs font-semibold bg-white hover:bg-slate-50 text-slate-700 border border-slate-300 px-3 py-1.5 rounded-lg transition-colors">
+          <a id="cms-buku-top-sample" href="/buku_siswa_pai_kelas1_semester1.html" target="_blank" class="text-xs font-semibold bg-white hover:bg-slate-50 text-slate-700 border border-slate-300 px-3 py-1.5 rounded-lg transition-colors">
             Lihat Contoh Halaman Buku
           </a>
         </div>
       </div>
 
       <!-- Book Grid (Kelas 1 - 6) -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div id="buku-grid-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
 
         <!-- KELAS 1 BUKU SISWA -->
         <article class="product-item edu-card rounded-xl p-5 flex flex-col justify-between" data-category="buku" data-grade="1">
@@ -509,18 +509,18 @@
       
       <div class="flex flex-col sm:flex-row items-start sm:items-end justify-between border-b border-slate-200 pb-3 gap-2">
         <div>
-          <span class="text-[11px] font-bold uppercase tracking-wider text-amber-900 bg-amber-50 px-2.5 py-0.5 rounded border border-amber-200">
+          <span id="cms-modul-badge" class="text-[11px] font-bold uppercase tracking-wider text-amber-900 bg-amber-50 px-2.5 py-0.5 rounded border border-amber-200">
             Katalog 2
           </span>
-          <h2 class="text-xl sm:text-2xl font-bold text-slate-900 mt-2">
+          <h2 id="cms-modul-heading" class="text-xl sm:text-2xl font-bold text-slate-900 mt-2">
             Modul Ajar Deep Learning PAI SD (Format 8 Halaman Lengkap)
           </h2>
-          <p class="text-xs text-slate-500 mt-0.5">
+          <p id="cms-modul-subheading" class="text-xs text-slate-500 mt-0.5">
             Dokumen administrasi guru berstandar supervisi akreditasi: Siklus Mindful, Meaningful & Joyful Learning dilengkapi LKPD dan Rubrik Penilaian.
           </p>
         </div>
         <div class="flex items-center gap-2">
-          <a href="/modul_ajar_deep_learning_kelas1_bab1.html" target="_blank" class="text-xs font-semibold bg-white hover:bg-slate-50 text-slate-700 border border-slate-300 px-3 py-1.5 rounded-lg transition-colors">
+          <a id="cms-modul-top-sample" href="/modul_ajar_deep_learning_kelas1_bab1.html" target="_blank" class="text-xs font-semibold bg-white hover:bg-slate-50 text-slate-700 border border-slate-300 px-3 py-1.5 rounded-lg transition-colors">
             Baca Contoh Modul Lengkap (8 Halaman)
           </a>
         </div>
@@ -529,16 +529,16 @@
       <!-- Feature Highlight Card -->
       <div class="edu-card rounded-xl p-6 sm:p-8 grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
         <div class="lg:col-span-8 space-y-3">
-          <span class="bg-amber-100 text-amber-900 font-bold text-[11px] px-2.5 py-0.5 rounded border border-amber-200">
+          <span id="cms-modul-feature-badge" class="bg-amber-100 text-amber-900 font-bold text-[11px] px-2.5 py-0.5 rounded border border-amber-200">
             File Word (.docx) 100% Dapat Diedit
           </span>
-          <h3 class="text-xl sm:text-2xl font-bold text-slate-900">
+          <h3 id="cms-modul-feature-title" class="text-xl sm:text-2xl font-bold text-slate-900">
             Paket Administrasi Guru: Dari Tujuan Pembelajaran hingga Lembar Kerja Siswa
           </h3>
-          <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+          <p id="cms-modul-feature-desc" class="text-xs sm:text-sm text-slate-600 leading-relaxed">
             Setiap modul ajar telah dirancang sistematis mencakup: Identitas Modul, Capaian Pembelajaran No. 020/2026, Profil Pelajar Pancasila & Rahmatan Lil 'Alamin, Pertanyaan Pemantik, Skenario Pembelajaran Berdiferensiasi, LKPD Siswa, Asesmen Formatif & Sumatif, serta Rubrik Ketercapaian.
           </p>
-          <div class="pt-2 flex flex-wrap gap-2 text-xs text-slate-700">
+          <div id="cms-modul-feature-tags" class="pt-2 flex flex-wrap gap-2 text-xs text-slate-700">
             <span class="bg-slate-50 px-3 py-1 rounded border border-slate-200">Format Asli Microsoft Word (.docx)</span>
             <span class="bg-slate-50 px-3 py-1 rounded border border-slate-200">Format Cetak PDF A4</span>
             <span class="bg-slate-50 px-3 py-1 rounded border border-slate-200">Tersedia untuk Kelas 1 sampai 6</span>
@@ -546,15 +546,18 @@
         </div>
         <div class="lg:col-span-4 flex flex-col justify-center">
           <div class="bg-slate-50 border border-slate-200 rounded-lg p-5 text-center space-y-2">
-            <p class="text-xs text-slate-500 font-semibold">Harga Paket Modul Ajar</p>
-            <p class="text-2xl font-extrabold text-slate-900">Mulai Rp 25.000</p>
-            <p class="text-[11px] text-slate-500">Tersedia per-bab maupun 1 semester</p>
-            <a href="https://lynk.id/bahanajarbuguru" target="_blank" rel="noopener noreferrer" class="mt-2 block w-full py-2.5 rounded-lg bg-brand-800 hover:bg-brand-900 text-white font-semibold text-xs transition-colors">
+            <p id="cms-modul-price-heading" class="text-xs text-slate-500 font-semibold">Harga Paket Modul Ajar</p>
+            <p id="cms-modul-price-value" class="text-2xl font-extrabold text-slate-900">Mulai Rp 25.000</p>
+            <p id="cms-modul-price-subtext" class="text-[11px] text-slate-500">Tersedia per-bab maupun 1 semester</p>
+            <a id="cms-modul-buy-btn" href="https://lynk.id/bahanajarbuguru" target="_blank" rel="noopener noreferrer" class="mt-2 block w-full py-2.5 rounded-lg bg-brand-800 hover:bg-brand-900 text-white font-semibold text-xs transition-colors">
               Pesan di Lynk.id
             </a>
           </div>
         </div>
       </div>
+
+      <!-- Dynamic Modul Ajar Items Grid (Updated from Admin / AI Generator) -->
+      <div id="modul-grid-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
 
     </section>
 
@@ -563,18 +566,18 @@
       
       <div class="flex flex-col sm:flex-row items-start sm:items-end justify-between border-b border-slate-200 pb-3 gap-2">
         <div>
-          <span class="text-[11px] font-bold uppercase tracking-wider text-slate-700 bg-slate-100 px-2.5 py-0.5 rounded border border-slate-300">
+          <span id="cms-soal-badge" class="text-[11px] font-bold uppercase tracking-wider text-slate-700 bg-slate-100 px-2.5 py-0.5 rounded border border-slate-300">
             Katalog 3
           </span>
-          <h2 class="text-xl sm:text-2xl font-bold text-slate-900 mt-2">
+          <h2 id="cms-soal-heading" class="text-xl sm:text-2xl font-bold text-slate-900 mt-2">
             Bank Soal SAS (Sumatif Akhir Semester) PAI Kelas 1–6 SD
           </h2>
-          <p class="text-xs text-slate-500 mt-0.5">
+          <p id="cms-soal-subheading" class="text-xs text-slate-500 mt-0.5">
             Naskah ujian 25 Soal (15 PG + 5 Isian + 5 Uraian HOTS) lengkap dengan Kunci Jawaban, Rubrik Penilaian, dan Kisi-Kisi CP No. 020 Tahun 2026.
           </p>
         </div>
         <div class="flex items-center gap-2">
-          <a href="/soal_sas_prototype.html" target="_blank" class="text-xs font-semibold bg-white hover:bg-slate-50 text-slate-700 border border-slate-300 px-3 py-1.5 rounded-lg transition-colors">
+          <a id="cms-soal-top-sample" href="/soal_sas_prototype.html" target="_blank" class="text-xs font-semibold bg-white hover:bg-slate-50 text-slate-700 border border-slate-300 px-3 py-1.5 rounded-lg transition-colors">
             Coba Latihan Soal Interaktif
           </a>
         </div>
@@ -601,7 +604,7 @@
       </div>
 
       <!-- Soal SAS Grid (6 Kelas) -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div id="soal-grid-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
 
         <!-- KELAS 1 SOAL SAS -->
         <article class="product-item edu-card rounded-xl p-5 flex flex-col justify-between" data-category="soal" data-grade="1">
@@ -827,13 +830,13 @@
       
       <div class="flex flex-col sm:flex-row items-start sm:items-end justify-between border-b border-slate-200 pb-3 gap-2">
         <div>
-          <span class="text-[11px] font-bold uppercase tracking-wider text-brand-800 bg-brand-50 px-2.5 py-0.5 rounded border border-brand-200">
+          <span id="cms-game-badge" class="text-[11px] font-bold uppercase tracking-wider text-brand-800 bg-brand-50 px-2.5 py-0.5 rounded border border-brand-200">
             Media Pembelajaran Interaktif
           </span>
-          <h2 class="text-xl sm:text-2xl font-bold text-slate-900 mt-2">
+          <h2 id="cms-game-heading" class="text-xl sm:text-2xl font-bold text-slate-900 mt-2">
             Game Kuis Edukasi: Petualangan Islami Ceria
           </h2>
-          <p class="text-xs text-slate-500 mt-0.5">
+          <p id="cms-game-subheading" class="text-xs text-slate-500 mt-0.5">
             Aktivitas interaktif berbasis browser ponsel. Siswa dapat bermain kuis materi agama Islam secara mandiri atau berkelompok di kelas tanpa perlu instalasi aplikasi tambahan.
           </p>
         </div>
@@ -843,13 +846,13 @@
       <div class="edu-card rounded-xl p-6 sm:p-8 grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
         
         <div class="md:col-span-8 space-y-3">
-          <p class="text-xs font-bold text-brand-800 uppercase tracking-wider">
+          <p id="cms-game-eyebrow" class="text-xs font-bold text-brand-800 uppercase tracking-wider">
             Responsif di Layar HP Siswa & Proyektor Kelas
           </p>
-          <h3 class="text-xl sm:text-2xl font-bold text-slate-900">
+          <h3 id="cms-game-feature-title" class="text-xl sm:text-2xl font-bold text-slate-900">
             Materi Agama Islam yang Disampaikan Lewat Kuis Interaktif
           </h3>
-          <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+          <p id="cms-game-feature-desc" class="text-xs sm:text-sm text-slate-600 leading-relaxed">
             Mencakup materi Wudhu & Shalat, Rukun Iman & Islam, Puasa Ramadhan, Zakat & Sedekah, serta Mengenal Hari Akhir. Mendukung fitur Kuis Kelompok, pencatatan rekor bintang kelompok, dan evaluasi hasil belajar secara langsung.
           </p>
           <div class="pt-2 flex flex-wrap gap-2 text-xs text-slate-700">
@@ -858,10 +861,10 @@
             <span class="bg-slate-50 px-3 py-1 rounded border border-slate-200">Bebas iklan komersial</span>
           </div>
           <div class="pt-3 flex flex-wrap gap-3">
-            <a href="/game_petualangan_islami.html" target="_blank" class="px-5 py-2.5 rounded-lg bg-brand-800 hover:bg-brand-900 text-white font-semibold text-xs transition-colors">
+            <a id="cms-game-demo-btn" href="/game_petualangan_islami.html" target="_blank" class="px-5 py-2.5 rounded-lg bg-brand-800 hover:bg-brand-900 text-white font-semibold text-xs transition-colors">
               Mainkan Demo Langsung
             </a>
-            <a href="https://lynk.id/bahanajarbuguru" target="_blank" rel="noopener noreferrer" class="px-4 py-2.5 rounded-lg bg-white hover:bg-slate-50 text-slate-700 font-medium text-xs border border-slate-300 transition-colors">
+            <a id="cms-game-buy-btn" href="https://lynk.id/bahanajarbuguru" target="_blank" rel="noopener noreferrer" class="px-4 py-2.5 rounded-lg bg-white hover:bg-slate-50 text-slate-700 font-medium text-xs border border-slate-300 transition-colors">
               Lisensi Materi di Lynk.id
             </a>
           </div>
@@ -1204,6 +1207,7 @@
     function toggleFaq(num) {
       const content = document.getElementById(`faq-content-${num}`);
       const icon = document.getElementById(`faq-icon-${num}`);
+      if (!content || !icon) return;
       if (content.classList.contains('hidden')) {
         content.classList.remove('hidden');
         icon.innerText = '−';
@@ -1212,6 +1216,245 @@
         icon.innerText = '＋';
       }
     }
+
+    function escapeHtml(str) {
+      return String(str ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function getCardThemeClasses(grade) {
+      const g = Number(grade) || 1;
+      if (g === 2) return { badge: 'text-teal-800 bg-teal-50 border-teal-200', btn: 'bg-teal-800 hover:bg-teal-900' };
+      if (g === 3) return { badge: 'text-slate-700 bg-slate-100 border-slate-300', btn: 'bg-slate-800 hover:bg-slate-900' };
+      if (g === 4) return { badge: 'text-amber-900 bg-amber-50 border-amber-200', btn: 'bg-amber-800 hover:bg-amber-900' };
+      if (g === 6) return { badge: 'text-slate-800 bg-slate-100 border-slate-300', btn: 'bg-slate-900 hover:bg-slate-950' };
+      return { badge: 'text-brand-800 bg-brand-50 border-brand-200', btn: 'bg-brand-800 hover:bg-brand-900' };
+    }
+
+    function setText(id, val) {
+      const el = document.getElementById(id);
+      if (el && typeof val === 'string' && val.trim() !== '') el.textContent = val;
+    }
+
+    function setLink(id, href, text) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      if (href) el.setAttribute('href', href);
+      if (text) el.textContent = text;
+    }
+
+    async function loadPortalContent() {
+      try {
+        const res = await fetch(`/data/portal_content.json?v=${Date.now()}`);
+        if (!res.ok) return;
+        const data = await res.json();
+
+        if (data.site) {
+          setText('cms-announcement-text', data.site.announcementText);
+          setLink('cms-announcement-cta', data.site.announcementCtaUrl, data.site.announcementCtaText);
+          setText('cms-hero-badge', data.site.heroBadge);
+          setText('cms-hero-title', data.site.heroTitle);
+          if (data.site.heroSubtitle) {
+            setText('cms-hero-subtitle', data.site.heroSubtitle);
+          }
+          setLink('cms-primary-cta', data.site.primaryCtaUrl, data.site.primaryCtaText);
+          setText('cms-profile-name', data.site.profileName);
+          setText('cms-profile-role', data.site.profileRole);
+          if (data.site.profileQuote) {
+            setText('cms-profile-quote', `"${data.site.profileQuote.replace(/^"|"$/g, '')}"`);
+          }
+          const avatarEl = document.getElementById('cms-profile-avatar');
+          if (avatarEl && data.site.profileAvatar) avatarEl.src = data.site.profileAvatar;
+        }
+
+        if (data.bukuSection) {
+          setText('cms-buku-badge', data.bukuSection.katalogBadge);
+          setText('cms-buku-heading', data.bukuSection.heading);
+          setText('cms-buku-subheading', data.bukuSection.subheading);
+          setLink('cms-buku-top-sample', data.bukuSection.topSampleUrl, data.bukuSection.topSampleLabel);
+        }
+
+        if (Array.isArray(data.bukuItems)) {
+          const bukuContainer = document.getElementById('buku-grid-container');
+          if (bukuContainer) {
+            bukuContainer.innerHTML = data.bukuItems
+              .filter((item) => item.visible !== false)
+              .map((item) => {
+                const theme = getCardThemeClasses(item.grade);
+                const tagsHtml = (item.tags || []).map((t) => `<span class="bg-slate-100 px-2 py-0.5 rounded">${escapeHtml(t)}</span>`).join('');
+                const actionLeft = item.sampleUrl
+                  ? `<a href="${escapeHtml(item.sampleUrl)}" target="_blank" class="flex-1 py-2 text-center text-xs font-medium text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors">${escapeHtml(item.sampleLabel || 'Buka Sampel')}</a>`
+                  : `<button type="button" data-modal-title="${escapeHtml(item.title)}" data-modal-desc="${escapeHtml(item.modalDetail || item.description)}" data-modal-img="${escapeHtml(item.coverImage)}" data-modal-price="${escapeHtml(item.price)}" class="cms-modal-trigger flex-1 py-2 text-center text-xs font-medium text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors">${escapeHtml(item.sampleLabel || 'Detail Bab')}</button>`;
+                return `
+                  <article class="product-item edu-card rounded-xl p-5 flex flex-col justify-between" data-category="buku" data-grade="${escapeHtml(item.grade)}">
+                    <div>
+                      <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-3">
+                        <span class="text-[11px] font-bold ${theme.badge} px-2.5 py-0.5 rounded border">${escapeHtml(item.badge)}</span>
+                        <span class="text-xs font-bold text-slate-900">${escapeHtml(item.price)}</span>
+                      </div>
+                      <div class="rounded-lg overflow-hidden border border-slate-200 mb-4 aspect-[3/4] bg-slate-50">
+                        <img src="${escapeHtml(item.coverImage)}" alt="${escapeHtml(item.title)}" class="w-full h-full object-cover">
+                      </div>
+                      <h3 class="font-bold text-slate-900 text-base">${escapeHtml(item.title)}</h3>
+                      <p class="text-xs text-slate-600 mt-1 line-clamp-2 leading-relaxed">${escapeHtml(item.description)}</p>
+                      <div class="mt-3 flex flex-wrap gap-1.5 text-[11px] text-slate-500">${tagsHtml}</div>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-100 flex items-center gap-2">
+                      ${actionLeft}
+                      <a href="${escapeHtml(item.buyUrl || 'https://lynk.id/bahanajarbuguru')}" target="_blank" rel="noopener noreferrer" class="flex-1 py-2 text-center text-xs font-semibold text-white ${theme.btn} rounded-lg transition-colors">Beli di Lynk.id</a>
+                    </div>
+                  </article>
+                `;
+              })
+              .join('');
+
+            bukuContainer.querySelectorAll('.cms-modal-trigger').forEach((btn) => {
+              btn.addEventListener('click', () => {
+                openPreviewModal(
+                  btn.getAttribute('data-modal-title'),
+                  btn.getAttribute('data-modal-desc'),
+                  btn.getAttribute('data-modal-img'),
+                  btn.getAttribute('data-modal-price')
+                );
+              });
+            });
+          }
+        }
+
+        if (data.modulSection) {
+          setText('cms-modul-badge', data.modulSection.katalogBadge);
+          setText('cms-modul-heading', data.modulSection.heading);
+          setText('cms-modul-subheading', data.modulSection.subheading);
+          setLink('cms-modul-top-sample', data.modulSection.topSampleUrl, data.modulSection.topSampleLabel);
+          setText('cms-modul-feature-badge', data.modulSection.featureBadge);
+          setText('cms-modul-feature-title', data.modulSection.featureTitle);
+          setText('cms-modul-feature-desc', data.modulSection.featureDescription);
+          setText('cms-modul-price-heading', data.modulSection.priceHeading);
+          setText('cms-modul-price-value', data.modulSection.priceValue);
+          setText('cms-modul-price-subtext', data.modulSection.priceSubtext);
+          setLink('cms-modul-buy-btn', data.modulSection.buyUrl);
+          const mTagsEl = document.getElementById('cms-modul-feature-tags');
+          if (mTagsEl && Array.isArray(data.modulSection.featureTags)) {
+            mTagsEl.innerHTML = data.modulSection.featureTags
+              .map((t) => `<span class="bg-slate-50 px-3 py-1 rounded border border-slate-200">${escapeHtml(t)}</span>`)
+              .join('');
+          }
+        }
+
+        if (Array.isArray(data.modulItems)) {
+          const modulContainer = document.getElementById('modul-grid-container');
+          if (modulContainer) {
+            const visibleModuls = data.modulItems.filter((item) => item.visible !== false);
+            modulContainer.innerHTML = visibleModuls
+              .map((item) => {
+                const tagsHtml = (item.tags || []).map((t) => `<span class="bg-slate-100 px-2 py-0.5 rounded">${escapeHtml(t)}</span>`).join('');
+                return `
+                  <article class="product-item edu-card rounded-xl p-5 flex flex-col justify-between" data-category="modul" data-grade="${escapeHtml(item.grade || 'all')}">
+                    <div>
+                      <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-3">
+                        <span class="text-[11px] font-bold text-amber-900 bg-amber-50 px-2.5 py-0.5 rounded border border-amber-200">${escapeHtml(item.badge)}</span>
+                        <span class="text-xs font-bold text-slate-900">${escapeHtml(item.price)}</span>
+                      </div>
+                      <h3 class="font-bold text-slate-900 text-base">${escapeHtml(item.title)}</h3>
+                      <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">${escapeHtml(item.description)}</p>
+                      <div class="mt-3 flex flex-wrap gap-1.5 text-[11px] text-slate-500">${tagsHtml}</div>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-100 flex items-center gap-2">
+                      ${item.sampleUrl ? `<a href="${escapeHtml(item.sampleUrl)}" target="_blank" class="flex-1 py-2 text-center text-xs font-medium text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors">${escapeHtml(item.sampleLabel || 'Buka Sampel')}</a>` : ''}
+                      <a href="${escapeHtml(item.buyUrl || 'https://lynk.id/bahanajarbuguru')}" target="_blank" rel="noopener noreferrer" class="flex-1 py-2 text-center text-xs font-semibold text-white bg-brand-800 hover:bg-brand-900 rounded-lg transition-colors">Beli di Lynk.id</a>
+                    </div>
+                  </article>
+                `;
+              })
+              .join('');
+          }
+        }
+
+        if (data.soalSection) {
+          setText('cms-soal-badge', data.soalSection.katalogBadge);
+          setText('cms-soal-heading', data.soalSection.heading);
+          setText('cms-soal-subheading', data.soalSection.subheading);
+          setLink('cms-soal-top-sample', data.soalSection.topSampleUrl, data.soalSection.topSampleLabel);
+        }
+
+        if (Array.isArray(data.soalItems)) {
+          const soalContainer = document.getElementById('soal-grid-container');
+          if (soalContainer) {
+            soalContainer.innerHTML = data.soalItems
+              .filter((item) => item.visible !== false)
+              .map((item) => {
+                const theme = getCardThemeClasses(item.grade);
+                const tagsHtml = (item.tags || []).map((t) => `<span class="bg-slate-100 px-2 py-0.5 rounded">${escapeHtml(t)}</span>`).join('');
+                const isExternal = item.sampleUrl && /^\/(exports|materi|soal_)/.test(item.sampleUrl);
+                return `
+                  <article class="product-item edu-card rounded-xl p-5 flex flex-col justify-between" data-category="soal" data-grade="${escapeHtml(item.grade)}">
+                    <div>
+                      <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-3">
+                        <span class="text-[11px] font-bold ${theme.badge} px-2.5 py-0.5 rounded border">${escapeHtml(item.badge)}</span>
+                        <span class="text-xs font-bold text-slate-900">${escapeHtml(item.price)}</span>
+                      </div>
+                      <div class="rounded-lg overflow-hidden border border-slate-200 mb-4 aspect-square bg-slate-50">
+                        <img src="${escapeHtml(item.coverImage)}" alt="${escapeHtml(item.title)}" class="w-full h-full object-cover">
+                      </div>
+                      <h3 class="font-bold text-slate-900 text-base">${escapeHtml(item.title)}</h3>
+                      <p class="text-xs text-slate-600 mt-1 line-clamp-2 leading-relaxed">${escapeHtml(item.description)}</p>
+                      <div class="mt-3 flex flex-wrap gap-1.5 text-[11px] text-slate-500">${tagsHtml}</div>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-100 flex items-center gap-2">
+                      <a href="${escapeHtml(item.sampleUrl || '#')}" ${isExternal ? 'target="_blank"' : ''} class="flex-1 py-2 text-center text-xs font-medium text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors">${escapeHtml(item.sampleLabel || 'Lihat Sampel')}</a>
+                      <a href="${escapeHtml(item.buyUrl || 'https://lynk.id/bahanajarbuguru')}" target="_blank" rel="noopener noreferrer" class="flex-1 py-2 text-center text-xs font-semibold text-white ${theme.btn} rounded-lg transition-colors">Beli di Lynk.id</a>
+                    </div>
+                  </article>
+                `;
+              })
+              .join('');
+          }
+        }
+
+        if (data.gameSection) {
+          setText('cms-game-badge', data.gameSection.katalogBadge);
+          setText('cms-game-heading', data.gameSection.heading);
+          setText('cms-game-subheading', data.gameSection.subheading);
+          setText('cms-game-eyebrow', data.gameSection.eyebrow);
+          setText('cms-game-feature-title', data.gameSection.featureTitle);
+          setText('cms-game-feature-desc', data.gameSection.featureDescription);
+          setLink('cms-game-demo-btn', data.gameSection.demoUrl);
+          setLink('cms-game-buy-btn', data.gameSection.buyUrl);
+        }
+
+        if (Array.isArray(data.faqs)) {
+          const faqContainer = document.getElementById('faq-accordion');
+          if (faqContainer) {
+            faqContainer.innerHTML = data.faqs
+              .map((faq, idx) => {
+                const n = idx + 1;
+                return `
+                  <div class="border border-slate-200 rounded-lg overflow-hidden">
+                    <button type="button" onclick="toggleFaq(${n})" class="w-full p-4 text-left font-bold text-slate-900 text-xs sm:text-sm flex justify-between items-center bg-slate-50 hover:bg-slate-100 transition-colors">
+                      <span>${escapeHtml(faq.question)}</span>
+                      <span id="faq-icon-${n}" class="text-brand-800 font-bold text-sm ml-2">＋</span>
+                    </button>
+                    <div id="faq-content-${n}" class="p-4 text-xs text-slate-600 leading-relaxed border-t border-slate-200 hidden bg-white">
+                      ${escapeHtml(faq.answer)}
+                    </div>
+                  </div>
+                `;
+              })
+              .join('');
+          }
+        }
+
+        applyFilters();
+      } catch (err) {
+        console.warn('Menggunakan konten bawaan index.html:', err);
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', loadPortalContent);
   </script>
 </body>
 </html>

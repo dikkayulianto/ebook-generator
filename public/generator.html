@@ -3,201 +3,470 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>E-Book & Modul Ajar Generator AI - Localhost Dashboard</title>
+  <title>Studio Generator Perangkat Ajar | Bahan Ajar Bu Guru</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,500;1,6..72,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
+            serif: ['"Newsreader"', 'Georgia', 'serif'],
+          },
+          colors: {
+            brand: {
+              50: '#f0fdf4',
+              100: '#dcfce7',
+              200: '#bbf7d0',
+              700: '#15803d',
+              800: '#166534',
+              900: '#14532d',
+              950: '#052e16',
+            },
+            warm: {
+              50: '#fdfbf7',
+              100: '#f7f3ea',
+              200: '#ece3d0',
+              800: '#78350f',
+            }
+          }
+        }
+      }
+    }
+  </script>
   <style>
-    body { font-family: 'Nunito', sans-serif; }
-    h1, h2, h3, h4, .font-display { font-family: 'Fredoka', sans-serif; }
+    :root {
+      --bg-canvas: #f8fafc;
+      --bg-card: #ffffff;
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --border-subtle: #e2e8f0;
+      --border-control: #8290a2;
+      --brand-primary: #166534;
+      --brand-hover: #14532d;
+      --focus-ring: #166534;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      background-color: var(--bg-canvas);
+      color: var(--text-primary);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* R-39: Pointer affordance across interactive controls */
+    button:not(:disabled),
+    [role="button"]:not([aria-disabled="true"]),
+    [role="tab"]:not([aria-disabled="true"]),
+    a[href],
+    select:not(:disabled),
+    summary,
+    label[for],
+    input[type="checkbox"]:not(:disabled),
+    input[type="radio"]:not(:disabled) {
+      cursor: pointer;
+    }
+
+    button:disabled,
+    select:disabled,
+    input:disabled,
+    [aria-disabled="true"] {
+      cursor: not-allowed;
+    }
+
+    /* R-32: High-contrast visible focus indicator without stripping outlines */
+    a:focus-visible,
+    button:focus-visible,
+    input:focus-visible,
+    select:focus-visible,
+    textarea:focus-visible,
+    summary:focus-visible {
+      outline: 2px solid var(--focus-ring);
+      outline-offset: 2px;
+    }
+
+    /* Clean form field boundary (>= 3:1 contrast against white) */
+    .ui-input {
+      border: 1px solid var(--border-control);
+      background-color: #ffffff;
+      color: #0f172a;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+    .ui-input:hover:not(:disabled) {
+      border-color: #475569;
+    }
+    .ui-input:focus {
+      border-color: var(--brand-primary);
+      box-shadow: 0 0 0 3px rgba(22, 101, 52, 0.14);
+    }
+
+    /* R-39 / R-19: Respect reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
   </style>
 </head>
-<body class="bg-slate-100 min-h-screen text-slate-800 flex flex-col">
+<body class="min-h-screen flex flex-col">
 
-  <!-- Header -->
-  <header class="bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-md">
-    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-      <div class="flex items-center gap-3">
-        <div class="bg-white/20 p-2 rounded-xl text-2xl">📚</div>
-        <div>
-          <h1 class="text-2xl font-bold tracking-wide">E-Book & Modul Ajar AI Publisher</h1>
-          <p class="text-xs text-emerald-100">Buku Siswa 1 Semester & Modul Ajar Deep Learning Per-Bab (Kurikulum Merdeka 2026)</p>
-        </div>
+  <!-- Skip link for keyboard navigation (R-32) -->
+  <a href="#workspace-main" class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:px-4 focus:py-2 focus:bg-brand-800 focus:text-white focus:rounded-lg focus:font-semibold focus:text-sm">
+    Lompat ke ruang kerja generator
+  </a>
+
+  <!-- Compact Sticky Header (only 1 element uses backdrop-blur per R-10) -->
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-sm border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
+
+      <!-- Brand & Back Link -->
+      <div class="flex items-center gap-3 min-w-0">
+        <a href="/" class="flex items-center gap-2.5 group min-w-0 rounded-lg py-1">
+          <img
+            src="/assets/avatar_profile_buguru.jpg"
+            alt="Foto Profil Bahan Ajar Bu Guru"
+            width="36"
+            height="36"
+            class="w-9 h-9 rounded-full object-cover border border-slate-300 shrink-0"
+          >
+          <div class="min-w-0">
+            <span class="block text-sm font-bold text-slate-900 group-hover:text-brand-800 transition-colors truncate">
+              Bahan Ajar Bu Guru
+            </span>
+            <span class="block text-xs text-slate-600 truncate">
+              Studio Generator Lokal
+            </span>
+          </div>
+        </a>
       </div>
-      <div class="flex items-center gap-2 sm:gap-3 flex-wrap justify-end">
-        <div class="inline-flex items-center gap-1 bg-emerald-900/60 p-1 rounded-lg border border-emerald-400/40 text-xs">
-          <span class="text-[11px] font-bold text-emerald-200 px-1.5">Flyer SAS:</span>
-          <a href="/flyer_sas_kelas1.html" class="px-2 py-0.5 rounded font-black bg-emerald-500 hover:bg-emerald-400 text-slate-950">Kls 1</a>
-          <a href="/flyer_sas_kelas2.html" class="px-2 py-0.5 rounded font-black bg-teal-500 hover:bg-teal-400 text-slate-950">Kls 2</a>
-          <a href="/flyer_sas_kelas3.html" class="px-2 py-0.5 rounded font-black bg-indigo-500 hover:bg-indigo-400 text-white">Kls 3</a>
-          <a href="/flyer_sas_kelas4.html" class="px-2 py-0.5 rounded font-black bg-orange-500 hover:bg-orange-400 text-white">Kls 4</a>
-          <a href="/flyer_sas_kelas5.html" class="px-2 py-0.5 rounded font-black bg-emerald-600 hover:bg-emerald-500 text-white">Kls 5</a>
-          <a href="/flyer_sas_kelas6.html" class="px-2 py-0.5 rounded font-black bg-purple-600 hover:bg-purple-500 text-white">Kls 6</a>
+
+      <!-- Desktop Navigation -->
+      <nav aria-label="Navigasi Studio" class="hidden md:flex items-center gap-2">
+        <a href="/" class="px-3 py-2 rounded-lg text-xs font-semibold text-slate-700 hover:bg-slate-100 hover:text-slate-900 transition-colors">
+          Beranda Portal
+        </a>
+        <a href="/admin.html" class="px-3 py-2 rounded-lg text-xs font-semibold text-brand-900 bg-brand-50 hover:bg-brand-100 border border-brand-200 transition-colors">
+          Admin Konten Web
+        </a>
+        <a href="/posting_soal_sas.html" class="px-3 py-2 rounded-lg text-xs font-semibold text-slate-700 hover:bg-slate-100 hover:text-slate-900 transition-colors">
+          Studio Posting SAS
+        </a>
+
+        <!-- Examples & Assets Popover -->
+        <div class="relative" id="studio-menu-wrapper">
+          <button
+            type="button"
+            id="studio-menu-btn"
+            aria-expanded="false"
+            aria-controls="studio-menu-popover"
+            onclick="toggleStudioMenu()"
+            class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-semibold text-slate-800 bg-slate-100 hover:bg-slate-200 border border-slate-300 transition-colors"
+          >
+            <span>Contoh & Aset Studio</span>
+            <svg class="w-3.5 h-3.5 text-slate-600 transition-transform" id="studio-menu-chevron" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+            </svg>
+          </button>
+
+          <div
+            id="studio-menu-popover"
+            role="region"
+            aria-label="Daftar contoh dokumen dan studio"
+            class="hidden absolute right-0 mt-2 w-80 bg-white rounded-xl border border-slate-300 shadow-lg p-4 space-y-4 z-50"
+          >
+            <div>
+              <p class="text-[11px] font-bold uppercase tracking-wider text-slate-600 mb-2">
+                Muat Contoh di Pratinjau
+              </p>
+              <div class="space-y-1">
+                <button type="button" onclick="loadPrototypeBuku(); closeStudioMenu();" class="w-full text-left px-3 py-2 rounded-lg text-xs font-semibold text-slate-800 hover:bg-brand-50 hover:text-brand-900 transition-colors">
+                  Buku Siswa PAI Kelas 1 (1 Semester)
+                </button>
+                <button type="button" onclick="loadPrototypeModul(); closeStudioMenu();" class="w-full text-left px-3 py-2 rounded-lg text-xs font-semibold text-slate-800 hover:bg-brand-50 hover:text-brand-900 transition-colors">
+                  Modul Ajar Deep Learning Bab 1 (8 Halaman)
+                </button>
+                <button type="button" onclick="loadPrototypeSAS(); closeStudioMenu();" class="w-full text-left px-3 py-2 rounded-lg text-xs font-semibold text-slate-800 hover:bg-brand-50 hover:text-brand-900 transition-colors">
+                  Naskah Soal SAS (25 Soal + Kunci)
+                </button>
+              </div>
+            </div>
+
+            <div class="border-t border-slate-200 pt-3">
+              <p class="text-[11px] font-bold uppercase tracking-wider text-slate-600 mb-2">
+                Alat Promosi & Media
+              </p>
+              <div class="grid grid-cols-2 gap-1.5 text-xs">
+                <a href="/flyer_9_16.html" class="px-2.5 py-2 rounded-lg font-medium text-slate-700 hover:bg-slate-100 transition-colors">Studio Flyer 9:16</a>
+                <a href="/panduan_posting_ig_tiktok.html" class="px-2.5 py-2 rounded-lg font-medium text-slate-700 hover:bg-slate-100 transition-colors">Panduan Carousel</a>
+                <a href="/lynkid_showcase.html" class="px-2.5 py-2 rounded-lg font-medium text-slate-700 hover:bg-slate-100 transition-colors">Aset Lynk.id</a>
+                <a href="/game_petualangan_islami.html" target="_blank" rel="noopener noreferrer" class="px-2.5 py-2 rounded-lg font-medium text-slate-700 hover:bg-slate-100 transition-colors">Game Islami</a>
+              </div>
+            </div>
+
+            <div class="border-t border-slate-200 pt-3">
+              <p class="text-[11px] font-bold uppercase tracking-wider text-slate-600 mb-2">
+                Flyer Soal SAS per Kelas
+              </p>
+              <div class="grid grid-cols-3 gap-1.5 text-xs">
+                <a href="/flyer_sas_kelas1.html" class="px-2 py-1.5 rounded-md border border-slate-300 text-center font-semibold text-slate-700 hover:bg-slate-100 transition-colors">Kelas 1</a>
+                <a href="/flyer_sas_kelas2.html" class="px-2 py-1.5 rounded-md border border-slate-300 text-center font-semibold text-slate-700 hover:bg-slate-100 transition-colors">Kelas 2</a>
+                <a href="/flyer_sas_kelas3.html" class="px-2 py-1.5 rounded-md border border-slate-300 text-center font-semibold text-slate-700 hover:bg-slate-100 transition-colors">Kelas 3</a>
+                <a href="/flyer_sas_kelas4.html" class="px-2 py-1.5 rounded-md border border-slate-300 text-center font-semibold text-slate-700 hover:bg-slate-100 transition-colors">Kelas 4</a>
+                <a href="/flyer_sas_kelas5.html" class="px-2 py-1.5 rounded-md border border-slate-300 text-center font-semibold text-slate-700 hover:bg-slate-100 transition-colors">Kelas 5</a>
+                <a href="/flyer_sas_kelas6.html" class="px-2 py-1.5 rounded-md border border-slate-300 text-center font-semibold text-slate-700 hover:bg-slate-100 transition-colors">Kelas 6</a>
+              </div>
+            </div>
+          </div>
         </div>
-        <a href="/game_petualangan_islami.html" target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold bg-gradient-to-r from-amber-400 to-yellow-400 hover:from-amber-300 hover:to-yellow-300 text-amber-950 transition-all shadow-md">
-          🎮 Game Islami Ceria (Play)
+
+        <a
+          href="https://lynk.id/bahanajarbuguru"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="px-3.5 py-2 rounded-lg text-xs font-semibold bg-brand-800 hover:bg-brand-900 text-white transition-colors"
+        >
+          Toko Lynk.id
         </a>
-        <a href="/flyer_9_16.html" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold bg-emerald-800 hover:bg-emerald-900 text-white transition-all shadow-sm">
-          🖼️ Studio Flyer 9:16
+      </nav>
+
+      <!-- Mobile Menu Toggle (R-03: >= 44px tap target and explicit label) -->
+      <div class="flex md:hidden items-center gap-2">
+        <a
+          href="/"
+          class="inline-flex items-center justify-center min-h-[44px] px-3 rounded-lg text-xs font-semibold text-slate-700 border border-slate-300 hover:bg-slate-100"
+        >
+          Beranda
         </a>
-        <a href="/panduan_posting_ig_tiktok.html" class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold bg-rose-500 hover:bg-rose-400 text-white transition-all shadow-sm">
-          📱 Panduan Carousel IG & TikTok
-        </a>
-        <a href="/lynkid_showcase.html" class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold bg-pink-100 hover:bg-pink-200 text-pink-800 transition-all shadow-sm">
-          🌸 Aset Toko Lynk.id
-        </a>
-        <button onclick="loadPrototypeSAS()" class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold bg-indigo-600 hover:bg-indigo-500 text-white transition-all shadow-sm">
-          📝 Contoh Soal SAS (25 Soal)
+        <button
+          type="button"
+          id="mobile-menu-btn"
+          aria-expanded="false"
+          aria-controls="mobile-nav-drawer"
+          onclick="toggleMobileMenu()"
+          class="inline-flex items-center justify-center gap-1.5 min-h-[44px] px-3.5 rounded-lg text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-900 border border-slate-300"
+        >
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+          <span>Menu</span>
         </button>
-        <button onclick="loadPrototypeModul()" class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold bg-amber-400 hover:bg-amber-300 text-amber-950 transition-all shadow-sm">
-          🌟 Contoh Modul Ajar (8 Hal)
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobile-nav-drawer" class="hidden md:hidden border-t border-slate-200 bg-white px-4 py-4 space-y-4">
+      <div class="space-y-1">
+        <p class="text-[11px] font-bold uppercase tracking-wider text-slate-600 px-2">Contoh Dokumen</p>
+        <button type="button" onclick="loadPrototypeBuku(); toggleMobileMenu(); switchMobilePane('preview');" class="w-full text-left min-h-[44px] px-3 rounded-lg text-sm font-semibold text-slate-800 hover:bg-brand-50">
+          Buku Siswa PAI Kelas 1 (1 Sem)
         </button>
-        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-700/60 text-emerald-100 border border-emerald-400/30">
-          <span class="w-2 h-2 rounded-full bg-emerald-300 animate-pulse"></span> Localhost:3000 Aktif
-        </span>
+        <button type="button" onclick="loadPrototypeModul(); toggleMobileMenu(); switchMobilePane('preview');" class="w-full text-left min-h-[44px] px-3 rounded-lg text-sm font-semibold text-slate-800 hover:bg-brand-50">
+          Modul Ajar Deep Learning (8 Hal)
+        </button>
+        <button type="button" onclick="loadPrototypeSAS(); toggleMobileMenu(); switchMobilePane('preview');" class="w-full text-left min-h-[44px] px-3 rounded-lg text-sm font-semibold text-slate-800 hover:bg-brand-50">
+          Naskah Soal SAS (25 Soal)
+        </button>
+      </div>
+
+      <div class="border-t border-slate-200 pt-3 grid grid-cols-2 gap-2 text-xs">
+        <a href="/admin.html" class="min-h-[44px] flex items-center justify-center px-3 rounded-lg bg-brand-50 border border-brand-200 font-bold text-brand-900 hover:bg-brand-100">
+          Admin Konten Web
+        </a>
+        <a href="/posting_soal_sas.html" class="min-h-[44px] flex items-center justify-center px-3 rounded-lg border border-slate-300 font-semibold text-slate-800 hover:bg-slate-100">
+          Studio Posting SAS
+        </a>
+        <a href="/flyer_9_16.html" class="min-h-[44px] flex items-center justify-center px-3 rounded-lg border border-slate-300 font-semibold text-slate-800 hover:bg-slate-100">
+          Studio Flyer 9:16
+        </a>
+        <a href="/panduan_posting_ig_tiktok.html" class="min-h-[44px] flex items-center justify-center px-3 rounded-lg border border-slate-300 font-semibold text-slate-800 hover:bg-slate-100">
+          Panduan Carousel
+        </a>
+        <a href="https://lynk.id/bahanajarbuguru" target="_blank" rel="noopener noreferrer" class="col-span-2 min-h-[44px] flex items-center justify-center px-3 rounded-lg bg-brand-800 font-semibold text-white">
+          Toko Lynk.id
+        </a>
       </div>
     </div>
   </header>
 
-  <!-- Main Content -->
-  <main class="max-w-7xl mx-auto px-6 py-6 flex-grow grid grid-cols-1 lg:grid-cols-12 gap-6 w-full">
-    
-    <!-- Left Column: Form Input (5 cols) -->
-    <div class="lg:col-span-5 bg-white rounded-2xl shadow-sm border border-slate-200 p-6 flex flex-col justify-between">
-      <div class="space-y-4">
-        
-        <!-- Mode Switcher: Buku Siswa vs Modul Ajar vs Soal SAS -->
-        <div class="bg-gradient-to-r from-emerald-50 via-teal-50 to-indigo-50 p-2.5 rounded-xl border border-emerald-200">
-          <label class="block text-xs font-bold uppercase tracking-wider text-emerald-800 mb-1.5 text-center">🎯 Pilih Menu Dokumen</label>
-          <div class="grid grid-cols-3 gap-1.5">
-            <button type="button" id="tab-mode-ebook" onclick="switchDocMode('ebook')" class="py-2 px-1 text-xs font-bold rounded-lg border flex flex-col items-center justify-center gap-0.5 transition-all bg-emerald-600 text-white border-emerald-600 shadow-sm text-center">
-              <span class="text-base">📘</span>
-              <span>Buku Siswa</span>
-              <span class="text-[9.5px] opacity-80">(1 Sem)</span>
+  <!-- Main Workspace -->
+  <main id="workspace-main" class="max-w-7xl mx-auto px-4 sm:px-6 py-5 sm:py-7 flex-1 w-full space-y-5">
+
+    <!-- Workspace Title Strip -->
+    <section class="flex flex-col sm:flex-row sm:items-end justify-between gap-3 pb-4 border-b border-slate-200">
+      <div class="space-y-1">
+        <h1 class="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">
+          Penyusun Perangkat Ajar PAI SD
+        </h1>
+        <p class="text-xs sm:text-sm text-slate-600 max-w-2xl">
+          Buat draf Buku Siswa, Modul Ajar Deep Learning per bab, atau Naskah Soal SAS format A4 siap cetak sesuai CP No. 020 Tahun 2026.
+        </p>
+      </div>
+      <div class="flex items-center gap-2 shrink-0">
+        <span id="server-status-pill" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-brand-50 border border-brand-200 text-brand-900 text-xs font-semibold">
+          <svg class="w-3.5 h-3.5 text-brand-700" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
+          </svg>
+          <span>Server Lokal Aktif</span>
+        </span>
+      </div>
+    </section>
+
+    <!-- Mobile & Tablet View Switcher (< 1024px) to keep narrow screens uncluttered (R-03) -->
+    <div class="lg:hidden grid grid-cols-2 gap-2 p-1 bg-slate-200/80 rounded-xl border border-slate-300" role="tablist" aria-label="Tampilan panel mobile">
+      <button
+        type="button"
+        id="mobile-tab-form"
+        role="tab"
+        aria-selected="true"
+        onclick="switchMobilePane('form')"
+        class="min-h-[44px] px-3 py-2 rounded-lg text-xs font-bold bg-white text-slate-900 shadow-sm transition-colors"
+      >
+        1. Parameter Dokumen
+      </button>
+      <button
+        type="button"
+        id="mobile-tab-preview"
+        role="tab"
+        aria-selected="false"
+        onclick="switchMobilePane('preview')"
+        class="min-h-[44px] px-3 py-2 rounded-lg text-xs font-semibold text-slate-700 hover:text-slate-900 transition-colors"
+      >
+        2. Pratinjau Hasil
+      </button>
+    </div>
+
+    <!-- Split Workbench Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+
+      <!-- Left Column: Configuration Form (5 cols) -->
+      <section
+        id="panel-form"
+        aria-label="Pengaturan Dokumen"
+        class="lg:col-span-5 bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-6 space-y-5"
+      >
+        <!-- Mode Switcher -->
+        <div class="space-y-2">
+          <span class="block text-xs font-bold uppercase tracking-wider text-slate-600">
+            Jenis Dokumen
+          </span>
+          <div class="grid grid-cols-3 gap-2" role="tablist" aria-label="Pilih jenis dokumen">
+            <button
+              type="button"
+              id="tab-mode-ebook"
+              role="tab"
+              aria-selected="true"
+              onclick="switchDocMode('ebook')"
+              class="min-h-[56px] px-2 py-2.5 rounded-xl border text-center transition-colors flex flex-col items-center justify-center gap-0.5 bg-brand-800 text-white border-brand-800 shadow-sm"
+            >
+              <span class="text-xs font-bold">Buku Siswa</span>
+              <span class="text-[11px] opacity-90">1 Semester</span>
             </button>
-            <button type="button" id="tab-mode-modul" onclick="switchDocMode('modul_ajar')" class="py-2 px-1 text-xs font-bold rounded-lg border flex flex-col items-center justify-center gap-0.5 transition-all bg-white text-slate-700 border-slate-300 hover:bg-slate-100 text-center">
-              <span class="text-base">🚀</span>
-              <span>Modul Ajar</span>
-              <span class="text-[9.5px] opacity-80">(Per-Bab)</span>
+            <button
+              type="button"
+              id="tab-mode-modul"
+              role="tab"
+              aria-selected="false"
+              onclick="switchDocMode('modul_ajar')"
+              class="min-h-[56px] px-2 py-2.5 rounded-xl border text-center transition-colors flex flex-col items-center justify-center gap-0.5 bg-white text-slate-800 border-slate-300 hover:bg-slate-50"
+            >
+              <span class="text-xs font-bold">Modul Ajar</span>
+              <span class="text-[11px] text-slate-600">Per Bab</span>
             </button>
-            <button type="button" id="tab-mode-sas" onclick="switchDocMode('soal_sas')" class="py-2 px-1 text-xs font-bold rounded-lg border flex flex-col items-center justify-center gap-0.5 transition-all bg-white text-slate-700 border-slate-300 hover:bg-slate-100 text-center">
-              <span class="text-base">📝</span>
-              <span>Soal SAS</span>
-              <span class="text-[9.5px] opacity-80">(15 PG+5+5)</span>
+            <button
+              type="button"
+              id="tab-mode-sas"
+              role="tab"
+              aria-selected="false"
+              onclick="switchDocMode('soal_sas')"
+              class="min-h-[56px] px-2 py-2.5 rounded-xl border text-center transition-colors flex flex-col items-center justify-center gap-0.5 bg-white text-slate-800 border-slate-300 hover:bg-slate-50"
+            >
+              <span class="text-xs font-bold">Soal SAS</span>
+              <span class="text-[11px] text-slate-600">25 Soal</span>
             </button>
           </div>
         </div>
 
-        <h2 id="form-heading" class="text-lg font-bold text-slate-900 flex items-center gap-2">
-          ⚙️ Parameter E-Book Siswa
-        </h2>
-
-        <!-- Provider Selection -->
-        <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200">
-          <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Pilih AI Engine</label>
-          <div class="grid grid-cols-2 gap-2 mb-3">
-            <button type="button" id="btn-provider-gemini" onclick="setProvider('gemini')" class="py-2 px-3 text-sm font-bold rounded-lg border flex items-center justify-center gap-2 transition-all bg-emerald-600 text-white border-emerald-600 shadow-sm">
-              ✨ Google Gemini
-            </button>
-            <button type="button" id="btn-provider-hermes" onclick="setProvider('hermes')" class="py-2 px-3 text-sm font-bold rounded-lg border flex items-center justify-center gap-2 transition-all bg-white text-slate-700 border-slate-300 hover:bg-slate-100">
-              🦙 Hermes / Local
-            </button>
-          </div>
-
-          <!-- Gemini Config -->
-          <div id="gemini-config" class="space-y-2">
-            <div>
-              <label class="block text-xs font-medium text-slate-600 mb-1">Gemini Model</label>
-              <select id="gemini-model" class="w-full text-sm px-3 py-1.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none bg-white font-medium">
-                <option value="gemini-3.8-flash">gemini-3.8-flash (Rekomendasi Google)</option>
-                <option value="gemini-3.8-pro">gemini-3.8-pro (Lebih Cerdas & Detail)</option>
-              </select>
-            </div>
-            <div>
-              <label class="block text-xs font-medium text-slate-600 mb-1">Gemini API Key</label>
-              <input type="password" id="gemini-key" placeholder="AIzaSy..." class="w-full text-sm px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none">
-              <p class="text-[11px] text-slate-400 mt-1">Dapat diperoleh gratis di Google AI Studio (aistudio.google.com).</p>
-            </div>
-          </div>
-
-          <!-- Hermes / Local Config -->
-          <div id="hermes-config" class="hidden space-y-2">
-            <div>
-              <label class="block text-xs font-medium text-slate-600 mb-1">Local Model (Ollama)</label>
-              <select id="hermes-model" class="w-full text-sm px-3 py-1.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none bg-white font-medium">
-                <option value="qwen2.5:1.5b">qwen2.5:1.5b (Super Cepat, Ringan & Cerdas)</option>
-                <option value="hermes3">hermes3 (Hermes Agent)</option>
-              </select>
-            </div>
-            <div>
-              <label class="block text-xs font-medium text-slate-600 mb-1">Endpoint API Local</label>
-              <input type="text" id="hermes-endpoint" value="http://localhost:11434/v1" class="w-full text-sm px-3 py-1.5 border rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none">
-            </div>
-          </div>
+        <div class="border-t border-slate-200 pt-4">
+          <h2 id="form-heading" class="text-base font-bold text-slate-900">
+            Parameter Buku Siswa (1 Semester)
+          </h2>
         </div>
 
-        <!-- Document Reference Upload Box -->
-        <div class="bg-amber-50/70 border-2 border-dashed border-amber-300 rounded-xl p-3.5">
-          <div class="flex items-center justify-between mb-1.5">
-            <label class="text-xs font-bold text-amber-900 flex items-center gap-1.5">
-              📂 Unggah Referensi Dokumen (PDF, Word, TXT)
-            </label>
-            <span id="doc-badge" class="hidden text-[10px] font-bold bg-amber-200 text-amber-900 px-2 py-0.5 rounded-full">Terunggah</span>
-          </div>
-          <p class="text-[11px] text-amber-700 mb-2">Jika Anda punya file silabus, modul lama, atau panduan materi sendiri, unggah di sini.</p>
-          
-          <div class="flex items-center gap-2">
-            <input type="file" id="docFileInput" accept=".pdf,.docx,.doc,.txt,.md" class="hidden" onchange="handleFileUpload(event)">
-            <button type="button" onclick="document.getElementById('docFileInput').click()" class="text-xs bg-amber-500 hover:bg-amber-600 text-white font-bold py-1.5 px-3 rounded-lg shadow-sm flex items-center gap-1">
-              📤 Pilih File Dokumen
-            </button>
-            <span id="file-chosen-name" class="text-xs text-slate-500 truncate max-w-[200px]">Belum ada file</span>
-          </div>
-          <div id="upload-status" class="hidden mt-2 text-xs text-emerald-700 font-semibold flex items-center gap-1"></div>
-        </div>
-
-        <!-- General Parameters -->
-        <div class="space-y-3">
+        <!-- Core Curriculum Fields -->
+        <div class="space-y-4">
           <div>
-            <label class="block text-xs font-semibold text-slate-700 mb-1">Mata Pelajaran / Judul</label>
-            <input type="text" id="subject" value="Pendidikan Agama Islam dan Budi Pekerti (PAI & BP)" class="w-full text-sm px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none font-medium">
+            <label for="subject" class="block text-xs font-semibold text-slate-800 mb-1.5">
+              Mata Pelajaran atau Judul
+            </label>
+            <input
+              type="text"
+              id="subject"
+              value="Pendidikan Agama Islam dan Budi Pekerti (PAI & BP)"
+              class="ui-input w-full text-sm px-3.5 py-2.5 rounded-lg font-medium"
+            >
           </div>
 
-          <div class="grid grid-cols-2 gap-3">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <label class="block text-xs font-semibold text-slate-700 mb-1">Kelas SD</label>
-              <select id="grade" onchange="onGradeOrSemesterChange()" class="w-full text-sm px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none font-medium">
-                <option value="1">Kelas 1 SD</option>
-                <option value="2">Kelas 2 SD</option>
-                <option value="3">Kelas 3 SD</option>
-                <option value="4">Kelas 4 SD</option>
-                <option value="5">Kelas 5 SD</option>
-                <option value="6">Kelas 6 SD</option>
+              <label for="grade" class="block text-xs font-semibold text-slate-800 mb-1.5">
+                Kelas SD
+              </label>
+              <select
+                id="grade"
+                onchange="onGradeOrSemesterChange()"
+                class="ui-input w-full text-sm px-3 py-2.5 rounded-lg font-medium"
+              >
+                <option value="1">Kelas 1 SD (Fase A)</option>
+                <option value="2">Kelas 2 SD (Fase A)</option>
+                <option value="3">Kelas 3 SD (Fase B)</option>
+                <option value="4">Kelas 4 SD (Fase B)</option>
+                <option value="5">Kelas 5 SD (Fase C)</option>
+                <option value="6">Kelas 6 SD (Fase C)</option>
               </select>
             </div>
+
             <div>
-              <label class="block text-xs font-semibold text-slate-700 mb-1">Semester</label>
-              <select id="semester" onchange="onGradeOrSemesterChange()" class="w-full text-sm px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none font-medium">
+              <label for="semester" class="block text-xs font-semibold text-slate-800 mb-1.5">
+                Semester
+              </label>
+              <select
+                id="semester"
+                onchange="onGradeOrSemesterChange()"
+                class="ui-input w-full text-sm px-3 py-2.5 rounded-lg font-medium"
+              >
                 <option value="1">Semester 1 (Ganjil)</option>
                 <option value="2">Semester 2 (Genap)</option>
               </select>
             </div>
           </div>
 
-          <!-- Modul Ajar Specific Options (Visible only in 'modul_ajar' mode) -->
-          <div id="modul-ajar-options" class="hidden bg-emerald-50/80 border border-emerald-300 rounded-xl p-3.5 space-y-3">
-            <div class="flex items-center justify-between">
-              <label class="text-xs font-bold text-emerald-900 flex items-center gap-1.5">
-                🚀 Opsi Modul Ajar Deep Learning Per-Bab
-              </label>
-              <span class="text-[10px] font-bold bg-emerald-200 text-emerald-900 px-2 py-0.5 rounded-full">8 Halaman Lengkap</span>
+          <!-- Modul Ajar Options (only visible in modul_ajar mode) -->
+          <div id="modul-ajar-options" class="hidden bg-brand-50/70 border border-brand-200 rounded-xl p-4 space-y-3.5">
+            <div class="flex items-center justify-between gap-2">
+              <span class="text-xs font-bold text-brand-900">
+                Pengaturan Modul Ajar Deep Learning
+              </span>
+              <span class="text-[11px] font-semibold bg-white text-brand-900 border border-brand-200 px-2 py-0.5 rounded-md">
+                8 Halaman A4
+              </span>
             </div>
 
-            <div class="grid grid-cols-3 gap-2">
-              <div class="col-span-1">
-                <label class="block text-[11px] font-semibold text-slate-700 mb-1">Bab Ke-</label>
-                <select id="modul-chapter-num" onchange="onChapterSelectChange()" class="w-full text-xs px-2.5 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none font-bold bg-white">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+              <div>
+                <label for="modul-chapter-num" class="block text-xs font-semibold text-slate-800 mb-1">
+                  Bab Ke
+                </label>
+                <select
+                  id="modul-chapter-num"
+                  onchange="onChapterSelectChange()"
+                  class="ui-input w-full text-xs px-2.5 py-2.5 rounded-lg font-semibold"
+                >
                   <option value="1">Bab 1</option>
                   <option value="2">Bab 2</option>
                   <option value="3">Bab 3</option>
@@ -205,23 +474,35 @@
                   <option value="5">Bab 5</option>
                 </select>
               </div>
-              <div class="col-span-2">
-                <label class="block text-[11px] font-semibold text-slate-700 mb-1">Topik / Judul Bab (Bisa diedit)</label>
-                <input type="text" id="modul-chapter-title" value="Aku Cinta Al-Qur'an (Mengenal Huruf Hijaiyah & Harakat)" class="w-full text-xs px-2.5 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none bg-white font-medium" placeholder="Judul bab...">
+              <div class="sm:col-span-2">
+                <label for="modul-chapter-title" class="block text-xs font-semibold text-slate-800 mb-1">
+                  Topik atau Judul Bab
+                </label>
+                <input
+                  type="text"
+                  id="modul-chapter-title"
+                  value="Aku Cinta Al-Qur'an (Mengenal Huruf Hijaiyah & Harakat)"
+                  placeholder="Masukkan topik bab..."
+                  class="ui-input w-full text-xs px-3 py-2.5 rounded-lg font-medium"
+                >
               </div>
             </div>
 
-            <div class="grid grid-cols-2 gap-2 text-xs">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
               <div>
-                <label class="block text-[11px] font-semibold text-slate-700 mb-1">Alokasi Waktu</label>
-                <select id="modul-meetings" class="w-full text-xs px-2 py-1.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none bg-white font-medium">
+                <label for="modul-meetings" class="block text-xs font-semibold text-slate-800 mb-1">
+                  Alokasi Waktu
+                </label>
+                <select id="modul-meetings" class="ui-input w-full text-xs px-2.5 py-2.5 rounded-lg font-medium">
                   <option value="2 Pertemuan (6 JP @ 35 Menit)">2 Pertemuan (6 JP @ 35 Menit)</option>
                   <option value="3 Pertemuan (6 JP @ 35 Menit)">3 Pertemuan (6 JP @ 35 Menit)</option>
                 </select>
               </div>
               <div>
-                <label class="block text-[11px] font-semibold text-slate-700 mb-1">Model Pembelajaran</label>
-                <select id="modul-model" class="w-full text-xs px-2 py-1.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none bg-white font-medium">
+                <label for="modul-model" class="block text-xs font-semibold text-slate-800 mb-1">
+                  Model Pembelajaran
+                </label>
+                <select id="modul-model" class="ui-input w-full text-xs px-2.5 py-2.5 rounded-lg font-medium">
                   <option value="Deep Learning (Mindful, Meaningful, Joyful) berbasis Project Based Learning (PjBL)">PjBL Deep Learning</option>
                   <option value="Deep Learning berbasis Problem Based Learning (PBL)">PBL Deep Learning</option>
                   <option value="Inquiry Learning Terbimbing">Inquiry Terbimbing</option>
@@ -229,75 +510,320 @@
               </div>
             </div>
 
-            <div class="bg-white/90 p-2.5 rounded-lg border border-emerald-200 text-[11px] text-emerald-800 space-y-1">
-              <div><strong>✨ Kelengkapan Dokumen 8 Halaman:</strong></div>
-              <div class="grid grid-cols-2 gap-1 text-[10.5px]">
-                <span>• Halaman 1: Cover Full (Uncropped)</span>
-                <span>• Halaman 2: Identitas, CP, Sarana (Full)</span>
-                <span>• Halaman 3: Rangkuman Materi Lengkap</span>
-                <span>• Halaman 4: Skenario 2 Pertemuan PjBL</span>
-                <span>• Halaman 5: LKPD 1 Menjodohkan</span>
-                <span>• Halaman 6: LKPD 2 Flashcard Gunting</span>
-                <span>• Halaman 7: Asesmen 5 Soal + HOTS</span>
-                <span>• Halaman 8: Rubrik Penilaian Guru</span>
-              </div>
+            <div class="bg-white rounded-lg border border-brand-200 p-3 text-xs text-slate-700 space-y-1.5">
+              <p class="font-bold text-slate-900">Struktur 8 Halaman Dokumen:</p>
+              <ul class="grid grid-cols-1 sm:grid-cols-2 gap-x-3 gap-y-1 text-[11px] text-slate-600 list-disc list-inside">
+                <li>Cover & Identitas Modul</li>
+                <li>Capaian & Sarana Ajar</li>
+                <li>Rangkuman Materi Inti</li>
+                <li>Skenario PjBL 2 Pertemuan</li>
+                <li>LKPD 1 Menjodohkan</li>
+                <li>LKPD 2 Kartu Gunting</li>
+                <li>Asesmen 5 Soal HOTS</li>
+                <li>Rubrik Penilaian Guru</li>
+              </ul>
             </div>
           </div>
 
           <div>
-            <label class="block text-xs font-semibold text-slate-700 mb-1">Acuan Kurikulum / Regulasi</label>
-            <input type="text" id="curriculum" value="CP No. 020 Tahun 2026" class="w-full text-sm px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none font-medium">
+            <label for="curriculum" class="block text-xs font-semibold text-slate-800 mb-1.5">
+              Acuan Kurikulum atau Regulasi
+            </label>
+            <input
+              type="text"
+              id="curriculum"
+              value="CP No. 020 Tahun 2026"
+              class="ui-input w-full text-sm px-3.5 py-2.5 rounded-lg font-medium"
+            >
           </div>
 
           <div>
-            <label class="block text-xs font-semibold text-slate-700 mb-1">Catatan Tambahan / Silabus Khusus (Opsional)</label>
-            <textarea id="customNotes" rows="2" placeholder="Contoh: Fokuskan pada pengenalan huruf hijaiyah dan proyek puzzle..." class="w-full text-sm px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none"></textarea>
+            <label for="customNotes" class="block text-xs font-semibold text-slate-800 mb-1.5">
+              Catatan Tambahan atau Silabus Khusus (Opsional)
+            </label>
+            <textarea
+              id="customNotes"
+              rows="2"
+              placeholder="Contoh: Fokuskan pada pengenalan huruf hijaiyah berharakat dan proyek kartu puzzle..."
+              class="ui-input w-full text-sm px-3.5 py-2.5 rounded-lg"
+            ></textarea>
           </div>
         </div>
-      </div>
 
-      <!-- Generate Button -->
-      <div class="mt-6 pt-3 border-t border-slate-200">
-        <button id="btn-generate" onclick="generateDocument()" class="w-full py-3.5 px-4 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-bold rounded-xl shadow-md transition-all flex items-center justify-center gap-2 text-base">
-          ✨ Generate E-Book Siswa (1 Sem)
-        </button>
-        <div id="loading-indicator" class="hidden mt-3 text-center text-sm font-semibold text-emerald-700 flex items-center justify-center gap-2">
-          <svg class="animate-spin h-5 w-5 text-emerald-600" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path></svg>
-          <span id="loading-text">Menyusun materi & merender layout A4...</span>
+        <!-- Reference File Upload (Warm Accent Box) -->
+        <div class="bg-warm-50 border border-warm-200 rounded-xl p-4 space-y-2.5">
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-xs font-bold text-warm-800">
+              Referensi Dokumen Guru (Opsional)
+            </span>
+            <span id="doc-badge" class="hidden text-[11px] font-bold bg-brand-100 text-brand-900 border border-brand-200 px-2 py-0.5 rounded-md">
+              Aktif digunakan
+            </span>
+          </div>
+          <p class="text-xs text-slate-700 leading-relaxed">
+            Unggah file silabus, modul lama, atau daftar materi (.pdf, .docx, .txt) bila ingin AI mengikuti struktur bab Anda sendiri.
+          </p>
+          <div class="flex flex-wrap items-center gap-2.5">
+            <input type="file" id="docFileInput" accept=".pdf,.docx,.doc,.txt,.md" class="sr-only" onchange="handleFileUpload(event)">
+            <label
+              for="docFileInput"
+              class="inline-flex items-center gap-1.5 min-h-[40px] px-3.5 py-2 rounded-lg bg-amber-700 hover:bg-amber-800 text-white text-xs font-semibold transition-colors"
+            >
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M12 4v12m0-12L8 8m4-4l4 4" />
+              </svg>
+              <span>Pilih File Dokumen</span>
+            </label>
+            <span id="file-chosen-name" class="text-xs text-slate-700 font-medium truncate max-w-[180px]">
+              Belum ada file dipilih
+            </span>
+            <button
+              type="button"
+              id="btn-clear-file"
+              onclick="clearUploadedFile()"
+              class="hidden text-xs font-semibold text-rose-700 hover:text-rose-900 underline px-1 py-1"
+            >
+              Hapus
+            </button>
+          </div>
+          <div id="upload-status" role="status" aria-live="polite" class="hidden text-xs font-semibold"></div>
         </div>
-      </div>
-    </div>
 
-    <!-- Right Column: Live Preview & Action (7 cols) -->
-    <div class="lg:col-span-7 bg-white rounded-2xl shadow-sm border border-slate-200 p-6 flex flex-col">
-      <div class="flex items-center justify-between pb-4 border-b border-slate-200 mb-4">
-        <div class="flex items-center gap-2">
-          <h2 id="preview-heading" class="text-lg font-bold text-slate-900">📄 Live Preview Dokumen</h2>
-          <span id="preview-status" class="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-medium">Siap</span>
+        <!-- AI Provider & Credentials Section -->
+        <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 space-y-3.5">
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-xs font-bold uppercase tracking-wider text-slate-700">
+              Mesin AI Pemroses
+            </span>
+            <span id="provider-summary-badge" class="text-[11px] font-semibold text-slate-600">
+              Google Gemini
+            </span>
+          </div>
+
+          <div class="grid grid-cols-2 gap-2" role="radiogroup" aria-label="Pilih penyedia AI">
+            <button
+              type="button"
+              id="btn-provider-gemini"
+              role="radio"
+              aria-checked="true"
+              onclick="setProvider('gemini')"
+              class="min-h-[42px] px-3 py-2 text-xs font-bold rounded-lg border transition-colors bg-brand-800 text-white border-brand-800"
+            >
+              Google Gemini
+            </button>
+            <button
+              type="button"
+              id="btn-provider-hermes"
+              role="radio"
+              aria-checked="false"
+              onclick="setProvider('hermes')"
+              class="min-h-[42px] px-3 py-2 text-xs font-bold rounded-lg border transition-colors bg-white text-slate-800 border-slate-300 hover:bg-slate-100"
+            >
+              Ollama / Lokal
+            </button>
+          </div>
+
+          <!-- Gemini Config -->
+          <div id="gemini-config" class="space-y-3">
+            <div>
+              <label for="gemini-model" class="block text-xs font-semibold text-slate-700 mb-1">
+                Model Gemini
+              </label>
+              <select id="gemini-model" class="ui-input w-full text-xs px-3 py-2.5 rounded-lg font-medium">
+                <option value="gemini-3.8-flash">gemini-3.8-flash (Standar, Cepat)</option>
+                <option value="gemini-3.8-pro">gemini-3.8-pro (Analisis Mendalam)</option>
+              </select>
+            </div>
+            <div>
+              <label for="gemini-key" class="block text-xs font-semibold text-slate-700 mb-1">
+                Gemini API Key
+              </label>
+              <div class="flex items-stretch gap-1.5">
+                <input
+                  type="password"
+                  id="gemini-key"
+                  placeholder="Masukkan API key (AIzaSy...)"
+                  autocomplete="off"
+                  oninput="clearKeyValidationError()"
+                  class="ui-input flex-1 text-xs px-3 py-2.5 rounded-lg font-medium min-w-0"
+                >
+                <button
+                  type="button"
+                  id="btn-toggle-key"
+                  aria-label="Tampilkan API Key"
+                  aria-pressed="false"
+                  onclick="toggleApiKeyVisibility()"
+                  class="px-3 rounded-lg border border-slate-400 bg-white hover:bg-slate-100 text-xs font-semibold text-slate-700 shrink-0"
+                >
+                  Lihat
+                </button>
+              </div>
+              <p id="gemini-key-error" role="alert" class="hidden text-xs font-semibold text-rose-700 mt-1.5"></p>
+              <p class="text-[11px] text-slate-600 mt-1">
+                Tersimpan aman di browser lokal Anda. Kunci dapat dibuat di Google AI Studio (aistudio.google.com).
+              </p>
+            </div>
+          </div>
+
+          <!-- Hermes / Local Config -->
+          <div id="hermes-config" class="hidden space-y-3">
+            <div>
+              <label for="hermes-model" class="block text-xs font-semibold text-slate-700 mb-1">
+                Model Lokal (Ollama)
+              </label>
+              <select id="hermes-model" class="ui-input w-full text-xs px-3 py-2.5 rounded-lg font-medium">
+                <option value="qwen2.5:1.5b">qwen2.5:1.5b (Ringan)</option>
+                <option value="hermes3">hermes3 (Hermes Agent)</option>
+              </select>
+            </div>
+            <div>
+              <label for="hermes-endpoint" class="block text-xs font-semibold text-slate-700 mb-1">
+                Endpoint API Lokal
+              </label>
+              <input
+                type="text"
+                id="hermes-endpoint"
+                value="http://localhost:11434/v1"
+                class="ui-input w-full text-xs px-3 py-2.5 rounded-lg font-medium"
+              >
+            </div>
+          </div>
         </div>
-        <div class="flex items-center gap-2">
-          <button id="btn-open-fullscreen" onclick="openFullscreen()" disabled class="px-3 py-1.5 text-xs font-bold rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed">
-            ↗️ Buka Tab Baru
+
+        <!-- Inline Form Error / Feedback Banner (R-27: replaces native alert()) -->
+        <div
+          id="form-feedback-banner"
+          role="alert"
+          aria-live="assertive"
+          class="hidden rounded-xl border px-3.5 py-3 text-xs font-medium flex items-start justify-between gap-2"
+        >
+          <span id="form-feedback-text"></span>
+          <button
+            type="button"
+            aria-label="Tutup pemberitahuan"
+            onclick="hideFormFeedback()"
+            class="text-xs font-bold underline shrink-0"
+          >
+            Tutup
           </button>
-          <button id="btn-print" onclick="printPreview()" disabled class="px-4 py-1.5 text-xs font-bold rounded-lg bg-amber-500 hover:bg-amber-600 text-amber-950 shadow-sm disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-1.5">
-            🖨️ Cetak / PDF
-          </button>
         </div>
-      </div>
 
-      <!-- Preview iFrame Container -->
-      <div class="flex-grow bg-slate-100 rounded-xl overflow-hidden border border-slate-200 relative min-h-[550px]">
-        <iframe id="preview-frame" class="w-full h-full border-0 absolute inset-0" src="/buku_siswa_pai_kelas1_semester1.html"></iframe>
-      </div>
+        <!-- Submit Action -->
+        <div class="pt-2 border-t border-slate-200">
+          <button
+            type="button"
+            id="btn-generate"
+            onclick="generateDocument()"
+            class="w-full min-h-[48px] py-3 px-4 bg-brand-800 hover:bg-brand-900 active:bg-brand-950 text-white font-bold rounded-xl shadow-sm transition-colors flex items-center justify-center gap-2 text-sm disabled:opacity-60"
+          >
+            <span id="btn-generate-label">Susun Buku Siswa (1 Semester)</span>
+          </button>
+          <p id="loading-indicator" class="hidden mt-3 text-center text-xs font-semibold text-brand-900 flex items-center justify-center gap-2">
+            <svg class="animate-spin h-4 w-4 text-brand-800 shrink-0" fill="none" viewBox="0 0 24 24" aria-hidden="true">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+            </svg>
+            <span id="loading-text">Menyusun materi dan merender layout A4...</span>
+          </p>
+        </div>
+      </section>
+
+      <!-- Right Column: Live Document Preview Workbench (7 cols) -->
+      <section
+        id="panel-preview"
+        aria-label="Pratinjau Dokumen"
+        class="hidden lg:flex lg:col-span-7 bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-6 flex-col lg:sticky lg:top-20"
+      >
+        <!-- Preview Toolbar -->
+        <div class="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-slate-200 mb-4">
+          <div class="min-w-0 space-y-1">
+            <h2 id="preview-heading" class="text-base font-bold text-slate-900 truncate">
+              Contoh: Buku Siswa PAI Kelas 1 (Semester 1)
+            </h2>
+            <div class="flex items-center gap-2">
+              <span id="preview-status" class="inline-flex items-center gap-1.5 text-xs bg-slate-100 text-slate-800 border border-slate-300 px-2.5 py-0.5 rounded-md font-semibold">
+                Contoh Siap
+              </span>
+              <span id="preview-file-path" class="text-[11px] text-slate-600 truncate max-w-[240px]">
+                /buku_siswa_pai_kelas1_semester1.html
+              </span>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-2 shrink-0">
+            <button
+              type="button"
+              id="btn-open-fullscreen"
+              onclick="openFullscreen()"
+              class="min-h-[40px] px-3.5 py-2 text-xs font-semibold rounded-lg border border-slate-400 text-slate-800 bg-white hover:bg-slate-50 transition-colors disabled:opacity-40"
+            >
+              Buka Tab Baru
+            </button>
+            <button
+              type="button"
+              id="btn-print"
+              onclick="printPreview()"
+              class="min-h-[40px] px-4 py-2 text-xs font-bold rounded-lg bg-amber-700 hover:bg-amber-800 text-white shadow-sm transition-colors disabled:opacity-40 inline-flex items-center gap-1.5"
+            >
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2M6 14h12v8H6v-8z" />
+              </svg>
+              <span>Cetak / PDF</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Preview Stage (Empty, Loading, Error, Ready states per R-27) -->
+        <div class="relative w-full h-[70vh] min-h-[520px] lg:h-[calc(100vh-14.5rem)] lg:min-h-[600px] bg-slate-100 rounded-xl overflow-hidden border border-slate-300">
+          <!-- Loading State Overlay -->
+          <div
+            id="preview-loading-overlay"
+            class="hidden absolute inset-0 z-20 bg-white/90 flex flex-col items-center justify-center p-6 text-center space-y-3"
+          >
+            <svg class="animate-spin h-7 w-7 text-brand-800" fill="none" viewBox="0 0 24 24" aria-hidden="true">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+            </svg>
+            <div class="space-y-1 max-w-sm">
+              <p class="text-sm font-bold text-slate-900" id="overlay-loading-title">Sedang menyusun dokumen...</p>
+              <p class="text-xs text-slate-600" id="overlay-loading-desc">AI sedang menyusun materi sesuai Kurikulum Merdeka dan merapikan layout halaman A4.</p>
+            </div>
+          </div>
+
+          <!-- Error / Empty Fallback State -->
+          <div
+            id="preview-error-state"
+            class="hidden absolute inset-0 z-20 bg-warm-50 flex flex-col items-center justify-center p-6 text-center space-y-3"
+          >
+            <p class="text-sm font-bold text-rose-800" id="preview-error-title">Dokumen gagal dimuat</p>
+            <p class="text-xs text-slate-700 max-w-md" id="preview-error-desc">Silakan periksa koneksi server lokal atau muat contoh dokumen di menu atas.</p>
+            <button
+              type="button"
+              onclick="loadPrototypeBuku()"
+              class="min-h-[40px] px-4 py-2 rounded-lg bg-brand-800 hover:bg-brand-900 text-white text-xs font-semibold"
+            >
+              Muat Contoh Buku Siswa
+            </button>
+          </div>
+
+          <iframe
+            id="preview-frame"
+            title="Pratinjau Dokumen Hasil Generator"
+            class="w-full h-full border-0 bg-white"
+            src="/buku_siswa_pai_kelas1_semester1.html"
+          ></iframe>
+        </div>
+      </section>
+
     </div>
   </main>
 
-  <!-- Script -->
   <script>
-    let currentMode = 'ebook'; // 'ebook' or 'modul_ajar'
+    let currentMode = 'ebook';
     let currentProvider = 'gemini';
     let currentSavedUrl = '/buku_siswa_pai_kelas1_semester1.html';
     let extractedReferenceText = '';
+    let activeMobilePane = 'form';
 
     const defaultChaptersPerGrade = {
       1: {
@@ -323,17 +849,159 @@
           { num: 3, title: "Perilaku Terpuji & Sopan Santun di Sekolah" },
           { num: 4, title: "Membiasakan Hidup Bersih & Sehat (PHBS)" },
           { num: 5, title: "Kisah Teladan Nabi Ishaq a.s. dan Nabi Ya'qub a.s." }
+        ],
+        2: [
+          { num: 1, title: "Membaca Surah An-Nas dan Al-Falaq" },
+          { num: 2, title: "Mengenal Asmaulhusna (Al-Alim & Al-Khabir)" },
+          { num: 3, title: "Salat Fardu Lima Waktu Secara Tertib" },
+          { num: 4, title: "Sikap Jujur dan Disiplin Sehari-hari" },
+          { num: 5, title: "Kisah Ketabahan Nabi Nuh a.s." }
+        ]
+      },
+      3: {
+        1: [
+          { num: 1, title: "Memahami Pesan Pokok Surah Al-Kautsar dan Al-Ikhlas" },
+          { num: 2, title: "Mengenal Sifat Wajib Allah dan Asmaulhusna (Al-Wahhab & Al-Kabir)" },
+          { num: 3, title: "Berbakti kepada Orang Tua dan Menghormati Guru" },
+          { num: 4, title: "Ketentuan dan Keutamaan Salat Berjamaah" },
+          { num: 5, title: "Kisah Keteladanan Nabi Ibrahim a.s." }
+        ],
+        2: [
+          { num: 1, title: "Hadis tentang Kewajiban Menuntut Ilmu" },
+          { num: 2, title: "Mengenal Iman kepada Kitab-Kitab Allah" },
+          { num: 3, title: "Perilaku Amanah dan Menepati Janji" },
+          { num: 4, title: "Tata Cara Puasa Ramadan dan Hikmahnya" },
+          { num: 5, title: "Kisah Nabi Ismail a.s. yang Patuh" }
+        ]
+      },
+      4: {
+        1: [
+          { num: 1, title: "Indahnya Keragaman dalam Surah Al-Hujurat Ayat 13" },
+          { num: 2, title: "Meneladani Asmaulhusna (Al-Quddus, As-Salam, Al-Mu'min)" },
+          { num: 3, title: "Indahnya Saling Menghargai dalam Keragaman" },
+          { num: 4, title: "Menyambut Usia Balig dan Tanggung Jawabnya" },
+          { num: 5, title: "Kisah Hijrah Nabi Muhammad saw. ke Madinah" }
+        ],
+        2: [
+          { num: 1, title: "Membaca dan Memahami Surah At-Tin" },
+          { num: 2, title: "Iman kepada Rasul-Rasul Allah Swt." },
+          { num: 3, title: "Salam, Silaturahmi, dan Sikap Toleran" },
+          { num: 4, title: "Ketentuan Salat Jumat dan Salat Duha" },
+          { num: 5, title: "Kisah Nabi Muhammad saw. Membangun Kota Madinah" }
+        ]
+      },
+      5: {
+        1: [
+          { num: 1, title: "Menyayangi Anak Yatim dalam Surah Al-Ma'un" },
+          { num: 2, title: "Mengenal Asmaulhusna (Al-Qawiyyu, Al-Qayyum, Al-Muhyi)" },
+          { num: 3, title: "Indahnya Saling Menghargai Perbedaan Budaya dan Agama" },
+          { num: 4, title: "Hidup Lapang dengan Zakat, Infak, dan Sedekah" },
+          { num: 5, title: "Meneladani Peristiwa Fathu Makkah" }
+        ],
+        2: [
+          { num: 1, title: "Hidup Damai dengan Saling Memaafkan (Surah Ali Imran: 134)" },
+          { num: 2, title: "Iman kepada Hari Akhir dan Kehidupan Bermakna" },
+          { num: 3, title: "Menjaga Lingkungan sebagai Amanah Khalifah" },
+          { num: 4, title: "Ketentuan Ibadah Haji dan Kurban" },
+          { num: 5, title: "Perjuangan Khulafaur Rasyidin Abu Bakar dan Umar" }
+        ]
+      },
+      6: {
+        1: [
+          { num: 1, title: "Belajar Surah Al-A'la dan Ad-Duha dengan Tartil" },
+          { num: 2, title: "Mengenal Asmaulhusna (Al-Ghaffar dan Al-Afuw)" },
+          { num: 3, title: "Memahami Halal dan Haram dalam Jual Beli Sederhana" },
+          { num: 4, title: "Menumbuhkan Sikap Peduli Sosial dan Gotong Royong" },
+          { num: 5, title: "Keteladanan Jasa Khalifah Usman bin Affan dan Ali bin Abi Talib" }
+        ],
+        2: [
+          { num: 1, title: "Memahami Hikmah Beriman kepada Qada dan Qadar" },
+          { num: 2, title: "Larangan Ghibah dan Pentingnya Tabayyun" },
+          { num: 3, title: "Puasa Sunah dan Pengendalian Diri" },
+          { num: 4, title: "Peduli Lingkungan dan Kelestarian Alam" },
+          { num: 5, title: "Meneladani Akhlak Mulia Nabi Muhammad saw." }
         ]
       }
     };
 
-    // Load saved API Key from localStorage
     window.addEventListener('DOMContentLoaded', () => {
       const savedKey = localStorage.getItem('gemini_api_key');
       if (savedKey) document.getElementById('gemini-key').value = savedKey;
       document.getElementById('btn-open-fullscreen').disabled = false;
       document.getElementById('btn-print').disabled = false;
+
+      // Close menus on Escape key (R-32 / R-26)
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          closeStudioMenu();
+          const drawer = document.getElementById('mobile-nav-drawer');
+          if (!drawer.classList.contains('hidden')) toggleMobileMenu(false);
+        }
+      });
+
+      // Close desktop popover when clicking outside
+      document.addEventListener('click', (e) => {
+        const wrapper = document.getElementById('studio-menu-wrapper');
+        if (wrapper && !wrapper.contains(e.target)) {
+          closeStudioMenu();
+        }
+      });
     });
+
+    function toggleStudioMenu() {
+      const popover = document.getElementById('studio-menu-popover');
+      const btn = document.getElementById('studio-menu-btn');
+      const chevron = document.getElementById('studio-menu-chevron');
+      const isHidden = popover.classList.contains('hidden');
+      popover.classList.toggle('hidden', !isHidden);
+      btn.setAttribute('aria-expanded', String(isHidden));
+      chevron.classList.toggle('rotate-180', isHidden);
+    }
+
+    function closeStudioMenu() {
+      const popover = document.getElementById('studio-menu-popover');
+      const btn = document.getElementById('studio-menu-btn');
+      const chevron = document.getElementById('studio-menu-chevron');
+      if (!popover.classList.contains('hidden')) {
+        popover.classList.add('hidden');
+        btn.setAttribute('aria-expanded', 'false');
+        chevron.classList.remove('rotate-180');
+      }
+    }
+
+    function toggleMobileMenu(forceState) {
+      const drawer = document.getElementById('mobile-nav-drawer');
+      const btn = document.getElementById('mobile-menu-btn');
+      const nextOpen = typeof forceState === 'boolean' ? forceState : drawer.classList.contains('hidden');
+      drawer.classList.toggle('hidden', !nextOpen);
+      btn.setAttribute('aria-expanded', String(nextOpen));
+    }
+
+    function switchMobilePane(pane) {
+      activeMobilePane = pane;
+      const formPanel = document.getElementById('panel-form');
+      const previewPanel = document.getElementById('panel-preview');
+      const tabForm = document.getElementById('mobile-tab-form');
+      const tabPreview = document.getElementById('mobile-tab-preview');
+
+      if (pane === 'preview') {
+        formPanel.classList.add('hidden', 'lg:block');
+        previewPanel.classList.remove('hidden');
+        previewPanel.classList.add('flex');
+        tabPreview.className = 'min-h-[44px] px-3 py-2 rounded-lg text-xs font-bold bg-white text-slate-900 shadow-sm transition-colors';
+        tabPreview.setAttribute('aria-selected', 'true');
+        tabForm.className = 'min-h-[44px] px-3 py-2 rounded-lg text-xs font-semibold text-slate-700 hover:text-slate-900 transition-colors';
+        tabForm.setAttribute('aria-selected', 'false');
+      } else {
+        formPanel.classList.remove('hidden', 'lg:block');
+        previewPanel.classList.add('hidden');
+        previewPanel.classList.remove('flex');
+        tabForm.className = 'min-h-[44px] px-3 py-2 rounded-lg text-xs font-bold bg-white text-slate-900 shadow-sm transition-colors';
+        tabForm.setAttribute('aria-selected', 'true');
+        tabPreview.className = 'min-h-[44px] px-3 py-2 rounded-lg text-xs font-semibold text-slate-700 hover:text-slate-900 transition-colors';
+        tabPreview.setAttribute('aria-selected', 'false');
+      }
+    }
 
     function switchDocMode(mode) {
       currentMode = mode;
@@ -342,30 +1010,42 @@
       const tabSas = document.getElementById('tab-mode-sas');
       const modulOptions = document.getElementById('modul-ajar-options');
       const formHeading = document.getElementById('form-heading');
-      const btnGen = document.getElementById('btn-generate');
+      const btnLabel = document.getElementById('btn-generate-label');
 
-      // Reset classes
-      const inactiveClass = "py-2 px-1 text-xs font-bold rounded-lg border flex flex-col items-center justify-center gap-0.5 transition-all bg-white text-slate-700 border-slate-300 hover:bg-slate-100 text-center";
-      tabEbook.className = inactiveClass;
-      tabModul.className = inactiveClass;
-      if (tabSas) tabSas.className = inactiveClass;
+      const inactiveClass = 'min-h-[56px] px-2 py-2.5 rounded-xl border text-center transition-colors flex flex-col items-center justify-center gap-0.5 bg-white text-slate-800 border-slate-300 hover:bg-slate-50';
+      const activeClass = 'min-h-[56px] px-2 py-2.5 rounded-xl border text-center transition-colors flex flex-col items-center justify-center gap-0.5 bg-brand-800 text-white border-brand-800 shadow-sm';
+
+      [tabEbook, tabModul, tabSas].forEach((tab) => {
+        if (!tab) return;
+        tab.className = inactiveClass;
+        tab.setAttribute('aria-selected', 'false');
+        const sub = tab.querySelector('span:last-child');
+        if (sub) sub.className = 'text-[11px] text-slate-600';
+      });
+
+      const activate = (tab) => {
+        tab.className = activeClass;
+        tab.setAttribute('aria-selected', 'true');
+        const sub = tab.querySelector('span:last-child');
+        if (sub) sub.className = 'text-[11px] opacity-90';
+      };
 
       if (mode === 'modul_ajar') {
-        tabModul.className = "py-2 px-1 text-xs font-bold rounded-lg border flex flex-col items-center justify-center gap-0.5 transition-all bg-emerald-600 text-white border-emerald-600 shadow-sm text-center";
+        activate(tabModul);
         modulOptions.classList.remove('hidden');
-        formHeading.innerText = "🚀 Parameter Modul Ajar Deep Learning";
-        btnGen.innerText = "🚀 Generate Modul Ajar Deep Learning (8 Hal)";
+        formHeading.innerText = 'Parameter Modul Ajar Deep Learning';
+        btnLabel.innerText = 'Susun Modul Ajar Deep Learning (8 Halaman)';
         onGradeOrSemesterChange();
       } else if (mode === 'soal_sas') {
-        if (tabSas) tabSas.className = "py-2 px-1 text-xs font-bold rounded-lg border flex flex-col items-center justify-center gap-0.5 transition-all bg-indigo-600 text-white border-indigo-600 shadow-sm text-center";
+        activate(tabSas);
         modulOptions.classList.add('hidden');
-        formHeading.innerText = "📝 Parameter Soal SAS (Sumatif Akhir Semester)";
-        btnGen.innerText = "📝 Generate Soal SAS (15 PG, 5 Isian, 5 Essay)";
+        formHeading.innerText = 'Parameter Naskah Soal SAS';
+        btnLabel.innerText = 'Susun Soal SAS (15 PG, 5 Isian, 5 Essay)';
       } else {
-        tabEbook.className = "py-2 px-1 text-xs font-bold rounded-lg border flex flex-col items-center justify-center gap-0.5 transition-all bg-emerald-600 text-white border-emerald-600 shadow-sm text-center";
+        activate(tabEbook);
         modulOptions.classList.add('hidden');
-        formHeading.innerText = "⚙️ Parameter E-Book Siswa";
-        btnGen.innerText = "✨ Generate E-Book Siswa (1 Sem)";
+        formHeading.innerText = 'Parameter Buku Siswa (1 Semester)';
+        btnLabel.innerText = 'Susun Buku Siswa (1 Semester)';
       }
     }
 
@@ -373,9 +1053,8 @@
       const grade = document.getElementById('grade').value;
       const semester = document.getElementById('semester').value;
       const chapterNum = document.getElementById('modul-chapter-num').value;
-      
       const gradeData = defaultChaptersPerGrade[grade]?.[semester] || defaultChaptersPerGrade[1][1];
-      const found = gradeData.find(c => c.num == chapterNum);
+      const found = gradeData.find((c) => String(c.num) === String(chapterNum));
       if (found) {
         document.getElementById('modul-chapter-title').value = found.title;
       }
@@ -385,36 +1064,58 @@
       const grade = document.getElementById('grade').value;
       const semester = document.getElementById('semester').value;
       const chapterNum = document.getElementById('modul-chapter-num').value;
-
       const gradeData = defaultChaptersPerGrade[grade]?.[semester] || defaultChaptersPerGrade[1][1];
-      const found = gradeData.find(c => c.num == chapterNum);
-      if (found) {
-        document.getElementById('modul-chapter-title').value = found.title;
+      const found = gradeData.find((c) => String(c.num) === String(chapterNum));
+      document.getElementById('modul-chapter-title').value = found
+        ? found.title
+        : `Bab ${chapterNum}: Materi Terkait Kurikulum`;
+    }
+
+    function loadPreviewUrl(url, heading, statusLabel, statusTone) {
+      currentSavedUrl = url;
+      document.getElementById('preview-error-state').classList.add('hidden');
+      const frame = document.getElementById('preview-frame');
+      frame.src = url;
+      document.getElementById('preview-heading').innerText = heading;
+      document.getElementById('preview-file-path').innerText = url;
+
+      const statusEl = document.getElementById('preview-status');
+      statusEl.innerText = statusLabel;
+      if (statusTone === 'success') {
+        statusEl.className = 'inline-flex items-center gap-1.5 text-xs bg-brand-50 text-brand-900 border border-brand-200 px-2.5 py-0.5 rounded-md font-semibold';
       } else {
-        document.getElementById('modul-chapter-title').value = `Bab ${chapterNum}: Materi Terkait Kurikulum`;
+        statusEl.className = 'inline-flex items-center gap-1.5 text-xs bg-slate-100 text-slate-800 border border-slate-300 px-2.5 py-0.5 rounded-md font-semibold';
       }
+
+      document.getElementById('btn-open-fullscreen').disabled = false;
+      document.getElementById('btn-print').disabled = false;
+    }
+
+    function loadPrototypeBuku() {
+      loadPreviewUrl(
+        '/buku_siswa_pai_kelas1_semester1.html',
+        'Contoh: Buku Siswa PAI Kelas 1 (Semester 1)',
+        'Contoh Siap',
+        'neutral'
+      );
     }
 
     function loadPrototypeModul() {
-      currentSavedUrl = '/modul_ajar_deep_learning_kelas1_bab1.html';
-      const frame = document.getElementById('preview-frame');
-      frame.src = currentSavedUrl;
-      document.getElementById('preview-heading').innerText = "📄 Contoh: Modul Ajar Deep Learning Bab 1";
-      document.getElementById('preview-status').innerText = "Contoh Siap";
-      document.getElementById('preview-status').className = 'text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded font-medium';
-      document.getElementById('btn-open-fullscreen').disabled = false;
-      document.getElementById('btn-print').disabled = false;
+      loadPreviewUrl(
+        '/modul_ajar_deep_learning_kelas1_bab1.html',
+        'Contoh: Modul Ajar Deep Learning Bab 1 (8 Halaman)',
+        'Contoh Siap',
+        'neutral'
+      );
     }
 
     function loadPrototypeSAS() {
-      currentSavedUrl = '/soal_sas_prototype.html';
-      const frame = document.getElementById('preview-frame');
-      frame.src = currentSavedUrl;
-      document.getElementById('preview-heading').innerText = "📄 Contoh: Naskah Soal SAS (15 PG, 5 Isian, 5 Essay)";
-      document.getElementById('preview-status').innerText = "Contoh Siap";
-      document.getElementById('preview-status').className = 'text-xs bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded font-medium';
-      document.getElementById('btn-open-fullscreen').disabled = false;
-      document.getElementById('btn-print').disabled = false;
+      loadPreviewUrl(
+        '/soal_sas_prototype.html',
+        'Contoh: Naskah Soal SAS (15 PG, 5 Isian, 5 Essay)',
+        'Contoh Siap',
+        'neutral'
+      );
     }
 
     function setProvider(provider) {
@@ -423,18 +1124,64 @@
       const btnHermes = document.getElementById('btn-provider-hermes');
       const geminiConfig = document.getElementById('gemini-config');
       const hermesConfig = document.getElementById('hermes-config');
+      const summary = document.getElementById('provider-summary-badge');
+
+      const activeBtn = 'min-h-[42px] px-3 py-2 text-xs font-bold rounded-lg border transition-colors bg-brand-800 text-white border-brand-800';
+      const inactiveBtn = 'min-h-[42px] px-3 py-2 text-xs font-bold rounded-lg border transition-colors bg-white text-slate-800 border-slate-300 hover:bg-slate-100';
 
       if (provider === 'gemini') {
-        btnGemini.className = "py-2 px-3 text-sm font-bold rounded-lg border flex items-center justify-center gap-2 transition-all bg-emerald-600 text-white border-emerald-600 shadow-sm";
-        btnHermes.className = "py-2 px-3 text-sm font-bold rounded-lg border flex items-center justify-center gap-2 transition-all bg-white text-slate-700 border-slate-300 hover:bg-slate-100";
+        btnGemini.className = activeBtn;
+        btnGemini.setAttribute('aria-checked', 'true');
+        btnHermes.className = inactiveBtn;
+        btnHermes.setAttribute('aria-checked', 'false');
         geminiConfig.classList.remove('hidden');
         hermesConfig.classList.add('hidden');
+        summary.innerText = 'Google Gemini';
       } else {
-        btnHermes.className = "py-2 px-3 text-sm font-bold rounded-lg border flex items-center justify-center gap-2 transition-all bg-emerald-600 text-white border-emerald-600 shadow-sm";
-        btnGemini.className = "py-2 px-3 text-sm font-bold rounded-lg border flex items-center justify-center gap-2 transition-all bg-white text-slate-700 border-slate-300 hover:bg-slate-100";
+        btnHermes.className = activeBtn;
+        btnHermes.setAttribute('aria-checked', 'true');
+        btnGemini.className = inactiveBtn;
+        btnGemini.setAttribute('aria-checked', 'false');
         hermesConfig.classList.remove('hidden');
         geminiConfig.classList.add('hidden');
+        summary.innerText = 'Ollama / Lokal';
       }
+      clearKeyValidationError();
+      hideFormFeedback();
+    }
+
+    function toggleApiKeyVisibility() {
+      const input = document.getElementById('gemini-key');
+      const btn = document.getElementById('btn-toggle-key');
+      const isPassword = input.type === 'password';
+      input.type = isPassword ? 'text' : 'password';
+      btn.innerText = isPassword ? 'Sembunyikan' : 'Lihat';
+      btn.setAttribute('aria-label', isPassword ? 'Sembunyikan API Key' : 'Tampilkan API Key');
+      btn.setAttribute('aria-pressed', String(isPassword));
+    }
+
+    function showFormFeedback(message, tone) {
+      const banner = document.getElementById('form-feedback-banner');
+      const text = document.getElementById('form-feedback-text');
+      text.innerText = message;
+      banner.classList.remove('hidden');
+      if (tone === 'error') {
+        banner.className = 'rounded-xl border border-rose-300 bg-rose-50 text-rose-900 px-3.5 py-3 text-xs font-medium flex items-start justify-between gap-2';
+      } else {
+        banner.className = 'rounded-xl border border-brand-200 bg-brand-50 text-brand-900 px-3.5 py-3 text-xs font-medium flex items-start justify-between gap-2';
+      }
+    }
+
+    function hideFormFeedback() {
+      document.getElementById('form-feedback-banner').classList.add('hidden');
+    }
+
+    function clearKeyValidationError() {
+      const errEl = document.getElementById('gemini-key-error');
+      const input = document.getElementById('gemini-key');
+      errEl.classList.add('hidden');
+      errEl.innerText = '';
+      input.removeAttribute('aria-invalid');
     }
 
     async function handleFileUpload(event) {
@@ -444,7 +1191,8 @@
       document.getElementById('file-chosen-name').innerText = file.name;
       const statusDiv = document.getElementById('upload-status');
       statusDiv.classList.remove('hidden');
-      statusDiv.innerText = '⏳ Membaca dan mengekstrak dokumen...';
+      statusDiv.className = 'text-xs font-semibold text-slate-700';
+      statusDiv.innerText = 'Sedang membaca dan mengekstrak teks dokumen...';
 
       const formData = new FormData();
       formData.append('docFile', file);
@@ -455,26 +1203,40 @@
           body: formData
         });
         const data = await res.json();
-        if (!res.ok) throw new Error(data.error || 'Gagal ekstrak file');
+        if (!res.ok) throw new Error(data.error || 'Gagal mengekstrak isi dokumen');
 
         extractedReferenceText = data.extractedText;
-        statusDiv.innerHTML = `✅ Dokumen berhasil diekstrak (${Math.round(data.fileSize / 1024)} KB)! AI akan menggunakan isi file ini.`;
-        statusDiv.className = 'mt-2 text-xs text-emerald-700 font-semibold flex items-center gap-1';
+        statusDiv.innerText = `Berhasil diekstrak (${Math.max(1, Math.round(data.fileSize / 1024))} KB). Isi dokumen akan dijadikan acuan materi.`;
+        statusDiv.className = 'text-xs font-semibold text-brand-900';
         document.getElementById('doc-badge').classList.remove('hidden');
+        document.getElementById('btn-clear-file').classList.remove('hidden');
       } catch (err) {
-        statusDiv.innerHTML = `❌ Gagal: ${err.message}`;
-        statusDiv.className = 'mt-2 text-xs text-rose-700 font-semibold flex items-center gap-1';
+        statusDiv.innerText = `Gagal membaca file: ${err.message}`;
+        statusDiv.className = 'text-xs font-semibold text-rose-800';
       }
     }
 
+    function clearUploadedFile() {
+      extractedReferenceText = '';
+      document.getElementById('docFileInput').value = '';
+      document.getElementById('file-chosen-name').innerText = 'Belum ada file dipilih';
+      document.getElementById('upload-status').classList.add('hidden');
+      document.getElementById('doc-badge').classList.add('hidden');
+      document.getElementById('btn-clear-file').classList.add('hidden');
+    }
+
     async function generateDocument() {
+      hideFormFeedback();
+      clearKeyValidationError();
+
       const subject = document.getElementById('subject').value.trim();
       const grade = document.getElementById('grade').value;
       const semester = document.getElementById('semester').value;
       const curriculum = document.getElementById('curriculum').value.trim();
       const customNotes = document.getElementById('customNotes').value.trim();
-      
-      const apiKey = document.getElementById('gemini-key').value.trim();
+
+      const apiKeyInput = document.getElementById('gemini-key');
+      const apiKey = apiKeyInput.value.trim();
       const geminiModel = document.getElementById('gemini-model').value;
       const hermesEndpoint = document.getElementById('hermes-endpoint').value.trim();
       const hermesModel = document.getElementById('hermes-model').value.trim();
@@ -484,35 +1246,48 @@
       const meetings = document.getElementById('modul-meetings').value;
       const modelStyle = document.getElementById('modul-model').value;
 
+      if (!subject) {
+        showFormFeedback('Mata pelajaran atau judul dokumen tidak boleh kosong.', 'error');
+        document.getElementById('subject').focus();
+        return;
+      }
+
       if (currentProvider === 'gemini') {
         if (!apiKey) {
-          alert('Silakan masukkan Gemini API Key Anda terlebih dahulu!');
-          document.getElementById('gemini-key').focus();
+          const errEl = document.getElementById('gemini-key-error');
+          errEl.innerText = 'Masukkan Gemini API Key Anda terlebih dahulu sebelum menyusun dokumen.';
+          errEl.classList.remove('hidden');
+          apiKeyInput.setAttribute('aria-invalid', 'true');
+          apiKeyInput.focus();
+          showFormFeedback('Gemini API Key belum diisi. Isi pada bagian Mesin AI Pemroses atau beralih ke Ollama lokal.', 'error');
           return;
         }
         localStorage.setItem('gemini_api_key', apiKey);
       }
 
-      // UI state
       const btnGen = document.getElementById('btn-generate');
       const loading = document.getElementById('loading-indicator');
       const loadingText = document.getElementById('loading-text');
       const previewStatus = document.getElementById('preview-status');
+      const previewOverlay = document.getElementById('preview-loading-overlay');
+      const previewErr = document.getElementById('preview-error-state');
+
       btnGen.disabled = true;
-      btnGen.classList.add('opacity-50');
       loading.classList.remove('hidden');
-      
+      previewErr.classList.add('hidden');
+      previewOverlay.classList.remove('hidden');
+
       if (currentMode === 'modul_ajar') {
-        loadingText.innerText = `Menyusun Modul Ajar Deep Learning Bab ${chapterNumber} (8 Halaman Lengkap)...`;
-        previewStatus.innerText = 'Menyusun Modul Ajar...';
+        loadingText.innerText = `Menyusun Modul Ajar Bab ${chapterNumber} (8 halaman A4)...`;
+        previewStatus.innerText = 'Memproses Modul Ajar...';
       } else if (currentMode === 'soal_sas') {
-        loadingText.innerText = 'Menyusun Naskah Soal SAS (15 PG + 5 Isian + 5 Essay) & Kunci Jawaban...';
-        previewStatus.innerText = 'Menyusun Soal SAS...';
+        loadingText.innerText = 'Menyusun Naskah Soal SAS (15 PG, 5 Isian, 5 Essay) dan kunci jawaban...';
+        previewStatus.innerText = 'Memproses Soal SAS...';
       } else {
-        loadingText.innerText = 'Menyusun materi & merender layout A4...';
-        previewStatus.innerText = 'Sedang Generate E-Book...';
+        loadingText.innerText = 'Menyusun Buku Siswa 1 semester dan merender layout A4...';
+        previewStatus.innerText = 'Memproses Buku Siswa...';
       }
-      previewStatus.className = 'text-xs bg-amber-100 text-amber-700 px-2 py-0.5 rounded font-medium';
+      previewStatus.className = 'inline-flex items-center gap-1.5 text-xs bg-amber-100 text-amber-900 border border-amber-300 px-2.5 py-0.5 rounded-md font-semibold';
 
       try {
         const response = await fetch('/api/generate', {
@@ -538,29 +1313,42 @@
         });
 
         const data = await response.json();
-        if (!response.ok) throw new Error(data.error || 'Gagal menghasilkan dokumen');
+        if (!response.ok) throw new Error(data.error || 'Gagal menghasilkan dokumen dari server');
 
-        currentSavedUrl = data.savedFile;
-        const frame = document.getElementById('preview-frame');
-        frame.src = data.savedFile;
+        const docTitle = currentMode === 'modul_ajar'
+          ? `Hasil: Modul Ajar Kelas ${grade} Bab ${chapterNumber}`
+          : currentMode === 'soal_sas'
+            ? `Hasil: Naskah Soal SAS Kelas ${grade} Sem ${semester}`
+            : `Hasil: Buku Siswa Kelas ${grade} Sem ${semester}`;
+        const doneLabel = currentMode === 'modul_ajar'
+          ? 'Modul Ajar Siap'
+          : currentMode === 'soal_sas'
+            ? 'Naskah Soal SAS Siap'
+            : 'Buku Siswa Selesai';
 
-        document.getElementById('btn-open-fullscreen').disabled = false;
-        document.getElementById('btn-print').disabled = false;
-        previewStatus.innerText = currentMode === 'modul_ajar' ? 'Modul Ajar Siap!' : (currentMode === 'soal_sas' ? 'Naskah Soal SAS Siap!' : 'E-Book Selesai!');
-        previewStatus.className = 'text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded font-medium';
+        loadPreviewUrl(data.savedFile, docTitle, doneLabel, 'success');
+        showFormFeedback('Dokumen berhasil disusun dan ditampilkan pada panel pratinjau.', 'success');
+
+        if (window.innerWidth < 1024) {
+          switchMobilePane('preview');
+        }
       } catch (err) {
-        alert('Terjadi kesalahan: ' + err.message);
+        const msg = err.message || 'Gagal menghubungi server generator';
+        showFormFeedback(`Gagal menyusun dokumen: ${msg}`, 'error');
         previewStatus.innerText = 'Gagal';
-        previewStatus.className = 'text-xs bg-rose-100 text-rose-700 px-2 py-0.5 rounded font-medium';
+        previewStatus.className = 'inline-flex items-center gap-1.5 text-xs bg-rose-50 text-rose-900 border border-rose-300 px-2.5 py-0.5 rounded-md font-semibold';
+        document.getElementById('preview-error-title').innerText = 'Penyusunan dokumen gagal';
+        document.getElementById('preview-error-desc').innerText = `${msg}. Pastikan API Key valid atau server Ollama lokal sedang berjalan.`;
+        previewErr.classList.remove('hidden');
       } finally {
         btnGen.disabled = false;
-        btnGen.classList.remove('opacity-50');
         loading.classList.add('hidden');
+        previewOverlay.classList.add('hidden');
       }
     }
 
     function openFullscreen() {
-      if (currentSavedUrl) window.open(currentSavedUrl, '_blank');
+      if (currentSavedUrl) window.open(currentSavedUrl, '_blank', 'noopener,noreferrer');
     }
 
     function printPreview() {

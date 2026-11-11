@@ -1,0 +1,1427 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Konten Web | Bahan Ajar Bu Guru</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,500;1,6..72,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
+            serif: ['"Newsreader"', 'Georgia', 'serif'],
+          },
+          colors: {
+            brand: {
+              50: '#f0fdf4',
+              100: '#dcfce7',
+              200: '#bbf7d0',
+              700: '#15803d',
+              800: '#166534',
+              900: '#14532d',
+              950: '#052e16',
+            },
+            warm: {
+              50: '#fdfbf7',
+              100: '#f7f3ea',
+              200: '#ece3d0',
+              800: '#78350f',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    :root {
+      --bg-canvas: #f8fafc;
+      --border-control: #8290a2;
+      --brand-primary: #166534;
+      --focus-ring: #166534;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      background-color: var(--bg-canvas);
+      color: #0f172a;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    button:not(:disabled),
+    [role="button"]:not([aria-disabled="true"]),
+    [role="tab"]:not([aria-disabled="true"]),
+    a[href],
+    select:not(:disabled),
+    summary,
+    label[for],
+    input[type="checkbox"]:not(:disabled) {
+      cursor: pointer;
+    }
+
+    button:disabled,
+    select:disabled,
+    input:disabled {
+      cursor: not-allowed;
+    }
+
+    a:focus-visible,
+    button:focus-visible,
+    input:focus-visible,
+    select:focus-visible,
+    textarea:focus-visible {
+      outline: 2px solid var(--focus-ring);
+      outline-offset: 2px;
+    }
+
+    .ui-input {
+      border: 1px solid var(--border-control);
+      background-color: #ffffff;
+      color: #0f172a;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+    .ui-input:hover:not(:disabled) {
+      border-color: #475569;
+    }
+    .ui-input:focus {
+      border-color: var(--brand-primary);
+      box-shadow: 0 0 0 3px rgba(22, 101, 52, 0.14);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+  <a href="#admin-main" class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:px-4 focus:py-2 focus:bg-brand-800 focus:text-white focus:rounded-lg focus:font-semibold focus:text-sm">
+    Lompat ke panel admin
+  </a>
+
+  <!-- Header -->
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-sm border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
+      <div class="flex items-center gap-3 min-w-0">
+        <a href="/" class="flex items-center gap-2.5 group min-w-0 rounded-lg py-1">
+          <img
+            src="/assets/avatar_profile_buguru.jpg"
+            alt="Foto Profil Bahan Ajar Bu Guru"
+            width="36"
+            height="36"
+            class="w-9 h-9 rounded-full object-cover border border-slate-300 shrink-0"
+          >
+          <div class="min-w-0">
+            <span class="block text-sm font-bold text-slate-900 group-hover:text-brand-800 transition-colors truncate">
+              Bahan Ajar Bu Guru
+            </span>
+            <span class="block text-xs text-slate-600 truncate">
+              Admin Pengelola Konten Web
+            </span>
+          </div>
+        </a>
+      </div>
+
+      <nav aria-label="Navigasi Admin" class="hidden md:flex items-center gap-2">
+        <a href="/generator.html" class="px-3 py-2 rounded-lg text-xs font-semibold text-slate-700 hover:bg-slate-100 transition-colors">
+          Buka AI Generator
+        </a>
+        <a href="/posting_soal_sas.html" class="px-3 py-2 rounded-lg text-xs font-semibold text-slate-700 hover:bg-slate-100 transition-colors">
+          Studio Posting SAS
+        </a>
+        <a href="/" target="_blank" rel="noopener noreferrer" class="px-3.5 py-2 rounded-lg text-xs font-semibold bg-brand-800 hover:bg-brand-900 text-white transition-colors">
+          Lihat Beranda Web
+        </a>
+      </nav>
+
+      <div class="flex md:hidden items-center gap-2">
+        <a href="/generator.html" class="min-h-[44px] inline-flex items-center px-3 rounded-lg border border-slate-300 text-xs font-semibold text-slate-800">
+          Generator
+        </a>
+        <a href="/" target="_blank" rel="noopener noreferrer" class="min-h-[44px] inline-flex items-center px-3 rounded-lg bg-brand-800 text-xs font-semibold text-white">
+          Lihat Web
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main id="admin-main" class="max-w-7xl mx-auto px-4 sm:px-6 py-6 flex-1 w-full space-y-5">
+
+    <!-- Page Intro & Server Mode Status -->
+    <section class="flex flex-col sm:flex-row sm:items-end justify-between gap-3 pb-4 border-b border-slate-200">
+      <div class="space-y-1">
+        <h1 class="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">
+          Kelola Konten & Materi Website
+        </h1>
+        <p class="text-xs sm:text-sm text-slate-600 max-w-2xl">
+          Perbarui isi halaman beranda, pasang hasil E-Book AI Generator ke katalog web, dan sunting langsung teks materi HTML tanpa membuka kode.
+        </p>
+      </div>
+      <div id="server-mode-badge" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-slate-100 border border-slate-300 text-slate-800 text-xs font-semibold shrink-0">
+        Memeriksa koneksi server lokal...
+      </div>
+    </section>
+
+    <!-- Static-only Warning Banner (shown if server write API unavailable) -->
+    <div id="readonly-warning" role="alert" class="hidden rounded-xl border border-amber-300 bg-amber-50 p-4 text-xs text-amber-900 space-y-1">
+      <p class="font-bold">Mode Baca-Saja (Hosting Statis Terdeteksi)</p>
+      <p>Penyimpanan perubahan langsung memerlukan server lokal aktif di komputer Anda (<code class="bg-white px-1.5 py-0.5 rounded border border-amber-200">node server.js</code> lalu buka <code class="bg-white px-1.5 py-0.5 rounded border border-amber-200">http://localhost:3000/admin.html</code>). Setelah disimpan lokal, push ke GitHub agar Vercel ikut terbarui.</p>
+    </div>
+
+    <!-- Global Feedback Banner -->
+    <div id="global-feedback" role="status" aria-live="polite" class="hidden rounded-xl border px-4 py-3 text-xs font-semibold flex items-center justify-between gap-3">
+      <span id="global-feedback-text"></span>
+      <button type="button" onclick="hideGlobalFeedback()" class="underline font-bold shrink-0">Tutup</button>
+    </div>
+
+    <!-- Primary Workspace Tabs -->
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 p-1.5 bg-slate-200/70 rounded-xl border border-slate-300" role="tablist" aria-label="Menu utama pengelola konten">
+      <button
+        type="button"
+        id="main-tab-portal"
+        role="tab"
+        aria-selected="true"
+        onclick="switchMainTab('portal')"
+        class="min-h-[46px] px-4 py-2.5 rounded-lg text-xs sm:text-sm font-bold bg-white text-slate-900 shadow-sm transition-colors text-left sm:text-center"
+      >
+        1. Katalog & Beranda Web
+      </button>
+      <button
+        type="button"
+        id="main-tab-exports"
+        role="tab"
+        aria-selected="false"
+        onclick="switchMainTab('exports')"
+        class="min-h-[46px] px-4 py-2.5 rounded-lg text-xs sm:text-sm font-semibold text-slate-700 hover:text-slate-900 transition-colors text-left sm:text-center"
+      >
+        2. Pasang Hasil AI Generator
+      </button>
+      <button
+        type="button"
+        id="main-tab-editor"
+        role="tab"
+        aria-selected="false"
+        onclick="switchMainTab('editor')"
+        class="min-h-[46px] px-4 py-2.5 rounded-lg text-xs sm:text-sm font-semibold text-slate-700 hover:text-slate-900 transition-colors text-left sm:text-center"
+      >
+        3. Editor Teks Materi HTML
+      </button>
+    </div>
+
+    <!-- ========================================================= -->
+    <!-- TAB 1: PORTAL & KATALOG EDITOR (index.html content)       -->
+    <!-- ========================================================= -->
+    <section id="pane-portal" class="space-y-5">
+
+      <!-- Sticky Action Bar for Portal CMS -->
+      <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-4 flex flex-wrap items-center justify-between gap-3">
+        <div class="flex flex-wrap items-center gap-1.5" role="tablist" aria-label="Bagian halaman beranda">
+          <button type="button" onclick="switchPortalSection('site')" id="subtab-site" class="min-h-[38px] px-3 py-1.5 rounded-lg text-xs font-bold bg-brand-800 text-white">Hero & Profil</button>
+          <button type="button" onclick="switchPortalSection('buku')" id="subtab-buku" class="min-h-[38px] px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-800 hover:bg-slate-200">Buku Siswa</button>
+          <button type="button" onclick="switchPortalSection('modul')" id="subtab-modul" class="min-h-[38px] px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-800 hover:bg-slate-200">Modul Ajar</button>
+          <button type="button" onclick="switchPortalSection('soal')" id="subtab-soal" class="min-h-[38px] px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-800 hover:bg-slate-200">Bank Soal SAS</button>
+          <button type="button" onclick="switchPortalSection('gamefaq')" id="subtab-gamefaq" class="min-h-[38px] px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-800 hover:bg-slate-200">Game & FAQ</button>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <button
+            type="button"
+            onclick="reloadPortalContent()"
+            class="min-h-[40px] px-3 py-2 rounded-lg border border-slate-300 text-xs font-semibold text-slate-700 hover:bg-slate-50"
+          >
+            Muat Ulang Data
+          </button>
+          <button
+            type="button"
+            id="btn-save-portal"
+            onclick="savePortalContent()"
+            class="min-h-[40px] px-4 py-2 rounded-lg bg-brand-800 hover:bg-brand-900 text-white text-xs font-bold shadow-sm disabled:opacity-50"
+          >
+            Simpan Perubahan ke Web
+          </button>
+        </div>
+      </div>
+
+      <!-- Loading / Error state for Portal Content -->
+      <div id="portal-loading-state" class="bg-white rounded-xl border border-slate-200 p-8 text-center text-xs font-semibold text-slate-600">
+        Memuat data konten portal...
+      </div>
+
+      <!-- Sub-panel: Hero & Profile -->
+      <div id="subpane-site" class="hidden bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-6 space-y-5">
+        <div class="border-b border-slate-200 pb-3">
+          <h2 class="text-base font-bold text-slate-900">Pengaturan Hero, Pengumuman & Profil Guru</h2>
+          <p class="text-xs text-slate-600 mt-0.5">Perubahan di sini langsung memperbarui bagian atas halaman utama saat disimpan.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="md:col-span-2">
+            <label for="site-announcement" class="block text-xs font-semibold text-slate-800 mb-1">Teks Bar Pengumuman Paling Atas</label>
+            <input type="text" id="site-announcement" class="ui-input w-full text-sm px-3.5 py-2.5 rounded-lg">
+          </div>
+          <div>
+            <label for="site-announcement-cta-text" class="block text-xs font-semibold text-slate-800 mb-1">Label Link Pengumuman</label>
+            <input type="text" id="site-announcement-cta-text" class="ui-input w-full text-sm px-3.5 py-2.5 rounded-lg">
+          </div>
+          <div>
+            <label for="site-announcement-cta-url" class="block text-xs font-semibold text-slate-800 mb-1">URL Link Pengumuman</label>
+            <input type="text" id="site-announcement-cta-url" class="ui-input w-full text-sm px-3.5 py-2.5 rounded-lg">
+          </div>
+          <div class="md:col-span-2">
+            <label for="site-hero-badge" class="block text-xs font-semibold text-slate-800 mb-1">Label Regulasi di Atas Judul Hero</label>
+            <input type="text" id="site-hero-badge" class="ui-input w-full text-sm px-3.5 py-2.5 rounded-lg">
+          </div>
+          <div class="md:col-span-2">
+            <label for="site-hero-title" class="block text-xs font-semibold text-slate-800 mb-1">Judul Utama (H1)</label>
+            <input type="text" id="site-hero-title" class="ui-input w-full text-sm px-3.5 py-2.5 rounded-lg font-semibold">
+          </div>
+          <div class="md:col-span-2">
+            <label for="site-hero-subtitle" class="block text-xs font-semibold text-slate-800 mb-1">Paragraf Pengantar Hero</label>
+            <textarea id="site-hero-subtitle" rows="3" class="ui-input w-full text-sm px-3.5 py-2.5 rounded-lg"></textarea>
+          </div>
+          <div>
+            <label for="site-primary-cta-text" class="block text-xs font-semibold text-slate-800 mb-1">Teks Tombol Utama Hero</label>
+            <input type="text" id="site-primary-cta-text" class="ui-input w-full text-sm px-3.5 py-2.5 rounded-lg">
+          </div>
+          <div>
+            <label for="site-primary-cta-url" class="block text-xs font-semibold text-slate-800 mb-1">Link Tujuan Toko Utama (Lynk.id)</label>
+            <input type="text" id="site-primary-cta-url" class="ui-input w-full text-sm px-3.5 py-2.5 rounded-lg">
+          </div>
+        </div>
+
+        <div class="border-t border-slate-200 pt-5 grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label for="site-profile-name" class="block text-xs font-semibold text-slate-800 mb-1">Nama Profil Guru / Toko</label>
+            <input type="text" id="site-profile-name" class="ui-input w-full text-sm px-3.5 py-2.5 rounded-lg">
+          </div>
+          <div>
+            <label for="site-profile-role" class="block text-xs font-semibold text-slate-800 mb-1">Jabatan / Peran</label>
+            <input type="text" id="site-profile-role" class="ui-input w-full text-sm px-3.5 py-2.5 rounded-lg">
+          </div>
+          <div class="md:col-span-2">
+            <label for="site-profile-quote" class="block text-xs font-semibold text-slate-800 mb-1">Kutipan / Misi Pengajar</label>
+            <textarea id="site-profile-quote" rows="2" class="ui-input w-full text-sm px-3.5 py-2.5 rounded-lg"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sub-panel: Buku Siswa -->
+      <div id="subpane-buku" class="hidden space-y-4">
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 space-y-4">
+          <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-200 pb-3">
+            <div>
+              <h2 class="text-base font-bold text-slate-900">Katalog 1: Buku Siswa PAI SD</h2>
+              <p class="text-xs text-slate-600">Atur judul, harga, deskripsi, foto sampul, dan tautan sampel buku hasil AI Generator.</p>
+            </div>
+            <button type="button" onclick="addProductItem('buku')" class="min-h-[40px] px-3.5 py-2 rounded-lg bg-brand-800 hover:bg-brand-900 text-white text-xs font-semibold">
+              + Tambah Kartu Buku
+            </button>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div>
+              <label for="buku-sec-heading" class="block text-xs font-semibold text-slate-800 mb-1">Judul Bagian Katalog Buku</label>
+              <input type="text" id="buku-sec-heading" class="ui-input w-full text-xs px-3 py-2 rounded-lg">
+            </div>
+            <div>
+              <label for="buku-sec-top-sample" class="block text-xs font-semibold text-slate-800 mb-1">Link Contoh Atas Buku</label>
+              <input type="text" id="buku-sec-top-sample" class="ui-input w-full text-xs px-3 py-2 rounded-lg">
+            </div>
+          </div>
+        </div>
+
+        <div id="admin-buku-list" class="grid grid-cols-1 lg:grid-cols-2 gap-4"></div>
+      </div>
+
+      <!-- Sub-panel: Modul Ajar -->
+      <div id="subpane-modul" class="hidden space-y-4">
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 space-y-4">
+          <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-200 pb-3">
+            <div>
+              <h2 class="text-base font-bold text-slate-900">Katalog 2: Modul Ajar Deep Learning</h2>
+              <p class="text-xs text-slate-600">Sunting highlight utama dan daftar modul ajar per-bab yang ingin ditampilkan di web.</p>
+            </div>
+            <button type="button" onclick="addProductItem('modul')" class="min-h-[40px] px-3.5 py-2 rounded-lg bg-brand-800 hover:bg-brand-900 text-white text-xs font-semibold">
+              + Tambah Kartu Modul Ajar
+            </button>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div>
+              <label for="modul-sec-heading" class="block text-xs font-semibold text-slate-800 mb-1">Judul Bagian Modul Ajar</label>
+              <input type="text" id="modul-sec-heading" class="ui-input w-full text-xs px-3 py-2 rounded-lg">
+            </div>
+            <div>
+              <label for="modul-sec-top-sample" class="block text-xs font-semibold text-slate-800 mb-1">Link Contoh Modul Utama</label>
+              <input type="text" id="modul-sec-top-sample" class="ui-input w-full text-xs px-3 py-2 rounded-lg">
+            </div>
+            <div>
+              <label for="modul-feat-title" class="block text-xs font-semibold text-slate-800 mb-1">Judul Kartu Highlight Modul</label>
+              <input type="text" id="modul-feat-title" class="ui-input w-full text-xs px-3 py-2 rounded-lg">
+            </div>
+            <div>
+              <label for="modul-price-val" class="block text-xs font-semibold text-slate-800 mb-1">Harga Highlight Modul</label>
+              <input type="text" id="modul-price-val" class="ui-input w-full text-xs px-3 py-2 rounded-lg">
+            </div>
+            <div class="md:col-span-2">
+              <label for="modul-feat-desc" class="block text-xs font-semibold text-slate-800 mb-1">Deskripsi Kartu Highlight Modul</label>
+              <textarea id="modul-feat-desc" rows="2" class="ui-input w-full text-xs px-3 py-2 rounded-lg"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div id="admin-modul-list" class="grid grid-cols-1 lg:grid-cols-2 gap-4"></div>
+      </div>
+
+      <!-- Sub-panel: Bank Soal SAS -->
+      <div id="subpane-soal" class="hidden space-y-4">
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 space-y-4">
+          <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-200 pb-3">
+            <div>
+              <h2 class="text-base font-bold text-slate-900">Katalog 3: Bank Soal SAS PAI SD</h2>
+              <p class="text-xs text-slate-600">Sunting naskah soal per kelas, harga, dan arahkan tautannya ke flyer atau naskah soal terbaru.</p>
+            </div>
+            <button type="button" onclick="addProductItem('soal')" class="min-h-[40px] px-3.5 py-2 rounded-lg bg-brand-800 hover:bg-brand-900 text-white text-xs font-semibold">
+              + Tambah Kartu Soal SAS
+            </button>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div>
+              <label for="soal-sec-heading" class="block text-xs font-semibold text-slate-800 mb-1">Judul Bagian Bank Soal</label>
+              <input type="text" id="soal-sec-heading" class="ui-input w-full text-xs px-3 py-2 rounded-lg">
+            </div>
+            <div>
+              <label for="soal-sec-top-sample" class="block text-xs font-semibold text-slate-800 mb-1">Link Latihan Interaktif Atas</label>
+              <input type="text" id="soal-sec-top-sample" class="ui-input w-full text-xs px-3 py-2 rounded-lg">
+            </div>
+          </div>
+        </div>
+
+        <div id="admin-soal-list" class="grid grid-cols-1 lg:grid-cols-2 gap-4"></div>
+      </div>
+
+      <!-- Sub-panel: Game & FAQ -->
+      <div id="subpane-gamefaq" class="hidden space-y-5">
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 space-y-4">
+          <h2 class="text-base font-bold text-slate-900 border-b border-slate-200 pb-3">Bagian Game Edukasi Interaktif</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div>
+              <label for="game-heading" class="block text-xs font-semibold text-slate-800 mb-1">Judul Bagian Game</label>
+              <input type="text" id="game-heading" class="ui-input w-full text-xs px-3 py-2 rounded-lg">
+            </div>
+            <div>
+              <label for="game-demo-url" class="block text-xs font-semibold text-slate-800 mb-1">URL Demo Game</label>
+              <input type="text" id="game-demo-url" class="ui-input w-full text-xs px-3 py-2 rounded-lg">
+            </div>
+            <div class="md:col-span-2">
+              <label for="game-feat-desc" class="block text-xs font-semibold text-slate-800 mb-1">Deskripsi Materi Game</label>
+              <textarea id="game-feat-desc" rows="2" class="ui-input w-full text-xs px-3 py-2 rounded-lg"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 space-y-4">
+          <div class="flex items-center justify-between border-b border-slate-200 pb-3">
+            <h2 class="text-base font-bold text-slate-900">Daftar FAQ (Pertanyaan Umum)</h2>
+            <button type="button" onclick="addFaqItem()" class="min-h-[38px] px-3 py-1.5 rounded-lg bg-brand-800 hover:bg-brand-900 text-white text-xs font-semibold">
+              + Tambah FAQ
+            </button>
+          </div>
+          <div id="admin-faq-list" class="space-y-3"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- TAB 2: PUBLISH AI GENERATOR EXPORTS (exports/ -> public)  -->
+    <!-- ========================================================= -->
+    <section id="pane-exports" class="hidden grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+
+      <!-- Left: Generated Exports List (5 cols) -->
+      <div class="lg:col-span-5 bg-white rounded-2xl border border-slate-200 shadow-sm p-5 space-y-4">
+        <div class="flex items-center justify-between gap-2 border-b border-slate-200 pb-3">
+          <div>
+            <h2 class="text-base font-bold text-slate-900">File Hasil AI Generator</h2>
+            <p class="text-xs text-slate-600">File HTML yang tersimpan di folder <code class="bg-slate-100 px-1 rounded">exports/</code>.</p>
+          </div>
+          <button type="button" onclick="loadExportsList()" class="min-h-[38px] px-3 py-1.5 rounded-lg border border-slate-300 text-xs font-semibold text-slate-700 hover:bg-slate-50">
+            Segarkan
+          </button>
+        </div>
+
+        <div id="exports-list-container" class="space-y-2 max-h-[540px] overflow-y-auto pr-1">
+          <p class="text-xs text-slate-600 py-4 text-center">Memuat daftar hasil generator...</p>
+        </div>
+      </div>
+
+      <!-- Right: Preview & Publish Action (7 cols) -->
+      <div class="lg:col-span-7 bg-white rounded-2xl border border-slate-200 shadow-sm p-5 space-y-4">
+        <div class="border-b border-slate-200 pb-3 flex flex-wrap items-center justify-between gap-2">
+          <div>
+            <h2 class="text-base font-bold text-slate-900">Pasang Materi ke Website Publik</h2>
+            <p class="text-xs text-slate-600">Salin hasil generator ke <code class="bg-slate-100 px-1 rounded">public/materi/</code> agar ikut tampil di Vercel dan bisa ditautkan ke beranda.</p>
+          </div>
+        </div>
+
+        <!-- Empty selection state -->
+        <div id="export-empty-selection" class="bg-warm-50 border border-warm-200 rounded-xl p-6 text-center space-y-2">
+          <p class="text-sm font-bold text-slate-900">Belum ada file dipilih</p>
+          <p class="text-xs text-slate-700 max-w-md mx-auto">Pilih salah satu dokumen dari daftar di sebelah kiri untuk melihat pratinjaunya lalu mempublikasikannya ke web.</p>
+        </div>
+
+        <!-- Selected export form & iframe -->
+        <div id="export-publish-panel" class="hidden space-y-4">
+          <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 space-y-3">
+            <p class="text-xs text-slate-700">
+              Sumber terpilih: <strong id="selected-export-name" class="text-slate-900"></strong>
+            </p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label for="publish-slug" class="block text-xs font-semibold text-slate-800 mb-1">Nama URL di Web (<code class="text-[11px]">/materi/...html</code>)</label>
+                <input type="text" id="publish-slug" placeholder="contoh: modul-ajar-kelas2-bab1" class="ui-input w-full text-xs px-3 py-2 rounded-lg font-medium">
+              </div>
+              <div>
+                <label for="publish-catalog-target" class="block text-xs font-semibold text-slate-800 mb-1">Sekaligus Tambahkan ke Katalog?</label>
+                <select id="publish-catalog-target" onchange="toggleQuickCatalogMeta()" class="ui-input w-full text-xs px-3 py-2 rounded-lg font-medium">
+                  <option value="none">Hanya pasang file (salin ke /materi/)</option>
+                  <option value="buku">Tambah kartu baru di Katalog Buku Siswa</option>
+                  <option value="modul">Tambah kartu baru di Katalog Modul Ajar</option>
+                  <option value="soal">Tambah kartu baru di Katalog Soal SAS</option>
+                </select>
+              </div>
+            </div>
+
+            <div id="publish-catalog-meta" class="hidden grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
+              <div class="sm:col-span-2">
+                <label for="publish-card-title" class="block text-xs font-semibold text-slate-800 mb-1">Judul Kartu di Beranda</label>
+                <input type="text" id="publish-card-title" class="ui-input w-full text-xs px-3 py-2 rounded-lg">
+              </div>
+              <div>
+                <label for="publish-card-grade" class="block text-xs font-semibold text-slate-800 mb-1">Kelas SD</label>
+                <select id="publish-card-grade" class="ui-input w-full text-xs px-3 py-2 rounded-lg">
+                  <option value="1">Kelas 1</option>
+                  <option value="2">Kelas 2</option>
+                  <option value="3">Kelas 3</option>
+                  <option value="4">Kelas 4</option>
+                  <option value="5">Kelas 5</option>
+                  <option value="6">Kelas 6</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-2 pt-1">
+              <button type="button" id="btn-publish-export" onclick="publishSelectedExport()" class="min-h-[42px] px-4 py-2 rounded-lg bg-brand-800 hover:bg-brand-900 text-white text-xs font-bold shadow-sm">
+                Pasang ke Web Sekarang
+              </button>
+              <a id="btn-open-export-tab" href="#" target="_blank" rel="noopener noreferrer" class="min-h-[42px] inline-flex items-center px-3.5 py-2 rounded-lg border border-slate-300 text-xs font-semibold text-slate-800 hover:bg-slate-100">
+                Buka Asli di Tab Baru
+              </a>
+            </div>
+          </div>
+
+          <div class="h-[460px] rounded-xl overflow-hidden border border-slate-300 bg-slate-100">
+            <iframe id="export-preview-frame" title="Pratinjau File Export AI Generator" class="w-full h-full border-0 bg-white"></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- TAB 3: DIRECT HTML MATERIAL EDITOR                        -->
+    <!-- ========================================================= -->
+    <section id="pane-editor" class="hidden space-y-4">
+
+      <!-- Toolbar -->
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-4 space-y-3">
+        <div class="flex flex-wrap items-end justify-between gap-3">
+          <div class="flex-1 min-w-[260px]">
+            <label for="editor-file-select" class="block text-xs font-semibold text-slate-800 mb-1">
+              Pilih File Materi HTML yang Terpasang di Web
+            </label>
+            <div class="flex items-center gap-2">
+              <select id="editor-file-select" onchange="loadHtmlFileIntoEditor()" class="ui-input flex-1 text-xs px-3 py-2.5 rounded-lg font-medium">
+                <option value="">Memuat daftar file...</option>
+              </select>
+              <button type="button" onclick="loadHtmlFilesList()" class="min-h-[40px] px-3 py-2 rounded-lg border border-slate-300 text-xs font-semibold text-slate-700 hover:bg-slate-50">
+                Segarkan
+              </button>
+            </div>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-2">
+            <div class="inline-flex rounded-lg border border-slate-300 p-0.5 bg-slate-100" role="tablist" aria-label="Mode editor">
+              <button type="button" id="btn-mode-visual" role="tab" aria-selected="true" onclick="setEditorMode('visual')" class="min-h-[36px] px-3 py-1.5 rounded-md text-xs font-bold bg-white text-slate-900 shadow-sm">
+                Edit Visual (Klik Teks)
+              </button>
+              <button type="button" id="btn-mode-source" role="tab" aria-selected="false" onclick="setEditorMode('source')" class="min-h-[36px] px-3 py-1.5 rounded-md text-xs font-semibold text-slate-700 hover:text-slate-900">
+                Kode HTML
+              </button>
+            </div>
+
+            <button
+              type="button"
+              id="btn-save-html-file"
+              onclick="saveEditedHtmlFile()"
+              disabled
+              class="min-h-[40px] px-4 py-2 rounded-lg bg-brand-800 hover:bg-brand-900 text-white text-xs font-bold shadow-sm disabled:opacity-40"
+            >
+              Simpan Perubahan Materi
+            </button>
+
+            <a id="btn-view-edited-file" href="#" target="_blank" rel="noopener noreferrer" class="hidden min-h-[40px] inline-flex items-center px-3 py-2 rounded-lg border border-slate-300 text-xs font-semibold text-slate-800 hover:bg-slate-50">
+              Lihat Hasil
+            </a>
+
+            <button
+              type="button"
+              id="btn-delete-materi-trigger"
+              onclick="showDeleteConfirm()"
+              class="hidden min-h-[40px] px-3 py-2 rounded-lg border border-rose-300 text-xs font-semibold text-rose-800 hover:bg-rose-50"
+            >
+              Hapus File
+            </button>
+          </div>
+        </div>
+
+        <!-- Inline Two-Step Delete Confirmation -->
+        <div id="delete-confirm-bar" class="hidden rounded-lg border border-rose-300 bg-rose-50 p-3 flex flex-wrap items-center justify-between gap-2 text-xs text-rose-900">
+          <span>Yakin ingin menghapus file materi ini dari folder <code class="bg-white px-1 rounded">/materi/</code>? Tindakan ini permanen.</span>
+          <div class="flex items-center gap-2">
+            <button type="button" onclick="confirmDeleteHtmlFile()" class="px-3 py-1.5 rounded bg-rose-700 hover:bg-rose-800 text-white font-bold">Ya, Hapus</button>
+            <button type="button" onclick="hideDeleteConfirm()" class="px-3 py-1.5 rounded bg-white border border-slate-300 text-slate-800 font-semibold">Batal</button>
+          </div>
+        </div>
+
+        <!-- Visual Formatting Mini Toolbar -->
+        <div id="visual-format-bar" class="hidden flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-slate-200 text-xs">
+          <div class="flex flex-wrap items-center gap-1.5">
+            <span class="text-slate-600 font-semibold mr-1">Alat Edit Visual:</span>
+            <button type="button" onclick="execVisualCmd('bold')" class="min-h-[34px] px-2.5 py-1 rounded border border-slate-300 bg-white hover:bg-slate-100 font-bold">B</button>
+            <button type="button" onclick="execVisualCmd('italic')" class="min-h-[34px] px-2.5 py-1 rounded border border-slate-300 bg-white hover:bg-slate-100 italic">I</button>
+            <button type="button" onclick="execVisualCmd('underline')" class="min-h-[34px] px-2.5 py-1 rounded border border-slate-300 bg-white hover:bg-slate-100 underline">U</button>
+            <button type="button" onclick="execVisualCmd('undo')" class="min-h-[34px] px-2.5 py-1 rounded border border-slate-300 bg-white hover:bg-slate-100 font-medium">Undo</button>
+            <button type="button" onclick="execVisualCmd('redo')" class="min-h-[34px] px-2.5 py-1 rounded border border-slate-300 bg-white hover:bg-slate-100 font-medium">Redo</button>
+          </div>
+          <span class="text-[11px] text-slate-600">Klik langsung pada teks bab, soal, atau judul di bawah untuk menyuntingnya.</span>
+        </div>
+      </div>
+
+      <!-- Editor Surface -->
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+        <div id="editor-empty-state" class="p-10 text-center text-xs text-slate-600">
+          Pilih salah satu file materi di menu atas untuk mulai menyunting isinya.
+        </div>
+
+        <iframe
+          id="visual-editor-frame"
+          title="Editor Visual Dokumen Materi"
+          class="hidden w-full h-[72vh] min-h-[560px] border-0 bg-white"
+        ></iframe>
+
+        <textarea
+          id="source-editor-textarea"
+          aria-label="Kode HTML Dokumen"
+          spellcheck="false"
+          class="hidden w-full h-[72vh] min-h-[560px] p-4 text-xs font-mono text-slate-900 bg-slate-50 border-0 focus:ring-0"
+        ></textarea>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    let portalData = null;
+    let availableAssets = [];
+    let availablePublicSamples = [];
+    let exportsList = [];
+    let selectedExportItem = null;
+    let currentEditingPath = '';
+    let currentEditorMode = 'visual';
+    let currentRawHtml = '';
+    let isWritableServer = false;
+
+    window.addEventListener('DOMContentLoaded', async () => {
+      await checkServerStatus();
+      await Promise.all([
+        loadAssetsList(),
+        loadHtmlFilesList(),
+        reloadPortalContent(),
+        loadExportsList()
+      ]);
+    });
+
+    async function checkServerStatus() {
+      const badge = document.getElementById('server-mode-badge');
+      const warn = document.getElementById('readonly-warning');
+      try {
+        const res = await fetch('/api/admin/status');
+        if (!res.ok) throw new Error('Offline');
+        const info = await res.json();
+        if (info.ok) {
+          isWritableServer = true;
+          badge.innerText = 'Server Lokal Siap Simpan';
+          badge.className = 'inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-brand-50 border border-brand-200 text-brand-900 text-xs font-semibold shrink-0';
+          warn.classList.add('hidden');
+          return;
+        }
+      } catch (e) {}
+
+      isWritableServer = false;
+      badge.innerText = 'Mode Baca-Saja (Statis)';
+      badge.className = 'inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-amber-50 border border-amber-300 text-amber-900 text-xs font-semibold shrink-0';
+      warn.classList.remove('hidden');
+    }
+
+    function showGlobalFeedback(msg, tone) {
+      const el = document.getElementById('global-feedback');
+      const txt = document.getElementById('global-feedback-text');
+      txt.innerText = msg;
+      el.classList.remove('hidden');
+      if (tone === 'error') {
+        el.className = 'rounded-xl border border-rose-300 bg-rose-50 text-rose-900 px-4 py-3 text-xs font-semibold flex items-center justify-between gap-3';
+      } else {
+        el.className = 'rounded-xl border border-brand-200 bg-brand-50 text-brand-900 px-4 py-3 text-xs font-semibold flex items-center justify-between gap-3';
+      }
+      el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function hideGlobalFeedback() {
+      document.getElementById('global-feedback').classList.add('hidden');
+    }
+
+    function switchMainTab(tab) {
+      const tabs = ['portal', 'exports', 'editor'];
+      tabs.forEach((t) => {
+        const btn = document.getElementById(`main-tab-${t}`);
+        const pane = document.getElementById(`pane-${t}`);
+        const isActive = t === tab;
+        btn.setAttribute('aria-selected', String(isActive));
+        btn.className = isActive
+          ? 'min-h-[46px] px-4 py-2.5 rounded-lg text-xs sm:text-sm font-bold bg-white text-slate-900 shadow-sm transition-colors text-left sm:text-center'
+          : 'min-h-[46px] px-4 py-2.5 rounded-lg text-xs sm:text-sm font-semibold text-slate-700 hover:text-slate-900 transition-colors text-left sm:text-center';
+        pane.classList.toggle('hidden', !isActive);
+      });
+    }
+
+    function switchPortalSection(sec) {
+      const sections = ['site', 'buku', 'modul', 'soal', 'gamefaq'];
+      sections.forEach((s) => {
+        const btn = document.getElementById(`subtab-${s}`);
+        const pane = document.getElementById(`subpane-${s}`);
+        const isActive = s === sec;
+        btn.className = isActive
+          ? 'min-h-[38px] px-3 py-1.5 rounded-lg text-xs font-bold bg-brand-800 text-white'
+          : 'min-h-[38px] px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-800 hover:bg-slate-200';
+        pane.classList.toggle('hidden', !isActive);
+      });
+    }
+
+    function esc(str) {
+      return String(str ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    async function loadAssetsList() {
+      try {
+        const res = await fetch('/api/admin/assets');
+        if (!res.ok) return;
+        const data = await res.json();
+        availableAssets = data.assets || [];
+      } catch (e) {}
+    }
+
+    async function reloadPortalContent() {
+      const loadingEl = document.getElementById('portal-loading-state');
+      loadingEl.classList.remove('hidden');
+      try {
+        let res = await fetch('/api/admin/content');
+        if (!res.ok) {
+          res = await fetch(`/data/portal_content.json?v=${Date.now()}`);
+        }
+        if (!res.ok) throw new Error('File data portal_content.json tidak ditemukan');
+        portalData = await res.json();
+        loadingEl.classList.add('hidden');
+        populatePortalForm();
+        switchPortalSection('site');
+      } catch (err) {
+        loadingEl.innerText = `Gagal memuat konten portal: ${err.message}`;
+      }
+    }
+
+    function populatePortalForm() {
+      if (!portalData) return;
+      const s = portalData.site || {};
+      document.getElementById('site-announcement').value = s.announcementText || '';
+      document.getElementById('site-announcement-cta-text').value = s.announcementCtaText || '';
+      document.getElementById('site-announcement-cta-url').value = s.announcementCtaUrl || '';
+      document.getElementById('site-hero-badge').value = s.heroBadge || '';
+      document.getElementById('site-hero-title').value = s.heroTitle || '';
+      document.getElementById('site-hero-subtitle').value = s.heroSubtitle || '';
+      document.getElementById('site-primary-cta-text').value = s.primaryCtaText || '';
+      document.getElementById('site-primary-cta-url').value = s.primaryCtaUrl || '';
+      document.getElementById('site-profile-name').value = s.profileName || '';
+      document.getElementById('site-profile-role').value = s.profileRole || '';
+      document.getElementById('site-profile-quote').value = s.profileQuote || '';
+
+      const b = portalData.bukuSection || {};
+      document.getElementById('buku-sec-heading').value = b.heading || '';
+      document.getElementById('buku-sec-top-sample').value = b.topSampleUrl || '';
+
+      const m = portalData.modulSection || {};
+      document.getElementById('modul-sec-heading').value = m.heading || '';
+      document.getElementById('modul-sec-top-sample').value = m.topSampleUrl || '';
+      document.getElementById('modul-feat-title').value = m.featureTitle || '';
+      document.getElementById('modul-price-val').value = m.priceValue || '';
+      document.getElementById('modul-feat-desc').value = m.featureDescription || '';
+
+      const sl = portalData.soalSection || {};
+      document.getElementById('soal-sec-heading').value = sl.heading || '';
+      document.getElementById('soal-sec-top-sample').value = sl.topSampleUrl || '';
+
+      const gm = portalData.gameSection || {};
+      document.getElementById('game-heading').value = gm.heading || '';
+      document.getElementById('game-demo-url').value = gm.demoUrl || '';
+      document.getElementById('game-feat-desc').value = gm.featureDescription || '';
+
+      renderProductCards('buku', portalData.bukuItems || [], 'admin-buku-list', true);
+      renderProductCards('modul', portalData.modulItems || [], 'admin-modul-list', false);
+      renderProductCards('soal', portalData.soalItems || [], 'admin-soal-list', true);
+      renderFaqCards();
+    }
+
+    function buildSampleOptions(selectedUrl) {
+      const options = ['<option value="">-- Gunakan Modal Detail Bab (Tanpa Link) --</option>'];
+      const seen = new Set();
+      availablePublicSamples.forEach((f) => {
+        seen.add(f.path);
+        const sel = f.path === selectedUrl ? 'selected' : '';
+        options.push(`<option value="${esc(f.path)}" ${sel}>${esc(f.path)}</option>`);
+      });
+      if (selectedUrl && !seen.has(selectedUrl)) {
+        options.push(`<option value="${esc(selectedUrl)}" selected>${esc(selectedUrl)}</option>`);
+      }
+      return options.join('');
+    }
+
+    function buildAssetOptions(selectedImg) {
+      const options = ['<option value="">-- Pilih Gambar Aset --</option>'];
+      const seen = new Set();
+      availableAssets.forEach((imgPath) => {
+        seen.add(imgPath);
+        const sel = imgPath === selectedImg ? 'selected' : '';
+        options.push(`<option value="${esc(imgPath)}" ${sel}>${esc(imgPath)}</option>`);
+      });
+      if (selectedImg && !seen.has(selectedImg)) {
+        options.push(`<option value="${esc(selectedImg)}" selected>${esc(selectedImg)}</option>`);
+      }
+      return options.join('');
+    }
+
+    function renderProductCards(type, items, containerId, hasCover) {
+      const container = document.getElementById(containerId);
+      if (!items.length) {
+        container.innerHTML = `<div class="col-span-full bg-white rounded-xl border border-slate-200 p-6 text-center text-xs text-slate-600">Belum ada kartu pada katalog ini. Klik tombol tambah di atas untuk membuat kartu baru.</div>`;
+        return;
+      }
+
+      container.innerHTML = items.map((item, idx) => `
+        <article class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 space-y-3" data-item-type="${type}" data-item-idx="${idx}">
+          <div class="flex items-center justify-between gap-2 border-b border-slate-200 pb-2.5">
+            <label class="inline-flex items-center gap-2 text-xs font-bold text-slate-900">
+              <input type="checkbox" ${item.visible !== false ? 'checked' : ''} onchange="updateProductField('${type}', ${idx}, 'visible', this.checked)" class="w-4 h-4 accent-brand-800">
+              <span>Tampilkan di Web</span>
+            </label>
+            <button type="button" onclick="deleteProductItem('${type}', ${idx})" class="text-xs font-semibold text-rose-700 hover:text-rose-900 underline px-2 py-1">
+              Hapus Kartu
+            </button>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+            <div>
+              <label class="block text-[11px] font-semibold text-slate-700 mb-1">Kelas SD</label>
+              <select onchange="updateProductField('${type}', ${idx}, 'grade', Number(this.value))" class="ui-input w-full text-xs px-2.5 py-2 rounded-lg">
+                ${[1, 2, 3, 4, 5, 6].map((g) => `<option value="${g}" ${Number(item.grade) === g ? 'selected' : ''}>Kelas ${g}</option>`).join('')}
+              </select>
+            </div>
+            <div>
+              <label class="block text-[11px] font-semibold text-slate-700 mb-1">Label Badge</label>
+              <input type="text" value="${esc(item.badge)}" oninput="updateProductField('${type}', ${idx}, 'badge', this.value)" class="ui-input w-full text-xs px-2.5 py-2 rounded-lg">
+            </div>
+            <div>
+              <label class="block text-[11px] font-semibold text-slate-700 mb-1">Harga</label>
+              <input type="text" value="${esc(item.price)}" oninput="updateProductField('${type}', ${idx}, 'price', this.value)" class="ui-input w-full text-xs px-2.5 py-2 rounded-lg font-semibold">
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-[11px] font-semibold text-slate-700 mb-1">Judul Materi / Produk</label>
+            <input type="text" value="${esc(item.title)}" oninput="updateProductField('${type}', ${idx}, 'title', this.value)" class="ui-input w-full text-xs px-3 py-2 rounded-lg font-semibold">
+          </div>
+
+          <div>
+            <label class="block text-[11px] font-semibold text-slate-700 mb-1">Deskripsi Singkat</label>
+            <textarea rows="2" oninput="updateProductField('${type}', ${idx}, 'description', this.value)" class="ui-input w-full text-xs px-3 py-2 rounded-lg">${esc(item.description)}</textarea>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+            <div>
+              <label class="block text-[11px] font-semibold text-slate-700 mb-1">Pilih File Sampel Web</label>
+              <select onchange="updateProductField('${type}', ${idx}, 'sampleUrl', this.value)" class="ui-input w-full text-xs px-2.5 py-2 rounded-lg">
+                ${buildSampleOptions(item.sampleUrl || '')}
+              </select>
+            </div>
+            <div>
+              <label class="block text-[11px] font-semibold text-slate-700 mb-1">Label Tombol Kiri</label>
+              <input type="text" value="${esc(item.sampleLabel || 'Buka Sampel')}" oninput="updateProductField('${type}', ${idx}, 'sampleLabel', this.value)" class="ui-input w-full text-xs px-2.5 py-2 rounded-lg">
+            </div>
+          </div>
+
+          ${hasCover ? `
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 items-end">
+            <div>
+              <label class="block text-[11px] font-semibold text-slate-700 mb-1">Gambar Cover</label>
+              <select onchange="updateProductField('${type}', ${idx}, 'coverImage', this.value)" class="ui-input w-full text-xs px-2.5 py-2 rounded-lg">
+                ${buildAssetOptions(item.coverImage || '')}
+              </select>
+            </div>
+            <div>
+              <label class="block text-[11px] font-semibold text-slate-700 mb-1">Link Produk Lynk.id</label>
+              <input type="text" value="${esc(item.buyUrl || 'https://lynk.id/bahanajarbuguru')}" oninput="updateProductField('${type}', ${idx}, 'buyUrl', this.value)" class="ui-input w-full text-xs px-2.5 py-2 rounded-lg">
+            </div>
+          </div>
+          ` : `
+          <div>
+            <label class="block text-[11px] font-semibold text-slate-700 mb-1">Link Produk Lynk.id</label>
+            <input type="text" value="${esc(item.buyUrl || 'https://lynk.id/bahanajarbuguru')}" oninput="updateProductField('${type}', ${idx}, 'buyUrl', this.value)" class="ui-input w-full text-xs px-2.5 py-2 rounded-lg">
+          </div>
+          `}
+
+          <div>
+            <label class="block text-[11px] font-semibold text-slate-700 mb-1">Tag Keterangan (pisahkan dengan koma)</label>
+            <input type="text" value="${esc((item.tags || []).join(', '))}" oninput="updateProductTags('${type}', ${idx}, this.value)" class="ui-input w-full text-xs px-2.5 py-2 rounded-lg">
+          </div>
+        </article>
+      `).join('');
+    }
+
+    function getListKey(type) {
+      if (type === 'buku') return 'bukuItems';
+      if (type === 'modul') return 'modulItems';
+      return 'soalItems';
+    }
+
+    function updateProductField(type, idx, field, value) {
+      const key = getListKey(type);
+      if (portalData && portalData[key] && portalData[key][idx]) {
+        portalData[key][idx][field] = value;
+      }
+    }
+
+    function updateProductTags(type, idx, raw) {
+      const tags = raw.split(',').map((t) => t.trim()).filter(Boolean);
+      updateProductField(type, idx, 'tags', tags);
+    }
+
+    function addProductItem(type) {
+      if (!portalData) return;
+      const key = getListKey(type);
+      if (!Array.isArray(portalData[key])) portalData[key] = [];
+
+      if (type === 'buku') {
+        portalData[key].unshift({
+          id: `buku-${Date.now()}`,
+          grade: 1,
+          badge: 'Fase A • Kelas 1 SD',
+          price: 'Rp 35.000',
+          coverImage: '/assets/cover_penjualan_buku_kelas1.jpg',
+          title: 'Buku Siswa PAI & BP Baru',
+          description: 'Ringkasan materi semester sesuai CP No. 020 Tahun 2026.',
+          tags: ['Format PDF A4', 'Lengkap'],
+          sampleLabel: 'Buka Sampel',
+          sampleUrl: '/buku_siswa_pai_kelas1_semester1.html',
+          buyUrl: 'https://lynk.id/bahanajarbuguru',
+          visible: true
+        });
+        renderProductCards('buku', portalData[key], 'admin-buku-list', true);
+      } else if (type === 'modul') {
+        portalData[key].unshift({
+          id: `modul-${Date.now()}`,
+          grade: 1,
+          badge: 'Kelas 1 SD • Bab Baru',
+          price: 'Rp 25.000',
+          title: 'Modul Ajar Deep Learning Bab Baru',
+          description: 'Modul 8 halaman lengkap dengan LKPD dan rubrik penilaian.',
+          tags: ['8 Halaman A4', 'Word + PDF'],
+          sampleLabel: 'Buka Sampel Modul',
+          sampleUrl: '/modul_ajar_deep_learning_kelas1_bab1.html',
+          buyUrl: 'https://lynk.id/bahanajarbuguru',
+          visible: true
+        });
+        renderProductCards('modul', portalData[key], 'admin-modul-list', false);
+      } else {
+        portalData[key].unshift({
+          id: `soal-${Date.now()}`,
+          grade: 1,
+          badge: 'SAS Kelas 1 SD',
+          price: 'Rp 20.000',
+          coverImage: '/assets/soal_sas_cover_kelas1.jpg',
+          title: 'Naskah Soal SAS PAI Baru',
+          description: '25 soal lengkap (15 PG, 5 Isian, 5 Uraian HOTS) dan kunci jawaban.',
+          tags: ['Word .docx', 'PDF Siap Cetak'],
+          sampleLabel: 'Buka Soal',
+          sampleUrl: '/soal_sas_prototype.html',
+          buyUrl: 'https://lynk.id/bahanajarbuguru',
+          visible: true
+        });
+        renderProductCards('soal', portalData[key], 'admin-soal-list', true);
+      }
+      showGlobalFeedback('Kartu baru ditambahkan ke daftar. Jangan lupa klik "Simpan Perubahan ke Web".', 'success');
+    }
+
+    function deleteProductItem(type, idx) {
+      const key = getListKey(type);
+      if (!portalData || !portalData[key]) return;
+      portalData[key].splice(idx, 1);
+      const map = {
+        buku: ['admin-buku-list', true],
+        modul: ['admin-modul-list', false],
+        soal: ['admin-soal-list', true]
+      };
+      renderProductCards(type, portalData[key], map[type][0], map[type][1]);
+    }
+
+    function renderFaqCards() {
+      const container = document.getElementById('admin-faq-list');
+      const faqs = portalData.faqs || [];
+      container.innerHTML = faqs.map((faq, idx) => `
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-2.5">
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-xs font-bold text-slate-800">FAQ #${idx + 1}</span>
+            <button type="button" onclick="deleteFaqItem(${idx})" class="text-xs font-semibold text-rose-700 underline">Hapus</button>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-slate-700 mb-1">Pertanyaan</label>
+            <input type="text" value="${esc(faq.question)}" oninput="portalData.faqs[${idx}].question = this.value" class="ui-input w-full text-xs px-3 py-2 rounded-lg font-semibold">
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-slate-700 mb-1">Jawaban</label>
+            <textarea rows="2" oninput="portalData.faqs[${idx}].answer = this.value" class="ui-input w-full text-xs px-3 py-2 rounded-lg">${esc(faq.answer)}</textarea>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function addFaqItem() {
+      if (!portalData) return;
+      if (!Array.isArray(portalData.faqs)) portalData.faqs = [];
+      portalData.faqs.push({
+        id: `faq-${Date.now()}`,
+        question: 'Pertanyaan baru...',
+        answer: 'Jawaban lengkap untuk pengunjung...'
+      });
+      renderFaqCards();
+    }
+
+    function deleteFaqItem(idx) {
+      portalData.faqs.splice(idx, 1);
+      renderFaqCards();
+    }
+
+    function syncFormToPortalData() {
+      if (!portalData) return;
+      portalData.site.announcementText = document.getElementById('site-announcement').value.trim();
+      portalData.site.announcementCtaText = document.getElementById('site-announcement-cta-text').value.trim();
+      portalData.site.announcementCtaUrl = document.getElementById('site-announcement-cta-url').value.trim();
+      portalData.site.heroBadge = document.getElementById('site-hero-badge').value.trim();
+      portalData.site.heroTitle = document.getElementById('site-hero-title').value.trim();
+      portalData.site.heroSubtitle = document.getElementById('site-hero-subtitle').value.trim();
+      portalData.site.primaryCtaText = document.getElementById('site-primary-cta-text').value.trim();
+      portalData.site.primaryCtaUrl = document.getElementById('site-primary-cta-url').value.trim();
+      portalData.site.profileName = document.getElementById('site-profile-name').value.trim();
+      portalData.site.profileRole = document.getElementById('site-profile-role').value.trim();
+      portalData.site.profileQuote = document.getElementById('site-profile-quote').value.trim();
+
+      portalData.bukuSection.heading = document.getElementById('buku-sec-heading').value.trim();
+      portalData.bukuSection.topSampleUrl = document.getElementById('buku-sec-top-sample').value.trim();
+
+      portalData.modulSection.heading = document.getElementById('modul-sec-heading').value.trim();
+      portalData.modulSection.topSampleUrl = document.getElementById('modul-sec-top-sample').value.trim();
+      portalData.modulSection.featureTitle = document.getElementById('modul-feat-title').value.trim();
+      portalData.modulSection.priceValue = document.getElementById('modul-price-val').value.trim();
+      portalData.modulSection.featureDescription = document.getElementById('modul-feat-desc').value.trim();
+
+      portalData.soalSection.heading = document.getElementById('soal-sec-heading').value.trim();
+      portalData.soalSection.topSampleUrl = document.getElementById('soal-sec-top-sample').value.trim();
+
+      portalData.gameSection.heading = document.getElementById('game-heading').value.trim();
+      portalData.gameSection.demoUrl = document.getElementById('game-demo-url').value.trim();
+      portalData.gameSection.featureDescription = document.getElementById('game-feat-desc').value.trim();
+    }
+
+    async function savePortalContent(silent = false) {
+      if (!isWritableServer) {
+        showGlobalFeedback('Penyimpanan gagal: jalankan server lokal (node server.js) di http://localhost:3000/admin.html.', 'error');
+        return false;
+      }
+      syncFormToPortalData();
+      const btn = document.getElementById('btn-save-portal');
+      btn.disabled = true;
+      try {
+        const res = await fetch('/api/admin/content', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(portalData)
+        });
+        const result = await res.json();
+        if (!res.ok) throw new Error(result.error || 'Gagal menyimpan');
+        if (!silent) {
+          showGlobalFeedback('Perubahan beranda dan katalog berhasil disimpan. Muat ulang halaman beranda untuk melihat hasilnya.', 'success');
+        }
+        return true;
+      } catch (err) {
+        showGlobalFeedback(`Gagal menyimpan perubahan: ${err.message}`, 'error');
+        return false;
+      } finally {
+        btn.disabled = false;
+      }
+    }
+
+    // === TAB 2: EXPORTS PUBLISHER ===
+    async function loadExportsList() {
+      const container = document.getElementById('exports-list-container');
+      try {
+        const res = await fetch('/api/admin/exports');
+        if (!res.ok) throw new Error('Endpoint server lokal tidak aktif');
+        const data = await res.json();
+        exportsList = data.files || [];
+
+        if (!exportsList.length) {
+          container.innerHTML = `
+            <div class="bg-warm-50 border border-warm-200 rounded-xl p-5 text-center space-y-2.5">
+              <p class="text-xs font-bold text-slate-900">Belum ada file hasil generator</p>
+              <p class="text-xs text-slate-700">Buat Buku Siswa, Modul Ajar, atau Soal SAS terlebih dahulu di halaman AI Generator.</p>
+              <a href="/generator.html" class="inline-block px-4 py-2 rounded-lg bg-brand-800 text-white text-xs font-semibold">Buka AI Generator</a>
+            </div>
+          `;
+          return;
+        }
+
+        container.innerHTML = exportsList.map((f, i) => {
+          const kb = Math.max(1, Math.round(f.sizeBytes / 1024));
+          const dt = new Date(f.modifiedAt).toLocaleString('id-ID', { dateStyle: 'medium', timeStyle: 'short' });
+          return `
+            <button
+              type="button"
+              onclick="selectExportFile(${i})"
+              class="w-full text-left p-3 rounded-xl border border-slate-200 hover:border-brand-700 hover:bg-brand-50/40 transition-colors space-y-1"
+            >
+              <span class="block text-xs font-bold text-slate-900 break-all">${esc(f.name)}</span>
+              <span class="block text-[11px] text-slate-600">${kb} KB • ${esc(dt)}</span>
+            </button>
+          `;
+        }).join('');
+      } catch (err) {
+        container.innerHTML = `<p class="text-xs text-rose-800 p-4 bg-rose-50 rounded-xl border border-rose-200">Tidak dapat membaca folder exports: ${esc(err.message)}</p>`;
+      }
+    }
+
+    function selectExportFile(index) {
+      selectedExportItem = exportsList[index];
+      if (!selectedExportItem) return;
+
+      document.getElementById('export-empty-selection').classList.add('hidden');
+      document.getElementById('export-publish-panel').classList.remove('hidden');
+
+      document.getElementById('selected-export-name').innerText = selectedExportItem.name;
+      const suggestedSlug = selectedExportItem.name
+        .replace(/_\d+\.html$/i, '')
+        .replace(/\.html$/i, '')
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '');
+      document.getElementById('publish-slug').value = suggestedSlug;
+      document.getElementById('publish-card-title').value = suggestedSlug.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
+
+      document.getElementById('btn-open-export-tab').href = selectedExportItem.url;
+      document.getElementById('export-preview-frame').src = selectedExportItem.url;
+    }
+
+    function toggleQuickCatalogMeta() {
+      const target = document.getElementById('publish-catalog-target').value;
+      document.getElementById('publish-catalog-meta').classList.toggle('hidden', target === 'none');
+    }
+
+    async function publishSelectedExport() {
+      if (!selectedExportItem) return;
+      const slug = document.getElementById('publish-slug').value.trim();
+      if (!slug) {
+        showGlobalFeedback('Masukkan nama URL tujuan sebelum mempublikasikan.', 'error');
+        return;
+      }
+
+      const btn = document.getElementById('btn-publish-export');
+      btn.disabled = true;
+      try {
+        const res = await fetch('/api/admin/publish-export', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            exportFileName: selectedExportItem.name,
+            targetSlug: slug
+          })
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'Gagal publikasi');
+
+        const targetCat = document.getElementById('publish-catalog-target').value;
+        if (targetCat !== 'none' && portalData) {
+          const cardTitle = document.getElementById('publish-card-title').value.trim() || slug;
+          const cardGrade = Number(document.getElementById('publish-card-grade').value) || 1;
+          const key = getListKey(targetCat);
+          if (!Array.isArray(portalData[key])) portalData[key] = [];
+
+          const baseCard = {
+            id: `${targetCat}-${Date.now()}`,
+            grade: cardGrade,
+            badge: `Kelas ${cardGrade} SD • Baru`,
+            price: targetCat === 'soal' ? 'Rp 20.000' : (targetCat === 'modul' ? 'Rp 25.000' : 'Rp 35.000'),
+            title: cardTitle,
+            description: 'Materi terbaru disusun sesuai CP No. 020 Tahun 2026.',
+            tags: ['Format A4', 'Siap Cetak'],
+            sampleLabel: 'Buka Sampel',
+            sampleUrl: data.publicUrl,
+            buyUrl: 'https://lynk.id/bahanajarbuguru',
+            visible: true
+          };
+          if (targetCat === 'buku') baseCard.coverImage = `/assets/cover_penjualan_buku_kelas${cardGrade}.jpg`;
+          if (targetCat === 'soal') baseCard.coverImage = `/assets/soal_sas_cover_kelas${cardGrade}.jpg`;
+
+          portalData[key].unshift(baseCard);
+          await savePortalContent(true);
+          populatePortalForm();
+        }
+
+        await loadHtmlFilesList();
+        showGlobalFeedback(`Berhasil dipasang ke web pada jalur ${data.publicUrl}. File ini sekarang siap ikut ter-deploy ke Vercel dan bisa disunting di tab Editor Teks Materi.`, 'success');
+      } catch (err) {
+        showGlobalFeedback(`Gagal memasang file ke web: ${err.message}`, 'error');
+      } finally {
+        btn.disabled = false;
+      }
+    }
+
+    // === TAB 3: DIRECT HTML MATERIAL EDITOR ===
+    async function loadHtmlFilesList() {
+      const sel = document.getElementById('editor-file-select');
+      try {
+        const res = await fetch('/api/admin/html-files');
+        if (!res.ok) throw new Error('Server lokal tidak aktif');
+        const data = await res.json();
+        availablePublicSamples = data.files || [];
+
+        const prevVal = sel.value;
+        sel.innerHTML = '<option value="">-- Pilih Dokumen Materi untuk Disunting --</option>' +
+          availablePublicSamples.map((f) => `<option value="${esc(f.path)}">${esc(f.path)} (${esc(f.group)})</option>`).join('');
+
+        if (prevVal && availablePublicSamples.some((f) => f.path === prevVal)) {
+          sel.value = prevVal;
+        }
+        if (portalData) {
+          renderProductCards('buku', portalData.bukuItems || [], 'admin-buku-list', true);
+          renderProductCards('modul', portalData.modulItems || [], 'admin-modul-list', false);
+          renderProductCards('soal', portalData.soalItems || [], 'admin-soal-list', true);
+        }
+      } catch (err) {
+        sel.innerHTML = '<option value="">Gagal memuat daftar file (memerlukan server lokal)</option>';
+      }
+    }
+
+    async function loadHtmlFileIntoEditor() {
+      const filePath = document.getElementById('editor-file-select').value;
+      const emptyEl = document.getElementById('editor-empty-state');
+      const frame = document.getElementById('visual-editor-frame');
+      const textarea = document.getElementById('source-editor-textarea');
+      const saveBtn = document.getElementById('btn-save-html-file');
+      const viewLink = document.getElementById('btn-view-edited-file');
+      const delBtn = document.getElementById('btn-delete-materi-trigger');
+
+      hideDeleteConfirm();
+      if (!filePath) {
+        currentEditingPath = '';
+        emptyEl.classList.remove('hidden');
+        frame.classList.add('hidden');
+        textarea.classList.add('hidden');
+        document.getElementById('visual-format-bar').classList.add('hidden');
+        saveBtn.disabled = true;
+        viewLink.classList.add('hidden');
+        delBtn.classList.add('hidden');
+        return;
+      }
+
+      try {
+        const res = await fetch(`/api/admin/html-file?path=${encodeURIComponent(filePath)}`);
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'Gagal membaca file');
+
+        currentEditingPath = data.path;
+        currentRawHtml = data.content;
+        textarea.value = currentRawHtml;
+
+        emptyEl.classList.add('hidden');
+        saveBtn.disabled = false;
+        viewLink.href = currentEditingPath;
+        viewLink.classList.remove('hidden');
+        delBtn.classList.toggle('hidden', !currentEditingPath.startsWith('/materi/'));
+
+        renderEditorView();
+      } catch (err) {
+        showGlobalFeedback(`Gagal membuka file: ${err.message}`, 'error');
+      }
+    }
+
+    function renderEditorView() {
+      const frame = document.getElementById('visual-editor-frame');
+      const textarea = document.getElementById('source-editor-textarea');
+      const formatBar = document.getElementById('visual-format-bar');
+
+      if (!currentEditingPath) return;
+
+      if (currentEditorMode === 'visual') {
+        textarea.classList.add('hidden');
+        frame.classList.remove('hidden');
+        formatBar.classList.remove('hidden');
+
+        frame.onload = () => {
+          try {
+            if (frame.contentDocument) {
+              frame.contentDocument.designMode = 'on';
+            }
+          } catch (e) {}
+        };
+        const doc = frame.contentDocument || frame.contentWindow.document;
+        doc.open();
+        doc.write(currentRawHtml);
+        doc.close();
+        try { doc.designMode = 'on'; } catch (e) {}
+      } else {
+        frame.classList.add('hidden');
+        formatBar.classList.add('hidden');
+        textarea.classList.remove('hidden');
+        textarea.value = currentRawHtml;
+      }
+    }
+
+    function captureCurrentEditorHtml() {
+      if (currentEditorMode === 'visual') {
+        const frame = document.getElementById('visual-editor-frame');
+        const doc = frame.contentDocument || frame.contentWindow?.document;
+        if (doc && doc.documentElement) {
+          const prevDesignMode = doc.designMode;
+          doc.designMode = 'off';
+          const serialized = '<!DOCTYPE html>\n' + doc.documentElement.outerHTML;
+          doc.designMode = prevDesignMode;
+          currentRawHtml = serialized;
+        }
+      } else {
+        currentRawHtml = document.getElementById('source-editor-textarea').value;
+      }
+      return currentRawHtml;
+    }
+
+    function setEditorMode(mode) {
+      if (mode === currentEditorMode) return;
+      if (currentEditingPath) {
+        captureCurrentEditorHtml();
+      }
+      currentEditorMode = mode;
+
+      const btnVis = document.getElementById('btn-mode-visual');
+      const btnSrc = document.getElementById('btn-mode-source');
+      btnVis.setAttribute('aria-selected', String(mode === 'visual'));
+      btnSrc.setAttribute('aria-selected', String(mode === 'source'));
+      btnVis.className = mode === 'visual'
+        ? 'min-h-[36px] px-3 py-1.5 rounded-md text-xs font-bold bg-white text-slate-900 shadow-sm'
+        : 'min-h-[36px] px-3 py-1.5 rounded-md text-xs font-semibold text-slate-700 hover:text-slate-900';
+      btnSrc.className = mode === 'source'
+        ? 'min-h-[36px] px-3 py-1.5 rounded-md text-xs font-bold bg-white text-slate-900 shadow-sm'
+        : 'min-h-[36px] px-3 py-1.5 rounded-md text-xs font-semibold text-slate-700 hover:text-slate-900';
+
+      renderEditorView();
+    }
+
+    function execVisualCmd(cmd) {
+      const frame = document.getElementById('visual-editor-frame');
+      const doc = frame.contentDocument || frame.contentWindow?.document;
+      if (!doc) return;
+      frame.contentWindow.focus();
+      doc.execCommand(cmd, false, null);
+    }
+
+    async function saveEditedHtmlFile() {
+      if (!currentEditingPath) return;
+      if (!isWritableServer) {
+        showGlobalFeedback('Tidak bisa menyimpan pada mode statis. Gunakan http://localhost:3000/admin.html.', 'error');
+        return;
+      }
+      const htmlContent = captureCurrentEditorHtml();
+      const btn = document.getElementById('btn-save-html-file');
+      btn.disabled = true;
+      try {
+        const res = await fetch('/api/admin/html-file', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            filePath: currentEditingPath,
+            content: htmlContent
+          })
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'Gagal menyimpan');
+        showGlobalFeedback(`Materi ${data.path} berhasil disimpan.`, 'success');
+      } catch (err) {
+        showGlobalFeedback(`Gagal menyimpan materi: ${err.message}`, 'error');
+      } finally {
+        btn.disabled = false;
+      }
+    }
+
+    function showDeleteConfirm() {
+      document.getElementById('delete-confirm-bar').classList.remove('hidden');
+    }
+
+    function hideDeleteConfirm() {
+      document.getElementById('delete-confirm-bar').classList.add('hidden');
+    }
+
+    async function confirmDeleteHtmlFile() {
+      if (!currentEditingPath || !currentEditingPath.startsWith('/materi/')) return;
+      try {
+        const res = await fetch(`/api/admin/html-file?path=${encodeURIComponent(currentEditingPath)}`, {
+          method: 'DELETE'
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'Gagal menghapus');
+        const deleted = currentEditingPath;
+        hideDeleteConfirm();
+        document.getElementById('editor-file-select').value = '';
+        await loadHtmlFilesList();
+        await loadHtmlFileIntoEditor();
+        showGlobalFeedback(`File materi ${deleted} berhasil dihapus.`, 'success');
+      } catch (err) {
+        showGlobalFeedback(`Gagal menghapus file: ${err.message}`, 'error');
+      }
+    }
+  </script>
+</body>
+</html>

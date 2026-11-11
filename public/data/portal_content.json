@@ -1,0 +1,320 @@
+{
+  "site": {
+    "announcementText": "Pembaruan Capaian Pembelajaran (CP) No. 020 Tahun 2026: Seluruh naskah soal dan modul ajar telah diselaraskan.",
+    "announcementCtaText": "Kunjungi Toko Lynk.id",
+    "announcementCtaUrl": "https://lynk.id/bahanajarbuguru",
+    "heroBadge": "Kurikulum Merdeka 2026 • CP No. 020 Kemendikbudristek",
+    "heroTitle": "Perangkat Pembelajaran PAI & Budi Pekerti SD yang Rapi, Praktis, dan Siap Pakai.",
+    "heroSubtitle": "Selamat datang di portal resmi Bahan Ajar Bu Guru. Kami menghadirkan Buku Siswa 1 Semester, Modul Ajar Deep Learning per Bab, dan Naskah Soal SAS Kelas 1-6 SD dalam format Word (.docx) yang dapat disunting bebas nama sekolahnya, serta PDF beresolusi tinggi siap cetak.",
+    "primaryCtaText": "Buka Katalog Toko di Lynk.id",
+    "primaryCtaUrl": "https://lynk.id/bahanajarbuguru",
+    "profileName": "Bahan Ajar Bu Guru",
+    "profileRole": "Praktisi Guru PAI SD",
+    "profileQuote": "Menghadirkan bahan ajar agama Islam yang menyenangkan, terstruktur rapi, dan memfasilitasi pembelajaran bermakna bagi generasi muslim Indonesia.",
+    "profileAvatar": "/assets/avatar_profile_buguru.jpg"
+  },
+  "bukuSection": {
+    "katalogBadge": "Katalog 1",
+    "heading": "Buku Siswa PAI & Budi Pekerti (Kelas 1-6 SD)",
+    "subheading": "Buku materi 1 semester penuh dengan ilustrasi ramah anak, tata letak standar penerbit A4, dan acuan CP No. 020 Tahun 2026.",
+    "topSampleLabel": "Lihat Contoh Halaman Buku",
+    "topSampleUrl": "/buku_siswa_pai_kelas1_semester1.html"
+  },
+  "bukuItems": [
+    {
+      "id": "buku-kls-1",
+      "grade": 1,
+      "badge": "Fase A • Kelas 1 SD",
+      "price": "Rp 35.000",
+      "coverImage": "/assets/cover_penjualan_buku_kelas1.jpg",
+      "title": "Buku Siswa PAI & BP Kelas 1 SD",
+      "description": "Mengenal Huruf Hijaiyah, Rukun Iman, Basmalah & Hamdalah, Adab Harian, serta Tata Cara Bersuci dan Wudhu.",
+      "tags": [
+        "Format PDF A4",
+        "Semester 1 Penuh"
+      ],
+      "sampleLabel": "Buka Sampel",
+      "sampleUrl": "/buku_siswa_pai_kelas1_semester1.html",
+      "modalDetail": "",
+      "buyUrl": "https://lynk.id/bahanajarbuguru",
+      "visible": true
+    },
+    {
+      "id": "buku-kls-2",
+      "grade": 2,
+      "badge": "Fase A • Kelas 2 SD",
+      "price": "Rp 35.000",
+      "coverImage": "/assets/cover_penjualan_buku_kelas2.jpg",
+      "title": "Buku Siswa PAI & BP Kelas 2 SD",
+      "description": "Asmaul Husna (Al-Hafiz, Al-Wali, Al-Alim, Al-Khabir), Hijaiyah Bersambung, Azan & Ikamah, serta Keteladanan Nabi Nuh a.s.",
+      "tags": [
+        "Format PDF A4",
+        "Semester 1 Penuh"
+      ],
+      "sampleLabel": "Detail Bab",
+      "sampleUrl": "",
+      "modalDetail": "Asmaul Husna, Hijaiyah Bersambung, Azan/Ikamah, Nabi Nuh a.s.",
+      "buyUrl": "https://lynk.id/bahanajarbuguru",
+      "visible": true
+    },
+    {
+      "id": "buku-kls-3",
+      "grade": 3,
+      "badge": "Fase B • Kelas 3 SD",
+      "price": "Rp 35.000",
+      "coverImage": "/assets/cover_penjualan_buku_kelas3.jpg",
+      "title": "Buku Siswa PAI & BP Kelas 3 SD",
+      "description": "Surah Al-Humazah & Al-Kautsar, Sifat-Sifat Wajib Allah SWT, Berbakti kepada Orang Tua & Guru, serta Shalat Rawatib.",
+      "tags": [
+        "Format PDF A4",
+        "Semester 1 Penuh"
+      ],
+      "sampleLabel": "Detail Bab",
+      "sampleUrl": "",
+      "modalDetail": "Surah Al-Humazah/Al-Kautsar, Sifat Wajib Allah, Berbakti Orang Tua, Sholat Sunnah Rawatib",
+      "buyUrl": "https://lynk.id/bahanajarbuguru",
+      "visible": true
+    },
+    {
+      "id": "buku-kls-4",
+      "grade": 4,
+      "badge": "Fase B • Kelas 4 SD",
+      "price": "Rp 35.000",
+      "coverImage": "/assets/cover_penjualan_buku_kelas4.jpg",
+      "title": "Buku Siswa PAI & BP Kelas 4 SD",
+      "description": "Surah Al-Hujurat: 13 (Keragaman), Asmaul Husna Al-Malik/Al-Aziz, Menyambut Usia Baligh, dan Peristiwa Hijrah ke Madinah.",
+      "tags": [
+        "Format PDF A4",
+        "Semester 1 Penuh"
+      ],
+      "sampleLabel": "Detail Bab",
+      "sampleUrl": "",
+      "modalDetail": "Surah Al-Hujurat: 13, Asmaul Husna, Usia Baligh, Hijrah Rasulullah SAW",
+      "buyUrl": "https://lynk.id/bahanajarbuguru",
+      "visible": true
+    },
+    {
+      "id": "buku-kls-5",
+      "grade": 5,
+      "badge": "Fase C • Kelas 5 SD",
+      "price": "Rp 35.000",
+      "coverImage": "/assets/cover_penjualan_buku_kelas5.jpg",
+      "title": "Buku Siswa PAI & BP Kelas 5 SD",
+      "description": "Surah Al-Ma'un, Asmaul Husna Al-Qawiyyu/Al-Qayyum, Makna Zakat, Infak, Sedekah, serta Peristiwa Fathu Makkah.",
+      "tags": [
+        "Format PDF A4",
+        "Semester 1 Penuh"
+      ],
+      "sampleLabel": "Detail Bab",
+      "sampleUrl": "",
+      "modalDetail": "Surah Al-Ma'un & Yatim, Asmaul Husna, Zakat/Infak/Sedekah, Fathu Makkah",
+      "buyUrl": "https://lynk.id/bahanajarbuguru",
+      "visible": true
+    },
+    {
+      "id": "buku-kls-6",
+      "grade": 6,
+      "badge": "Fase C • Kelas 6 SD",
+      "price": "Rp 35.000",
+      "coverImage": "/assets/cover_penjualan_buku_kelas6.jpg",
+      "title": "Buku Siswa PAI & BP Kelas 6 SD",
+      "description": "Surah Ad-Duha, Asmaul Husna Al-Ghaffar/Al-Wahid, Toleransi Beragama, Ketentuan Makanan Halal & Haram, serta Khulafaur Rasyidin.",
+      "tags": [
+        "Format PDF A4",
+        "Tingkat Akhir SD"
+      ],
+      "sampleLabel": "Detail Bab",
+      "sampleUrl": "",
+      "modalDetail": "Surah Ad-Duha, Asmaul Husna Al-Ghaffar, Makanan Halal/Haram, Khulafaur Rasyidin",
+      "buyUrl": "https://lynk.id/bahanajarbuguru",
+      "visible": true
+    }
+  ],
+  "modulSection": {
+    "katalogBadge": "Katalog 2",
+    "heading": "Modul Ajar Deep Learning PAI SD (Format 8 Halaman Lengkap)",
+    "subheading": "Dokumen administrasi guru berstandar supervisi akreditasi: Siklus Mindful, Meaningful & Joyful Learning dilengkapi LKPD dan Rubrik Penilaian.",
+    "topSampleLabel": "Baca Contoh Modul Lengkap (8 Halaman)",
+    "topSampleUrl": "/modul_ajar_deep_learning_kelas1_bab1.html",
+    "featureBadge": "File Word (.docx) 100% Dapat Diedit",
+    "featureTitle": "Paket Administrasi Guru: Dari Tujuan Pembelajaran hingga Lembar Kerja Siswa",
+    "featureDescription": "Setiap modul ajar telah dirancang sistematis mencakup: Identitas Modul, Capaian Pembelajaran No. 020/2026, Profil Pelajar Pancasila & Rahmatan Lil 'Alamin, Pertanyaan Pemantik, Skenario Pembelajaran Berdiferensiasi, LKPD Siswa, Asesmen Formatif & Sumatif, serta Rubrik Ketercapaian.",
+    "featureTags": [
+      "Format Asli Microsoft Word (.docx)",
+      "Format Cetak PDF A4",
+      "Tersedia untuk Kelas 1 sampai 6"
+    ],
+    "priceHeading": "Harga Paket Modul Ajar",
+    "priceValue": "Mulai Rp 25.000",
+    "priceSubtext": "Tersedia per-bab maupun 1 semester",
+    "buyUrl": "https://lynk.id/bahanajarbuguru"
+  },
+  "modulItems": [
+    {
+      "id": "modul-kls-1-bab-1",
+      "grade": 1,
+      "badge": "Kelas 1 SD • Bab 1",
+      "price": "Rp 25.000",
+      "title": "Modul Ajar Deep Learning Kelas 1 Bab 1: Aku Cinta Al-Qur'an",
+      "description": "Modul lengkap 8 halaman mencakup identifikasi CP 020/2026, skenario PjBL 2 pertemuan, 2 lembar LKPD, asesmen HOTS, dan rubrik guru.",
+      "tags": [
+        "8 Halaman A4",
+        "Word + PDF",
+        "LKPD & Rubrik"
+      ],
+      "sampleLabel": "Buka Sampel Modul",
+      "sampleUrl": "/modul_ajar_deep_learning_kelas1_bab1.html",
+      "buyUrl": "https://lynk.id/bahanajarbuguru",
+      "visible": true
+    }
+  ],
+  "soalSection": {
+    "katalogBadge": "Katalog 3",
+    "heading": "Bank Soal SAS (Sumatif Akhir Semester) PAI Kelas 1-6 SD",
+    "subheading": "Naskah ujian 25 Soal (15 PG + 5 Isian + 5 Uraian HOTS) lengkap dengan Kunci Jawaban, Rubrik Penilaian, dan Kisi-Kisi CP No. 020 Tahun 2026.",
+    "topSampleLabel": "Coba Latihan Soal Interaktif",
+    "topSampleUrl": "/soal_sas_prototype.html"
+  },
+  "soalItems": [
+    {
+      "id": "soal-kls-1",
+      "grade": 1,
+      "badge": "SAS Kelas 1 SD • Semester 1",
+      "price": "Rp 20.000",
+      "coverImage": "/assets/soal_sas_cover_kelas1.jpg",
+      "title": "Naskah Soal SAS PAI Kelas 1 SD",
+      "description": "15 PG Bergambar, 5 Isian, 5 Uraian Penalaran. Huruf Hijaiyah, Rukun Iman, Basmalah/Hamdalah, dan Bersuci.",
+      "tags": [
+        "Word .docx",
+        "PDF Siap Cetak",
+        "Kunci & Rubrik"
+      ],
+      "sampleLabel": "Flyer 9:16",
+      "sampleUrl": "/flyer_sas_kelas1.html",
+      "buyUrl": "https://lynk.id/bahanajarbuguru",
+      "visible": true
+    },
+    {
+      "id": "soal-kls-2",
+      "grade": 2,
+      "badge": "SAS Kelas 2 SD • Semester 1",
+      "price": "Rp 20.000",
+      "coverImage": "/assets/soal_sas_cover_kelas2.jpg",
+      "title": "Naskah Soal SAS PAI Kelas 2 SD",
+      "description": "Asmaul Husna, Huruf Hijaiyah Bersambung, Azan dan Ikamah, serta Keteladanan Nabi Nuh a.s.",
+      "tags": [
+        "Word .docx",
+        "PDF Siap Cetak",
+        "Kisi-kisi CP 020"
+      ],
+      "sampleLabel": "Flyer 9:16",
+      "sampleUrl": "/flyer_sas_kelas2.html",
+      "buyUrl": "https://lynk.id/bahanajarbuguru",
+      "visible": true
+    },
+    {
+      "id": "soal-kls-3",
+      "grade": 3,
+      "badge": "SAS Kelas 3 SD • Semester 1",
+      "price": "Rp 20.000",
+      "coverImage": "/assets/soal_sas_cover_kelas3.jpg",
+      "title": "Naskah Soal SAS PAI Kelas 3 SD",
+      "description": "Surah Al-Humazah & Al-Kautsar, Sifat-Sifat Wajib Allah, Berbakti Orang Tua & Guru, Shalat Sunah Rawatib.",
+      "tags": [
+        "Word .docx",
+        "PDF Siap Cetak",
+        "Kunci & Rubrik"
+      ],
+      "sampleLabel": "Flyer 9:16",
+      "sampleUrl": "/flyer_sas_kelas3.html",
+      "buyUrl": "https://lynk.id/bahanajarbuguru",
+      "visible": true
+    },
+    {
+      "id": "soal-kls-4",
+      "grade": 4,
+      "badge": "SAS Kelas 4 SD • Semester 1",
+      "price": "Rp 20.000",
+      "coverImage": "/assets/soal_sas_cover_kelas4.jpg",
+      "title": "Naskah Soal SAS PAI Kelas 4 SD",
+      "description": "Surah Al-Hujurat 13, Asmaul Husna, Keragaman Manusia, Menyambut Usia Baligh, Hijrah Rasulullah SAW ke Madinah.",
+      "tags": [
+        "Word .docx",
+        "PDF Siap Cetak",
+        "Penalaran HOTS"
+      ],
+      "sampleLabel": "Flyer 9:16",
+      "sampleUrl": "/flyer_sas_kelas4.html",
+      "buyUrl": "https://lynk.id/bahanajarbuguru",
+      "visible": true
+    },
+    {
+      "id": "soal-kls-5",
+      "grade": 5,
+      "badge": "SAS Kelas 5 SD • Semester 1",
+      "price": "Rp 20.000",
+      "coverImage": "/assets/soal_sas_cover_kelas5.jpg",
+      "title": "Naskah Soal SAS PAI Kelas 5 SD",
+      "description": "Surah Al-Ma'un, Asmaul Husna Al-Qawiyyu/Al-Qayyum, Zakat/Infak/Sedekah/Hadiah, Peristiwa Fathu Makkah.",
+      "tags": [
+        "Word .docx",
+        "PDF Siap Cetak",
+        "Rubrik Lengkap"
+      ],
+      "sampleLabel": "Flyer 9:16",
+      "sampleUrl": "/flyer_sas_kelas5.html",
+      "buyUrl": "https://lynk.id/bahanajarbuguru",
+      "visible": true
+    },
+    {
+      "id": "soal-kls-6",
+      "grade": 6,
+      "badge": "SAS Kelas 6 SD • Semester 1",
+      "price": "Rp 20.000",
+      "coverImage": "/assets/soal_sas_cover_kelas6.jpg",
+      "title": "Naskah Soal SAS PAI Kelas 6 SD",
+      "description": "Surah Ad-Duha, Asmaul Husna Al-Ghaffar, Ketentuan Makanan Halal & Haram, Jasa Khulafaur Rasyidin.",
+      "tags": [
+        "Word .docx",
+        "PDF Siap Cetak",
+        "Analisis HOTS"
+      ],
+      "sampleLabel": "Flyer 9:16",
+      "sampleUrl": "/flyer_sas_kelas6.html",
+      "buyUrl": "https://lynk.id/bahanajarbuguru",
+      "visible": true
+    }
+  ],
+  "gameSection": {
+    "katalogBadge": "Media Pembelajaran Interaktif",
+    "heading": "Game Kuis Edukasi: Petualangan Islami Ceria",
+    "subheading": "Aktivitas interaktif berbasis browser ponsel. Siswa dapat bermain kuis materi agama Islam secara mandiri atau berkelompok di kelas tanpa perlu instalasi aplikasi tambahan.",
+    "eyebrow": "Responsif di Layar HP Siswa & Proyektor Kelas",
+    "featureTitle": "Materi Agama Islam yang Disampaikan Lewat Kuis Interaktif",
+    "featureDescription": "Mencakup materi Wudhu & Shalat, Rukun Iman & Islam, Puasa Ramadhan, Zakat & Sedekah, serta Mengenal Hari Akhir. Mendukung fitur Kuis Kelompok, pencatatan rekor bintang kelompok, dan evaluasi hasil belajar secara langsung.",
+    "demoUrl": "/game_petualangan_islami.html",
+    "buyUrl": "https://lynk.id/bahanajarbuguru"
+  },
+  "faqs": [
+    {
+      "id": "faq-1",
+      "question": "Apakah naskah soal dan modul ajar dapat disunting nama sekolahnya?",
+      "answer": "Seluruh naskah soal SAS dan Modul Ajar disediakan dalam format Microsoft Word (.docx) sehingga Bapak/Ibu Guru dapat leluasa mengganti kop nama sekolah, nama pengampu, nomor ujian, maupun menyesuaikan butir pertanyaan. Versi PDF siap cetak juga disertakan di dalam paket."
+    },
+    {
+      "id": "faq-2",
+      "question": "Apakah acuan materi telah sesuai dengan regulasi kurikulum terbaru?",
+      "answer": "Ya. Penyusunan materi mengacu pada Capaian Pembelajaran (CP) No. 020 Tahun 2026 Kemendikbudristek untuk seluruh jenjang: Fase A (Kelas 1-2), Fase B (Kelas 3-4), dan Fase C (Kelas 5-6)."
+    },
+    {
+      "id": "faq-3",
+      "question": "Bagaimana pengiriman file setelah pembayaran selesai?",
+      "answer": "Pengiriman berlangsung otomatis melalui platform Lynk.id. Segera setelah konfirmasi pembayaran QRIS atau transfer diterima, tombol unduh berkas akan langsung tampil di halaman browser, dan tautan cadangan dikirim ke nomor kontak/email yang diisikan."
+    },
+    {
+      "id": "faq-4",
+      "question": "Apakah game edukasi memerlukan instalasi aplikasi khusus?",
+      "answer": "Tidak perlu. Game kuis interaktif berjalan langsung melalui browser ponsel (Chrome, Safari, dsb.) secara responsif, sehingga dapat dimainkan siswa tanpa membebani memori perangkat."
+    }
+  ]
+}
