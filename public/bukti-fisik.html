@@ -342,6 +342,21 @@
           <!-- Input Form -->
           <div class="lg:col-span-5 space-y-3.5 text-xs font-bold">
             <div>
+              <div class="flex items-center justify-between mb-1">
+                <label class="block text-stone-800">Pilih Model Teks Gemini</label>
+                <button type="button" onclick="testApiKey()" class="text-[10px] text-pop-coral hover:underline font-bold">
+                  🔄 Cek Model Akun
+                </button>
+              </div>
+              <select id="ai_model_select" class="w-full px-3.5 py-2.5 bg-white border-2 border-pop-charcoal rounded-xl focus:outline-none focus:ring-2 focus:ring-pop-coral shadow-brutal-sm text-xs font-bold text-pop-charcoal">
+                <option value="auto">⚡ Otomatis (Rekomendasi Teks Terbaik)</option>
+                <option value="gemini-1.5-flash">gemini-1.5-flash ⭐ (Paling Stabil)</option>
+                <option value="gemini-2.0-flash">gemini-2.0-flash (Cepat)</option>
+                <option value="gemini-2.5-flash">gemini-2.5-flash</option>
+                <option value="gemini-1.5-pro">gemini-1.5-pro (Mendalam)</option>
+              </select>
+            </div>
+            <div>
               <label class="block text-stone-800 mb-1">Nomor & Nama Indikator</label>
               <input type="text" id="ai_indicator_name" placeholder="Misal: Poin 8 - Senam Pagi Anak Indonesia Hebat" class="w-full px-3.5 py-2.5 bg-white border-2 border-pop-charcoal rounded-xl focus:outline-none focus:ring-2 focus:ring-pop-coral shadow-brutal-sm text-xs font-semibold">
             </div>
@@ -965,8 +980,57 @@ Belum ada naskah yang di-generate. Silakan isi form di sebelah kiri dan klik "Ge
       const savedKey = localStorage.getItem('GEMINI_API_KEY');
       if (savedKey) {
         document.getElementById('gemini_api_key').value = savedKey;
+        loadAvailableModels(savedKey);
       }
     });
+
+    function isStrictTextModel(m) {
+      const name = (typeof m === 'string' ? m : (m.name || '')).toLowerCase();
+      // Filter out non-text modalities: TTS, audio, embedding, imagen, aqa, realtime
+      if (name.includes('tts') || name.includes('audio') || name.includes('embedding') || name.includes('imagen') || name.includes('aqa') || name.includes('realtime') || name.includes('whisper')) {
+        return false;
+      }
+      if (typeof m === 'object' && m.supportedGenerationMethods) {
+        if (!m.supportedGenerationMethods.includes('generateContent')) return false;
+      }
+      return true;
+    }
+
+    async function loadAvailableModels(apiKey) {
+      if (!apiKey) return;
+      const selectEl = document.getElementById('ai_model_select');
+      const statusMsg = document.getElementById('key-status-msg');
+      try {
+        const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${apiKey}`);
+        if (!res.ok) return;
+        const data = await res.json();
+        const rawModels = data.models || [];
+        
+        const textModels = rawModels
+          .filter(isStrictTextModel)
+          .map(m => m.name.replace(/^models\//, ''));
+
+        if (textModels.length && selectEl) {
+          let optionsHtml = `<option value="auto">⚡ Otomatis (Rekomendasi Teks Terbaik)</option>`;
+          textModels.forEach(m => {
+            let label = m;
+            if (m === 'gemini-1.5-flash') label += ' ⭐ (Direkomendasikan/Stabil)';
+            else if (m === 'gemini-2.0-flash') label += ' ⚡ (Generasi 2)';
+            else if (m === 'gemini-1.5-pro') label += ' 🧠 (Analisis Mendalam)';
+            optionsHtml += `<option value="${m}">${label}</option>`;
+          });
+          selectEl.innerHTML = optionsHtml;
+          
+          if (statusMsg) {
+            statusMsg.classList.remove('hidden');
+            statusMsg.innerHTML = `✅ <strong>Terhubung!</strong> ${textModels.length} model teks siap digunakan.`;
+            statusMsg.className = "text-[11px] font-bold text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-xl border border-emerald-300";
+          }
+        }
+      } catch (err) {
+        console.warn("loadAvailableModels:", err);
+      }
+    }
 
     async function testApiKey() {
       const apiKey = (document.getElementById('gemini_api_key')?.value || '').trim();
@@ -988,18 +1052,24 @@ Belum ada naskah yang di-generate. Silakan isi form di sebelah kiri dan klik "Ge
         const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${apiKey}`);
         const data = await res.json();
         if (res.ok) {
-          const genModels = (data.models || []).filter(m => m.supportedGenerationMethods && m.supportedGenerationMethods.includes('generateContent'));
-          const modelNames = genModels.map(m => m.name.replace(/^models\//, '')).slice(0, 3).join(', ');
-          if (statusMsg) {
-            statusMsg.textContent = `✅ API Key Aktif! Model tersedia: ${modelNames || 'Siap'}`;
-            statusMsg.className = "text-[11px] font-bold text-emerald-700";
-          }
+          const rawModels = data.models || [];
+          const textModels = rawModels
+            .filter(isStrictTextModel)
+            .map(m => m.name.replace(/^models\//, ''));
+
           localStorage.setItem('GEMINI_API_KEY', apiKey);
+          await loadAvailableModels(apiKey);
+
+          if (statusMsg) {
+            const topNames = textModels.slice(0, 4).join(', ');
+            statusMsg.innerHTML = `✅ <strong>API Key Aktif!</strong> Ditemukan ${textModels.length} model teks:<br><span class="font-mono text-[10px] text-stone-700">${topNames}${textModels.length > 4 ? ', ...' : ''}</span>`;
+            statusMsg.className = "text-[11px] font-bold text-emerald-800 bg-emerald-50 p-2.5 rounded-xl border border-emerald-300";
+          }
         } else {
           const errMsg = data.error?.message || res.statusText;
           if (statusMsg) {
             statusMsg.textContent = `❌ ${errMsg}`;
-            statusMsg.className = "text-[11px] font-bold text-red-600";
+            statusMsg.className = "text-[11px] font-bold text-red-600 bg-red-50 p-2.5 rounded-xl border border-red-300";
           }
         }
       } catch (e) {
@@ -1097,43 +1167,59 @@ Susun dengan format:
         if (!apiKey) {
           useFallbackTemplate();
         } else {
-          // 1. Dynamic model discovery using Google ListModels endpoint
+          // 1. Check user choice from dropdown
+          const chosenModelUI = document.getElementById('ai_model_select')?.value;
           let candidateModels = [];
+
+          if (chosenModelUI && chosenModelUI !== 'auto') {
+            candidateModels.push(chosenModelUI);
+          }
+
+          // 2. Dynamic model discovery via Google ListModels endpoint
           try {
             const listRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${apiKey}`);
             if (listRes.ok) {
               const listData = await listRes.json();
               const available = (listData.models || [])
-                .filter(m => m.supportedGenerationMethods && m.supportedGenerationMethods.includes('generateContent'))
+                .filter(isStrictTextModel)
                 .map(m => m.name.replace(/^models\//, ''));
               
-              // Prioritize flash models, then any available model
-              const flashModels = available.filter(m => m.includes('flash'));
-              const otherModels = available.filter(m => !m.includes('flash'));
-              candidateModels = [...flashModels, ...otherModels];
+              // Prioritize standard stable text models
+              const prio1 = available.filter(m => m === 'gemini-1.5-flash' || m === 'gemini-1.5-flash-latest');
+              const prio2 = available.filter(m => m.includes('2.0-flash') || m === 'gemini-2.0-flash');
+              const prio3 = available.filter(m => m.includes('1.5-flash'));
+              const prio4 = available.filter(m => m.includes('2.5-flash'));
+              const prioOthers = available.filter(m => !m.includes('flash'));
+              
+              const ordered = [...prio1, ...prio2, ...prio3, ...prio4, ...prioOthers];
+              ordered.forEach(m => {
+                if (!candidateModels.includes(m)) candidateModels.push(m);
+              });
             } else {
               const errData = await listRes.json().catch(() => ({}));
               if (listRes.status === 400 || listRes.status === 403) {
-                throw new Error(`API Key bermasalah (${listRes.status}): ${errData.error?.message || listRes.statusText}`);
+                const msg = errData.error?.message || listRes.statusText;
+                if (msg.toLowerCase().includes('api_key_invalid') || msg.toLowerCase().includes('api key not valid')) {
+                  throw new Error(`API Key tidak valid (${listRes.status}): ${msg}`);
+                }
               }
             }
           } catch (listErr) {
-            if (listErr.message && listErr.message.includes('API Key bermasalah')) {
+            if (listErr.message && listErr.message.includes('API Key tidak valid')) {
               throw listErr;
             }
             console.warn("ListModels fallback:", listErr);
           }
 
-          // Fallback list of modern active models if list endpoint was inaccessible
+          // 3. Fallback list of modern active text models
           if (!candidateModels.length) {
             candidateModels = [
-              'gemini-1.5-flash-latest',
               'gemini-1.5-flash',
+              'gemini-1.5-flash-latest',
+              'gemini-2.0-flash',
               'gemini-1.5-flash-001',
               'gemini-1.5-flash-002',
-              'gemini-2.0-flash-exp',
-              'gemini-2.0-flash',
-              'gemini-1.5-pro-latest'
+              'gemini-2.0-flash-exp'
             ];
           }
 
@@ -1143,6 +1229,9 @@ Susun dengan format:
 
           outerModelLoop:
           for (const m of candidateModels) {
+            // Strictly skip any non-text or TTS models
+            if (!isStrictTextModel(m)) continue;
+
             for (const ver of versionsToTry) {
               try {
                 const url = `https://generativelanguage.googleapis.com/${ver}/models/${m}:generateContent?key=${apiKey}`;
@@ -1163,10 +1252,12 @@ Susun dengan format:
                     errDetail = errJson.error?.message || errDetail;
                   } catch(e) {}
                   lastErr = new Error(`${response.status}: ${errDetail}`);
-                  if (response.status === 400 || response.status === 429) {
-                    // Invalid key or quota limit - don't keep hammering
+                  
+                  // Stop only if API Key is completely invalid or quota exhausted
+                  if (errDetail.toLowerCase().includes('api_key_invalid') || errDetail.toLowerCase().includes('api key not valid')) {
                     break outerModelLoop;
                   }
+                  // If model does not support modalities or is retired, continue to next candidate
                 }
               } catch (networkErr) {
                 lastErr = networkErr;
