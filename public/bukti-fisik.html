@@ -324,11 +324,17 @@
             </div>
           </div>
 
-          <div class="flex items-center space-x-2">
-            <input type="password" id="gemini_api_key" placeholder="Gemini API Key..." class="px-3 py-1.5 bg-white border-2 border-pop-charcoal rounded-xl text-xs font-bold text-pop-charcoal placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-pop-coral shadow-brutal-sm w-44">
-            <button onclick="saveApiKey()" class="px-3 py-1.5 bg-pop-coral hover:bg-pop-coralDark text-white border-2 border-pop-charcoal rounded-xl text-xs font-extrabold shadow-brutal-sm transition">
-              Simpan
-            </button>
+          <div class="flex flex-col items-end space-y-1.5">
+            <div class="flex items-center space-x-2">
+              <input type="password" id="gemini_api_key" placeholder="Gemini API Key..." class="px-3 py-1.5 bg-white border-2 border-pop-charcoal rounded-xl text-xs font-bold text-pop-charcoal placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-pop-coral shadow-brutal-sm w-44">
+              <button onclick="saveApiKey()" class="px-3 py-1.5 bg-pop-coral hover:bg-pop-coralDark text-white border-2 border-pop-charcoal rounded-xl text-xs font-extrabold shadow-brutal-sm transition">
+                Simpan
+              </button>
+              <button onclick="testApiKey()" id="btn-test-key" class="px-3 py-1.5 bg-white hover:bg-cream-200 text-pop-charcoal border-2 border-pop-charcoal rounded-xl text-xs font-extrabold shadow-brutal-sm transition">
+                Tes Key
+              </button>
+            </div>
+            <div id="key-status-msg" class="text-[11px] font-bold text-stone-700 hidden"></div>
           </div>
         </div>
 
@@ -962,6 +968,94 @@ Belum ada naskah yang di-generate. Silakan isi form di sebelah kiri dan klik "Ge
       }
     });
 
+    async function testApiKey() {
+      const apiKey = (document.getElementById('gemini_api_key')?.value || '').trim();
+      const statusMsg = document.getElementById('key-status-msg');
+      const btn = document.getElementById('btn-test-key');
+      if (!apiKey) {
+        alert("Masukkan API Key terlebih dahulu.");
+        return;
+      }
+      btn.disabled = true;
+      btn.textContent = "Mengecek...";
+      if (statusMsg) {
+        statusMsg.classList.remove('hidden');
+        statusMsg.textContent = "Menghubungi server Google...";
+        statusMsg.className = "text-[11px] font-bold text-stone-700";
+      }
+
+      try {
+        const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${apiKey}`);
+        const data = await res.json();
+        if (res.ok) {
+          const genModels = (data.models || []).filter(m => m.supportedGenerationMethods && m.supportedGenerationMethods.includes('generateContent'));
+          const modelNames = genModels.map(m => m.name.replace(/^models\//, '')).slice(0, 3).join(', ');
+          if (statusMsg) {
+            statusMsg.textContent = `✅ API Key Aktif! Model tersedia: ${modelNames || 'Siap'}`;
+            statusMsg.className = "text-[11px] font-bold text-emerald-700";
+          }
+          localStorage.setItem('GEMINI_API_KEY', apiKey);
+        } else {
+          const errMsg = data.error?.message || res.statusText;
+          if (statusMsg) {
+            statusMsg.textContent = `❌ ${errMsg}`;
+            statusMsg.className = "text-[11px] font-bold text-red-600";
+          }
+        }
+      } catch (e) {
+        if (statusMsg) {
+          statusMsg.textContent = `❌ Gagal koneksi: ${e.message}`;
+          statusMsg.className = "text-[11px] font-bold text-red-600";
+        }
+      } finally {
+        btn.disabled = false;
+        btn.textContent = "Tes Key";
+      }
+    }
+
+    function useFallbackTemplate() {
+      const indicatorName = (document.getElementById('ai_indicator_name')?.value || '').trim() || 'Indikator Penguatan Karakter';
+      const evidenceTypes = (document.getElementById('ai_evidence_types')?.value || '').trim() || 'SOP, Jurnal Pembiasaan, Laporan';
+      const sch = getSchoolInfo();
+      const previewEl = document.getElementById('ai_preview_box');
+      const statusEl = document.getElementById('ai-status');
+      const btnDl = document.getElementById('btn-dl-ai');
+
+      const text = `[TEMPLATE RESMI DRAF BUKTI FISIK SATUAN PENDIDIKAN]
+=============================================================
+PEMERINTAH KOTA CIREBON - DINAS PENDIDIKAN
+${sch.name}
+Alamat: ${sch.address}
+
+BUKTI FISIK INSTRUMEN JABAR BERAKSI
+INDIKATOR: ${indicatorName.toUpperCase()}
+DOKUMEN: ${evidenceTypes}
+
+BAGIAN I: STANDAR OPERASIONAL PROSEDUR (SOP)
+1. Tujuan: Menjamin keterlaksanaan program pembiasaan secara konsisten, aman, dan berdampak positif bagi peserta didik.
+2. Sasaran: Seluruh siswa kelas 1 s.d. 6, guru kelas, dan tenaga kependidikan.
+3. Prosedur: Perencanaan awal tahun, briefing mingguan guru piket, pelaksanaan rutin, dan rekapitulasi capaian.
+
+BAGIAN II: JURNAL LOG HARIAN PEMBIASAAN
+- Tanggal 08/09/2026: Kegiatan terlaksana sesuai SOP dengan tingkat kehadiran peserta didik 96%.
+- Tanggal 15/09/2026: Penguatan nilai budi pekerti berjalan interaktif melalui pendampingan wali kelas.
+- Tanggal 22/09/2026: Rekap evaluasi bulanan menunjukkan peningkatan kedisiplinan dan kebiasaan positif.
+
+BAGIAN III: LAPORAN EVALUASI & TINDAK LANJUT
+- Kendala: Beberapa siswa memerlukan pendampingan afektif intensif.
+- Solusi: Kolaborasi dengan orang tua melalui buku penghubung siswa.
+
+Mengetahui,
+Kepala Sekolah ${sch.name}
+
+${sch.ks}`;
+
+      previewEl.textContent = text;
+      lastGeneratedData = { title: indicatorName, content: text };
+      btnDl.disabled = false;
+      statusEl.textContent = "Selesai (Format Standar Siap Unduh)";
+    }
+
     async function generateCustomAI() {
       const indicatorName = document.getElementById('ai_indicator_name').value.trim();
       const evidenceTypes = document.getElementById('ai_evidence_types').value.trim();
@@ -1001,59 +1095,82 @@ Susun dengan format:
 
       try {
         if (!apiKey) {
-          const sampleOutput = `[TEMPLATE RESMI DRAF BUKTI FISIK SATUAN PENDIDIKAN]
-=============================================================
-PEMERINTAH KOTA CIREBON - DINAS PENDIDIKAN
-${sch.name}
-
-BUKTI FISIK INSTRUMEN JABAR BERAKSI
-INDIKATOR: ${indicatorName.toUpperCase()}
-BUKTI FISIK: ${evidenceTypes}
-
-BAGIAN I: STANDAR OPERASIONAL PROSEDUR (SOP)
-1. Tujuan: Menjamin pelaksanaan ${indicatorName} secara konsisten dan terukur di lingkungan sekolah.
-2. Pelaksana: Guru Kelas, Guru Pembina, dan Tenaga Kependidikan.
-3. Prosedur: Sosialisasi program, pembiasaan rutin pagi, dan evaluasi berkala.
-
-BAGIAN II: JURNAL LOG HARIAN PEMBIASAAN
-- Tanggal 15/09/2026: Pembiasaan di kelas berjalan tertib dan terarah.
-- Tanggal 22/09/2026: Evaluasi keterlibatan peserta didik mencapai 94%.
-
-BAGIAN III: LEMBAR DOKUMENTASI FOTO & PENGESAHAN
-Mengetahui, Kepala Sekolah ${sch.ks}`;
-
-          previewEl.textContent = sampleOutput;
-          lastGeneratedData = { title: indicatorName, content: sampleOutput };
-          btnDl.disabled = false;
-          statusEl.textContent = "Selesai (Template Standar)";
+          useFallbackTemplate();
         } else {
-          // Model fallback list (gemini-1.5-flash is universal and supported on all keys)
-          const modelsToTry = ['gemini-1.5-flash', 'gemini-2.0-flash', 'gemini-1.5-pro'];
+          // 1. Dynamic model discovery using Google ListModels endpoint
+          let candidateModels = [];
+          try {
+            const listRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${apiKey}`);
+            if (listRes.ok) {
+              const listData = await listRes.json();
+              const available = (listData.models || [])
+                .filter(m => m.supportedGenerationMethods && m.supportedGenerationMethods.includes('generateContent'))
+                .map(m => m.name.replace(/^models\//, ''));
+              
+              // Prioritize flash models, then any available model
+              const flashModels = available.filter(m => m.includes('flash'));
+              const otherModels = available.filter(m => !m.includes('flash'));
+              candidateModels = [...flashModels, ...otherModels];
+            } else {
+              const errData = await listRes.json().catch(() => ({}));
+              if (listRes.status === 400 || listRes.status === 403) {
+                throw new Error(`API Key bermasalah (${listRes.status}): ${errData.error?.message || listRes.statusText}`);
+              }
+            }
+          } catch (listErr) {
+            if (listErr.message && listErr.message.includes('API Key bermasalah')) {
+              throw listErr;
+            }
+            console.warn("ListModels fallback:", listErr);
+          }
+
+          // Fallback list of modern active models if list endpoint was inaccessible
+          if (!candidateModels.length) {
+            candidateModels = [
+              'gemini-1.5-flash-latest',
+              'gemini-1.5-flash',
+              'gemini-1.5-flash-001',
+              'gemini-1.5-flash-002',
+              'gemini-2.0-flash-exp',
+              'gemini-2.0-flash',
+              'gemini-1.5-pro-latest'
+            ];
+          }
+
           let generatedText = null;
           let lastErr = null;
+          const versionsToTry = ['v1beta', 'v1'];
 
-          for (const m of modelsToTry) {
-            try {
-              const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${m}:generateContent?key=${apiKey}`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
-              });
+          outerModelLoop:
+          for (const m of candidateModels) {
+            for (const ver of versionsToTry) {
+              try {
+                const url = `https://generativelanguage.googleapis.com/${ver}/models/${m}:generateContent?key=${apiKey}`;
+                const response = await fetch(url, {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+                });
 
-              if (response.ok) {
-                const data = await response.json();
-                generatedText = data.candidates?.[0]?.content?.parts?.[0]?.text;
-                if (generatedText) break;
-              } else {
-                let errDetail = response.statusText;
-                try {
-                  const errJson = await response.json();
-                  errDetail = errJson.error?.message || errDetail;
-                } catch(e) {}
-                lastErr = new Error(`${response.status}: ${errDetail}`);
+                if (response.ok) {
+                  const data = await response.json();
+                  generatedText = data.candidates?.[0]?.content?.parts?.[0]?.text;
+                  if (generatedText) break outerModelLoop;
+                } else {
+                  let errDetail = response.statusText;
+                  try {
+                    const errJson = await response.json();
+                    errDetail = errJson.error?.message || errDetail;
+                  } catch(e) {}
+                  lastErr = new Error(`${response.status}: ${errDetail}`);
+                  if (response.status === 400 || response.status === 429) {
+                    // Invalid key or quota limit - don't keep hammering
+                    break outerModelLoop;
+                  }
+                }
+              } catch (networkErr) {
+                lastErr = networkErr;
               }
-            } catch (networkErr) {
-              lastErr = networkErr;
             }
           }
 
@@ -1068,7 +1185,20 @@ Mengetahui, Kepala Sekolah ${sch.ks}`;
         }
       } catch (err) {
         console.error(err);
-        previewEl.textContent = "Error: " + err.message;
+        previewEl.innerHTML = `
+<div class="space-y-3">
+  <div class="text-red-600 font-bold flex items-center space-x-1.5">
+    <i class="fa-solid fa-triangle-exclamation"></i>
+    <span>Kendala Gemini API:</span>
+  </div>
+  <div class="text-xs text-stone-700 bg-red-50 p-2.5 rounded-xl border border-red-200 font-mono">${err.message}</div>
+  <div class="pt-1">
+    <button onclick="useFallbackTemplate()" class="px-3.5 py-2 bg-pop-green hover:bg-emerald-400 text-pop-charcoal border-2 border-pop-charcoal rounded-xl text-xs font-extrabold shadow-brutal-sm transition flex items-center space-x-1.5">
+      <i class="fa-solid fa-file-lines"></i>
+      <span>Gunakan Format Standar Resmi (Tanpa API Key)</span>
+    </button>
+  </div>
+</div>`;
         statusEl.textContent = "Gagal memproses AI";
       } finally {
         btnGenerate.disabled = false;
