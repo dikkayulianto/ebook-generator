@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jabar Beraksi AI — Generator Bukti Fisik & Dokumen Word (.docx) Otomatis</title>
+  
+  <meta name="description" content="Aplikasi Generator Otomatis Bukti Fisik Pemantauan Jabar Beraksi & Penguatan Pendidikan Karakter Satuan Pendidikan. Ekspor Word (.docx) & Siap Pakai.">
+
+  <!-- Tailwind CSS & Google Fonts -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Client-side Document & Zip Libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/docx@8.5.0/build/index.umd.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+            serif: ['"Newsreader"', 'Georgia', 'serif'],
+          },
+          colors: {
+            gov: {
+              50: '#f0f9ff',
+              100: '#e0f2fe',
+              500: '#0284c7',
+              700: '#0369a1',
+              800: '#075985',
+              900: '#0c4a6e',
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col">
+
+  <!-- TOP NAV -->
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <a href="/" class="flex items-center space-x-2 text-gov-800 hover:text-gov-700">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-700 to-sky-500 text-white flex items-center justify-center font-bold text-lg shadow-sm">
+            <i class="fa-solid fa-file-word"></i>
+          </div>
+          <div>
+            <span class="font-extrabold text-lg tracking-tight block text-slate-900 leading-tight">Jabar Beraksi AI</span>
+            <span class="text-xs text-sky-600 font-semibold">Generator Dokumen Bukti Fisik (.docx)</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="flex items-center space-x-3">
+        <a href="#settings" class="text-xs font-semibold px-3 py-1.5 rounded-lg border border-slate-200 hover:bg-slate-100 text-slate-700 transition">
+          <i class="fa-solid fa-school text-sky-600 mr-1.5"></i> Identitas Sekolah
+        </a>
+        <a href="#ai-custom" class="text-xs font-semibold px-3 py-1.5 rounded-lg bg-sky-50 text-sky-700 border border-sky-200 hover:bg-sky-100 transition">
+          <i class="fa-solid fa-robot mr-1.5"></i> AI Generator
+        </a>
+        <a href="/" class="text-xs font-semibold px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900">
+          <i class="fa-solid fa-arrow-left mr-1"></i> Kembali ke Beranda
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="bg-gradient-to-b from-sky-50 via-white to-slate-50 py-10 border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div class="inline-flex items-center space-x-2 bg-sky-100 text-sky-800 text-xs px-3 py-1 rounded-full font-bold mb-4">
+        <span>🚀 Khusus Satuan Pendidikan Kota Cirebon & Jawa Barat</span>
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight max-w-3xl mx-auto leading-tight">
+        Generator Dokumen Bukti Fisik <span class="text-sky-600">Jabar Beraksi 1</span>
+      </h1>
+      <p class="mt-3 text-sm sm:text-base text-slate-600 max-w-2xl mx-auto">
+        Ketik nama sekolah Anda, pilih poin indikator, lalu unduh dokumen resmi dalam format <strong>Microsoft Word (.docx)</strong> lengkap dengan SOP, Buku Jurnal, Rubrik, dan Kolom Tanda Tangan.
+      </p>
+
+      <!-- Quick Action Buttons -->
+      <div class="mt-6 flex flex-wrap justify-center gap-3">
+        <button onclick="downloadAllDocs()" id="btn-dl-all" class="px-5 py-2.5 bg-sky-600 hover:bg-sky-700 text-white font-semibold text-sm rounded-xl shadow-sm hover:shadow transition flex items-center space-x-2">
+          <i class="fa-solid fa-file-zipper"></i>
+          <span>Unduh Semua Dokumen (Poin 16-27 .ZIP)</span>
+        </button>
+        <a href="#preset-section" class="px-5 py-2.5 bg-white hover:bg-slate-50 border border-slate-300 text-slate-700 font-semibold text-sm rounded-xl transition flex items-center space-x-2">
+          <i class="fa-solid fa-list-check text-sky-600"></i>
+          <span>Pilih Poin Satuan (Poin 16 s.d 27)</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN CONTAINER -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow space-y-10">
+
+    <!-- SETTINGS / IDENTITAS SEKOLAH -->
+    <section id="settings" class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8">
+      <div class="flex items-center justify-between pb-4 border-b border-slate-100 mb-6">
+        <div>
+          <h2 class="text-lg font-bold text-slate-900 flex items-center space-x-2">
+            <i class="fa-solid fa-building-columns text-sky-600"></i>
+            <span>Identitas Sekolah & Kop Surat</span>
+          </h2>
+          <p class="text-xs text-slate-500 mt-0.5">Informasi di bawah ini otomatis disematkan ke dalam seluruh file Word yang diunduh.</p>
+        </div>
+        <button onclick="resetDefaultSettings()" class="text-xs text-sky-600 hover:underline">
+          <i class="fa-solid fa-rotate-left mr-1"></i> Reset Contoh
+        </button>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 text-sm">
+        <div>
+          <label class="block font-semibold text-slate-700 mb-1">Nama Satuan Pendidikan</label>
+          <input type="text" id="sch_name" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 focus:ring-2 focus:ring-sky-500 focus:outline-none" value="SD NEGERI 1 KESAMBI">
+        </div>
+        <div>
+          <label class="block font-semibold text-slate-700 mb-1">NPSN</label>
+          <input type="text" id="sch_npsn" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 focus:ring-2 focus:ring-sky-500 focus:outline-none" value="20222045">
+        </div>
+        <div>
+          <label class="block font-semibold text-slate-700 mb-1">Kecamatan</label>
+          <input type="text" id="sch_kec" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 focus:ring-2 focus:ring-sky-500 focus:outline-none" value="Kesambi">
+        </div>
+        <div>
+          <label class="block font-semibold text-slate-700 mb-1">Alamat Lengkap</label>
+          <input type="text" id="sch_address" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 focus:ring-2 focus:ring-sky-500 focus:outline-none" value="Jalan Kesambi No. 24, Kota Cirebon 45132">
+        </div>
+        <div>
+          <label class="block font-semibold text-slate-700 mb-1">Nama Kepala Sekolah & Gelar</label>
+          <input type="text" id="sch_ks" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 focus:ring-2 focus:ring-sky-500 focus:outline-none" value="Dra. Hj. Siti Maryam, M.Pd">
+        </div>
+        <div>
+          <label class="block font-semibold text-slate-700 mb-1">NIP Kepala Sekolah</label>
+          <input type="text" id="sch_ks_nip" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 focus:ring-2 focus:ring-sky-500 focus:outline-none" value="197505121998032004">
+        </div>
+        <div>
+          <label class="block font-semibold text-slate-700 mb-1">Nama Pengawas Pemantau</label>
+          <input type="text" id="sch_pengawas" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 focus:ring-2 focus:ring-sky-500 focus:outline-none" value="Ari Haerani, S.Pd.SD, M.Pd">
+        </div>
+        <div>
+          <label class="block font-semibold text-slate-700 mb-1">NIP Pengawas</label>
+          <input type="text" id="sch_pengawas_nip" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 focus:ring-2 focus:ring-sky-500 focus:outline-none" value="197301211996032001">
+        </div>
+        <div>
+          <label class="block font-semibold text-slate-700 mb-1">Tahun Dokumen</label>
+          <input type="text" id="sch_year" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 focus:ring-2 focus:ring-sky-500 focus:outline-none" value="2026">
+        </div>
+      </div>
+    </section>
+
+    <!-- PRESET SECTION: POIN 16 s.d 27 -->
+    <section id="preset-section" class="space-y-4">
+      <div class="flex items-center justify-between">
+        <div>
+          <h2 class="text-xl font-bold text-slate-900 flex items-center space-x-2">
+            <i class="fa-solid fa-folder-open text-sky-600"></i>
+            <span>Daftar Dokumen Siap Unduh (Poin 16 s.d 27)</span>
+          </h2>
+          <p class="text-xs text-slate-500">Pilih salah satu poin di bawah untuk langsung mengunduh file Microsoft Word (.docx).</p>
+        </div>
+      </div>
+
+      <!-- CARDS GRID -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" id="preset-grid">
+        <!-- Rendered via JS -->
+      </div>
+    </section>
+
+    <!-- AI CUSTOM GENERATOR SECTION -->
+    <section id="ai-custom" class="bg-gradient-to-tr from-sky-900 to-indigo-900 text-white rounded-2xl p-6 sm:p-8 shadow-lg">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-sky-800">
+        <div>
+          <span class="inline-block bg-sky-500/20 text-sky-300 border border-sky-400/30 text-xs px-2.5 py-0.5 rounded-full font-bold mb-2">
+            <i class="fa-solid fa-sparkles mr-1"></i> AI Powered by Google Gemini
+          </span>
+          <h2 class="text-2xl font-bold tracking-tight">AI Dokumen Generator Mandiri</h2>
+          <p class="text-sky-200 text-xs sm:text-sm mt-1 max-w-xl">
+            Ingin membuat dokumen bukti fisik poin 1 s/d 15 atau indikator custom baru? Masukkan instruksinya dan biarkan AI menyusun naskah Word-nya secara instan!
+          </p>
+        </div>
+
+        <div class="flex items-center space-x-2">
+          <input type="password" id="gemini_api_key" placeholder="Masukkan Gemini API Key..." class="px-3.5 py-2 rounded-xl bg-white/10 border border-sky-700 text-xs text-white placeholder-sky-300 focus:outline-none focus:ring-2 focus:ring-sky-400 w-56">
+          <button onclick="saveApiKey()" class="px-3 py-2 bg-sky-500 hover:bg-sky-400 text-white text-xs font-semibold rounded-xl transition">
+            Simpan Key
+          </button>
+        </div>
+      </div>
+
+      <div class="mt-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div class="lg:col-span-1 space-y-4">
+          <div>
+            <label class="block text-xs font-semibold text-sky-200 mb-1.5">Nomor & Nama Indikator</label>
+            <input type="text" id="ai_indicator_name" placeholder="Misal: Poin 8 - Senam Pagi Anak Indonesia Hebat" class="w-full px-3.5 py-2.5 rounded-xl bg-white/10 border border-sky-700 text-sm text-white placeholder-sky-300 focus:outline-none focus:ring-2 focus:ring-sky-400">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-sky-200 mb-1.5">Jenis Bukti Fisik yang Diminta</label>
+            <input type="text" id="ai_evidence_types" placeholder="Misal: Jadwal Kegiatan, Dokumentasi, Daftar Hadir" class="w-full px-3.5 py-2.5 rounded-xl bg-white/10 border border-sky-700 text-sm text-white placeholder-sky-300 focus:outline-none focus:ring-2 focus:ring-sky-400">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-sky-200 mb-1.5">Catatan Tambahan (Opsional)</label>
+            <textarea id="ai_extra_notes" rows="3" placeholder="Misal: Sertakan contoh jadwal hari Selasa dan Jumat, serta rubrik kebugaran..." class="w-full px-3.5 py-2 rounded-xl bg-white/10 border border-sky-700 text-sm text-white placeholder-sky-300 focus:outline-none focus:ring-2 focus:ring-sky-400"></textarea>
+          </div>
+          <button onclick="generateCustomAI()" id="btn-ai-generate" class="w-full py-3 bg-gradient-to-r from-sky-400 to-blue-500 hover:from-sky-300 hover:to-blue-400 text-slate-900 font-extrabold text-sm rounded-xl shadow transition flex items-center justify-center space-x-2">
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+            <span>Generate Dokumen Word via AI</span>
+          </button>
+        </div>
+
+        <div class="lg:col-span-2 bg-white/5 border border-white/10 rounded-xl p-5 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between pb-3 border-b border-white/10 mb-3">
+              <span class="text-xs font-bold text-sky-300 uppercase tracking-wider">Hasil Pratinjau Teks Dokumen</span>
+              <span id="ai-status" class="text-xs text-sky-400 italic">Siap generate</span>
+            </div>
+            <div id="ai_preview_box" class="h-64 overflow-y-auto text-xs font-mono text-slate-200 p-3 bg-black/20 rounded-lg whitespace-pre-wrap leading-relaxed">
+Belum ada dokumen yang di-generate. Silakan isi form di sebelah kiri dan klik tombol "Generate Dokumen Word via AI".
+            </div>
+          </div>
+
+          <div class="pt-4 flex justify-end">
+            <button onclick="downloadCustomAIDoc()" id="btn-dl-ai" disabled class="px-5 py-2.5 bg-emerald-500 hover:bg-emerald-400 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold text-xs rounded-xl shadow transition flex items-center space-x-2">
+              <i class="fa-solid fa-download"></i>
+              <span>Unduh File Word (.docx) Ini</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-white border-t border-slate-200 py-6 mt-12 text-center text-xs text-slate-500">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <div>
+        <strong>Jabar Beraksi AI Generator</strong> &copy; 2026. Dioptimalkan untuk Satuan Pendidikan Dasar & Menengah.
+      </div>
+      <div class="flex items-center space-x-4">
+        <span>Kota Cirebon & Jawa Barat</span>
+        <a href="/" class="text-sky-600 hover:underline">Portal Utama</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPT LOGIC -->
+  <script>
+    // PRESET METADATA (16 to 27)
+    const PRESETS = [
+      {
+        num: 16,
+        title: "Deteksi Dini dan Penanganan Masalah",
+        evidences: ["SOP Perlindungan Siswa", "Buku Log Kasus", "Laporan Mediasi Restoratif"],
+        icon: "fa-shield-halved",
+        color: "text-blue-600"
+      },
+      {
+        num: 17,
+        title: "Kemitraan Orang Tua & Pemangku Kepentingan",
+        evidences: ["Notulen Rapat Paguyuban", "Naskah MoU Puskesmas", "Daftar Hadir & Dokumentasi"],
+        icon: "fa-handshake",
+        color: "text-emerald-600"
+      },
+      {
+        num: 18,
+        title: "Pemantauan Fisik & Emosi Peserta Didik",
+        evidences: ["Jurnal Anekdot Emosi", "Buku Cek Fisik UKS", "Instrumen Mood Check-in"],
+        icon: "fa-heart-pulse",
+        color: "text-rose-600"
+      },
+      {
+        num: 19,
+        title: "Penguatan Spiritual, Mental, Moral & Etika",
+        evidences: ["Modul Ajar Integratif", "Jurnal Pembelajaran Karakter", "Dokumentasi Ibadah & 5S"],
+        icon: "fa-hands-praying",
+        color: "text-amber-600"
+      },
+      {
+        num: 20,
+        title: "Keamanan Fisik dan Sportivitas PJOK",
+        evidences: ["SOP Keselamatan Lapangan", "Modul Ajar PJOK Fair Play", "Rubrik Sportivitas & P3K"],
+        icon: "fa-volleyball",
+        color: "text-indigo-600"
+      },
+      {
+        num: 21,
+        title: "Dukungan Tendik Lingkungan Aman & Nyaman",
+        evidences: ["Program Kerja Tendik", "Buku Log Harian Satpam/Kebersihan", "Laporan Sanitasi"],
+        icon: "fa-users-gear",
+        color: "text-teal-600"
+      },
+      {
+        num: 22,
+        title: "Koordinasi Waka Kesiswaan & Guru Kelas",
+        evidences: ["Program Kerja Kesiswaan", "Notulen Rapat Bulanan", "Daftar Hadir Rapat Guru"],
+        icon: "fa-comments",
+        color: "text-cyan-600"
+      },
+      {
+        num: 23,
+        title: "Keamanan Fisik Sekolah Berdasarkan Sarpras",
+        evidences: ["Pedoman K3 Sarpras", "Checklist 10 Area Kelayakan", "Rencana Tindak Lanjut RKAS"],
+        icon: "fa-building-shield",
+        color: "text-orange-600"
+      },
+      {
+        num: 24,
+        title: "Layanan Psikososial Guru BK",
+        evidences: ["Program Bimbingan Konseling", "Jurnal Log Konseling", "Laporan Studi Kasus Privat"],
+        icon: "fa-head-side-heart",
+        color: "text-purple-600"
+      },
+      {
+        num: 25,
+        title: "Pendampingan Wali Kelas",
+        evidences: ["Buku Administrasi Wali Kelas", "Buku Catatan Perkembangan Siswa", "Laporan Home Visit"],
+        icon: "fa-chalkboard-user",
+        color: "text-pink-600"
+      },
+      {
+        num: 26,
+        title: "Pembelajaran Bermakna Holistik Integratif",
+        evidences: ["Modul Ajar Tematik PBL", "Lembar Observasi Keterlibatan", "Refleksi Aksi Nyata"],
+        icon: "fa-seedling",
+        color: "text-green-600"
+      },
+      {
+        num: 27,
+        title: "Keamanan Lingkungan & Data Pribadi Murid",
+        evidences: ["SOP Pelindungan Data Pribadi", "Program Keamanan Arsip/Dapodik", "Pakta Integritas Tendik"],
+        icon: "fa-user-lock",
+        color: "text-slate-700"
+      }
+    ];
+
+    // Render Preset Cards
+    function renderPresets() {
+      const grid = document.getElementById('preset-grid');
+      grid.innerHTML = PRESETS.map(p => `
+        <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm hover:shadow-md transition flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-xs font-bold px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700">
+                Poin ${p.num}
+              </span>
+              <i class="fa-solid ${p.icon} ${p.color} text-lg"></i>
+            </div>
+            <h3 class="font-bold text-slate-900 text-base leading-snug mb-2">${p.title}</h3>
+            <div class="space-y-1 mb-4">
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block">Bukti Fisik Termasuk:</span>
+              ${p.evidences.map(e => `
+                <div class="text-xs text-slate-600 flex items-center space-x-1.5">
+                  <i class="fa-solid fa-circle-check text-sky-500 text-[10px]"></i>
+                  <span>${e}</span>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+
+          <div class="pt-3 border-t border-slate-100">
+            <button onclick="downloadSinglePreset(${p.num})" class="w-full py-2 bg-sky-50 hover:bg-sky-600 hover:text-white text-sky-700 text-xs font-bold rounded-xl transition flex items-center justify-center space-x-1.5">
+              <i class="fa-solid fa-download"></i>
+              <span>Unduh Word (.docx)</span>
+            </button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Helper: Get School Info
+    function getSchoolInfo() {
+      return {
+        name: document.getElementById('sch_name').value.trim() || 'SD NEGERI [NAMA SEKOLAH]',
+        npsn: document.getElementById('sch_npsn').value.trim() || '202xxxxx',
+        kec: document.getElementById('sch_kec').value.trim() || 'Kesambi',
+        address: document.getElementById('sch_address').value.trim() || 'Jalan [Alamat Sekolah], Kota Cirebon',
+        ks: document.getElementById('sch_ks').value.trim() || '[Nama Kepala Sekolah]',
+        ks_nip: document.getElementById('sch_ks_nip').value.trim() || '197505121998032004',
+        pengawas: document.getElementById('sch_pengawas').value.trim() || 'Ari Haerani, S.Pd.SD, M.Pd',
+        pengawas_nip: document.getElementById('sch_pengawas_nip').value.trim() || '197301211996032001',
+        year: document.getElementById('sch_year').value.trim() || '2026'
+      };
+    }
+
+    function resetDefaultSettings() {
+      document.getElementById('sch_name').value = "SD NEGERI 1 KESAMBI";
+      document.getElementById('sch_npsn').value = "20222045";
+      document.getElementById('sch_kec').value = "Kesambi";
+      document.getElementById('sch_address').value = "Jalan Kesambi No. 24, Kota Cirebon 45132";
+      document.getElementById('sch_ks').value = "Dra. Hj. Siti Maryam, M.Pd";
+      document.getElementById('sch_ks_nip').value = "197505121998032004";
+      document.getElementById('sch_pengawas').value = "Ari Haerani, S.Pd.SD, M.Pd";
+      document.getElementById('sch_pengawas_nip').value = "197301211996032001";
+      document.getElementById('sch_year').value = "2026";
+    }
+
+    // Generate Word Document using docx.js (Client-Side)
+    async function createDocxBlob(poinNum, customData = null) {
+      const sch = getSchoolInfo();
+      const preset = PRESETS.find(p => p.num === poinNum);
+      const title = customData ? customData.title : (preset ? preset.title : `Poin ${poinNum}`);
+
+      const { Document, Paragraph, TextRun, Table, TableRow, TableCell, AlignmentType, WidthType, BorderStyle } = docx;
+
+      const borderStyle = {
+        top: { style: BorderStyle.SINGLE, size: 4, color: "B0BEC5" },
+        bottom: { style: BorderStyle.SINGLE, size: 4, color: "B0BEC5" },
+        left: { style: BorderStyle.SINGLE, size: 4, color: "B0BEC5" },
+        right: { style: BorderStyle.SINGLE, size: 4, color: "B0BEC5" },
+        insideHorizontal: { style: BorderStyle.SINGLE, size: 4, color: "B0BEC5" },
+        insideVertical: { style: BorderStyle.SINGLE, size: 4, color: "B0BEC5" }
+      };
+
+      const doc = new Document({
+        sections: [{
+          properties: {
+            page: {
+              margin: { top: 1134, bottom: 1134, left: 1134, right: 1134 } // 2 cm
+            }
+          },
+          children: [
+            // KOP SURAT
+            new Paragraph({
+              alignment: AlignmentType.CENTER,
+              spacing: { after: 60 },
+              children: [
+                new TextRun({ text: "PEMERINTAH KOTA CIREBON\nDINAS PENDIDIKAN\n" + sch.name, bold: true, size: 24, font: "Arial" })
+              ]
+            }),
+            new Paragraph({
+              alignment: AlignmentType.CENTER,
+              spacing: { after: 180 },
+              children: [
+                new TextRun({ text: `Alamat: ${sch.address}, Kec. ${sch.kec}, Kota Cirebon\nPosel: sdnegeri@cirebonkota.go.id | Laman: disdik.cirebonkota.go.id`, italics: true, size: 17, font: "Arial", color: "666666" })
+              ]
+            }),
+            new Paragraph({
+              spacing: { after: 240 },
+              border: {
+                bottom: { style: BorderStyle.DOUBLE, size: 12, color: "000000" }
+              }
+            }),
+
+            // TITLE
+            new Paragraph({
+              alignment: AlignmentType.CENTER,
+              spacing: { after: 60 },
+              children: [
+                new TextRun({ text: `BUKTI FISIK INSTRUMEN JABAR BERAKSI - POIN ${poinNum}`, bold: true, size: 24, font: "Arial" })
+              ]
+            }),
+            new Paragraph({
+              alignment: AlignmentType.CENTER,
+              spacing: { after: 300 },
+              children: [
+                new TextRun({ text: `INDIKATOR: ${title.toUpperCase()}\n(Berkas Bukti Fisik Lengkap & Instrumen Terverifikasi)`, bold: true, size: 19, font: "Arial", color: "0D47A1" })
+              ]
+            }),
+
+            // BAGIAN I: PROSEDUR STANDAR OPERASIONAL (SOP)
+            new Paragraph({
+              spacing: { before: 180, after: 100 },
+              children: [
+                new TextRun({ text: "BAGIAN I: STANDAR OPERASIONAL PROSEDUR (SOP)", bold: true, size: 21, color: "0D47A1" })
+              ]
+            }),
+            new Table({
+              width: { size: 100, type: WidthType.PERCENTAGE },
+              borders: borderStyle,
+              rows: [
+                new TableRow({
+                  children: [
+                    new TableCell({
+                      width: { size: 25, type: WidthType.PERCENTAGE },
+                      shading: { fill: "F5F7FA" },
+                      children: [new Paragraph({ children: [new TextRun({ text: "1. Tujuan", bold: true, size: 17 })] })]
+                    }),
+                    new TableCell({
+                      width: { size: 75, type: WidthType.PERCENTAGE },
+                      children: [new Paragraph({ children: [new TextRun({ text: `Memberikan pedoman terstruktur dalam implementasi ${title} di lingkungan ${sch.name} secara aman, adil, konsisten, dan ramah anak.`, size: 17 })] })]
+                    })
+                  ]
+                }),
+                new TableRow({
+                  children: [
+                    new TableCell({
+                      width: { size: 25, type: WidthType.PERCENTAGE },
+                      shading: { fill: "F5F7FA" },
+                      children: [new Paragraph({ children: [new TextRun({ text: "2. Pelaksana", bold: true, size: 17 })] })]
+                    }),
+                    new TableCell({
+                      width: { size: 75, type: WidthType.PERCENTAGE },
+                      children: [new Paragraph({ children: [new TextRun({ text: "Kepala Sekolah, Seluruh Pendidik, Tenaga Kependidikan, dan Komite Sekolah.", size: 17 })] })]
+                    })
+                  ]
+                }),
+                new TableRow({
+                  children: [
+                    new TableCell({
+                      width: { size: 25, type: WidthType.PERCENTAGE },
+                      shading: { fill: "F5F7FA" },
+                      children: [new Paragraph({ children: [new TextRun({ text: "3. Prosedur Kerja", bold: true, size: 17 })] })]
+                    }),
+                    new TableCell({
+                      width: { size: 75, type: WidthType.PERCENTAGE },
+                      children: [new Paragraph({ children: [new TextRun({ text: "a. Sosialisasi berkala kepada seluruh warga sekolah dan paguyuban orang tua murid.\nb. Pelaksanaan terintegrasi dalam pembelajaran harian dan pembiasaan budaya sekolah.\nc. Pencatatan dan evaluasi rutin berkala setiap akhir pekan.", size: 17 })] })]
+                    })
+                  ]
+                })
+              ]
+            }),
+
+            // BAGIAN II: BUKU LOG / CATATAN
+            new Paragraph({
+              spacing: { before: 240, after: 100 },
+              children: [
+                new TextRun({ text: "BAGIAN II: FORMAT BUKU CATATAN DAN LOG PEMANTAUAN", bold: true, size: 21, color: "0D47A1" })
+              ]
+            }),
+            new Table({
+              width: { size: 100, type: WidthType.PERCENTAGE },
+              borders: borderStyle,
+              rows: [
+                new TableRow({
+                  children: [
+                    new TableCell({ shading: { fill: "1565C0" }, children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "No", bold: true, color: "FFFFFF", size: 16 })] })] }),
+                    new TableCell({ shading: { fill: "1565C0" }, children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "Hari / Tanggal", bold: true, color: "FFFFFF", size: 16 })] })] }),
+                    new TableCell({ shading: { fill: "1565C0" }, children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "Aktivitas Pembiasaan", bold: true, color: "FFFFFF", size: 16 })] })] }),
+                    new TableCell({ shading: { fill: "1565C0" }, children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "Hasil Pengamatan", bold: true, color: "FFFFFF", size: 16 })] })] }),
+                    new TableCell({ shading: { fill: "1565C0" }, children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "Status", bold: true, color: "FFFFFF", size: 16 })] })] })
+                  ]
+                }),
+                new TableRow({
+                  children: [
+                    new TableCell({ children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "1", size: 16 })] })] }),
+                    new TableCell({ children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "Senin, 14/09/2026", size: 16 })] })] }),
+                    new TableCell({ children: [new Paragraph({ children: [new TextRun({ text: `Pelaksanaan program ${title} saat pembiasaan pagi.`, size: 16 })] })] }),
+                    new TableCell({ children: [new Paragraph({ children: [new TextRun({ text: "Peserta didik antusias dan tertib mengikuti panduan.", size: 16 })] })] }),
+                    new TableCell({ children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "Terlaksana", size: 16 })] })] })
+                  ]
+                }),
+                new TableRow({
+                  children: [
+                    new TableCell({ children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "2", size: 16 })] })] }),
+                    new TableCell({ children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "Rabu, 07/10/2026", size: 16 })] })] }),
+                    new TableCell({ children: [new Paragraph({ children: [new TextRun({ text: "Evaluasi berkala dan pengisian jurnal refleksi karakter.", size: 16 })] })] }),
+                    new TableCell({ children: [new Paragraph({ children: [new TextRun({ text: "95% siswa konsisten mempraktikkan sikap positif.", size: 16 })] })] }),
+                    new TableCell({ children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "Terlaksana", size: 16 })] })] })
+                  ]
+                })
+              ]
+            }),
+
+            // BAGIAN III: DOKUMENTASI FOTO
+            new Paragraph({
+              spacing: { before: 240, after: 100 },
+              children: [
+                new TextRun({ text: "BAGIAN III: DOKUMENTASI FOTO BUKTI FISIK", bold: true, size: 21, color: "0D47A1" })
+              ]
+            }),
+            new Table({
+              width: { size: 100, type: WidthType.PERCENTAGE },
+              borders: borderStyle,
+              rows: [
+                new TableRow({
+                  children: [
+                    new TableCell({
+                      width: { size: 50, type: WidthType.PERCENTAGE },
+                      shading: { fill: "ECEFF1" },
+                      children: [
+                        new Paragraph({
+                          alignment: AlignmentType.CENTER,
+                          spacing: { before: 200, after: 200 },
+                          children: [new TextRun({ text: "[ TEMPELKAN FOTO DOKUMENTASI KEGIATAN 1 DI SINI ]\n\nKeterangan: Pelaksanaan kegiatan di lingkungan satuan pendidikan.", size: 16 })]
+                        })
+                      ]
+                    }),
+                    new TableCell({
+                      width: { size: 50, type: WidthType.PERCENTAGE },
+                      shading: { fill: "ECEFF1" },
+                      children: [
+                        new Paragraph({
+                          alignment: AlignmentType.CENTER,
+                          spacing: { before: 200, after: 200 },
+                          children: [new TextRun({ text: "[ TEMPELKAN FOTO DOKUMENTASI KEGIATAN 2 DI SINI ]\n\nKeterangan: Evaluasi bersama peserta didik dan dewan guru.", size: 16 })]
+                        })
+                      ]
+                    })
+                  ]
+                })
+              ]
+            }),
+
+            // LEMBAR PENGESAHAN
+            new Paragraph({
+              alignment: AlignmentType.RIGHT,
+              spacing: { before: 240, after: 140 },
+              children: [
+                new TextRun({ text: `Cirebon, 13 November ${sch.year}`, size: 18 })
+              ]
+            }),
+            new Table({
+              width: { size: 100, type: WidthType.PERCENTAGE },
+              borders: {
+                top: { style: BorderStyle.NONE },
+                bottom: { style: BorderStyle.NONE },
+                left: { style: BorderStyle.NONE },
+                right: { style: BorderStyle.NONE },
+                insideHorizontal: { style: BorderStyle.NONE },
+                insideVertical: { style: BorderStyle.NONE }
+              },
+              rows: [
+                new TableRow({
+                  children: [
+                    new TableCell({
+                      width: { size: 50, type: WidthType.PERCENTAGE },
+                      children: [
+                        new Paragraph({
+                          alignment: AlignmentType.CENTER,
+                          children: [new TextRun({ text: "Koordinator Program,\n\n\n\n\n( ......................................... )\nNIP. .....................................", size: 17 })]
+                        })
+                      ]
+                    }),
+                    new TableCell({
+                      width: { size: 50, type: WidthType.PERCENTAGE },
+                      children: [
+                        new Paragraph({
+                          alignment: AlignmentType.CENTER,
+                          children: [new TextRun({ text: `Mengetahui,\nKepala ${sch.name},\n\n\n\n${sch.ks}\nNIP. ${sch.ks_nip}`, size: 17 })]
+                        })
+                      ]
+                    })
+                  ]
+                })
+              ]
+            })
+          ]
+        }]
+      });
+
+      return await docx.Packer.toBlob(doc);
+    }
+
+    // Download Single Preset
+    async function downloadSinglePreset(poinNum) {
+      try {
+        const sch = getSchoolInfo();
+        const blob = await createDocxBlob(poinNum);
+        const fileName = `Bukti_Fisik_Poin_${poinNum}_${sch.name.replace(/\s+/g, '_')}_${sch.year}.docx`;
+        saveAs(blob, fileName);
+      } catch (err) {
+        console.error(err);
+        alert("Gagal membuat dokumen: " + err.message);
+      }
+    }
+
+    // Download All Presets into a ZIP
+    async function downloadAllDocs() {
+      const btn = document.getElementById('btn-dl-all');
+      const originalText = btn.innerHTML;
+      btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> <span>Menyiapkan 12 Dokumen Word...</span>`;
+      btn.disabled = true;
+
+      try {
+        const zip = new JSZip();
+        const sch = getSchoolInfo();
+
+        for (const p of PRESETS) {
+          const blob = await createDocxBlob(p.num);
+          const fileName = `Poin_${p.num}_${p.title.replace(/[\/\s:]+/g, '_')}.docx`;
+          zip.file(fileName, blob);
+        }
+
+        const zipBlob = await zip.generateAsync({ type: "blob" });
+        const zipName = `Bukti_Fisik_Jabar_Beraksi_16-27_${sch.name.replace(/\s+/g, '_')}.zip`;
+        saveAs(zipBlob, zipName);
+      } catch (err) {
+        console.error(err);
+        alert("Gagal membuat paket ZIP: " + err.message);
+      } finally {
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+      }
+    }
+
+    // AI CUSTOM GENERATOR LOGIC
+    let lastGeneratedData = null;
+
+    function saveApiKey() {
+      const key = document.getElementById('gemini_api_key').value.trim();
+      if (!key) {
+        alert("Masukkan API Key terlebih dahulu.");
+        return;
+      }
+      localStorage.setItem('GEMINI_API_KEY', key);
+      alert("API Key berhasil disimpan di browser Anda!");
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      renderPresets();
+      const savedKey = localStorage.getItem('GEMINI_API_KEY');
+      if (savedKey) {
+        document.getElementById('gemini_api_key').value = savedKey;
+      }
+    });
+
+    async function generateCustomAI() {
+      const indicatorName = document.getElementById('ai_indicator_name').value.trim();
+      const evidenceTypes = document.getElementById('ai_evidence_types').value.trim();
+      const notes = document.getElementById('ai_extra_notes').value.trim();
+      const apiKey = document.getElementById('gemini_api_key').value.trim();
+      const sch = getSchoolInfo();
+
+      if (!indicatorName) {
+        alert("Mohon masukkan nama indikator terlebih dahulu.");
+        return;
+      }
+
+      const statusEl = document.getElementById('ai-status');
+      const previewEl = document.getElementById('ai_preview_box');
+      const btnGenerate = document.getElementById('btn-ai-generate');
+      const btnDl = document.getElementById('btn-dl-ai');
+
+      statusEl.textContent = "AI sedang menyusun naskah dokumen...";
+      btnGenerate.disabled = true;
+      btnGenerate.classList.add('opacity-60');
+
+      // Prompt to Gemini API
+      const prompt = `Anda adalah asisten pakar kurikulum dan pengawas sekolah Jawa Barat.
+Tolong buatkan naskah resmi Bukti Fisik Pemantauan Penguatan Karakter Jabar Beraksi untuk satuan pendidikan:
+Nama Sekolah: ${sch.name}
+Alamat: ${sch.address}
+Kepala Sekolah: ${sch.ks}
+Indikator: ${indicatorName}
+Bukti Fisik yang Dibutuhkan: ${evidenceTypes || 'SOP, Jurnal Log Pembiasaan, Laporan Evaluasi'}
+Catatan Tambahan: ${notes || 'Lengkap, realistis, dan aplikatif'}
+
+Susun dengan format:
+1. JUDUL RESMI & KOP
+2. STANDAR OPERASIONAL PROSEDUR (Tujuan, Ruang Lingkup, Alur Prosedur Kerja)
+3. TABEL FORMAT JURNAL / BUKU LOG (Sertakan 3 contoh baris riil kegiatan di sekolah dasar)
+4. LAPORAN EVALUASI & TINDAK LANJUT
+5. REKOMENDASI KEPALA SEKOLAH & PENGESAHAN`;
+
+      try {
+        if (!apiKey) {
+          // Fallback simulation if no API Key provided
+          const sampleOutput = `[SIMULASI FORMAT DOKUMEN - MASUKKAN API KEY UNTUK GENERATE DENGAN MODEL GEMINI ASLI]
+=============================================================
+PEMERINTAH KOTA CIREBON - DINAS PENDIDIKAN
+${sch.name}
+
+BUKTI FISIK INSTRUMEN JABAR BERAKSI
+INDIKATOR: ${indicatorName.toUpperCase()}
+BUKTI FISIK: ${evidenceTypes}
+
+BAGIAN I: STANDAR OPERASIONAL PROSEDUR (SOP)
+1. Tujuan: Menjamin pelaksanaan ${indicatorName} secara konsisten dan terukur di lingkungan sekolah.
+2. Pelaksana: Guru Kelas, Guru Pembina, dan Tenaga Kependidikan.
+3. Prosedur: Sosialisasi program, pembiasaan rutin pagi, dan evaluasi berkala.
+
+BAGIAN II: JURNAL LOG HARIAN PEMBIASAAN
+- Tanggal 15/09/2026: Pembiasaan di kelas berjalan tertib dan terarah.
+- Tanggal 22/09/2026: Evaluasi keterlibatan peserta didik mencapai 94%.
+
+BAGIAN III: LEMBAR DOKUMENTASI FOTO & PENGESAHAN
+Mengetahui, Kepala Sekolah ${sch.ks}`;
+
+          previewEl.textContent = sampleOutput;
+          lastGeneratedData = { title: indicatorName, content: sampleOutput };
+          btnDl.disabled = false;
+          statusEl.textContent = "Selesai (Template Standar)";
+        } else {
+          // Call Real Gemini API
+          const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              contents: [{ parts: [{ text: prompt }] }]
+            })
+          });
+
+          if (!response.ok) {
+            throw new Error(`API Error: ${response.status} ${response.statusText}`);
+          }
+
+          const data = await response.json();
+          const generatedText = data.candidates?.[0]?.content?.parts?.[0]?.text || "Gagal menghasilkan teks.";
+          
+          previewEl.textContent = generatedText;
+          lastGeneratedData = { title: indicatorName, content: generatedText };
+          btnDl.disabled = false;
+          statusEl.textContent = "Berhasil dibuat oleh AI!";
+        }
+      } catch (err) {
+        console.error(err);
+        previewEl.textContent = "Error: " + err.message;
+        statusEl.textContent = "Gagal memproses AI";
+      } finally {
+        btnGenerate.disabled = false;
+        btnGenerate.classList.remove('opacity-60');
+      }
+    }
+
+    async function downloadCustomAIDoc() {
+      if (!lastGeneratedData) return;
+      try {
+        const sch = getSchoolInfo();
+        const blob = await createDocxBlob(99, { title: lastGeneratedData.title });
+        const cleanName = lastGeneratedData.title.replace(/[\/\s:]+/g, '_');
+        saveAs(blob, `Bukti_Fisik_Custom_${cleanName}.docx`);
+      } catch (err) {
+        alert("Gagal mengunduh: " + err.message);
+      }
+    }
+  </script>
+</body>
+</html>
