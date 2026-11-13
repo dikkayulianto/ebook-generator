@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jabar Beraksi AI — Generator Bukti Fisik & Dokumen Word (.docx) Otomatis</title>
+  <title>AI-autoDoc — Smart School Document & Evidence Generator (.docx)</title>
   
-  <meta name="description" content="Aplikasi Generator Otomatis Bukti Fisik Pemantauan Jabar Beraksi & Penguatan Pendidikan Karakter Satuan Pendidikan. Ekspor Word (.docx) & Siap Pakai.">
+  <meta name="description" content="AI-autoDoc: Generator Dokumen Bukti Fisik Pemantauan Jabar Beraksi & Penguatan Karakter Satuan Pendidikan Format Word (.docx) Otomatis.">
 
   <!-- Tailwind CSS & Google Fonts -->
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <!-- Client-side Document & Zip Libraries -->
@@ -25,359 +25,543 @@
         extend: {
           fontFamily: {
             sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
-            serif: ['"Newsreader"', 'Georgia', 'serif'],
+            serif: ['"Fraunces"', 'Georgia', 'serif'],
           },
           colors: {
-            gov: {
-              50: '#f0f9ff',
-              100: '#e0f2fe',
-              500: '#0284c7',
-              700: '#0369a1',
-              800: '#075985',
-              900: '#0c4a6e',
+            cream: {
+              50: '#FDFCF7',
+              100: '#FAF6EC',
+              200: '#F5EEDC',
+              300: '#EFE4C8',
+            },
+            pop: {
+              blue: '#9DBFF2',
+              blueDark: '#4F84CE',
+              coral: '#EB7A63',
+              coralDark: '#C85741',
+              lilac: '#C8BCF0',
+              lilacDark: '#8F7FD1',
+              yellow: '#FBE49D',
+              green: '#A8E3BC',
+              charcoal: '#18181B'
             }
+          },
+          boxShadow: {
+            'brutal-sm': '2px 2px 0px #18181B',
+            'brutal': '3px 3px 0px #18181B',
+            'brutal-lg': '5px 5px 0px #18181B',
+            'brutal-xl': '7px 7px 0px #18181B',
           }
         }
       }
     }
   </script>
+
+  <style>
+    /* Playful Grid Blueprint Background */
+    body {
+      background-color: #9dbff2;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.45) 1.5px, transparent 1.5px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.45) 1.5px, transparent 1.5px);
+      background-size: 36px 36px;
+    }
+    .custom-scroll::-webkit-scrollbar { width: 6px; height: 6px; }
+    .custom-scroll::-webkit-scrollbar-track { background: #FAF6EC; }
+    .custom-scroll::-webkit-scrollbar-thumb { background: #18181B; border-radius: 999px; }
+  </style>
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col">
+<body class="text-pop-charcoal font-sans min-h-screen flex flex-col p-3 sm:p-6 lg:p-8 selection:bg-pop-yellow selection:text-pop-charcoal">
 
-  <!-- TOP NAV -->
-  <header class="bg-white border-b border-slate-200 sticky top-0 z-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-      <div class="flex items-center space-x-3">
-        <a href="/" class="flex items-center space-x-2 text-gov-800 hover:text-gov-700">
-          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-700 to-sky-500 text-white flex items-center justify-center font-bold text-lg shadow-sm">
-            <i class="fa-solid fa-file-word"></i>
-          </div>
-          <div>
-            <span class="font-extrabold text-lg tracking-tight block text-slate-900 leading-tight">Jabar Beraksi AI</span>
-            <span class="text-xs text-sky-600 font-semibold">Generator Dokumen Bukti Fisik (.docx)</span>
-          </div>
-        </a>
+  <!-- ======================================================== -->
+  <!-- 1. LANDING PAGE GATEWAY (PROTECTED PASSCODE ACCESS)       -->
+  <!-- ======================================================== -->
+  <div id="landing-gate" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-pop-blue/95 backdrop-blur-md transition-all duration-300">
+    <div class="max-w-md w-full bg-cream-100 border-[2.5px] border-pop-charcoal rounded-3xl p-6 sm:p-8 shadow-brutal-xl relative">
+      
+      <!-- Top Decorative Sticker Pill -->
+      <div class="flex items-center justify-between mb-5">
+        <span class="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-pop-yellow border-2 border-pop-charcoal text-[11px] font-extrabold uppercase tracking-wider shadow-brutal-sm">
+          <span>🔒 Akses Terbatas</span>
+        </span>
+        <div class="flex space-x-1.5">
+          <span class="w-3.5 h-3.5 rounded-full bg-pop-coral border-2 border-pop-charcoal"></span>
+          <span class="w-3.5 h-3.5 rounded-full bg-pop-yellow border-2 border-pop-charcoal"></span>
+          <span class="w-3.5 h-3.5 rounded-full bg-pop-green border-2 border-pop-charcoal"></span>
+        </div>
       </div>
 
-      <div class="flex items-center space-x-3">
-        <a href="#settings" class="text-xs font-semibold px-3 py-1.5 rounded-lg border border-slate-200 hover:bg-slate-100 text-slate-700 transition">
-          <i class="fa-solid fa-school text-sky-600 mr-1.5"></i> Identitas Sekolah
-        </a>
-        <a href="#ai-custom" class="text-xs font-semibold px-3 py-1.5 rounded-lg bg-sky-50 text-sky-700 border border-sky-200 hover:bg-sky-100 transition">
-          <i class="fa-solid fa-robot mr-1.5"></i> AI Generator
-        </a>
-        <a href="/" class="text-xs font-semibold px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900">
-          <i class="fa-solid fa-arrow-left mr-1"></i> Kembali ke Beranda
-        </a>
+      <!-- Icon & Title -->
+      <div class="text-center space-y-2 mb-6">
+        <div class="w-16 h-16 mx-auto rounded-2xl bg-pop-lilac border-2 border-pop-charcoal flex items-center justify-center text-2xl shadow-brutal">
+          <span>🎓</span>
+        </div>
+        <h1 class="font-serif text-3xl font-extrabold tracking-tight text-pop-charcoal">
+          AI-autoDoc
+        </h1>
+        <p class="text-xs text-stone-600 font-medium px-2">
+          Portal Administrasi & Generator Bukti Fisik Jabar Beraksi Satuan Pendidikan. Masukkan kode akses sekolah untuk melanjutkan.
+        </p>
+      </div>
+
+      <!-- Passcode Input Form -->
+      <form onsubmit="handlePasscodeSubmit(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs font-bold uppercase tracking-wider mb-1.5 text-stone-700">Kode Akses Sekolah</label>
+          <div class="relative">
+            <input type="password" id="input-passcode" placeholder="Ketik kode akses..." autofocus
+              class="w-full px-4 py-3 bg-white border-2 border-pop-charcoal rounded-2xl text-sm font-bold tracking-widest placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-pop-coral shadow-brutal-sm transition">
+            <button type="button" onclick="togglePasscodeVisibility()" class="absolute right-3.5 top-3.5 text-stone-400 hover:text-pop-charcoal text-sm">
+              <i class="fa-solid fa-eye" id="toggle-eye-icon"></i>
+            </button>
+          </div>
+          <div class="flex items-center justify-between mt-2 text-[11px] text-stone-500">
+            <span>Kode default: <strong class="text-pop-coral font-bold bg-white px-1.5 py-0.5 rounded border border-pop-charcoal">JABAR2026</strong></span>
+            <span id="gate-error-msg" class="text-red-600 font-bold hidden">Kode salah!</span>
+          </div>
+        </div>
+
+        <button type="submit" class="w-full py-3.5 bg-pop-coral hover:bg-pop-coralDark text-white font-extrabold text-sm rounded-2xl border-2 border-pop-charcoal shadow-brutal hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-brutal-sm active:translate-x-1 active:translate-y-1 active:shadow-none transition flex items-center justify-center space-x-2">
+          <span>Buka Portal Generator</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </form>
+
+      <!-- Footer Info -->
+      <div class="mt-6 pt-4 border-t-2 border-stone-200 text-center text-[10px] text-stone-500 font-medium">
+        Dilindungi untuk Guru, Kepala Sekolah, & Tenaga Kependidikan.
       </div>
     </div>
-  </header>
+  </div>
 
-  <!-- HERO SECTION -->
-  <section class="bg-gradient-to-b from-sky-50 via-white to-slate-50 py-10 border-b border-slate-200">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <div class="inline-flex items-center space-x-2 bg-sky-100 text-sky-800 text-xs px-3 py-1 rounded-full font-bold mb-4">
-        <span>🚀 Khusus Satuan Pendidikan Kota Cirebon & Jawa Barat</span>
+  <!-- ======================================================== -->
+  <!-- 2. MAIN APPLICATION CONTAINER (NEO-BRUTALIST DASHBOARD)  -->
+  <!-- ======================================================== -->
+  <div class="max-w-6xl w-full mx-auto bg-cream-100 border-[2.5px] border-pop-charcoal rounded-3xl shadow-brutal-xl overflow-hidden flex flex-col flex-grow">
+    
+    <!-- TOP NAVIGATION BAR -->
+    <header class="px-5 sm:px-8 py-4 bg-cream-100 border-b-[2.5px] border-pop-charcoal flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center space-x-3">
+        <div class="w-11 h-11 rounded-2xl bg-pop-yellow border-2 border-pop-charcoal flex items-center justify-center text-xl shadow-brutal-sm">
+          <span>📑</span>
+        </div>
+        <div>
+          <div class="flex items-center space-x-2">
+            <h2 class="font-serif text-xl sm:text-2xl font-extrabold text-pop-charcoal leading-none">Hello, Bapak/Ibu Guru</h2>
+            <span class="text-lg">😊</span>
+          </div>
+          <span class="text-xs font-semibold text-stone-500">AI-autoDoc &bull; Satuan Pendidikan Jawa Barat</span>
+        </div>
       </div>
-      <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight max-w-3xl mx-auto leading-tight">
-        Generator Dokumen Bukti Fisik <span class="text-sky-600">Jabar Beraksi 1</span>
-      </h1>
-      <p class="mt-3 text-sm sm:text-base text-slate-600 max-w-2xl mx-auto">
-        Ketik nama sekolah Anda, pilih poin indikator, lalu unduh dokumen resmi dalam format <strong>Microsoft Word (.docx)</strong> lengkap dengan SOP, Buku Jurnal, Rubrik, dan Kolom Tanda Tangan.
-      </p>
 
-      <!-- Quick Action Buttons -->
-      <div class="mt-6 flex flex-wrap justify-center gap-3">
-        <button onclick="downloadAllDocs()" id="btn-dl-all" class="px-5 py-2.5 bg-sky-600 hover:bg-sky-700 text-white font-semibold text-sm rounded-xl shadow-sm hover:shadow transition flex items-center space-x-2">
-          <i class="fa-solid fa-file-zipper"></i>
-          <span>Unduh Semua Dokumen (Poin 16-27 .ZIP)</span>
-        </button>
-        <a href="#preset-section" class="px-5 py-2.5 bg-white hover:bg-slate-50 border border-slate-300 text-slate-700 font-semibold text-sm rounded-xl transition flex items-center space-x-2">
-          <i class="fa-solid fa-list-check text-sky-600"></i>
-          <span>Pilih Poin Satuan (Poin 16 s.d 27)</span>
+      <div class="flex items-center space-x-2 sm:space-x-3">
+        <a href="#settings" class="px-3.5 py-1.5 bg-white border-2 border-pop-charcoal rounded-xl text-xs font-bold text-pop-charcoal hover:bg-cream-200 shadow-brutal-sm transition flex items-center space-x-1.5">
+          <i class="fa-solid fa-school text-pop-coral"></i>
+          <span class="hidden sm:inline">Data Sekolah</span>
         </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- MAIN CONTAINER -->
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow space-y-10">
-
-    <!-- SETTINGS / IDENTITAS SEKOLAH -->
-    <section id="settings" class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8">
-      <div class="flex items-center justify-between pb-4 border-b border-slate-100 mb-6">
-        <div>
-          <h2 class="text-lg font-bold text-slate-900 flex items-center space-x-2">
-            <i class="fa-solid fa-building-columns text-sky-600"></i>
-            <span>Identitas Sekolah & Kop Surat</span>
-          </h2>
-          <p class="text-xs text-slate-500 mt-0.5">Informasi di bawah ini otomatis disematkan ke dalam seluruh file Word yang diunduh.</p>
-        </div>
-        <button onclick="resetDefaultSettings()" class="text-xs text-sky-600 hover:underline">
-          <i class="fa-solid fa-rotate-left mr-1"></i> Reset Contoh
+        <a href="#ai-custom" class="px-3.5 py-1.5 bg-pop-lilac border-2 border-pop-charcoal rounded-xl text-xs font-bold text-pop-charcoal hover:bg-pop-lilacDark hover:text-white shadow-brutal-sm transition flex items-center space-x-1.5">
+          <i class="fa-solid fa-wand-magic-sparkles"></i>
+          <span>AI Custom</span>
+        </a>
+        <button onclick="lockPortal()" title="Kunci Kembali Portal" class="px-3 py-1.5 bg-pop-coral border-2 border-pop-charcoal rounded-xl text-xs font-bold text-white hover:bg-pop-coralDark shadow-brutal-sm transition">
+          <i class="fa-solid fa-lock"></i>
         </button>
       </div>
+    </header>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 text-sm">
-        <div>
-          <label class="block font-semibold text-slate-700 mb-1">Nama Satuan Pendidikan</label>
-          <input type="text" id="sch_name" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 focus:ring-2 focus:ring-sky-500 focus:outline-none" value="SD NEGERI 1 KESAMBI">
-        </div>
-        <div>
-          <label class="block font-semibold text-slate-700 mb-1">NPSN</label>
-          <input type="text" id="sch_npsn" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 focus:ring-2 focus:ring-sky-500 focus:outline-none" value="20222045">
-        </div>
-        <div>
-          <label class="block font-semibold text-slate-700 mb-1">Kecamatan</label>
-          <input type="text" id="sch_kec" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 focus:ring-2 focus:ring-sky-500 focus:outline-none" value="Kesambi">
-        </div>
-        <div>
-          <label class="block font-semibold text-slate-700 mb-1">Alamat Lengkap</label>
-          <input type="text" id="sch_address" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 focus:ring-2 focus:ring-sky-500 focus:outline-none" value="Jalan Kesambi No. 24, Kota Cirebon 45132">
-        </div>
-        <div>
-          <label class="block font-semibold text-slate-700 mb-1">Nama Kepala Sekolah & Gelar</label>
-          <input type="text" id="sch_ks" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 focus:ring-2 focus:ring-sky-500 focus:outline-none" value="Dra. Hj. Siti Maryam, M.Pd">
-        </div>
-        <div>
-          <label class="block font-semibold text-slate-700 mb-1">NIP Kepala Sekolah</label>
-          <input type="text" id="sch_ks_nip" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 focus:ring-2 focus:ring-sky-500 focus:outline-none" value="197505121998032004">
-        </div>
-        <div>
-          <label class="block font-semibold text-slate-700 mb-1">Nama Pengawas Pemantau</label>
-          <input type="text" id="sch_pengawas" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 focus:ring-2 focus:ring-sky-500 focus:outline-none" value="Ari Haerani, S.Pd.SD, M.Pd">
-        </div>
-        <div>
-          <label class="block font-semibold text-slate-700 mb-1">NIP Pengawas</label>
-          <input type="text" id="sch_pengawas_nip" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 focus:ring-2 focus:ring-sky-500 focus:outline-none" value="197301211996032001">
-        </div>
-        <div>
-          <label class="block font-semibold text-slate-700 mb-1">Tahun Dokumen</label>
-          <input type="text" id="sch_year" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 focus:ring-2 focus:ring-sky-500 focus:outline-none" value="2026">
-        </div>
-      </div>
-    </section>
+    <!-- CONTENT BODY -->
+    <div class="p-5 sm:p-8 space-y-8 flex-grow">
 
-    <!-- PRESET SECTION: POIN 16 s.d 27 -->
-    <section id="preset-section" class="space-y-4">
-      <div class="flex items-center justify-between">
-        <div>
-          <h2 class="text-xl font-bold text-slate-900 flex items-center space-x-2">
-            <i class="fa-solid fa-folder-open text-sky-600"></i>
-            <span>Daftar Dokumen Siap Unduh (Poin 16 s.d 27)</span>
-          </h2>
-          <p class="text-xs text-slate-500">Pilih salah satu poin di bawah untuk langsung mengunduh file Microsoft Word (.docx).</p>
-        </div>
-      </div>
-
-      <!-- CARDS GRID -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" id="preset-grid">
-        <!-- Rendered via JS -->
-      </div>
-    </section>
-
-    <!-- AI CUSTOM GENERATOR SECTION -->
-    <section id="ai-custom" class="bg-gradient-to-tr from-sky-900 to-indigo-900 text-white rounded-2xl p-6 sm:p-8 shadow-lg">
-      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-sky-800">
-        <div>
-          <span class="inline-block bg-sky-500/20 text-sky-300 border border-sky-400/30 text-xs px-2.5 py-0.5 rounded-full font-bold mb-2">
-            <i class="fa-solid fa-sparkles mr-1"></i> AI Powered by Google Gemini
-          </span>
-          <h2 class="text-2xl font-bold tracking-tight">AI Dokumen Generator Mandiri</h2>
-          <p class="text-sky-200 text-xs sm:text-sm mt-1 max-w-xl">
-            Ingin membuat dokumen bukti fisik poin 1 s/d 15 atau indikator custom baru? Masukkan instruksinya dan biarkan AI menyusun naskah Word-nya secara instan!
-          </p>
-        </div>
-
-        <div class="flex items-center space-x-2">
-          <input type="password" id="gemini_api_key" placeholder="Masukkan Gemini API Key..." class="px-3.5 py-2 rounded-xl bg-white/10 border border-sky-700 text-xs text-white placeholder-sky-300 focus:outline-none focus:ring-2 focus:ring-sky-400 w-56">
-          <button onclick="saveApiKey()" class="px-3 py-2 bg-sky-500 hover:bg-sky-400 text-white text-xs font-semibold rounded-xl transition">
-            Simpan Key
-          </button>
-        </div>
-      </div>
-
-      <div class="mt-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div class="lg:col-span-1 space-y-4">
-          <div>
-            <label class="block text-xs font-semibold text-sky-200 mb-1.5">Nomor & Nama Indikator</label>
-            <input type="text" id="ai_indicator_name" placeholder="Misal: Poin 8 - Senam Pagi Anak Indonesia Hebat" class="w-full px-3.5 py-2.5 rounded-xl bg-white/10 border border-sky-700 text-sm text-white placeholder-sky-300 focus:outline-none focus:ring-2 focus:ring-sky-400">
+      <!-- QUICK STATS & ACTION CARDS -->
+      <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        
+        <!-- CARD 1: FULL TIME BUKTI FISIK (POIN 16-27) -->
+        <div class="bg-pop-blue rounded-3xl border-2 border-pop-charcoal p-5 shadow-brutal flex flex-col justify-between relative overflow-hidden group">
+          <div class="space-y-1">
+            <div class="flex items-center justify-between">
+              <span class="text-3xl font-serif font-extrabold text-pop-charcoal">12</span>
+              <span class="px-2.5 py-0.5 rounded-full bg-white border-2 border-pop-charcoal text-[11px] font-extrabold uppercase">Paket Poin</span>
+            </div>
+            <p class="font-serif text-lg font-bold text-pop-charcoal">Bukti Fisik 16-27</p>
+            <p class="text-xs text-stone-800 font-medium">SOP, Buku Kasus, Modul PJOK, Jurnal BK, Sarpras & Data Murid.</p>
           </div>
-          <div>
-            <label class="block text-xs font-semibold text-sky-200 mb-1.5">Jenis Bukti Fisik yang Diminta</label>
-            <input type="text" id="ai_evidence_types" placeholder="Misal: Jadwal Kegiatan, Dokumentasi, Daftar Hadir" class="w-full px-3.5 py-2.5 rounded-xl bg-white/10 border border-sky-700 text-sm text-white placeholder-sky-300 focus:outline-none focus:ring-2 focus:ring-sky-400">
+          <div class="pt-5 flex items-center justify-between">
+            <button onclick="downloadAllDocs()" id="btn-dl-all" class="px-4 py-2 bg-white hover:bg-cream-200 text-pop-charcoal border-2 border-pop-charcoal rounded-xl text-xs font-extrabold shadow-brutal-sm hover:translate-x-0.5 hover:translate-y-0.5 transition flex items-center space-x-1.5">
+              <i class="fa-solid fa-file-zipper"></i>
+              <span>Unduh Paket .ZIP</span>
+            </button>
+            <span class="text-2xl">✌️</span>
           </div>
-          <div>
-            <label class="block text-xs font-semibold text-sky-200 mb-1.5">Catatan Tambahan (Opsional)</label>
-            <textarea id="ai_extra_notes" rows="3" placeholder="Misal: Sertakan contoh jadwal hari Selasa dan Jumat, serta rubrik kebugaran..." class="w-full px-3.5 py-2 rounded-xl bg-white/10 border border-sky-700 text-sm text-white placeholder-sky-300 focus:outline-none focus:ring-2 focus:ring-sky-400"></textarea>
+        </div>
+
+        <!-- CARD 2: STATUS AKREDITASI / PEMANTAUAN -->
+        <div class="bg-pop-coral rounded-3xl border-2 border-pop-charcoal p-5 shadow-brutal flex flex-col justify-between relative overflow-hidden text-white">
+          <div class="space-y-1">
+            <div class="flex items-center justify-between">
+              <span class="text-3xl font-serif font-extrabold text-white">100%</span>
+              <span class="px-2.5 py-0.5 rounded-full bg-pop-charcoal text-white border-2 border-white text-[11px] font-extrabold uppercase">Capaian S</span>
+            </div>
+            <p class="font-serif text-lg font-bold text-white">Standar Jabar Beraksi</p>
+            <p class="text-xs text-rose-100 font-medium">Format terverifikasi sesuai instrumen Dinas Pendidikan Kota Cirebon.</p>
           </div>
-          <button onclick="generateCustomAI()" id="btn-ai-generate" class="w-full py-3 bg-gradient-to-r from-sky-400 to-blue-500 hover:from-sky-300 hover:to-blue-400 text-slate-900 font-extrabold text-sm rounded-xl shadow transition flex items-center justify-center space-x-2">
-            <i class="fa-solid fa-wand-magic-sparkles"></i>
-            <span>Generate Dokumen Word via AI</span>
+          <div class="pt-5 flex items-center justify-between">
+            <a href="#preset-section" class="px-4 py-2 bg-pop-yellow hover:bg-yellow-300 text-pop-charcoal border-2 border-pop-charcoal rounded-xl text-xs font-extrabold shadow-brutal-sm hover:translate-x-0.5 hover:translate-y-0.5 transition flex items-center space-x-1.5">
+              <span>Pilih Dokumen</span>
+              <i class="fa-solid fa-arrow-down"></i>
+            </a>
+            <span class="text-2xl">👍</span>
+          </div>
+        </div>
+
+        <!-- CARD 3: AI CUSTOM ASSISTANT -->
+        <div class="bg-pop-lilac rounded-3xl border-2 border-pop-charcoal p-5 shadow-brutal flex flex-col justify-between relative sm:col-span-2 lg:col-span-1">
+          <div class="space-y-1">
+            <div class="flex items-center justify-between">
+              <span class="text-2xl font-serif font-extrabold text-pop-charcoal">Gemini AI</span>
+              <span class="px-2.5 py-0.5 rounded-full bg-white border-2 border-pop-charcoal text-[11px] font-extrabold uppercase">Custom Mode</span>
+            </div>
+            <p class="font-serif text-lg font-bold text-pop-charcoal">Buat Poin 1 s/d 15</p>
+            <p class="text-xs text-stone-800 font-medium">Ketik topik apa pun, AI menyusun naskah Word (.docx) secara mandiri.</p>
+          </div>
+          <div class="pt-5 flex items-center justify-between">
+            <a href="#ai-custom" class="px-4 py-2 bg-white hover:bg-cream-200 text-pop-charcoal border-2 border-pop-charcoal rounded-xl text-xs font-extrabold shadow-brutal-sm hover:translate-x-0.5 hover:translate-y-0.5 transition flex items-center space-x-1.5">
+              <i class="fa-solid fa-sparkles text-purple-600"></i>
+              <span>Coba AI Generator</span>
+            </a>
+            <span class="text-2xl">✨</span>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- SECTION: IDENTITAS SEKOLAH (COLLAPSIBLE / FORM) -->
+      <section id="settings" class="bg-white rounded-3xl border-2 border-pop-charcoal p-5 sm:p-7 shadow-brutal">
+        <div class="flex flex-wrap items-center justify-between pb-4 border-b-2 border-stone-200 mb-5 gap-3">
+          <div class="flex items-center space-x-3">
+            <div class="w-9 h-9 rounded-xl bg-pop-green border-2 border-pop-charcoal flex items-center justify-center font-bold">
+              <i class="fa-solid fa-school text-pop-charcoal"></i>
+            </div>
+            <div>
+              <h3 class="font-serif text-lg font-bold text-pop-charcoal">Profil Satuan Pendidikan & Kop Surat</h3>
+              <p class="text-xs text-stone-500">Kop surat dan tanda tangan di seluruh file Word otomatis disesuaikan dengan data ini.</p>
+            </div>
+          </div>
+          <button onclick="resetDefaultSettings()" class="px-3 py-1 bg-cream-100 hover:bg-cream-200 border-2 border-pop-charcoal rounded-xl text-xs font-bold text-stone-700 shadow-brutal-sm transition">
+            <i class="fa-solid fa-rotate-left mr-1"></i> Reset Contoh
           </button>
         </div>
 
-        <div class="lg:col-span-2 bg-white/5 border border-white/10 rounded-xl p-5 flex flex-col justify-between">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-xs font-semibold">
           <div>
-            <div class="flex items-center justify-between pb-3 border-b border-white/10 mb-3">
-              <span class="text-xs font-bold text-sky-300 uppercase tracking-wider">Hasil Pratinjau Teks Dokumen</span>
-              <span id="ai-status" class="text-xs text-sky-400 italic">Siap generate</span>
+            <label class="block text-stone-700 mb-1">Nama Satuan Pendidikan</label>
+            <input type="text" id="sch_name" class="w-full px-3 py-2 bg-cream-50 border-2 border-pop-charcoal rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-pop-coral shadow-brutal-sm" value="SD NEGERI 1 KESAMBI">
+          </div>
+          <div>
+            <label class="block text-stone-700 mb-1">NPSN</label>
+            <input type="text" id="sch_npsn" class="w-full px-3 py-2 bg-cream-50 border-2 border-pop-charcoal rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-pop-coral shadow-brutal-sm" value="20222045">
+          </div>
+          <div>
+            <label class="block text-stone-700 mb-1">Kecamatan</label>
+            <input type="text" id="sch_kec" class="w-full px-3 py-2 bg-cream-50 border-2 border-pop-charcoal rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-pop-coral shadow-brutal-sm" value="Kesambi">
+          </div>
+          <div>
+            <label class="block text-stone-700 mb-1">Alamat Lengkap</label>
+            <input type="text" id="sch_address" class="w-full px-3 py-2 bg-cream-50 border-2 border-pop-charcoal rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-pop-coral shadow-brutal-sm" value="Jalan Kesambi No. 24, Kota Cirebon 45132">
+          </div>
+          <div>
+            <label class="block text-stone-700 mb-1">Nama Kepala Sekolah & Gelar</label>
+            <input type="text" id="sch_ks" class="w-full px-3 py-2 bg-cream-50 border-2 border-pop-charcoal rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-pop-coral shadow-brutal-sm" value="Dra. Hj. Siti Maryam, M.Pd">
+          </div>
+          <div>
+            <label class="block text-stone-700 mb-1">NIP Kepala Sekolah</label>
+            <input type="text" id="sch_ks_nip" class="w-full px-3 py-2 bg-cream-50 border-2 border-pop-charcoal rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-pop-coral shadow-brutal-sm" value="197505121998032004">
+          </div>
+          <div>
+            <label class="block text-stone-700 mb-1">Nama Pengawas Pemantau</label>
+            <input type="text" id="sch_pengawas" class="w-full px-3 py-2 bg-cream-50 border-2 border-pop-charcoal rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-pop-coral shadow-brutal-sm" value="Ari Haerani, S.Pd.SD, M.Pd">
+          </div>
+          <div>
+            <label class="block text-stone-700 mb-1">NIP Pengawas</label>
+            <input type="text" id="sch_pengawas_nip" class="w-full px-3 py-2 bg-cream-50 border-2 border-pop-charcoal rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-pop-coral shadow-brutal-sm" value="197301211996032001">
+          </div>
+          <div>
+            <label class="block text-stone-700 mb-1">Tahun Dokumen</label>
+            <input type="text" id="sch_year" class="w-full px-3 py-2 bg-cream-50 border-2 border-pop-charcoal rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-pop-coral shadow-brutal-sm" value="2026">
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION: PRESET LIST (POIN 16 s.d. 27) -->
+      <section id="preset-section" class="space-y-4">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center space-x-2.5">
+            <h3 class="font-serif text-2xl font-bold text-pop-charcoal">Dokumen Siap Unduh</h3>
+            <span class="px-2.5 py-0.5 rounded-full bg-pop-yellow border-2 border-pop-charcoal text-xs font-bold shadow-brutal-sm">Poin 16 s.d. 27</span>
+          </div>
+          <span class="text-xs text-stone-500 hidden sm:inline font-medium">Klik tombol unduh untuk mengunduh berkas .docx</span>
+        </div>
+
+        <!-- LIST CONTAINER -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="preset-grid">
+          <!-- Populated by JavaScript -->
+        </div>
+      </section>
+
+      <!-- SECTION: AI CUSTOM GENERATOR (RETRO NEO-BRUTALISM) -->
+      <section id="ai-custom" class="bg-pop-yellow rounded-3xl border-2 border-pop-charcoal p-5 sm:p-7 shadow-brutal space-y-6">
+        <div class="flex flex-wrap items-center justify-between pb-4 border-b-2 border-pop-charcoal gap-3">
+          <div class="flex items-center space-x-3">
+            <div class="w-10 h-10 rounded-2xl bg-white border-2 border-pop-charcoal flex items-center justify-center text-xl shadow-brutal-sm">
+              <span>🤖</span>
             </div>
-            <div id="ai_preview_box" class="h-64 overflow-y-auto text-xs font-mono text-slate-200 p-3 bg-black/20 rounded-lg whitespace-pre-wrap leading-relaxed">
-Belum ada dokumen yang di-generate. Silakan isi form di sebelah kiri dan klik tombol "Generate Dokumen Word via AI".
+            <div>
+              <h3 class="font-serif text-xl font-bold text-pop-charcoal">AI Custom Document Generator</h3>
+              <p class="text-xs text-stone-800 font-medium">Buat bukti fisik untuk Poin 1-15 atau indikator kustom lainnya dengan Google Gemini AI.</p>
             </div>
           </div>
 
-          <div class="pt-4 flex justify-end">
-            <button onclick="downloadCustomAIDoc()" id="btn-dl-ai" disabled class="px-5 py-2.5 bg-emerald-500 hover:bg-emerald-400 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold text-xs rounded-xl shadow transition flex items-center space-x-2">
-              <i class="fa-solid fa-download"></i>
-              <span>Unduh File Word (.docx) Ini</span>
+          <div class="flex items-center space-x-2">
+            <input type="password" id="gemini_api_key" placeholder="Gemini API Key..." class="px-3 py-1.5 bg-white border-2 border-pop-charcoal rounded-xl text-xs font-bold text-pop-charcoal placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-pop-coral shadow-brutal-sm w-44">
+            <button onclick="saveApiKey()" class="px-3 py-1.5 bg-pop-coral hover:bg-pop-coralDark text-white border-2 border-pop-charcoal rounded-xl text-xs font-extrabold shadow-brutal-sm transition">
+              Simpan
             </button>
           </div>
         </div>
-      </div>
-    </section>
 
-  </main>
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          <!-- Input Form -->
+          <div class="lg:col-span-5 space-y-3.5 text-xs font-bold">
+            <div>
+              <label class="block text-stone-800 mb-1">Nomor & Nama Indikator</label>
+              <input type="text" id="ai_indicator_name" placeholder="Misal: Poin 8 - Senam Pagi Anak Indonesia Hebat" class="w-full px-3.5 py-2.5 bg-white border-2 border-pop-charcoal rounded-xl focus:outline-none focus:ring-2 focus:ring-pop-coral shadow-brutal-sm text-xs font-semibold">
+            </div>
+            <div>
+              <label class="block text-stone-800 mb-1">Jenis Bukti Fisik yang Diminta</label>
+              <input type="text" id="ai_evidence_types" placeholder="Misal: Jadwal Kegiatan, Dokumentasi, Daftar Hadir" class="w-full px-3.5 py-2.5 bg-white border-2 border-pop-charcoal rounded-xl focus:outline-none focus:ring-2 focus:ring-pop-coral shadow-brutal-sm text-xs font-semibold">
+            </div>
+            <div>
+              <label class="block text-stone-800 mb-1">Catatan Tambahan (Opsional)</label>
+              <textarea id="ai_extra_notes" rows="3" placeholder="Sertakan contoh jadwal hari Selasa dan Jumat, serta rubrik kebugaran..." class="w-full px-3.5 py-2 bg-white border-2 border-pop-charcoal rounded-xl focus:outline-none focus:ring-2 focus:ring-pop-coral shadow-brutal-sm text-xs font-semibold"></textarea>
+            </div>
+            <button onclick="generateCustomAI()" id="btn-ai-generate" class="w-full py-3 bg-pop-coral hover:bg-pop-coralDark text-white border-2 border-pop-charcoal rounded-2xl text-xs font-extrabold shadow-brutal hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-brutal-sm transition flex items-center justify-center space-x-2">
+              <i class="fa-solid fa-wand-magic-sparkles"></i>
+              <span>Generate Dokumen via AI</span>
+            </button>
+          </div>
 
-  <!-- FOOTER -->
-  <footer class="bg-white border-t border-slate-200 py-6 mt-12 text-center text-xs text-slate-500">
-    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
-      <div>
-        <strong>Jabar Beraksi AI Generator</strong> &copy; 2026. Dioptimalkan untuk Satuan Pendidikan Dasar & Menengah.
-      </div>
-      <div class="flex items-center space-x-4">
-        <span>Kota Cirebon & Jawa Barat</span>
-        <a href="/" class="text-sky-600 hover:underline">Portal Utama</a>
-      </div>
+          <!-- Preview & Action Box -->
+          <div class="lg:col-span-7 bg-white rounded-2xl border-2 border-pop-charcoal p-4 shadow-brutal-sm flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between pb-2 border-b border-stone-200 mb-2">
+                <span class="text-[11px] font-extrabold uppercase tracking-wider text-stone-600">Pratinjau Naskah AI</span>
+                <span id="ai-status" class="text-[11px] font-bold text-pop-coral">Siap generate</span>
+              </div>
+              <div id="ai_preview_box" class="h-44 custom-scroll overflow-y-auto text-xs font-mono text-stone-700 p-2.5 bg-cream-50 rounded-xl border border-stone-200 whitespace-pre-wrap leading-relaxed">
+Belum ada naskah yang di-generate. Silakan isi form di sebelah kiri dan klik "Generate Dokumen via AI".
+              </div>
+            </div>
+
+            <div class="pt-3 flex justify-end">
+              <button onclick="downloadCustomAIDoc()" id="btn-dl-ai" disabled class="px-4 py-2 bg-pop-green hover:bg-emerald-400 disabled:opacity-50 disabled:cursor-not-allowed text-pop-charcoal border-2 border-pop-charcoal rounded-xl text-xs font-extrabold shadow-brutal-sm transition flex items-center space-x-1.5">
+                <i class="fa-solid fa-file-word"></i>
+                <span>Unduh Word (.docx) Ini</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
     </div>
-  </footer>
+
+    <!-- FOOTER -->
+    <footer class="px-5 sm:px-8 py-4 bg-cream-200 border-t-2 border-pop-charcoal flex flex-wrap items-center justify-between gap-3 text-xs font-bold text-stone-600">
+      <div class="flex items-center space-x-2">
+        <span>AI-autoDoc &bull; Kota Cirebon & Jawa Barat</span>
+      </div>
+      <div>
+        <span>Dibuat untuk Mempermudah Administrasi Guru & Sekolah</span>
+      </div>
+    </footer>
+
+  </div>
 
   <!-- SCRIPT LOGIC -->
   <script>
+    // ACCESS PASSCODE CONFIG
+    const CORRECT_PASSCODE = "JABAR2026";
+    const AUTH_KEY = "AI_AUTODOC_AUTH_TOKEN";
+
+    function checkAuth() {
+      const isAuth = sessionStorage.getItem(AUTH_KEY) === "true";
+      const gate = document.getElementById('landing-gate');
+      if (isAuth) {
+        gate.classList.add('hidden');
+      } else {
+        gate.classList.remove('hidden');
+      }
+    }
+
+    function handlePasscodeSubmit(e) {
+      e.preventDefault();
+      const input = document.getElementById('input-passcode').value.trim();
+      const errorMsg = document.getElementById('gate-error-msg');
+      if (input.toUpperCase() === CORRECT_PASSCODE) {
+        sessionStorage.setItem(AUTH_KEY, "true");
+        document.getElementById('landing-gate').classList.add('hidden');
+        errorMsg.classList.add('hidden');
+      } else {
+        errorMsg.classList.remove('hidden');
+      }
+    }
+
+    function togglePasscodeVisibility() {
+      const field = document.getElementById('input-passcode');
+      const icon = document.getElementById('toggle-eye-icon');
+      if (field.type === 'password') {
+        field.type = 'text';
+        icon.classList.remove('fa-eye');
+        icon.classList.add('fa-eye-slash');
+      } else {
+        field.type = 'password';
+        icon.classList.remove('fa-eye-slash');
+        icon.classList.add('fa-eye');
+      }
+    }
+
+    function lockPortal() {
+      sessionStorage.removeItem(AUTH_KEY);
+      document.getElementById('input-passcode').value = "";
+      document.getElementById('landing-gate').classList.remove('hidden');
+    }
+
     // PRESET METADATA (16 to 27)
     const PRESETS = [
       {
         num: 16,
-        title: "Deteksi Dini dan Penanganan Masalah",
+        title: "Deteksi Dini & Penanganan Masalah",
         evidences: ["SOP Perlindungan Siswa", "Buku Log Kasus", "Laporan Mediasi Restoratif"],
-        icon: "fa-shield-halved",
-        color: "text-blue-600"
+        badge: "SOP & Kasus",
+        bgBadge: "bg-pop-blue",
+        emoji: "🛡️"
       },
       {
         num: 17,
         title: "Kemitraan Orang Tua & Pemangku Kepentingan",
         evidences: ["Notulen Rapat Paguyuban", "Naskah MoU Puskesmas", "Daftar Hadir & Dokumentasi"],
-        icon: "fa-handshake",
-        color: "text-emerald-600"
+        badge: "MoU & Notulen",
+        bgBadge: "bg-pop-green",
+        emoji: "🤝"
       },
       {
         num: 18,
         title: "Pemantauan Fisik & Emosi Peserta Didik",
         evidences: ["Jurnal Anekdot Emosi", "Buku Cek Fisik UKS", "Instrumen Mood Check-in"],
-        icon: "fa-heart-pulse",
-        color: "text-rose-600"
+        badge: "Pemantauan UKS",
+        bgBadge: "bg-pop-coral text-white",
+        emoji: "🩺"
       },
       {
         num: 19,
         title: "Penguatan Spiritual, Mental, Moral & Etika",
         evidences: ["Modul Ajar Integratif", "Jurnal Pembelajaran Karakter", "Dokumentasi Ibadah & 5S"],
-        icon: "fa-hands-praying",
-        color: "text-amber-600"
+        badge: "Modul Karakter",
+        bgBadge: "bg-pop-yellow",
+        emoji: "🤲"
       },
       {
         num: 20,
-        title: "Keamanan Fisik dan Sportivitas PJOK",
+        title: "Keamanan Fisik & Sportivitas PJOK",
         evidences: ["SOP Keselamatan Lapangan", "Modul Ajar PJOK Fair Play", "Rubrik Sportivitas & P3K"],
-        icon: "fa-volleyball",
-        color: "text-indigo-600"
+        badge: "PJOK & Fair Play",
+        bgBadge: "bg-pop-blue",
+        emoji: "⚽"
       },
       {
         num: 21,
         title: "Dukungan Tendik Lingkungan Aman & Nyaman",
         evidences: ["Program Kerja Tendik", "Buku Log Harian Satpam/Kebersihan", "Laporan Sanitasi"],
-        icon: "fa-users-gear",
-        color: "text-teal-600"
+        badge: "Tendik & Satpam",
+        bgBadge: "bg-pop-lilac",
+        emoji: "🧹"
       },
       {
         num: 22,
         title: "Koordinasi Waka Kesiswaan & Guru Kelas",
         evidences: ["Program Kerja Kesiswaan", "Notulen Rapat Bulanan", "Daftar Hadir Rapat Guru"],
-        icon: "fa-comments",
-        color: "text-cyan-600"
+        badge: "Kesiswaan",
+        bgBadge: "bg-pop-green",
+        emoji: "📋"
       },
       {
         num: 23,
         title: "Keamanan Fisik Sekolah Berdasarkan Sarpras",
         evidences: ["Pedoman K3 Sarpras", "Checklist 10 Area Kelayakan", "Rencana Tindak Lanjut RKAS"],
-        icon: "fa-building-shield",
-        color: "text-orange-600"
+        badge: "Sarpras K3",
+        bgBadge: "bg-pop-coral text-white",
+        emoji: "🏫"
       },
       {
         num: 24,
         title: "Layanan Psikososial Guru BK",
         evidences: ["Program Bimbingan Konseling", "Jurnal Log Konseling", "Laporan Studi Kasus Privat"],
-        icon: "fa-head-side-heart",
-        color: "text-purple-600"
+        badge: "Konseling BK",
+        bgBadge: "bg-pop-lilac",
+        emoji: "💬"
       },
       {
         num: 25,
         title: "Pendampingan Wali Kelas",
         evidences: ["Buku Administrasi Wali Kelas", "Buku Catatan Perkembangan Siswa", "Laporan Home Visit"],
-        icon: "fa-chalkboard-user",
-        color: "text-pink-600"
+        badge: "Wali Kelas",
+        bgBadge: "bg-pop-yellow",
+        emoji: "👩‍🏫"
       },
       {
         num: 26,
         title: "Pembelajaran Bermakna Holistik Integratif",
         evidences: ["Modul Ajar Tematik PBL", "Lembar Observasi Keterlibatan", "Refleksi Aksi Nyata"],
-        icon: "fa-seedling",
-        color: "text-green-600"
+        badge: "Holistik PBL",
+        bgBadge: "bg-pop-green",
+        emoji: "🌱"
       },
       {
         num: 27,
         title: "Keamanan Lingkungan & Data Pribadi Murid",
         evidences: ["SOP Pelindungan Data Pribadi", "Program Keamanan Arsip/Dapodik", "Pakta Integritas Tendik"],
-        icon: "fa-user-lock",
-        color: "text-slate-700"
+        badge: "Privasi & UU PDP",
+        bgBadge: "bg-pop-blue",
+        emoji: "🔐"
       }
     ];
 
-    // Render Preset Cards
     function renderPresets() {
       const grid = document.getElementById('preset-grid');
       grid.innerHTML = PRESETS.map(p => `
-        <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm hover:shadow-md transition flex flex-col justify-between">
+        <div class="bg-white rounded-2xl border-2 border-pop-charcoal p-4 shadow-brutal-sm hover:shadow-brutal transition flex flex-col justify-between">
           <div>
-            <div class="flex items-center justify-between mb-3">
-              <span class="text-xs font-bold px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700">
-                Poin ${p.num}
+            <div class="flex items-center justify-between mb-2">
+              <span class="px-2 py-0.5 rounded-lg ${p.bgBadge} border border-pop-charcoal text-[10px] font-extrabold uppercase">
+                Poin ${p.num} &bull; ${p.badge}
               </span>
-              <i class="fa-solid ${p.icon} ${p.color} text-lg"></i>
+              <span class="text-xl">${p.emoji}</span>
             </div>
-            <h3 class="font-bold text-slate-900 text-base leading-snug mb-2">${p.title}</h3>
-            <div class="space-y-1 mb-4">
-              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block">Bukti Fisik Termasuk:</span>
-              ${p.evidences.map(e => `
-                <div class="text-xs text-slate-600 flex items-center space-x-1.5">
-                  <i class="fa-solid fa-circle-check text-sky-500 text-[10px]"></i>
-                  <span>${e}</span>
-                </div>
-              `).join('')}
+            <h4 class="font-serif text-base font-bold text-pop-charcoal leading-snug mb-1.5">${p.title}</h4>
+            <div class="text-[11px] text-stone-500 font-medium space-y-0.5 mb-3">
+              ${p.evidences.map(e => `<div>&bull; ${e}</div>`).join('')}
             </div>
           </div>
 
-          <div class="pt-3 border-t border-slate-100">
-            <button onclick="downloadSinglePreset(${p.num})" class="w-full py-2 bg-sky-50 hover:bg-sky-600 hover:text-white text-sky-700 text-xs font-bold rounded-xl transition flex items-center justify-center space-x-1.5">
-              <i class="fa-solid fa-download"></i>
-              <span>Unduh Word (.docx)</span>
+          <div class="pt-2 border-t border-stone-200 flex items-center justify-between">
+            <span class="text-[10px] font-bold text-stone-400 uppercase">Format Word (.docx)</span>
+            <button onclick="downloadSinglePreset(${p.num})" class="px-3 py-1.5 bg-cream-100 hover:bg-pop-yellow border-2 border-pop-charcoal rounded-xl text-xs font-extrabold text-pop-charcoal shadow-brutal-sm hover:translate-x-0.5 hover:translate-y-0.5 transition flex items-center space-x-1.5">
+              <i class="fa-solid fa-download text-xs"></i>
+              <span>Unduh .docx</span>
             </button>
           </div>
         </div>
       `).join('');
     }
 
-    // Helper: Get School Info
     function getSchoolInfo() {
       return {
         name: document.getElementById('sch_name').value.trim() || 'SD NEGERI [NAMA SEKOLAH]',
@@ -404,7 +588,6 @@ Belum ada dokumen yang di-generate. Silakan isi form di sebelah kiri dan klik to
       document.getElementById('sch_year').value = "2026";
     }
 
-    // Generate Word Document using docx.js (Client-Side)
     async function createDocxBlob(poinNum, customData = null) {
       const sch = getSchoolInfo();
       const preset = PRESETS.find(p => p.num === poinNum);
@@ -421,237 +604,250 @@ Belum ada dokumen yang di-generate. Silakan isi form di sebelah kiri dan klik to
         insideVertical: { style: BorderStyle.SINGLE, size: 4, color: "B0BEC5" }
       };
 
-      const doc = new Document({
-        sections: [{
-          properties: {
-            page: {
-              margin: { top: 1134, bottom: 1134, left: 1134, right: 1134 } // 2 cm
-            }
-          },
+      const children = [
+        new Paragraph({
+          alignment: AlignmentType.CENTER,
+          spacing: { after: 60 },
           children: [
-            // KOP SURAT
-            new Paragraph({
-              alignment: AlignmentType.CENTER,
-              spacing: { after: 60 },
-              children: [
-                new TextRun({ text: "PEMERINTAH KOTA CIREBON\nDINAS PENDIDIKAN\n" + sch.name, bold: true, size: 24, font: "Arial" })
-              ]
-            }),
-            new Paragraph({
-              alignment: AlignmentType.CENTER,
-              spacing: { after: 180 },
-              children: [
-                new TextRun({ text: `Alamat: ${sch.address}, Kec. ${sch.kec}, Kota Cirebon\nPosel: sdnegeri@cirebonkota.go.id | Laman: disdik.cirebonkota.go.id`, italics: true, size: 17, font: "Arial", color: "666666" })
-              ]
-            }),
-            new Paragraph({
-              spacing: { after: 240 },
-              border: {
-                bottom: { style: BorderStyle.DOUBLE, size: 12, color: "000000" }
-              }
-            }),
+            new TextRun({ text: "PEMERINTAH KOTA CIREBON\nDINAS PENDIDIKAN\n" + sch.name, bold: true, size: 24, font: "Arial" })
+          ]
+        }),
+        new Paragraph({
+          alignment: AlignmentType.CENTER,
+          spacing: { after: 180 },
+          children: [
+            new TextRun({ text: `Alamat: ${sch.address}, Kec. ${sch.kec}, Kota Cirebon\nPosel: sdnegeri@cirebonkota.go.id | Laman: disdik.cirebonkota.go.id`, italics: true, size: 17, font: "Arial", color: "666666" })
+          ]
+        }),
+        new Paragraph({
+          spacing: { after: 240 },
+          border: { bottom: { style: BorderStyle.DOUBLE, size: 12, color: "000000" } }
+        }),
 
-            // TITLE
-            new Paragraph({
-              alignment: AlignmentType.CENTER,
-              spacing: { after: 60 },
-              children: [
-                new TextRun({ text: `BUKTI FISIK INSTRUMEN JABAR BERAKSI - POIN ${poinNum}`, bold: true, size: 24, font: "Arial" })
-              ]
-            }),
-            new Paragraph({
-              alignment: AlignmentType.CENTER,
-              spacing: { after: 300 },
-              children: [
-                new TextRun({ text: `INDIKATOR: ${title.toUpperCase()}\n(Berkas Bukti Fisik Lengkap & Instrumen Terverifikasi)`, bold: true, size: 19, font: "Arial", color: "0D47A1" })
-              ]
-            }),
+        new Paragraph({
+          alignment: AlignmentType.CENTER,
+          spacing: { after: 60 },
+          children: [
+            new TextRun({ text: `BUKTI FISIK INSTRUMEN JABAR BERAKSI - ${customData ? customData.title.toUpperCase() : 'POIN ' + poinNum}`, bold: true, size: 24, font: "Arial" })
+          ]
+        }),
+        new Paragraph({
+          alignment: AlignmentType.CENTER,
+          spacing: { after: 300 },
+          children: [
+            new TextRun({ text: `INDIKATOR: ${title.toUpperCase()}\n(Berkas Bukti Fisik Terverifikasi Satuan Pendidikan)`, bold: true, size: 19, font: "Arial", color: "0D47A1" })
+          ]
+        })
+      ];
 
-            // BAGIAN I: PROSEDUR STANDAR OPERASIONAL (SOP)
-            new Paragraph({
+      if (customData && customData.content) {
+        const rawLines = customData.content.split('\n');
+        for (const line of rawLines) {
+          const t = line.trim();
+          if (!t) {
+            children.push(new Paragraph({ spacing: { after: 80 } }));
+            continue;
+          }
+          if (t.startsWith('#') || t.startsWith('BAGIAN') || (t.toUpperCase() === t && t.length > 5 && !t.includes(':'))) {
+            children.push(new Paragraph({
               spacing: { before: 180, after: 100 },
-              children: [
-                new TextRun({ text: "BAGIAN I: STANDAR OPERASIONAL PROSEDUR (SOP)", bold: true, size: 21, color: "0D47A1" })
-              ]
-            }),
-            new Table({
-              width: { size: 100, type: WidthType.PERCENTAGE },
-              borders: borderStyle,
-              rows: [
-                new TableRow({
-                  children: [
-                    new TableCell({
-                      width: { size: 25, type: WidthType.PERCENTAGE },
-                      shading: { fill: "F5F7FA" },
-                      children: [new Paragraph({ children: [new TextRun({ text: "1. Tujuan", bold: true, size: 17 })] })]
-                    }),
-                    new TableCell({
-                      width: { size: 75, type: WidthType.PERCENTAGE },
-                      children: [new Paragraph({ children: [new TextRun({ text: `Memberikan pedoman terstruktur dalam implementasi ${title} di lingkungan ${sch.name} secara aman, adil, konsisten, dan ramah anak.`, size: 17 })] })]
-                    })
-                  ]
-                }),
-                new TableRow({
-                  children: [
-                    new TableCell({
-                      width: { size: 25, type: WidthType.PERCENTAGE },
-                      shading: { fill: "F5F7FA" },
-                      children: [new Paragraph({ children: [new TextRun({ text: "2. Pelaksana", bold: true, size: 17 })] })]
-                    }),
-                    new TableCell({
-                      width: { size: 75, type: WidthType.PERCENTAGE },
-                      children: [new Paragraph({ children: [new TextRun({ text: "Kepala Sekolah, Seluruh Pendidik, Tenaga Kependidikan, dan Komite Sekolah.", size: 17 })] })]
-                    })
-                  ]
-                }),
-                new TableRow({
-                  children: [
-                    new TableCell({
-                      width: { size: 25, type: WidthType.PERCENTAGE },
-                      shading: { fill: "F5F7FA" },
-                      children: [new Paragraph({ children: [new TextRun({ text: "3. Prosedur Kerja", bold: true, size: 17 })] })]
-                    }),
-                    new TableCell({
-                      width: { size: 75, type: WidthType.PERCENTAGE },
-                      children: [new Paragraph({ children: [new TextRun({ text: "a. Sosialisasi berkala kepada seluruh warga sekolah dan paguyuban orang tua murid.\nb. Pelaksanaan terintegrasi dalam pembelajaran harian dan pembiasaan budaya sekolah.\nc. Pencatatan dan evaluasi rutin berkala setiap akhir pekan.", size: 17 })] })]
-                    })
-                  ]
-                })
-              ]
-            }),
+              children: [new TextRun({ text: t.replace(/^#+\s*/, ''), bold: true, size: 21, color: "0D47A1" })]
+            }));
+          } else {
+            children.push(new Paragraph({
+              spacing: { after: 80 },
+              children: [new TextRun({ text: t, size: 18, font: "Arial" })]
+            }));
+          }
+        }
+      } else {
+        children.push(
+          new Paragraph({
+            spacing: { before: 180, after: 100 },
+            children: [
+              new TextRun({ text: "BAGIAN I: STANDAR OPERASIONAL PROSEDUR (SOP)", bold: true, size: 21, color: "0D47A1" })
+            ]
+          }),
+          new Table({
+            width: { size: 100, type: WidthType.PERCENTAGE },
+            borders: borderStyle,
+            rows: [
+              new TableRow({
+                children: [
+                  new TableCell({
+                    width: { size: 25, type: WidthType.PERCENTAGE },
+                    shading: { fill: "F5F7FA" },
+                    children: [new Paragraph({ children: [new TextRun({ text: "1. Tujuan", bold: true, size: 17 })] })]
+                  }),
+                  new TableCell({
+                    width: { size: 75, type: WidthType.PERCENTAGE },
+                    children: [new Paragraph({ children: [new TextRun({ text: `Memberikan pedoman terstruktur dalam implementasi ${title} di lingkungan ${sch.name} secara aman, adil, konsisten, dan ramah anak.`, size: 17 })] })]
+                  })
+                ]
+              }),
+              new TableRow({
+                children: [
+                  new TableCell({
+                    width: { size: 25, type: WidthType.PERCENTAGE },
+                    shading: { fill: "F5F7FA" },
+                    children: [new Paragraph({ children: [new TextRun({ text: "2. Pelaksana", bold: true, size: 17 })] })]
+                  }),
+                  new TableCell({
+                    width: { size: 75, type: WidthType.PERCENTAGE },
+                    children: [new Paragraph({ children: [new TextRun({ text: "Kepala Sekolah, Seluruh Pendidik, Tenaga Kependidikan, dan Komite Sekolah.", size: 17 })] })]
+                  })
+                ]
+              }),
+              new TableRow({
+                children: [
+                  new TableCell({
+                    width: { size: 25, type: WidthType.PERCENTAGE },
+                    shading: { fill: "F5F7FA" },
+                    children: [new Paragraph({ children: [new TextRun({ text: "3. Prosedur Kerja", bold: true, size: 17 })] })]
+                  }),
+                  new TableCell({
+                    width: { size: 75, type: WidthType.PERCENTAGE },
+                    children: [new Paragraph({ children: [new TextRun({ text: "a. Sosialisasi berkala kepada seluruh warga sekolah dan paguyuban orang tua murid.\nb. Pelaksanaan terintegrasi dalam pembelajaran harian dan pembiasaan budaya sekolah.\nc. Pencatatan dan evaluasi rutin berkala setiap akhir pekan.", size: 17 })] })]
+                  })
+                ]
+              })
+            ]
+          }),
+          new Paragraph({
+            spacing: { before: 240, after: 100 },
+            children: [
+              new TextRun({ text: "BAGIAN II: FORMAT BUKU CATATAN DAN LOG PEMANTAUAN", bold: true, size: 21, color: "0D47A1" })
+            ]
+          }),
+          new Table({
+            width: { size: 100, type: WidthType.PERCENTAGE },
+            borders: borderStyle,
+            rows: [
+              new TableRow({
+                children: [
+                  new TableCell({ shading: { fill: "1565C0" }, children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "No", bold: true, color: "FFFFFF", size: 16 })] })] }),
+                  new TableCell({ shading: { fill: "1565C0" }, children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "Hari / Tanggal", bold: true, color: "FFFFFF", size: 16 })] })] }),
+                  new TableCell({ shading: { fill: "1565C0" }, children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "Aktivitas Pembiasaan", bold: true, color: "FFFFFF", size: 16 })] })] }),
+                  new TableCell({ shading: { fill: "1565C0" }, children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "Hasil Pengamatan", bold: true, color: "FFFFFF", size: 16 })] })] }),
+                  new TableCell({ shading: { fill: "1565C0" }, children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "Status", bold: true, color: "FFFFFF", size: 16 })] })] })
+                ]
+              }),
+              new TableRow({
+                children: [
+                  new TableCell({ children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "1", size: 16 })] })] }),
+                  new TableCell({ children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "Senin, 14/09/2026", size: 16 })] })] }),
+                  new TableCell({ children: [new Paragraph({ children: [new TextRun({ text: `Pelaksanaan program ${title} saat pembiasaan pagi.`, size: 16 })] })] }),
+                  new TableCell({ children: [new Paragraph({ children: [new TextRun({ text: "Peserta didik antusias dan tertib mengikuti panduan.", size: 16 })] })] }),
+                  new TableCell({ children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "Terlaksana", size: 16 })] })] })
+                ]
+              }),
+              new TableRow({
+                children: [
+                  new TableCell({ children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "2", size: 16 })] })] }),
+                  new TableCell({ children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "Rabu, 07/10/2026", size: 16 })] })] }),
+                  new TableCell({ children: [new Paragraph({ children: [new TextRun({ text: "Evaluasi berkala dan pengisian jurnal refleksi karakter.", size: 16 })] })] }),
+                  new TableCell({ children: [new Paragraph({ children: [new TextRun({ text: "95% siswa konsisten mempraktikkan sikap positif.", size: 16 })] })] }),
+                  new TableCell({ children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "Terlaksana", size: 16 })] })] })
+                ]
+              })
+            ]
+          }),
+          new Paragraph({
+            spacing: { before: 240, after: 100 },
+            children: [
+              new TextRun({ text: "BAGIAN III: DOKUMENTASI FOTO BUKTI FISIK", bold: true, size: 21, color: "0D47A1" })
+            ]
+          }),
+          new Table({
+            width: { size: 100, type: WidthType.PERCENTAGE },
+            borders: borderStyle,
+            rows: [
+              new TableRow({
+                children: [
+                  new TableCell({
+                    width: { size: 50, type: WidthType.PERCENTAGE },
+                    shading: { fill: "ECEFF1" },
+                    children: [
+                      new Paragraph({
+                        alignment: AlignmentType.CENTER,
+                        spacing: { before: 200, after: 200 },
+                        children: [new TextRun({ text: "[ TEMPELKAN FOTO DOKUMENTASI KEGIATAN 1 DI SINI ]\n\nKeterangan: Pelaksanaan kegiatan di lingkungan satuan pendidikan.", size: 16 })]
+                      })
+                    ]
+                  }),
+                  new TableCell({
+                    width: { size: 50, type: WidthType.PERCENTAGE },
+                    shading: { fill: "ECEFF1" },
+                    children: [
+                      new Paragraph({
+                        alignment: AlignmentType.CENTER,
+                        spacing: { before: 200, after: 200 },
+                        children: [new TextRun({ text: "[ TEMPELKAN FOTO DOKUMENTASI KEGIATAN 2 DI SINI ]\n\nKeterangan: Evaluasi bersama peserta didik dan dewan guru.", size: 16 })]
+                      })
+                    ]
+                  })
+                ]
+              })
+            ]
+          })
+        );
+      }
 
-            // BAGIAN II: BUKU LOG / CATATAN
-            new Paragraph({
-              spacing: { before: 240, after: 100 },
+      children.push(
+        new Paragraph({
+          alignment: AlignmentType.RIGHT,
+          spacing: { before: 240, after: 140 },
+          children: [
+            new TextRun({ text: `Cirebon, 13 November ${sch.year}`, size: 18 })
+          ]
+        }),
+        new Table({
+          width: { size: 100, type: WidthType.PERCENTAGE },
+          borders: {
+            top: { style: BorderStyle.NONE }, bottom: { style: BorderStyle.NONE },
+            left: { style: BorderStyle.NONE }, right: { style: BorderStyle.NONE },
+            insideHorizontal: { style: BorderStyle.NONE }, insideVertical: { style: BorderStyle.NONE }
+          },
+          rows: [
+            new TableRow({
               children: [
-                new TextRun({ text: "BAGIAN II: FORMAT BUKU CATATAN DAN LOG PEMANTAUAN", bold: true, size: 21, color: "0D47A1" })
-              ]
-            }),
-            new Table({
-              width: { size: 100, type: WidthType.PERCENTAGE },
-              borders: borderStyle,
-              rows: [
-                new TableRow({
+                new TableCell({
+                  width: { size: 50, type: WidthType.PERCENTAGE },
                   children: [
-                    new TableCell({ shading: { fill: "1565C0" }, children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "No", bold: true, color: "FFFFFF", size: 16 })] })] }),
-                    new TableCell({ shading: { fill: "1565C0" }, children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "Hari / Tanggal", bold: true, color: "FFFFFF", size: 16 })] })] }),
-                    new TableCell({ shading: { fill: "1565C0" }, children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "Aktivitas Pembiasaan", bold: true, color: "FFFFFF", size: 16 })] })] }),
-                    new TableCell({ shading: { fill: "1565C0" }, children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "Hasil Pengamatan", bold: true, color: "FFFFFF", size: 16 })] })] }),
-                    new TableCell({ shading: { fill: "1565C0" }, children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "Status", bold: true, color: "FFFFFF", size: 16 })] })] })
-                  ]
-                }),
-                new TableRow({
-                  children: [
-                    new TableCell({ children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "1", size: 16 })] })] }),
-                    new TableCell({ children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "Senin, 14/09/2026", size: 16 })] })] }),
-                    new TableCell({ children: [new Paragraph({ children: [new TextRun({ text: `Pelaksanaan program ${title} saat pembiasaan pagi.`, size: 16 })] })] }),
-                    new TableCell({ children: [new Paragraph({ children: [new TextRun({ text: "Peserta didik antusias dan tertib mengikuti panduan.", size: 16 })] })] }),
-                    new TableCell({ children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "Terlaksana", size: 16 })] })] })
-                  ]
-                }),
-                new TableRow({
-                  children: [
-                    new TableCell({ children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "2", size: 16 })] })] }),
-                    new TableCell({ children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "Rabu, 07/10/2026", size: 16 })] })] }),
-                    new TableCell({ children: [new Paragraph({ children: [new TextRun({ text: "Evaluasi berkala dan pengisian jurnal refleksi karakter.", size: 16 })] })] }),
-                    new TableCell({ children: [new Paragraph({ children: [new TextRun({ text: "95% siswa konsisten mempraktikkan sikap positif.", size: 16 })] })] }),
-                    new TableCell({ children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "Terlaksana", size: 16 })] })] })
-                  ]
-                })
-              ]
-            }),
-
-            // BAGIAN III: DOKUMENTASI FOTO
-            new Paragraph({
-              spacing: { before: 240, after: 100 },
-              children: [
-                new TextRun({ text: "BAGIAN III: DOKUMENTASI FOTO BUKTI FISIK", bold: true, size: 21, color: "0D47A1" })
-              ]
-            }),
-            new Table({
-              width: { size: 100, type: WidthType.PERCENTAGE },
-              borders: borderStyle,
-              rows: [
-                new TableRow({
-                  children: [
-                    new TableCell({
-                      width: { size: 50, type: WidthType.PERCENTAGE },
-                      shading: { fill: "ECEFF1" },
-                      children: [
-                        new Paragraph({
-                          alignment: AlignmentType.CENTER,
-                          spacing: { before: 200, after: 200 },
-                          children: [new TextRun({ text: "[ TEMPELKAN FOTO DOKUMENTASI KEGIATAN 1 DI SINI ]\n\nKeterangan: Pelaksanaan kegiatan di lingkungan satuan pendidikan.", size: 16 })]
-                        })
-                      ]
-                    }),
-                    new TableCell({
-                      width: { size: 50, type: WidthType.PERCENTAGE },
-                      shading: { fill: "ECEFF1" },
-                      children: [
-                        new Paragraph({
-                          alignment: AlignmentType.CENTER,
-                          spacing: { before: 200, after: 200 },
-                          children: [new TextRun({ text: "[ TEMPELKAN FOTO DOKUMENTASI KEGIATAN 2 DI SINI ]\n\nKeterangan: Evaluasi bersama peserta didik dan dewan guru.", size: 16 })]
-                        })
-                      ]
+                    new Paragraph({
+                      alignment: AlignmentType.CENTER,
+                      children: [new TextRun({ text: "Koordinator Program,\n\n\n\n\n( ......................................... )\nNIP. .....................................", size: 17 })]
                     })
                   ]
-                })
-              ]
-            }),
-
-            // LEMBAR PENGESAHAN
-            new Paragraph({
-              alignment: AlignmentType.RIGHT,
-              spacing: { before: 240, after: 140 },
-              children: [
-                new TextRun({ text: `Cirebon, 13 November ${sch.year}`, size: 18 })
-              ]
-            }),
-            new Table({
-              width: { size: 100, type: WidthType.PERCENTAGE },
-              borders: {
-                top: { style: BorderStyle.NONE },
-                bottom: { style: BorderStyle.NONE },
-                left: { style: BorderStyle.NONE },
-                right: { style: BorderStyle.NONE },
-                insideHorizontal: { style: BorderStyle.NONE },
-                insideVertical: { style: BorderStyle.NONE }
-              },
-              rows: [
-                new TableRow({
+                }),
+                new TableCell({
+                  width: { size: 50, type: WidthType.PERCENTAGE },
                   children: [
-                    new TableCell({
-                      width: { size: 50, type: WidthType.PERCENTAGE },
-                      children: [
-                        new Paragraph({
-                          alignment: AlignmentType.CENTER,
-                          children: [new TextRun({ text: "Koordinator Program,\n\n\n\n\n( ......................................... )\nNIP. .....................................", size: 17 })]
-                        })
-                      ]
-                    }),
-                    new TableCell({
-                      width: { size: 50, type: WidthType.PERCENTAGE },
-                      children: [
-                        new Paragraph({
-                          alignment: AlignmentType.CENTER,
-                          children: [new TextRun({ text: `Mengetahui,\nKepala ${sch.name},\n\n\n\n${sch.ks}\nNIP. ${sch.ks_nip}`, size: 17 })]
-                        })
-                      ]
+                    new Paragraph({
+                      alignment: AlignmentType.CENTER,
+                      children: [new TextRun({ text: `Mengetahui,\nKepala ${sch.name},\n\n\n\n${sch.ks}\nNIP. ${sch.ks_nip}`, size: 17 })]
                     })
                   ]
                 })
               ]
             })
           ]
+        })
+      );
+
+      const doc = new Document({
+        sections: [{
+          properties: {
+            page: { margin: { top: 1134, bottom: 1134, left: 1134, right: 1134 } }
+          },
+          children: children
         }]
       });
 
       return await docx.Packer.toBlob(doc);
     }
+    }
 
-    // Download Single Preset
     async function downloadSinglePreset(poinNum) {
       try {
         const sch = getSchoolInfo();
@@ -664,11 +860,10 @@ Belum ada dokumen yang di-generate. Silakan isi form di sebelah kiri dan klik to
       }
     }
 
-    // Download All Presets into a ZIP
     async function downloadAllDocs() {
       const btn = document.getElementById('btn-dl-all');
       const originalText = btn.innerHTML;
-      btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> <span>Menyiapkan 12 Dokumen Word...</span>`;
+      btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> <span>Menyiapkan 12 Dokumen...</span>`;
       btn.disabled = true;
 
       try {
@@ -682,7 +877,7 @@ Belum ada dokumen yang di-generate. Silakan isi form di sebelah kiri dan klik to
         }
 
         const zipBlob = await zip.generateAsync({ type: "blob" });
-        const zipName = `Bukti_Fisik_Jabar_Beraksi_16-27_${sch.name.replace(/\s+/g, '_')}.zip`;
+        const zipName = `Paket_Bukti_Fisik_Jabar_Beraksi_${sch.name.replace(/\s+/g, '_')}.zip`;
         saveAs(zipBlob, zipName);
       } catch (err) {
         console.error(err);
@@ -693,7 +888,6 @@ Belum ada dokumen yang di-generate. Silakan isi form di sebelah kiri dan klik to
       }
     }
 
-    // AI CUSTOM GENERATOR LOGIC
     let lastGeneratedData = null;
 
     function saveApiKey() {
@@ -707,6 +901,7 @@ Belum ada dokumen yang di-generate. Silakan isi form di sebelah kiri dan klik to
     }
 
     window.addEventListener('DOMContentLoaded', () => {
+      checkAuth();
       renderPresets();
       const savedKey = localStorage.getItem('GEMINI_API_KEY');
       if (savedKey) {
@@ -731,11 +926,10 @@ Belum ada dokumen yang di-generate. Silakan isi form di sebelah kiri dan klik to
       const btnGenerate = document.getElementById('btn-ai-generate');
       const btnDl = document.getElementById('btn-dl-ai');
 
-      statusEl.textContent = "AI sedang menyusun naskah dokumen...";
+      statusEl.textContent = "AI sedang menyusun naskah...";
       btnGenerate.disabled = true;
       btnGenerate.classList.add('opacity-60');
 
-      // Prompt to Gemini API
       const prompt = `Anda adalah asisten pakar kurikulum dan pengawas sekolah Jawa Barat.
 Tolong buatkan naskah resmi Bukti Fisik Pemantauan Penguatan Karakter Jabar Beraksi untuk satuan pendidikan:
 Nama Sekolah: ${sch.name}
@@ -754,8 +948,7 @@ Susun dengan format:
 
       try {
         if (!apiKey) {
-          // Fallback simulation if no API Key provided
-          const sampleOutput = `[SIMULASI FORMAT DOKUMEN - MASUKKAN API KEY UNTUK GENERATE DENGAN MODEL GEMINI ASLI]
+          const sampleOutput = `[TEMPLATE RESMI DRAF BUKTI FISIK SATUAN PENDIDIKAN]
 =============================================================
 PEMERINTAH KOTA CIREBON - DINAS PENDIDIKAN
 ${sch.name}
@@ -781,21 +974,39 @@ Mengetahui, Kepala Sekolah ${sch.ks}`;
           btnDl.disabled = false;
           statusEl.textContent = "Selesai (Template Standar)";
         } else {
-          // Call Real Gemini API
-          const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              contents: [{ parts: [{ text: prompt }] }]
-            })
-          });
+          // Model fallback list (gemini-1.5-flash is universal and supported on all keys)
+          const modelsToTry = ['gemini-1.5-flash', 'gemini-2.0-flash', 'gemini-1.5-pro'];
+          let generatedText = null;
+          let lastErr = null;
 
-          if (!response.ok) {
-            throw new Error(`API Error: ${response.status} ${response.statusText}`);
+          for (const m of modelsToTry) {
+            try {
+              const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${m}:generateContent?key=${apiKey}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+              });
+
+              if (response.ok) {
+                const data = await response.json();
+                generatedText = data.candidates?.[0]?.content?.parts?.[0]?.text;
+                if (generatedText) break;
+              } else {
+                let errDetail = response.statusText;
+                try {
+                  const errJson = await response.json();
+                  errDetail = errJson.error?.message || errDetail;
+                } catch(e) {}
+                lastErr = new Error(`${response.status}: ${errDetail}`);
+              }
+            } catch (networkErr) {
+              lastErr = networkErr;
+            }
           }
 
-          const data = await response.json();
-          const generatedText = data.candidates?.[0]?.content?.parts?.[0]?.text || "Gagal menghasilkan teks.";
+          if (!generatedText) {
+            throw lastErr || new Error("Gagal memperoleh respon dari Gemini API.");
+          }
           
           previewEl.textContent = generatedText;
           lastGeneratedData = { title: indicatorName, content: generatedText };
@@ -816,7 +1027,7 @@ Mengetahui, Kepala Sekolah ${sch.ks}`;
       if (!lastGeneratedData) return;
       try {
         const sch = getSchoolInfo();
-        const blob = await createDocxBlob(99, { title: lastGeneratedData.title });
+        const blob = await createDocxBlob(99, { title: lastGeneratedData.title, content: lastGeneratedData.content });
         const cleanName = lastGeneratedData.title.replace(/[\/\s:]+/g, '_');
         saveAs(blob, `Bukti_Fisik_Custom_${cleanName}.docx`);
       } catch (err) {
