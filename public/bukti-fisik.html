@@ -1651,9 +1651,39 @@ SUSUN NASKAH SECARA RESMI DENGAN URUTAN PERSIS SEPERTI INI:
 5. LEMBAR PENGESAHAN KEPALA SEKOLAH (Lengkap dengan tempat, tanggal Cirebon 13 November ${sch.year}, tanda tangan, nama, dan NIP).`;
 
       try {
-        if (!apiKey) {
-          useFallbackTemplate();
-        } else {
+        let generatedText = null;
+
+        // Coba panggil serverless backend Vercel /api/generate terlebih dahulu
+        try {
+          const chosenModelUI = document.getElementById('ai_model_select')?.value;
+          const apiBackendRes = await fetch('/api/generate', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              indicatorName,
+              evidenceTypes,
+              extraNotes: notes,
+              schoolInfo: sch,
+              apiKey: apiKey || undefined,
+              model: chosenModelUI
+            })
+          });
+
+          if (apiBackendRes.ok) {
+            const apiData = await apiBackendRes.json();
+            if (apiData.content) {
+              generatedText = apiData.content;
+            }
+          }
+        } catch (backendErr) {
+          console.log("Serverless backend tidak tersedia, menggunakan client-side fallback:", backendErr);
+        }
+
+        if (!generatedText) {
+          if (!apiKey) {
+            useFallbackTemplate();
+            return;
+          }
           // 1. Check user choice from dropdown
           const chosenModelUI = document.getElementById('ai_model_select')?.value;
           let candidateModels = [];
@@ -1783,15 +1813,326 @@ SUSUN NASKAH SECARA RESMI DENGAN URUTAN PERSIS SEPERTI INI:
       }
     }
 
+    // ========================================================
+    // STRUCTURED DOCX ENGINE FOR AI GENERATED EVIDENCE
+    // Mengubah keluaran AI menjadi dokumen Word ber-tabel resmi kedinasan
+    // ========================================================
+    async function createStructuredDocxFromAI(sch, title, rawContent) {
+      const { Document, Paragraph, TextRun, Table, TableRow, TableCell, AlignmentType, WidthType, BorderStyle } = docx;
+
+      const borderStyle = {
+        top: { style: BorderStyle.SINGLE, size: 4, color: "B0BEC5" },
+        bottom: { style: BorderStyle.SINGLE, size: 4, color: "B0BEC5" },
+        left: { style: BorderStyle.SINGLE, size: 4, color: "B0BEC5" },
+        right: { style: BorderStyle.SINGLE, size: 4, color: "B0BEC5" },
+        insideHorizontal: { style: BorderStyle.SINGLE, size: 4, color: "E2E8F0" },
+        insideVertical: { style: BorderStyle.SINGLE, size: 4, color: "E2E8F0" }
+      };
+
+      const children = [
+        // KOP SURAT RESMI
+        new Paragraph({
+          alignment: AlignmentType.CENTER,
+          spacing: { after: 40 },
+          children: [
+            new TextRun({ text: "PEMERINTAH KOTA CIREBON\nDINAS PENDIDIKAN\n" + sch.name, bold: true, size: 24, font: "Arial" })
+          ]
+        }),
+        new Paragraph({
+          alignment: AlignmentType.CENTER,
+          spacing: { after: 140 },
+          children: [
+            new TextRun({ text: `Alamat: ${sch.address}, Kec. ${sch.kec}, Kota Cirebon\nPosel: sdnegeri@cirebonkota.go.id | Laman: disdik.cirebonkota.go.id`, italics: true, size: 17, font: "Arial", color: "666666" })
+          ]
+        }),
+        new Paragraph({
+          spacing: { after: 200 },
+          border: { bottom: { style: BorderStyle.DOUBLE, size: 14, color: "000000" } }
+        }),
+
+        // JUDUL UTAMA
+        new Paragraph({
+          alignment: AlignmentType.CENTER,
+          spacing: { after: 50 },
+          children: [
+            new TextRun({ text: "BUKTI FISIK INSTRUMEN JABAR BERAKSI", bold: true, size: 23, font: "Arial" })
+          ]
+        }),
+        new Paragraph({
+          alignment: AlignmentType.CENTER,
+          spacing: { after: 260 },
+          children: [
+            new TextRun({ text: `INDIKATOR: ${title.toUpperCase()}\n(Dokumen Resmi Terverifikasi Penguatan Pendidikan Karakter)`, bold: true, size: 18, font: "Arial", color: "1E3A8A" })
+          ]
+        })
+      ];
+
+      // Parse AI raw content into sections
+      const lines = rawContent.split('\n');
+      let currentSection = '';
+      let sectionItems = [];
+      let tableRowsData = [];
+      let inMarkdownTable = false;
+
+      function flushCurrentSection() {
+        if (!currentSection) return;
+
+        // Add Section Header
+        children.push(
+          new Paragraph({
+            spacing: { before: 200, after: 100 },
+            children: [
+              new TextRun({ text: currentSection, bold: true, size: 20, color: "1E3A8A", font: "Arial" })
+            ]
+          })
+        );
+
+        // If we gathered markdown table rows
+        if (tableRowsData.length > 0) {
+          const docxRows = [];
+          tableRowsData.forEach((rowCells, rIdx) => {
+            const isHeader = rIdx === 0;
+            const bg = isHeader ? "1E3A8A" : (rIdx % 2 === 0 ? "F8FAFC" : "FFFFFF");
+            const textColor = isHeader ? "FFFFFF" : "000000";
+
+            docxRows.push(
+              new TableRow({
+                children: rowCells.map(cellText => new TableCell({
+                  shading: { fill: bg },
+                  children: [
+                    new Paragraph({
+                      alignment: isHeader ? AlignmentType.CENTER : AlignmentType.LEFT,
+                      children: [new TextRun({ text: cellText.trim(), bold: isHeader, color: textColor, size: 16, font: "Arial" })]
+                    })
+                  ]
+                }))
+              })
+            );
+          });
+
+          if (docxRows.length > 0) {
+            children.push(
+              new Table({
+                width: { size: 100, type: WidthType.PERCENTAGE },
+                borders: borderStyle,
+                rows: docxRows
+              })
+            );
+          }
+          tableRowsData = [];
+        } else if (sectionItems.length > 0) {
+          // If we gathered key-value pairs or list items, build a 2-column formal table
+          const docxKeyValRows = [];
+          sectionItems.forEach(([label, detail]) => {
+            docxKeyValRows.push(
+              new TableRow({
+                children: [
+                  new TableCell({
+                    width: { size: 28, type: WidthType.PERCENTAGE },
+                    shading: { fill: "F5F7FA" },
+                    children: [new Paragraph({ children: [new TextRun({ text: label, bold: true, size: 17, font: "Arial" })] })]
+                  }),
+                  new TableCell({
+                    width: { size: 72, type: WidthType.PERCENTAGE },
+                    children: [new Paragraph({ children: [new TextRun({ text: detail, size: 17, font: "Arial" })] })]
+                  })
+                ]
+              })
+            );
+          });
+
+          if (docxKeyValRows.length > 0) {
+            children.push(
+              new Table({
+                width: { size: 100, type: WidthType.PERCENTAGE },
+                borders: borderStyle,
+                rows: docxKeyValRows
+              })
+            );
+          }
+          sectionItems = [];
+        }
+
+        children.push(new Paragraph({ spacing: { after: 120 } }));
+      }
+
+      for (let i = 0; i < lines.length; i++) {
+        const line = lines[i].trim();
+        if (!line) continue;
+
+        // Detect Section Header (BAGIAN I, BAGIAN II, etc.)
+        if (line.startsWith('BAGIAN') || line.startsWith('### BAGIAN') || (line.startsWith('**BAGIAN') && line.includes(':'))) {
+          flushCurrentSection();
+          currentSection = line.replace(/[*#]/g, '').trim();
+          inMarkdownTable = false;
+          continue;
+        }
+
+        // Detect Markdown Table
+        if (line.startsWith('|') && line.endsWith('|')) {
+          const cells = line.split('|').slice(1, -1).map(c => c.trim());
+          // Ignore separator line |---|---|
+          if (cells.some(c => c.includes('---'))) {
+            continue;
+          }
+          tableRowsData.push(cells);
+          inMarkdownTable = true;
+          continue;
+        }
+
+        // Detect Key-Value item like "- Dasar Penugasan: ..." or "1. Tujuan: ..."
+        if ((line.startsWith('- ') || line.startsWith('* ') || /^[0-9]+\./.test(line)) && line.includes(':')) {
+          const parts = line.replace(/^[-*0-9.]+\s*/, '').split(':');
+          const label = parts[0].trim();
+          const detail = parts.slice(1).join(':').trim();
+          sectionItems.push([label, detail]);
+          continue;
+        }
+
+        // General narrative paragraph
+        if (!currentSection) {
+          // Top metadata
+          children.push(
+            new Paragraph({
+              spacing: { after: 60 },
+              children: [new TextRun({ text: line, size: 17, font: "Arial" })]
+            })
+          );
+        } else {
+          sectionItems.push(["Keterangan", line]);
+        }
+      }
+
+      flushCurrentSection();
+
+      // Add Photo Frame Table
+      children.push(
+        new Paragraph({
+          spacing: { before: 200, after: 100 },
+          children: [
+            new TextRun({ text: "LEMBAR DOKUMENTASI FOTO KEGIATAN", bold: true, size: 20, color: "1E3A8A", font: "Arial" })
+          ]
+        }),
+        new Table({
+          width: { size: 100, type: WidthType.PERCENTAGE },
+          borders: borderStyle,
+          rows: [
+            new TableRow({
+              children: [
+                new TableCell({
+                  width: { size: 50, type: WidthType.PERCENTAGE },
+                  shading: { fill: "FAFAFA" },
+                  children: [
+                    new Paragraph({
+                      alignment: AlignmentType.CENTER,
+                      spacing: { before: 180, after: 180 },
+                      children: [new TextRun({ text: "[ TEMPELKAN FOTO KEGIATAN 1 DI SINI ]\n\nPelaksanaan kegiatan bersama peserta didik di lingkungan sekolah.", size: 16, color: "777777", font: "Arial" })]
+                    })
+                  ]
+                }),
+                new TableCell({
+                  width: { size: 50, type: WidthType.PERCENTAGE },
+                  shading: { fill: "FAFAFA" },
+                  children: [
+                    new Paragraph({
+                      alignment: AlignmentType.CENTER,
+                      spacing: { before: 180, after: 180 },
+                      children: [new TextRun({ text: "[ TEMPELKAN FOTO KEGIATAN 2 DI SINI ]\n\nEvaluasi bersama dewan guru dan paguyuban orang tua murid.", size: 16, color: "777777", font: "Arial" })]
+                    })
+                  ]
+                })
+              ]
+            })
+          ]
+        })
+      );
+
+      // Add Official 3-Column Signatures
+      children.push(
+        new Paragraph({
+          alignment: AlignmentType.RIGHT,
+          spacing: { before: 240, after: 100 },
+          children: [new TextRun({ text: `Cirebon, 13 November ${sch.year}`, size: 18, font: "Arial" })]
+        }),
+        new Table({
+          width: { size: 100, type: WidthType.PERCENTAGE },
+          borders: {
+            top: { style: BorderStyle.NONE },
+            bottom: { style: BorderStyle.NONE },
+            left: { style: BorderStyle.NONE },
+            right: { style: BorderStyle.NONE },
+            insideHorizontal: { style: BorderStyle.NONE },
+            insideVertical: { style: BorderStyle.NONE }
+          },
+          rows: [
+            new TableRow({
+              children: [
+                new TableCell({
+                  width: { size: 33, type: WidthType.PERCENTAGE },
+                  children: [
+                    new Paragraph({
+                      alignment: AlignmentType.CENTER,
+                      children: [new TextRun({ text: "Pembina Kesiswaan,\n\n\n\n\n( ......................................... )\nNIP. .....................................", size: 16, font: "Arial" })]
+                    })
+                  ]
+                }),
+                new TableCell({
+                  width: { size: 33, type: WidthType.PERCENTAGE },
+                  children: [
+                    new Paragraph({
+                      alignment: AlignmentType.CENTER,
+                      children: [new TextRun({ text: "Ketua Komite Sekolah,\n\n\n\n\n( ......................................... )", size: 16, font: "Arial" })]
+                    })
+                  ]
+                }),
+                new TableCell({
+                  width: { size: 34, type: WidthType.PERCENTAGE },
+                  children: [
+                    new Paragraph({
+                      alignment: AlignmentType.CENTER,
+                      children: [new TextRun({ text: "Mengetahui,\nKepala " + sch.name + "\n\n\n\n\n" + sch.ks + "\nNIP. " + sch.ks_nip, bold: false, size: 16, font: "Arial" })]
+                    })
+                  ]
+                })
+              ]
+            })
+          ]
+        })
+      );
+
+      const doc = new Document({
+        sections: [{
+          properties: {
+            page: { margin: { top: 1134, bottom: 1134, left: 1134, right: 1134 } }
+          },
+          children: children
+        }]
+      });
+
+      return await docx.Packer.toBlob(doc);
+    }
+
     async function downloadCustomAIDoc() {
       if (!lastGeneratedData) return;
+      const btn = document.getElementById('btn-dl-ai');
+      if (btn) btn.disabled = true;
       try {
         const sch = getSchoolInfo();
-        const blob = await createDocxBlob(99, { title: lastGeneratedData.title, content: lastGeneratedData.content });
+        const blob = await createStructuredDocxFromAI(sch, lastGeneratedData.title, lastGeneratedData.content);
         const cleanName = lastGeneratedData.title.replace(/[\/\s:]+/g, '_');
-        saveAs(blob, `Bukti_Fisik_Custom_${cleanName}.docx`);
+        saveAs(blob, `Bukti_Fisik_Resmi_${cleanName}_${sch.name.replace(/\s+/g, '_')}_${sch.year}.docx`);
       } catch (err) {
-        alert("Gagal mengunduh: " + err.message);
+        console.error("Gagal mengunduh structured docx:", err);
+        // Fallback to basic blob if parsing fails
+        try {
+          const sch = getSchoolInfo();
+          const fallbackBlob = await createDocxBlob(99, { title: lastGeneratedData.title, content: lastGeneratedData.content });
+          saveAs(fallbackBlob, `Bukti_Fisik_${lastGeneratedData.title.replace(/[\/\s:]+/g, '_')}.docx`);
+        } catch(fallbackErr) {
+          alert("Gagal mengunduh: " + err.message);
+        }
+      } finally {
+        if (btn) btn.disabled = false;
       }
     }
 
