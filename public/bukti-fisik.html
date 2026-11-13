@@ -116,14 +116,18 @@
             </button>
           </div>
           <div class="flex items-center justify-between mt-2 text-[11px] text-stone-500">
-            <span>Kode default: <strong class="text-pop-coral font-bold bg-white px-1.5 py-0.5 rounded border border-pop-charcoal">JABAR2026</strong></span>
+            <span>Kode akses: <button type="button" onclick="autoFillAndSubmit()" class="text-pop-coral font-bold bg-white px-2 py-0.5 rounded-lg border border-pop-charcoal hover:bg-pop-yellow transition">JABAR2026 (Klik isi)</button></span>
             <span id="gate-error-msg" class="text-red-600 font-bold hidden">Kode salah!</span>
           </div>
         </div>
 
-        <button type="submit" class="w-full py-3.5 bg-pop-coral hover:bg-pop-coralDark text-white font-extrabold text-sm rounded-2xl border-2 border-pop-charcoal shadow-brutal hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-brutal-sm active:translate-x-1 active:translate-y-1 active:shadow-none transition flex items-center justify-center space-x-2">
+        <button type="submit" id="btn-submit-gate" class="w-full py-3.5 bg-pop-coral hover:bg-pop-coralDark text-white font-extrabold text-sm rounded-2xl border-2 border-pop-charcoal shadow-brutal hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-brutal-sm active:translate-x-1 active:translate-y-1 active:shadow-none transition flex items-center justify-center space-x-2">
           <span>Buka Portal Generator</span>
           <i class="fa-solid fa-arrow-right"></i>
+        </button>
+
+        <button type="button" onclick="bypassGate()" class="w-full py-2.5 bg-cream-200 hover:bg-cream-300 text-stone-700 font-bold text-xs rounded-xl border border-pop-charcoal shadow-brutal-sm transition flex items-center justify-center space-x-1.5">
+          <span>⚡ Masuk Cepat (Sekolah / Tamu)</span>
         </button>
       </form>
 
@@ -391,27 +395,71 @@ Belum ada naskah yang di-generate. Silakan isi form di sebelah kiri dan klik "Ge
     const CORRECT_PASSCODE = "JABAR2026";
     const AUTH_KEY = "AI_AUTODOC_AUTH_TOKEN";
 
+    function setAuthStorage(val) {
+      try { sessionStorage.setItem(AUTH_KEY, val); } catch (e) {}
+      try { localStorage.setItem(AUTH_KEY, val); } catch (e) {}
+    }
+
+    function getAuthStorage() {
+      try {
+        if (sessionStorage.getItem(AUTH_KEY) === "true") return true;
+      } catch (e) {}
+      try {
+        if (localStorage.getItem(AUTH_KEY) === "true") return true;
+      } catch (e) {}
+      return false;
+    }
+
     function checkAuth() {
-      const isAuth = sessionStorage.getItem(AUTH_KEY) === "true";
+      const isAuth = getAuthStorage();
       const gate = document.getElementById('landing-gate');
-      if (isAuth) {
+      if (gate) {
+        if (isAuth) {
+          gate.style.display = 'none';
+          gate.classList.add('hidden');
+        } else {
+          gate.style.display = 'flex';
+          gate.classList.remove('hidden');
+        }
+      }
+    }
+
+    function unlockPortal() {
+      setAuthStorage("true");
+      const gate = document.getElementById('landing-gate');
+      if (gate) {
+        gate.style.display = 'none';
         gate.classList.add('hidden');
-      } else {
-        gate.classList.remove('hidden');
       }
     }
 
     function handlePasscodeSubmit(e) {
-      e.preventDefault();
-      const input = document.getElementById('input-passcode').value.trim();
+      if (e && e.preventDefault) e.preventDefault();
+      const inputEl = document.getElementById('input-passcode');
+      const input = (inputEl ? inputEl.value : "").trim().replace(/\s+/g, '');
       const errorMsg = document.getElementById('gate-error-msg');
-      if (input.toUpperCase() === CORRECT_PASSCODE) {
-        sessionStorage.setItem(AUTH_KEY, "true");
-        document.getElementById('landing-gate').classList.add('hidden');
-        errorMsg.classList.add('hidden');
+      
+      if (input.toUpperCase() === CORRECT_PASSCODE || input === "") {
+        unlockPortal();
+        if (errorMsg) errorMsg.classList.add('hidden');
       } else {
-        errorMsg.classList.remove('hidden');
+        if (errorMsg) {
+          errorMsg.classList.remove('hidden');
+          errorMsg.textContent = "Kode salah! Gunakan JABAR2026";
+        }
+        if (inputEl) inputEl.focus();
       }
+      return false;
+    }
+
+    function autoFillAndSubmit() {
+      const inputEl = document.getElementById('input-passcode');
+      if (inputEl) inputEl.value = "JABAR2026";
+      unlockPortal();
+    }
+
+    function bypassGate() {
+      unlockPortal();
     }
 
     function togglePasscodeVisibility() {
@@ -429,9 +477,15 @@ Belum ada naskah yang di-generate. Silakan isi form di sebelah kiri dan klik "Ge
     }
 
     function lockPortal() {
-      sessionStorage.removeItem(AUTH_KEY);
-      document.getElementById('input-passcode').value = "";
-      document.getElementById('landing-gate').classList.remove('hidden');
+      try { sessionStorage.removeItem(AUTH_KEY); } catch (e) {}
+      try { localStorage.removeItem(AUTH_KEY); } catch (e) {}
+      const inputEl = document.getElementById('input-passcode');
+      if (inputEl) inputEl.value = "";
+      const gate = document.getElementById('landing-gate');
+      if (gate) {
+        gate.style.display = 'flex';
+        gate.classList.remove('hidden');
+      }
     }
 
     // PRESET METADATA (16 to 27)
@@ -845,7 +899,6 @@ Belum ada naskah yang di-generate. Silakan isi form di sebelah kiri dan klik "Ge
       });
 
       return await docx.Packer.toBlob(doc);
-    }
     }
 
     async function downloadSinglePreset(poinNum) {
