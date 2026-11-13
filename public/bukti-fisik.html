@@ -1027,8 +1027,195 @@ Belum ada naskah yang di-generate. Silakan isi form di sebelah kiri dan klik "Ge
             }));
           }
         }
+      } else if (poinNum === 6) {
+        // SPESIFIK POIN 6: PEMBIASAAN BERMASYARAKAT (SURAT TUGAS + LAPORAN + JURNAL LOG + DOKUMENTASI)
+        children.push(
+          new Paragraph({
+            spacing: { before: 160, after: 100 },
+            children: [
+              new TextRun({ text: "BAGIAN I: SURAT TUGAS PELAKSANAAN KEGIATAN SOSIAL KEMASYARAKATAN", bold: true, size: 20, color: "1E3A8A" })
+            ]
+          }),
+          new Table({
+            width: { size: 100, type: WidthType.PERCENTAGE },
+            borders: borderStyle,
+            rows: [
+              new TableRow({
+                children: [
+                  new TableCell({ width: { size: 28, type: WidthType.PERCENTAGE }, shading: { fill: "F5F7FA" }, children: [new Paragraph({ children: [new TextRun({ text: "1. Nomor Surat Tugas", bold: true, size: 17 })] })] }),
+                  new TableCell({ width: { size: 72, type: WidthType.PERCENTAGE }, children: [new Paragraph({ children: [new TextRun({ text: "Nomor: 421.2 / 084 / SD-KS / X / " + sch.year, size: 17 })] })] })
+                ]
+              }),
+              new TableRow({
+                children: [
+                  new TableCell({ width: { size: 28, type: WidthType.PERCENTAGE }, shading: { fill: "F5F7FA" }, children: [new Paragraph({ children: [new TextRun({ text: "2. Dasar Penugasan", bold: true, size: 17 })] })] }),
+                  new TableCell({ width: { size: 72, type: WidthType.PERCENTAGE }, children: [new Paragraph({ children: [new TextRun({ text: "a. Program Penguatan Pendidikan Karakter (PPK) Jabar Beraksi Tahun " + sch.year + ".\nb. Rencana Kerja Tahunan (RKT) " + sch.name + " Bidang Kesiswaan & Hubungan Masyarakat.", size: 17 })] })] })
+                ]
+              }),
+              new TableRow({
+                children: [
+                  new TableCell({ width: { size: 28, type: WidthType.PERCENTAGE }, shading: { fill: "F5F7FA" }, children: [new Paragraph({ children: [new TextRun({ text: "3. Pejabat Penugasan", bold: true, size: 17 })] })] }),
+                  new TableCell({ width: { size: 72, type: WidthType.PERCENTAGE }, children: [new Paragraph({ children: [new TextRun({ text: "Nama : " + sch.ks + "\nJabatan : Kepala " + sch.name + "\nNIP : " + sch.ks_nip, size: 17 })] })] })
+                ]
+              }),
+              new TableRow({
+                children: [
+                  new TableCell({ width: { size: 28, type: WidthType.PERCENTAGE }, shading: { fill: "F5F7FA" }, children: [new Paragraph({ children: [new TextRun({ text: "4. Personel Ditugaskan", bold: true, size: 17 })] })] }),
+                  new TableCell({ width: { size: 72, type: WidthType.PERCENTAGE }, children: [new Paragraph({ children: [new TextRun({ text: "1. Pembina Kesiswaan & Koordinator Pembiasaan\n2. Seluruh Guru Kelas (Kelas I s.d. VI) dan Guru Pendamping\n3. Pengurus Paguyuban Orang Tua Murid / Komite Sekolah\n4. Seluruh Peserta Didik " + sch.name, size: 17 })] })] })
+                ]
+              }),
+              new TableRow({
+                children: [
+                  new TableCell({ width: { size: 28, type: WidthType.PERCENTAGE }, shading: { fill: "F5F7FA" }, children: [new Paragraph({ children: [new TextRun({ text: "5. Uraian Penugasan", bold: true, size: 17 })] })] }),
+                  new TableCell({ width: { size: 72, type: WidthType.PERCENTAGE }, children: [new Paragraph({ children: [new TextRun({ text: "1. Merencanakan dan mendampingi pelaksanaan Program Pembiasaan Bermasyarakat.\n2. Mengkoordinasikan Aksi Infaq Peduli Sesama (Jumat Berkah), Gerakan Pungut Sampah Warga Sekitar Sekolah (GPS), dan Kunjungan Sosial.\n3. Memastikan ketertiban, keselamatan, dan sopan santun peserta didik selama berinteraksi dengan warga masyarakat sekitar sekolah.", size: 17 })] })] })
+                ]
+              }),
+              new TableRow({
+                children: [
+                  new TableCell({ width: { size: 28, type: WidthType.PERCENTAGE }, shading: { fill: "F5F7FA" }, children: [new Paragraph({ children: [new TextRun({ text: "6. Waktu & Lokasi", bold: true, size: 17 })] })] }),
+                  new TableCell({ width: { size: 72, type: WidthType.PERCENTAGE }, children: [new Paragraph({ children: [new TextRun({ text: "Waktu : Terjadwal Rutin Setiap Pekan ke-2 dan ke-4\nLokasi : Lingkungan RT 01 - RT 04 / RW 03 Kelurahan " + sch.kec + ", Kota Cirebon", size: 17 })] })] })
+                ]
+              })
+            ]
+          }),
+
+          new Paragraph({
+            spacing: { before: 240, after: 100 },
+            children: [
+              new TextRun({ text: "BAGIAN II: LAPORAN PELAKSANAAN KEGIATAN SOSIAL & BERMASYARAKAT", bold: true, size: 20, color: "1E3A8A" })
+            ]
+          }),
+          new Table({
+            width: { size: 100, type: WidthType.PERCENTAGE },
+            borders: borderStyle,
+            rows: [
+              new TableRow({
+                children: [
+                  new TableCell({ width: { size: 28, type: WidthType.PERCENTAGE }, shading: { fill: "F5F7FA" }, children: [new Paragraph({ children: [new TextRun({ text: "1. Nama Program", bold: true, size: 17 })] })] }),
+                  new TableCell({ width: { size: 72, type: WidthType.PERCENTAGE }, children: [new Paragraph({ children: [new TextRun({ text: "Program Pembiasaan: Siswa Beraksi Nyata Peduli Lingkungan & Berbagi Kasih Warga", size: 17 })] })] })
+                ]
+              }),
+              new TableRow({
+                children: [
+                  new TableCell({ width: { size: 28, type: WidthType.PERCENTAGE }, shading: { fill: "F5F7FA" }, children: [new Paragraph({ children: [new TextRun({ text: "2. Tujuan", bold: true, size: 17 })] })] }),
+                  new TableCell({ width: { size: 72, type: WidthType.PERCENTAGE }, children: [new Paragraph({ children: [new TextRun({ text: "Menumbuhkan empati sosial, tenggang rasa, kepedulian kemanusiaan, dan membiasakan budaya gotong royong kepada masyarakat sekitar sekolah.", size: 17 })] })] })
+                ]
+              }),
+              new TableRow({
+                children: [
+                  new TableCell({ width: { size: 28, type: WidthType.PERCENTAGE }, shading: { fill: "F5F7FA" }, children: [new Paragraph({ children: [new TextRun({ text: "3. Bentuk Aktivitas", bold: true, size: 17 })] })] }),
+                  new TableCell({ width: { size: 72, type: WidthType.PERCENTAGE }, children: [new Paragraph({ children: [new TextRun({ text: "a. Jumat Berkah & Kotak Infaq Sukarela (penyaluran paket bekal sehat dan sembako dhuafa bagi warga lansia sekitar sekolah).\nb. Gerakan Pungut Sampah (GPS) dan pembersihan selokan fasilitas umum sekitar sekolah bersama warga.\nc. Sapa Santun Warga dan silaturahmi tokoh masyarakat sekitar sekolah.", size: 17 })] })] })
+                ]
+              }),
+              new TableRow({
+                children: [
+                  new TableCell({ width: { size: 28, type: WidthType.PERCENTAGE }, shading: { fill: "F5F7FA" }, children: [new Paragraph({ children: [new TextRun({ text: "4. Capaian & Dampak", bold: true, size: 17 })] })] }),
+                  new TableCell({ width: { size: 72, type: WidthType.PERCENTAGE }, children: [new Paragraph({ children: [new TextRun({ text: "Partisipasi aktif peserta didik mencapai 98%, terbangun ikatan kekeluargaan yang erat antara sekolah dengan warga lingkungan sekitar.", size: 17 })] })] })
+                ]
+              }),
+              new TableRow({
+                children: [
+                  new TableCell({ width: { size: 28, type: WidthType.PERCENTAGE }, shading: { fill: "F5F7FA" }, children: [new Paragraph({ children: [new TextRun({ text: "5. Rencana Lanjut", bold: true, size: 17 })] })] }),
+                  new TableCell({ width: { size: 72, type: WidthType.PERCENTAGE }, children: [new Paragraph({ children: [new TextRun({ text: "Program pembiasaan bermasyarakat diperluas menjadi bagian terpadu dari Projek Penguatan Profil Pelajar Pancasila (P5) tema Kearifan Lokal.", size: 17 })] })] })
+                ]
+              })
+            ]
+          }),
+
+          new Paragraph({
+            spacing: { before: 240, after: 100 },
+            children: [
+              new TextRun({ text: "BAGIAN III: JURNAL LOG HARIAN & BUKU CATATAN AKTIVITAS SOSIAL SISWA", bold: true, size: 20, color: "1E3A8A" })
+            ]
+          }),
+          new Table({
+            width: { size: 100, type: WidthType.PERCENTAGE },
+            borders: borderStyle,
+            rows: [
+              new TableRow({
+                children: [
+                  new TableCell({ shading: { fill: "1E3A8A" }, children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "No", bold: true, color: "FFFFFF", size: 16 })] })] }),
+                  new TableCell({ shading: { fill: "1E3A8A" }, children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "Hari / Tanggal", bold: true, color: "FFFFFF", size: 16 })] })] }),
+                  new TableCell({ shading: { fill: "1E3A8A" }, children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "Bentuk Kegiatan Sosial", bold: true, color: "FFFFFF", size: 16 })] })] }),
+                  new TableCell({ shading: { fill: "1E3A8A" }, children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "Sasaran / Lokasi", bold: true, color: "FFFFFF", size: 16 })] })] }),
+                  new TableCell({ shading: { fill: "1E3A8A" }, children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "Hasil Pengamatan Karakter", bold: true, color: "FFFFFF", size: 16 })] })] }),
+                  new TableCell({ shading: { fill: "1E3A8A" }, children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "Status", bold: true, color: "FFFFFF", size: 16 })] })] })
+                ]
+              }),
+              new TableRow({
+                children: [
+                  new TableCell({ children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "1", size: 16 })] })] }),
+                  new TableCell({ children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "Jumat, 11/09/" + sch.year, size: 16 })] })] }),
+                  new TableCell({ children: [new Paragraph({ children: [new TextRun({ text: "Aksi Jumat Berkah & Penyaluran Paket Makanan / Sembako", size: 16 })] })] }),
+                  new TableCell({ children: [new Paragraph({ children: [new TextRun({ text: "Warga Lansia RT 02 RW 03 " + sch.kec, size: 16 })] })] }),
+                  new TableCell({ children: [new Paragraph({ children: [new TextRun({ text: "Siswa santun, takzim, dan berempati tinggi saat membagikan bantuan.", size: 16 })] })] }),
+                  new TableCell({ children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "Terlaksana", size: 16 })] })] })
+                ]
+              }),
+              new TableRow({
+                children: [
+                  new TableCell({ children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "2", size: 16 })] })] }),
+                  new TableCell({ children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "Sabtu, 26/09/" + sch.year, size: 16 })] })] }),
+                  new TableCell({ children: [new Paragraph({ children: [new TextRun({ text: "Kerja Bakti Bersih Lingkungan Bersama Warga (GPS)", size: 16 })] })] }),
+                  new TableCell({ children: [new Paragraph({ children: [new TextRun({ text: "Jalan Protokol & Saluran Air Sekitar Sekolah", size: 16 })] })] }),
+                  new TableCell({ children: [new Paragraph({ children: [new TextRun({ text: "Kerja sama tim sangat kompak, peduli kebersihan fasilitas umum.", size: 16 })] })] }),
+                  new TableCell({ children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "Terlaksana", size: 16 })] })] })
+                ]
+              }),
+              new TableRow({
+                children: [
+                  new TableCell({ children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "3", size: 16 })] })] }),
+                  new TableCell({ children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "Jumat, 16/10/" + sch.year, size: 16 })] })] }),
+                  new TableCell({ children: [new Paragraph({ children: [new TextRun({ text: "Silaturahmi & Santunan Anak Yatim Warga Sekitar", size: 16 })] })] }),
+                  new TableCell({ children: [new Paragraph({ children: [new TextRun({ text: "Aula Pertemuan Kelurahan " + sch.kec, size: 16 })] })] }),
+                  new TableCell({ children: [new Paragraph({ children: [new TextRun({ text: "Terjalin silaturahmi yang hangat dan ketulusan berbagi kebahagiaan.", size: 16 })] })] }),
+                  new TableCell({ children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "Terlaksana", size: 16 })] })] })
+                ]
+              })
+            ]
+          }),
+
+          new Paragraph({
+            spacing: { before: 240, after: 100 },
+            children: [
+              new TextRun({ text: "BAGIAN IV: LEMBAR DOKUMENTASI FOTO KEGIATAN BERMASYARAKAT", bold: true, size: 20, color: "1E3A8A" })
+            ]
+          }),
+          new Table({
+            width: { size: 100, type: WidthType.PERCENTAGE },
+            borders: borderStyle,
+            rows: [
+              new TableRow({
+                children: [
+                  new TableCell({
+                    width: { size: 50, type: WidthType.PERCENTAGE },
+                    shading: { fill: "FAFAFA" },
+                    children: [
+                      new Paragraph({
+                        alignment: AlignmentType.CENTER,
+                        spacing: { before: 180, after: 180 },
+                        children: [new TextRun({ text: "[ TEMPELKAN FOTO KEGIATAN 1 DI SINI ]\n\nDokumentasi Aksi Jumat Berkah & Penyaluran Paket Bantuan kepada Warga Kurang Mampu Sekitar Sekolah.", size: 16, color: "777777" })]
+                      })
+                    ]
+                  }),
+                  new TableCell({
+                    width: { size: 50, type: WidthType.PERCENTAGE },
+                    shading: { fill: "FAFAFA" },
+                    children: [
+                      new Paragraph({
+                        alignment: AlignmentType.CENTER,
+                        spacing: { before: 180, after: 180 },
+                        children: [new TextRun({ text: "[ TEMPELKAN FOTO KEGIATAN 2 DI SINI ]\n\nDokumentasi Kerja Bakti Bersih Lingkungan dan Saluran Air Bersama Warga RT 02 RW 03 " + sch.kec + ".", size: 16, color: "777777" })]
+                      })
+                    ]
+                  })
+                ]
+              })
+            ]
+          })
+        );
       } else {
-        // Specific Indonesian SOP and Log Table
+        // Generic Indonesian SOP and Log Table
         children.push(
           new Paragraph({
             spacing: { before: 160, after: 100 },
