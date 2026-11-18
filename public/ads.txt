@@ -1,0 +1,3 @@
+# Google AdSense Publisher Verification File
+# Ganti pub-XXXXXXXXXXXXXXXX dengan ID Publisher Akun AdSense Anda
+google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0

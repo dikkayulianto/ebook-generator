@@ -10,6 +10,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Fredoka:wght@400;600;700&family=Nunito:wght@400;600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
+  <!-- Google AdSense Monetization & Site Verification -->
+  <meta name="google-adsense-account" content="ca-pub-XXXXXXXXXXXXXXXX">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
 
@@ -440,11 +444,8 @@
 
         <!-- Bottom Controls -->
         <div class="flex flex-col items-center gap-3 pt-6 border-t border-[#e2d8cd]">
-          <a href="/admin.html" class="w-10 h-10 rounded-full bg-white hover:bg-slate-100 text-slate-700 flex items-center justify-center border border-slate-200 transition-colors" title="Admin Pengelola Konten">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-              <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-            </svg>
+          <a href="/#katalog-buku" class="w-10 h-10 rounded-full bg-white hover:bg-slate-100 text-slate-700 flex items-center justify-center border border-slate-200 transition-colors font-bold text-xs" title="Katalog Beranda">
+            📖
           </a>
           <a href="/#profil-guru" class="w-10 h-10 rounded-full overflow-hidden border-2 border-emerald-600/40 shadow-sm block">
             <img src="/assets/avatar_profile_buguru.jpg" alt="Foto Profil Bahan Ajar Bu Guru" class="w-full h-full object-cover">
@@ -605,6 +606,20 @@
           </div>
         </div>
 
+        <!-- GOOGLE ADSENSE: SIDEBAR RECTANGLE UNIT -->
+        <div class="p-3 rounded-2xl bg-white border border-dashed border-[#e2d8cd] text-center overflow-hidden" aria-label="Ruang Iklan">
+          <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-1">Iklan Sponsor &bull; Google AdSense</span>
+          <ins class="adsbygoogle"
+               style="display:block"
+               data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+               data-ad-slot="3456789012"
+               data-ad-format="auto"
+               data-full-width-responsive="true"></ins>
+          <script>
+               (adsbygoogle = window.adsbygoogle || []).push({});
+          </script>
+        </div>
+
         <!-- Buy Full Package CTA Card (Pastel Peach) -->
         <div class="edu-card-pastel bg-pastel-peach border border-pastel-peachBorder p-5 space-y-3 shadow-sm text-left">
           <div class="flex items-center justify-between">
@@ -633,6 +648,21 @@
       </aside>
 
     </div>
+
+    <!-- FOOTER BAR (Google AdSense Compliant Links) -->
+    <footer class="bg-white/90 border-t border-[#ece6dc] py-4 px-6 text-xs text-slate-500 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <div class="flex items-center gap-2">
+        <span class="font-bold text-slate-800">Bahan Ajar Bu Guru</span>
+        <span>•</span>
+        <span>Kurikulum Merdeka CP No. 020 Tahun 2026</span>
+      </div>
+      <div class="flex flex-wrap items-center gap-3 sm:gap-4 font-semibold text-[11px] sm:text-xs">
+        <a href="/kebijakan-privasi.html" class="hover:text-slate-900 transition-colors">Kebijakan Privasi</a>
+        <a href="/syarat-ketentuan.html" class="hover:text-slate-900 transition-colors">Syarat &amp; Ketentuan</a>
+        <a href="/tentang-kami.html" class="hover:text-slate-900 transition-colors">Tentang Kami</a>
+        <a href="https://lynk.id/bahanajarbuguru" target="_blank" rel="noopener noreferrer" class="text-slate-900 font-bold hover:underline">Toko Lynk.id &rarr;</a>
+      </div>
+    </footer>
 
   </div>
 
