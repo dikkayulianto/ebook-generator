@@ -315,16 +315,16 @@
               Fase A • Kelas 1 SD • Sumatif Akhir Semester (SAS)
             </span>
             <span class="px-3 py-1 rounded-full bg-amber-100 text-amber-950 font-bold text-xs border border-amber-300">
-              🔒 Pratinjau Sampel 4 Halaman Naskah
+              🔒 Pratinjau 5 Halaman Lengkap (Naskah + Kisi-Kisi)
             </span>
           </div>
 
           <h1 id="reader-hero-title" class="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 tracking-tight leading-[1.2]">
-            Naskah Soal SAS PAI &amp; BP Kelas 1 SD
+            Naskah Soal SAS &amp; Kisi-Kisi PAI Kelas 1 SD
           </h1>
 
           <p class="text-xs sm:text-sm text-slate-600 max-w-2xl leading-relaxed font-normal">
-            Menampilkan 4 halaman sampel naskah ujian resmi (KOP Resmi, Identitas Peserta, Pilihan Ganda Bergambar 1–10, Isian Singkat 16–20, Uraian HOTS 21–25, Kunci Jawaban &amp; Kisi-Kisi CP No. 020/2026). Naskah lengkap Microsoft Word (.docx) siap sunting dapat diperoleh di Lynk.id.
+            Menampilkan 5 halaman berkas ujian resmi (KOP Resmi Sekolah, Identitas Peserta, Pilihan Ganda 1–15, Isian Singkat 16–20, Uraian Penalaran HOTS 21–25, Kunci Jawaban Lengkap, Pedoman Penskoran 100 Poin, serta Matriks Kisi-Kisi Penulisan Soal Berbasis CP No. 020/2026). Naskah Microsoft Word (.docx) siap sunting dapat diperoleh di Lynk.id.
           </p>
         </section>
 
@@ -355,6 +355,29 @@
               <span>📝</span>
               <span>Kelas 6 SD</span>
             </button>
+          </div>
+        </section>
+
+        <!-- VIEW MODE SWITCHER PILLS (Filter Naskah vs Kisi-Kisi) -->
+        <section class="bg-white/80 backdrop-blur p-2.5 rounded-2xl border border-[#e5ded4] flex flex-wrap items-center justify-between gap-2.5 text-xs">
+          <div class="flex flex-wrap items-center gap-2 font-bold text-slate-700">
+            <span class="text-emerald-700 font-extrabold flex items-center gap-1">
+              <span>📂</span> <span>Tampilan Berkas:</span>
+            </span>
+            <div class="flex flex-wrap items-center gap-1.5" id="view-mode-tabs">
+              <button onclick="setViewMode('all')" id="view-tab-all" class="px-3.5 py-1.5 rounded-xl font-bold transition-all bg-slate-900 text-white shadow-xs">
+                📖 Semua Lembar (5 Hal)
+              </button>
+              <button onclick="setViewMode('soal')" id="view-tab-soal" class="px-3.5 py-1.5 rounded-xl font-bold transition-all bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200">
+                📝 Naskah Soal &amp; Kunci (Hal 1–3)
+              </button>
+              <button onclick="setViewMode('kisi')" id="view-tab-kisi" class="px-3.5 py-1.5 rounded-xl font-bold transition-all bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200">
+                📋 Matriks Kisi-Kisi Resmi (Hal 4–5)
+              </button>
+            </div>
+          </div>
+          <div class="text-[11px] text-slate-500 font-semibold">
+            Standar BSKAP No. 020/2026
           </div>
         </section>
 
@@ -520,6 +543,7 @@
   <!-- ======================================================== -->
   <script>
     let currentGrade = 1;
+    let currentViewMode = 'all'; // 'all' | 'soal' | 'kisi'
     let samplesData = null;
 
     // Toast Trigger
@@ -548,8 +572,34 @@
       }
     });
 
+    // View Mode Switcher
+    function setViewMode(mode) {
+      currentViewMode = mode;
+      
+      const tabAll = document.getElementById('view-tab-all');
+      const tabSoal = document.getElementById('view-tab-soal');
+      const tabKisi = document.getElementById('view-tab-kisi');
+
+      const activeClass = 'px-3.5 py-1.5 rounded-xl font-bold transition-all bg-slate-900 text-white shadow-xs';
+      const inactiveClass = 'px-3.5 py-1.5 rounded-xl font-bold transition-all bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200';
+
+      if (tabAll) tabAll.className = (mode === 'all') ? activeClass : inactiveClass;
+      if (tabSoal) tabSoal.className = (mode === 'soal') ? activeClass : inactiveClass;
+      if (tabKisi) tabKisi.className = (mode === 'kisi') ? activeClass : inactiveClass;
+
+      renderSoal(currentGrade, false);
+    }
+
+    const pageLabels = [
+      "Lembar 1 dari 5 • KOP Resmi Sekolah & Pilihan Ganda (1–7)",
+      "Lembar 2 dari 5 • Lanjutan PG (8–15) & Isian Singkat (16–20)",
+      "Lembar 3 dari 5 • Uraian Penalaran HOTS (21–25), Kunci Jawaban & Rubrik Skor",
+      "Lembar 4 dari 5 • Matriks Kisi-Kisi Resmi CP No. 020/2026 (Bagian I: Bab 1–3)",
+      "Lembar 5 dari 5 • Matriks Kisi-Kisi Resmi (Bagian II: Bab 4–5) & Rekapitulasi Kognitif"
+    ];
+
     // Render Soal Sample Pages
-    function renderSoal(grade) {
+    function renderSoal(grade, shouldScroll = true) {
       currentGrade = grade;
 
       // Update switcher pills
@@ -564,7 +614,7 @@
       }
 
       const breadcrumbEl = document.getElementById('reader-breadcrumb');
-      if (breadcrumbEl) breadcrumbEl.textContent = `Pratinjau Soal Kelas ${grade}`;
+      if (breadcrumbEl) breadcrumbEl.textContent = `Pratinjau Soal & Kisi-Kisi Kelas ${grade}`;
 
       const container = document.getElementById('book-pages-container');
       const titleEl = document.getElementById('reader-hero-title');
@@ -578,26 +628,36 @@
 
       const soal = samplesData[grade];
       titleEl.textContent = soal.title;
-      badgeEl.textContent = `${soal.badge} • 25 Soal Lengkap`;
+      badgeEl.textContent = `${soal.badge} • 25 Soal & Kisi-Kisi Lengkap`;
       if (chromeUrlEl) {
         chromeUrlEl.textContent = `lynk.id/bahanajarbuguru/preview-soal-kelas-${grade}`;
       }
-      document.title = `${soal.title} (Pratinjau Sampel) — Bahan Ajar Bu Guru`;
+      document.title = `${soal.title} (Pratinjau Terpadu) — Bahan Ajar Bu Guru`;
 
-      // Render 4 Sample Pages with Watermark + 1 Locked Barrier Card
+      // Determine which pages to show based on currentViewMode
+      let pageIndices = [0, 1, 2, 3, 4];
+      if (currentViewMode === 'soal') {
+        pageIndices = [0, 1, 2];
+      } else if (currentViewMode === 'kisi') {
+        pageIndices = [3, 4];
+      }
+
+      // Render Filtered Pages with Watermark + 1 Locked Barrier Card
       let html = '';
 
-      soal.pages.forEach((pageHtml, idx) => {
+      pageIndices.forEach((pIdx) => {
+        const pageHtml = soal.pages[pIdx];
+        const pageTitle = pageLabels[pIdx] || `Lembar ${pIdx + 1} dari 5`;
         html += `
           <div class="space-y-2">
             <div class="flex items-center justify-between text-xs font-bold text-slate-500 px-1">
-              <span>Lembar Naskah ${idx + 1} dari 4</span>
-              <span>${escapeHtml(soal.title)}</span>
+              <span class="text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-200">${pageTitle}</span>
+              <span class="truncate max-w-[200px] sm:max-w-none text-slate-400 font-semibold">${escapeHtml(soal.title)}</span>
             </div>
             <div class="book-page-wrap">
               <!-- Diagonal Watermark Overlay -->
               <div class="watermark-overlay">
-                <span class="watermark-text">SAMPEL SOAL SAS • DILARANG MENGUNDUH • LYNK.ID</span>
+                <span class="watermark-text">DOKUMEN SAS & KISI-KISI CP 020 • PRATINJAU • LYNK.ID</span>
               </div>
               ${pageHtml}
             </div>
@@ -614,31 +674,32 @@
 
           <div class="space-y-2 max-w-lg mx-auto">
             <span class="px-3 py-1 rounded-full bg-white/90 text-amber-950 font-black text-xs uppercase tracking-wider inline-block border border-amber-300 shadow-xs">
-              Naskah Lengkap &amp; Kunci Jawaban Siap Cetak Terkunci
+              Naskah 25 Soal &amp; Matriks Kisi-Kisi CP 020 Terpadu
             </span>
             <h3 class="text-2xl sm:text-3xl font-black text-slate-900 leading-snug">
-              Ingin Membaca &amp; Mengunduh Versi Lengkap Naskah Soal SAS?
+              Ingin Mengunduh Versi Lengkap Naskah Soal &amp; Kisi-Kisi?
             </h3>
             <p class="text-xs sm:text-sm text-slate-700 leading-relaxed font-normal">
-              Anda baru saja membaca 4 halaman sampel pratinjau. Seluruh naskah lengkap 25 butir soal (15 Pilihan Ganda Bergambar, 5 Isian Singkat, 5 Uraian HOTS, Rubrik Kunci Jawaban, Pedoman Skor, dan Kisi-Kisi CP No. 020 Tahun 2026) tersedia dalam format <strong>Word (.docx) 100% Dapat Diedit</strong> bebas ganti KOP sekolah Anda dan <strong>PDF A4 Siap Cetak</strong>.
+              Anda baru saja membaca 5 halaman dokumen terpadu SAS dan Kisi-Kisi resmi. Seluruh naskah lengkap 25 butir soal (15 Pilihan Ganda, 5 Isian Singkat, 5 Uraian HOTS, Kunci Jawaban Resmi, Pedoman Skor 100 Poin, serta Matriks Kisi-Kisi CP No. 020 Tahun 2026) tersedia dalam format <strong>Word (.docx) 100% Siap Sunting</strong> bebas ganti KOP sekolah Anda dan <strong>PDF A4 Siap Cetak</strong>.
             </p>
           </div>
 
           <div class="max-w-md mx-auto bg-white/90 rounded-2xl p-4 border border-amber-200 text-left space-y-2 text-xs text-slate-800 shadow-xs">
             <div class="font-extrabold text-amber-950 flex items-center gap-1.5 text-xs">
-              <span>🎁</span> <span>Paket Naskah Ujian yang Anda Dapatkan:</span>
+              <span>🎁</span> <span>Paket Komplet yang Anda Dapatkan:</span>
             </div>
             <ul class="space-y-1.5 pl-4 list-disc text-[11px] text-slate-700">
               <li>Naskah 25 Soal Lengkap Semester 1 Penuh (Standar Resmi Penilaian)</li>
+              <li>Matriks Kisi-Kisi Resmi Penulisan Soal Berbasis CP No. 020 Tahun 2026</li>
               <li>File Microsoft Word (.docx) &bull; Bebas ganti logo, nama sekolah &amp; guru</li>
               <li>File PDF resolusi tinggi siap cetak langsung tanpa watermark</li>
-              <li>Kunci Jawaban, Rubrik Penskoran, dan Kisi-Kisi CP No. 020/2026</li>
+              <li>Kunci Jawaban Resmi dan Rubrik Pedoman Penskoran 100 Poin Sempurna</li>
             </ul>
           </div>
 
           <div class="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
             <a href="https://lynk.id/bahanajarbuguru" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto px-6 py-3 rounded-full bg-slate-900 hover:bg-slate-800 text-white font-black text-xs shadow-md transition-transform hover:scale-105">
-              Dapatkan Paket Soal SAS (Rp 20.000) &rarr;
+              Dapatkan Paket Soal SAS &amp; Kisi-Kisi (Rp 20.000) &rarr;
             </a>
             <a href="/soal_sas_prototype.html" target="_blank" class="w-full sm:w-auto px-5 py-3 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs shadow transition-colors">
               Coba Latihan Interaktif &rarr;
@@ -651,7 +712,9 @@
       `;
 
       container.innerHTML = html;
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (shouldScroll) {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
     }
 
     function switchGrade(grade) {
