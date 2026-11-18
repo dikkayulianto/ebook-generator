@@ -3,4 +3,4 @@ User-agent: *
 Allow: /
 
 # Sitemap Index
-Sitemap: https://lynk.id/bahanajarbuguru/sitemap.xml
+Sitemap: https://bahanajarbuguru.my.id/sitemap.xml
