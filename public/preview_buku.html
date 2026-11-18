@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pratinjau Sampel Buku Siswa — Bahan Ajar Bu Guru</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@400;600;700;800;900&family=Amiri:wght@400;700&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    /* Security & Download Protection */
+    body {
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      background-color: #cbd5e1;
+      font-family: 'Nunito', sans-serif;
+    }
+
+    /* Print Protection: completely block printing */
+    @media print {
+      body * {
+        display: none !important;
+      }
+      body::before {
+        content: "MODE PRATINJAU BACA SAJA: Pencetakan dan pengunduhan dinonaktifkan. Silakan dapatkan buku lengkap di https://lynk.id/bahanajarbuguru";
+        display: block !important;
+        font-family: sans-serif;
+        font-size: 16pt;
+        font-weight: bold;
+        text-align: center;
+        padding: 50px 20px;
+        color: #0f172a;
+      }
+    }
+
+    /* Authentic A4 Page Dimensions matching book exports */
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 20px auto;
+      background: #ffffff;
+      padding: 12mm 16mm;
+      position: relative;
+      box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.2), 0 8px 10px -6px rgba(15, 23, 42, 0.1);
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    @media (max-width: 820px) {
+      .page {
+        width: 95vw;
+        min-height: auto;
+        padding: 16px;
+        margin: 12px auto;
+      }
+    }
+
+    /* Diagonal Subtle Watermark */
+    .watermark-overlay {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: repeating-linear-gradient(
+        -45deg,
+        rgba(15, 23, 42, 0.02) 0,
+        rgba(15, 23, 42, 0.02) 60px,
+        transparent 60px,
+        transparent 140px
+      );
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 40;
+    }
+
+    .watermark-text {
+      transform: rotate(-35deg);
+      font-size: 20pt;
+      font-weight: 900;
+      letter-spacing: 0.15em;
+      color: rgba(15, 23, 42, 0.06);
+      text-transform: uppercase;
+      white-space: nowrap;
+      user-select: none;
+    }
+
+    /* Book Inner Typography & Elements */
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 2px dashed #a7f3d0;
+      padding-bottom: 4px;
+      margin-bottom: 8px;
+      font-size: 9pt;
+      color: #059669;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .page-footer {
+      margin-top: auto;
+      display: flex;
+      justify-content: space-between;
+      border-top: 2px dashed #e2e8f0;
+      padding-top: 4px;
+      font-size: 9pt;
+      color: #94a3b8;
+      font-weight: 600;
+    }
+
+    .cover-page {
+      background: linear-gradient(180deg, #f0fdf4 0%, #ecfdf5 45%, #fef3c7 100%);
+      border: 5px double #059669;
+      text-align: center;
+      padding: 12mm 14mm;
+      justify-content: space-between;
+    }
+
+    .cover-top-badge {
+      display: inline-block;
+      background: #059669;
+      color: white;
+      padding: 4px 20px;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 10pt;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+    }
+
+    .cover-title {
+      font-size: 20pt;
+      font-family: 'Fredoka', sans-serif;
+      color: #064e3b;
+      margin-top: 8px;
+      line-height: 1.25;
+    }
+
+    .cover-subtitle {
+      font-size: 15pt;
+      font-family: 'Fredoka', sans-serif;
+      color: #047857;
+      margin-top: 4px;
+    }
+
+    .cover-image-container {
+      width: 155mm;
+      height: 100mm;
+      margin: 10px auto;
+      border: 4px solid #ffffff;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f8fafc;
+    }
+
+    .cover-image-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .toc-card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 7px 12px;
+      margin-bottom: 7px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .toc-badge {
+      color: white;
+      font-weight: 800;
+      font-size: 9.5pt;
+      padding: 3px 10px;
+      border-radius: 6px;
+      min-width: 65px;
+      text-align: center;
+    }
+
+    .bab-header-flex {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .bab-badge {
+      color: white;
+      font-family: 'Fredoka', sans-serif;
+      font-size: 11pt;
+      font-weight: 700;
+      padding: 4px 14px;
+      border-radius: 8px;
+    }
+
+    .bab-title {
+      font-family: 'Fredoka', sans-serif;
+      color: #0f172a;
+      font-size: 15pt;
+      line-height: 1.2;
+    }
+
+    .box-tujuan {
+      background: #ecfdf5;
+      border-left: 4px solid #059669;
+      border-radius: 6px;
+      padding: 6px 10px;
+      font-size: 9pt;
+      margin-bottom: 8px;
+    }
+
+    .chapter-hero-card {
+      width: 100%;
+      margin: 6px 0;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid #cbd5e1;
+      background: #f1f5f9;
+    }
+
+    .chapter-hero-img {
+      width: 100%;
+      height: 60mm;
+      object-fit: cover;
+      display: block;
+    }
+
+    .chapter-caption {
+      background: #ffffff;
+      padding: 5px 10px;
+      font-size: 8.5pt;
+      color: #334155;
+      border-top: 1px solid #e2e8f0;
+    }
+
+    .box-materi {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 8px 12px;
+      margin: 6px 0;
+    }
+
+    .box-materi h3 {
+      font-family: 'Fredoka', sans-serif;
+      color: #0f172a;
+      font-size: 11.5pt;
+      margin-bottom: 4px;
+      border-bottom: 1.5px solid #e2e8f0;
+      padding-bottom: 2px;
+    }
+
+    .materi-text {
+      font-size: 9.3pt;
+      line-height: 1.45;
+      color: #1e293b;
+      text-align: justify;
+    }
+
+    .box-fun {
+      background: #eff6ff;
+      border: 1.5px dashed #3b82f6;
+      border-radius: 8px;
+      padding: 6px 10px;
+      margin: 6px 0;
+      font-size: 9pt;
+    }
+
+    .box-latihan {
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 6px 10px;
+      margin-top: 6px;
+    }
+
+    .box-latihan h4 {
+      font-family: 'Fredoka', sans-serif;
+      color: #0f172a;
+      font-size: 10.5pt;
+      margin-bottom: 4px;
+    }
+
+    .soal-item {
+      font-size: 9pt;
+      color: #334155;
+      margin-bottom: 3px;
+    }
+
+    /* Lock Page Styling */
+    .locked-page {
+      background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 50%, #fde68a 100%);
+      border: 3px dashed #d97706;
+      text-align: center;
+      justify-content: center;
+      align-items: center;
+      padding: 24mm 16mm;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col text-slate-800" oncontextmenu="showProtectedToast(event)">
+
+  <!-- ======================================================== -->
+  <!-- TOP STICKY TOOLBAR (Navigation & Book Controls)          -->
+  <!-- ======================================================== -->
+  <header class="sticky top-0 z-50 bg-slate-900/95 backdrop-blur text-white px-4 py-2.5 shadow-lg border-b border-slate-800 flex flex-wrap items-center justify-between gap-3">
+    
+    <!-- Left: Back Button & Title -->
+    <div class="flex items-center gap-3">
+      <a href="/#katalog-buku" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold border border-slate-700 transition-colors">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+        </svg>
+        <span>Katalog Beranda</span>
+      </a>
+
+      <div class="hidden sm:block">
+        <h1 id="topbar-title" class="font-extrabold text-sm text-white">
+          Buku Siswa PAI &amp; BP Kelas 1 SD
+        </h1>
+        <p class="text-[11px] text-emerald-400 font-medium">
+          Pratinjau Sampel Terbatas (Halaman 1–4 dari 15)
+        </p>
+      </div>
+    </div>
+
+    <!-- Center: Grade Switcher Pills -->
+    <div class="flex items-center gap-1 overflow-x-auto text-xs py-1" id="grade-switcher">
+      <span class="text-slate-400 text-[11px] font-bold px-1 hidden md:inline">Pilih Kelas:</span>
+      <button onclick="switchGrade(1)" id="pill-grade-1" class="px-2.5 py-1 rounded-full font-bold transition-all text-xs">Kls 1</button>
+      <button onclick="switchGrade(2)" id="pill-grade-2" class="px-2.5 py-1 rounded-full font-bold transition-all text-xs">Kls 2</button>
+      <button onclick="switchGrade(3)" id="pill-grade-3" class="px-2.5 py-1 rounded-full font-bold transition-all text-xs">Kls 3</button>
+      <button onclick="switchGrade(4)" id="pill-grade-4" class="px-2.5 py-1 rounded-full font-bold transition-all text-xs">Kls 4</button>
+      <button onclick="switchGrade(5)" id="pill-grade-5" class="px-2.5 py-1 rounded-full font-bold transition-all text-xs">Kls 5</button>
+      <button onclick="switchGrade(6)" id="pill-grade-6" class="px-2.5 py-1 rounded-full font-bold transition-all text-xs">Kls 6</button>
+    </div>
+
+    <!-- Right: Protection Notice & Buy CTA -->
+    <div class="flex items-center gap-2">
+      <div class="hidden lg:flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-800 border border-slate-700 text-[11px] text-amber-300 font-semibold" title="Pengunduhan & pencetakan dinonaktifkan pada mode sampel">
+        <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
+        </svg>
+        <span>Unduh Dinonaktifkan</span>
+      </div>
+
+      <a id="topbar-buy-btn" href="https://lynk.id/bahanajarbuguru" target="_blank" rel="noopener noreferrer" class="px-4 py-1.5 rounded-full bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs shadow transition-transform hover:scale-105">
+        Beli Buku Lengkap &rarr;
+      </a>
+    </div>
+  </header>
+
+  <!-- ======================================================== -->
+  <!-- NOTICE BANNER: BACA SAJA & INFORMASI SAMPEL             -->
+  <!-- ======================================================== -->
+  <div class="bg-amber-50 border-b border-amber-200 px-4 py-2 text-center text-xs text-amber-900 font-medium flex items-center justify-center gap-2">
+    <span>🔒 <strong>Mode Pratinjau Sampel Terbatas:</strong> Anda hanya dapat membaca 4 halaman sampel pertama buku ini secara online. Pengunduhan dan pencetakan dinonaktifkan.</span>
+    <a href="https://lynk.id/bahanajarbuguru" target="_blank" rel="noopener noreferrer" class="underline font-bold text-amber-800 hover:text-amber-950">Dapatkan Naskah Lengkap di Lynk.id</a>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- MAIN READER CONTAINER (A4 PAGES STACK)                   -->
+  <!-- ======================================================== -->
+  <main class="flex-1 w-full max-w-5xl mx-auto py-6 px-2 sm:px-4 space-y-8" id="book-pages-container">
+    <!-- Pages dynamically injected by JavaScript -->
+    <div class="text-center py-20 text-slate-500 font-bold">
+      Memuat pratinjau buku...
+    </div>
+  </main>
+
+  <!-- ======================================================== -->
+  <!-- FLOATING SECURITY TOAST NOTIFICATION                     -->
+  <!-- ======================================================== -->
+  <div id="security-toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-slate-950/95 text-white px-5 py-3 rounded-2xl shadow-2xl border border-slate-700 text-xs font-semibold flex items-center gap-2.5 transition-all duration-300 opacity-0 pointer-events-none translate-y-4 z-50">
+    <span class="text-base">🔒</span>
+    <span>Mode pratinjau baca saja. Pengunduhan dan pencetakan dinonaktifkan untuk versi sampel.</span>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- JAVASCRIPT: BOOK HYDRATION, CONTROLS, & SECURITY         -->
+  <!-- ======================================================== -->
+  <script>
+    let samplesData = null;
+    let currentGrade = 1;
+
+    // Intercept keyboard shortcuts: Ctrl+P, Ctrl+S, Ctrl+U, F12
+    window.addEventListener('keydown', function (e) {
+      if ((e.ctrlKey || e.metaKey) && ['p', 's', 'u'].includes(e.key.toLowerCase())) {
+        e.preventDefault();
+        showToast();
+      }
+      if (e.key === 'F12') {
+        e.preventDefault();
+        showToast();
+      }
+    });
+
+    function showProtectedToast(e) {
+      e.preventDefault();
+      showToast();
+      return false;
+    }
+
+    function showToast() {
+      const toast = document.getElementById('security-toast');
+      if (!toast) return;
+      toast.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4');
+      toast.classList.add('opacity-100', 'translate-y-0');
+      clearTimeout(window._toastTimeout);
+      window._toastTimeout = setTimeout(() => {
+        toast.classList.remove('opacity-100', 'translate-y-0');
+        toast.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
+      }, 3000);
+    }
+
+    function updatePills(grade) {
+      for (let i = 1; i <= 6; i++) {
+        const btn = document.getElementById(`pill-grade-${i}`);
+        if (!btn) continue;
+        if (i === grade) {
+          btn.className = 'px-3 py-1 rounded-full font-extrabold text-xs bg-amber-400 text-slate-950 shadow-sm';
+        } else {
+          btn.className = 'px-3 py-1 rounded-full font-bold text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700';
+        }
+      }
+    }
+
+    function renderBook(grade) {
+      currentGrade = grade;
+      updatePills(grade);
+
+      const container = document.getElementById('book-pages-container');
+      const titleEl = document.getElementById('topbar-title');
+      if (!samplesData || !samplesData[grade]) {
+        container.innerHTML = '<div class="text-center py-20 text-red-600 font-bold">Data sampel buku tidak ditemukan.</div>';
+        return;
+      }
+
+      const book = samplesData[grade];
+      titleEl.textContent = book.title;
+      document.title = `${book.title} (Pratinjau Sampel) — Bahan Ajar Bu Guru`;
+
+      // Render 4 Sample Pages + 1 Locked Barrier Page
+      let html = '';
+
+      book.pages.forEach((pageHtml, idx) => {
+        html += `
+          <div class="relative">
+            <!-- Diagonal Watermark Overlay -->
+            <div class="watermark-overlay">
+              <span class="watermark-text">SAMPEL TERBATAS • DILARANG MENGUNDUH • LYNK.ID</span>
+            </div>
+            ${pageHtml}
+          </div>
+        `;
+      });
+
+      // Locked Barrier Page (Page 5)
+      html += `
+        <div class="page locked-page shadow-2xl">
+          <div class="max-w-md mx-auto space-y-4">
+            <div class="w-20 h-20 mx-auto rounded-3xl bg-amber-500/20 text-amber-700 flex items-center justify-center text-4xl shadow-inner border border-amber-500/30">
+              🔒
+            </div>
+
+            <span class="px-3 py-1 rounded-full bg-amber-200 text-amber-900 font-extrabold text-xs uppercase tracking-wider inline-block">
+              Halaman 5 s/d 15 Terkunci
+            </span>
+
+            <h2 class="text-2xl font-black text-slate-900 font-['Fredoka'] leading-snug">
+              Ingin Membaca Versi Lengkap ${escapeHtml(book.title)}?
+            </h2>
+
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed font-normal">
+              Anda baru saja membaca 4 halaman sampel pratinjau. Seluruh naskah lengkap 1 semester penuh (mencakup Bab 1 s/d Bab 5, Latihan Soal Sumatif, Rubrik Asesmen, dan LKPD Siswa) tersedia dalam format <strong>Word (.docx) 100% Dapat Diedit</strong> dan <strong>PDF A4 Siap Cetak</strong>.
+            </p>
+
+            <div class="bg-white/80 rounded-2xl p-4 border border-amber-300 text-left space-y-2 text-xs text-slate-800">
+              <div class="font-bold text-amber-900 flex items-center gap-1.5">
+                <span>🎁</span> <span>Paket Lengkap yang Anda Dapatkan:</span>
+              </div>
+              <ul class="space-y-1 pl-4 list-disc text-[11px] text-slate-700">
+                <li>Buku Siswa Lengkap Semester 1 Penuh (15 Halaman A4 Standar Penerbit)</li>
+                <li>File Microsoft Word (.docx) — bebas ganti nama sekolah dan guru</li>
+                <li>File PDF resolusi tinggi siap cetak tanpa watermark</li>
+                <li>Penyelarasan CP No. 020 Tahun 2026 Kemendikbudristek</li>
+              </ul>
+            </div>
+
+            <div class="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
+              <a href="https://lynk.id/bahanajarbuguru" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto px-6 py-3 rounded-full bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-xs shadow-lg transition-transform hover:scale-105">
+                Dapatkan Buku Lengkap (Rp 35.000) &rarr;
+              </a>
+              <a href="/#katalog-buku" class="w-full sm:w-auto px-5 py-3 rounded-full bg-white hover:bg-slate-100 text-slate-800 font-bold text-xs border border-slate-300 transition-colors">
+                &larr; Kembali ke Katalog Web
+              </a>
+            </div>
+          </div>
+        </div>
+      `;
+
+      container.innerHTML = html;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function switchGrade(grade) {
+      const url = new URL(window.location);
+      url.searchParams.set('kelas', grade);
+      window.history.pushState({}, '', url);
+      renderBook(grade);
+    }
+
+    function escapeHtml(str) {
+      return String(str ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    // Initialize
+    async function init() {
+      try {
+        const res = await fetch(`/data/buku_samples.json?v=${Date.now()}`);
+        if (!res.ok) throw new Error('Gagal memuat data buku');
+        samplesData = await res.json();
+
+        const params = new URLSearchParams(window.location.search);
+        let gradeParam = parseInt(params.get('kelas') || '1', 10);
+        if (isNaN(gradeParam) || gradeParam < 1 || gradeParam > 6) gradeParam = 1;
+
+        renderBook(gradeParam);
+      } catch (err) {
+        console.error(err);
+        document.getElementById('book-pages-container').innerHTML = `
+          <div class="text-center py-20 text-red-600 font-bold">
+            Gagal memuat sampel buku: ${err.message}
+          </div>
+        `;
+      }
+    }
+
+    init();
+  </script>
+</body>
+</html>

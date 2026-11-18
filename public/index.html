@@ -279,7 +279,7 @@
                 Buku Siswa PAI &amp; Budi Pekerti (1–6 SD)
               </h2>
             </div>
-            <a id="cms-buku-top-sample" href="/buku_siswa_pai_kelas1_semester1.html" target="_blank" class="hidden sm:inline-flex text-xs font-bold px-3 py-1.5 rounded-full bg-white hover:bg-slate-100 border border-slate-200 text-slate-800 transition-colors">
+            <a id="cms-buku-top-sample" href="/preview_buku.html?kelas=1" class="hidden sm:inline-flex text-xs font-bold px-3 py-1.5 rounded-full bg-white hover:bg-slate-100 border border-slate-200 text-slate-800 transition-colors">
               Lihat Contoh Halaman
             </a>
           </div>
@@ -772,9 +772,8 @@
               .filter((item) => item.visible !== false)
               .map((item, idx) => {
                 const theme = pastelThemes[idx % pastelThemes.length];
-                const actionLeft = item.sampleUrl
-                  ? `<a href="${escapeHtml(item.sampleUrl)}" target="_blank" class="px-4 py-2 rounded-full text-xs font-bold text-slate-800 bg-white/90 hover:bg-white border border-black/10 transition-colors">Buka Sampel</a>`
-                  : `<button type="button" data-modal-title="${escapeHtml(item.title)}" data-modal-desc="${escapeHtml(item.modalDetail || item.description)}" data-modal-img="${escapeHtml(item.coverImage)}" data-modal-price="${escapeHtml(item.price)}" class="cms-modal-trigger px-4 py-2 rounded-full text-xs font-bold text-slate-800 bg-white/90 hover:bg-white border border-black/10 transition-colors">${escapeHtml(item.sampleLabel || 'Detail Bab')}</button>`;
+                const targetUrl = item.sampleUrl || `/preview_buku.html?kelas=${item.grade}`;
+                const actionLeft = `<a href="${escapeHtml(targetUrl)}" class="px-4 py-2 rounded-full text-xs font-bold text-slate-800 bg-white/90 hover:bg-white border border-black/10 transition-colors">Detail</a>`;
 
                 return `
                   <article class="product-item edu-card-pastel ${theme.bg} border ${theme.border} p-5 sm:p-6 flex flex-col justify-between" data-category="buku" data-grade="${escapeHtml(item.grade)}">

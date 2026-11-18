@@ -18,7 +18,7 @@
     "heading": "Buku Siswa PAI & Budi Pekerti (Kelas 1-6 SD)",
     "subheading": "Buku materi 1 semester penuh dengan ilustrasi ramah anak, tata letak standar penerbit A4, dan acuan CP No. 020 Tahun 2026.",
     "topSampleLabel": "Lihat Contoh Halaman Buku",
-    "topSampleUrl": "/buku_siswa_pai_kelas1_semester1.html"
+    "topSampleUrl": "/preview_buku.html?kelas=1"
   },
   "bukuItems": [
     {
@@ -33,8 +33,8 @@
         "Format PDF A4",
         "Semester 1 Penuh"
       ],
-      "sampleLabel": "Buka Sampel",
-      "sampleUrl": "/buku_siswa_pai_kelas1_semester1.html",
+      "sampleLabel": "Detail",
+      "sampleUrl": "/preview_buku.html?kelas=1",
       "modalDetail": "",
       "buyUrl": "https://lynk.id/bahanajarbuguru",
       "visible": true
@@ -51,8 +51,8 @@
         "Format PDF A4",
         "Semester 1 Penuh"
       ],
-      "sampleLabel": "Detail Bab",
-      "sampleUrl": "",
+      "sampleLabel": "Detail",
+      "sampleUrl": "/preview_buku.html?kelas=2",
       "modalDetail": "Asmaul Husna, Hijaiyah Bersambung, Azan/Ikamah, Nabi Nuh a.s.",
       "buyUrl": "https://lynk.id/bahanajarbuguru",
       "visible": true
@@ -69,8 +69,8 @@
         "Format PDF A4",
         "Semester 1 Penuh"
       ],
-      "sampleLabel": "Detail Bab",
-      "sampleUrl": "",
+      "sampleLabel": "Detail",
+      "sampleUrl": "/preview_buku.html?kelas=3",
       "modalDetail": "Surah Al-Humazah/Al-Kautsar, Sifat Wajib Allah, Berbakti Orang Tua, Sholat Sunnah Rawatib",
       "buyUrl": "https://lynk.id/bahanajarbuguru",
       "visible": true
@@ -87,8 +87,8 @@
         "Format PDF A4",
         "Semester 1 Penuh"
       ],
-      "sampleLabel": "Detail Bab",
-      "sampleUrl": "",
+      "sampleLabel": "Detail",
+      "sampleUrl": "/preview_buku.html?kelas=4",
       "modalDetail": "Surah Al-Hujurat: 13, Asmaul Husna, Usia Baligh, Hijrah Rasulullah SAW",
       "buyUrl": "https://lynk.id/bahanajarbuguru",
       "visible": true
@@ -105,8 +105,8 @@
         "Format PDF A4",
         "Semester 1 Penuh"
       ],
-      "sampleLabel": "Detail Bab",
-      "sampleUrl": "",
+      "sampleLabel": "Detail",
+      "sampleUrl": "/preview_buku.html?kelas=5",
       "modalDetail": "Surah Al-Ma'un & Yatim, Asmaul Husna, Zakat/Infak/Sedekah, Fathu Makkah",
       "buyUrl": "https://lynk.id/bahanajarbuguru",
       "visible": true
@@ -123,8 +123,8 @@
         "Format PDF A4",
         "Tingkat Akhir SD"
       ],
-      "sampleLabel": "Detail Bab",
-      "sampleUrl": "",
+      "sampleLabel": "Detail",
+      "sampleUrl": "/preview_buku.html?kelas=6",
       "modalDetail": "Surah Ad-Duha, Asmaul Husna Al-Ghaffar, Makanan Halal/Haram, Khulafaur Rasyidin",
       "buyUrl": "https://lynk.id/bahanajarbuguru",
       "visible": true
