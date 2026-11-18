@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Halaman Utama / Beranda -->
+  <url>
+    <loc>https://lynk.id/bahanajarbuguru/</loc>
+    <lastmod>2026-11-18</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <!-- Pratinjau Buku Siswa PAI SD -->
+  <url>
+    <loc>https://lynk.id/bahanajarbuguru/preview_buku.html</loc>
+    <lastmod>2026-11-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <!-- Pratinjau Modul Ajar Deep Learning -->
+  <url>
+    <loc>https://lynk.id/bahanajarbuguru/preview_modul.html</loc>
+    <lastmod>2026-11-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <!-- Pratinjau Bank Soal SAS PAI SD -->
+  <url>
+    <loc>https://lynk.id/bahanajarbuguru/preview_soal.html</loc>
+    <lastmod>2026-11-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <!-- Dokumen Lengkap Cetak Modul Ajar Kelas 1 -->
+  <url>
+    <loc>https://lynk.id/bahanajarbuguru/modul_ajar_deep_learning_kelas1_bab1.html</loc>
+    <lastmod>2026-11-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <!-- Game Edukasi Interaktif -->
+  <url>
+    <loc>https://lynk.id/bahanajarbuguru/game_petualangan_islami.html</loc>
+    <lastmod>2026-11-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Halaman Legalitas & Profil -->
+  <url>
+    <loc>https://lynk.id/bahanajarbuguru/tentang-kami.html</loc>
+    <lastmod>2026-11-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://lynk.id/bahanajarbuguru/kebijakan-privasi.html</loc>
+    <lastmod>2026-11-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://lynk.id/bahanajarbuguru/syarat-ketentuan.html</loc>
+    <lastmod>2026-11-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+</urlset>

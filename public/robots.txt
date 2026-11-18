@@ -1,0 +1,6 @@
+# Robots.txt untuk Bahan Ajar Bu Guru
+User-agent: *
+Allow: /
+
+# Sitemap Index
+Sitemap: https://lynk.id/bahanajarbuguru/sitemap.xml
