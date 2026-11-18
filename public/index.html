@@ -77,7 +77,7 @@
             "description": "Naskah 25 Soal (15 PG + 5 Isian + 5 Uraian HOTS), Kunci Jawaban, Rubrik Penilaian, dan Kisi-kisi CP 020.",
             "offers": {
               "@type": "Offer",
-              "price": "20000",
+              "price": "15000",
               "priceCurrency": "IDR",
               "availability": "https://schema.org/InStock"
             }
@@ -1017,6 +1017,14 @@
                 const targetUrl = item.sampleUrl || `/preview_soal.html?kelas=${item.grade}`;
                 const actionLeft = `<a href="${escapeHtml(targetUrl)}" class="px-4 py-2 rounded-full text-xs font-bold text-slate-800 bg-white/90 hover:bg-white border border-black/10 transition-colors">Detail</a>`;
 
+                const priceHtml = item.originalPrice
+                  ? `<div class="flex items-center gap-1.5 pt-1">
+                      <span class="text-xs font-black text-slate-950">${escapeHtml(item.price)}</span>
+                      <span class="text-[11px] text-slate-400 line-through font-semibold">${escapeHtml(item.originalPrice)}</span>
+                      <span class="text-[9px] bg-red-100 text-red-700 font-extrabold px-1.5 py-0.5 rounded-full">Hemat 25%</span>
+                    </div>`
+                  : `<div class="text-xs font-black text-slate-950 pt-1">${escapeHtml(item.price)}</div>`;
+
                 return `
                   <article class="product-item edu-card-pastel ${theme.bg} border ${theme.border} p-5 sm:p-6 flex flex-col justify-between" data-category="soal" data-grade="${escapeHtml(item.grade)}">
                     <div class="space-y-3">
@@ -1039,7 +1047,7 @@
                         <div class="space-y-1.5 min-w-0">
                           <h3 class="font-black text-slate-900 text-base sm:text-lg leading-snug">${escapeHtml(item.title)}</h3>
                           <p class="text-xs text-slate-700 leading-relaxed line-clamp-3">${escapeHtml(item.description)}</p>
-                          <div class="text-xs font-black text-slate-950 pt-1">${escapeHtml(item.price)}</div>
+                          ${priceHtml}
                         </div>
                       </div>
                     </div>

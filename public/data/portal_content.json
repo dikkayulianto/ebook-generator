@@ -269,7 +269,7 @@
       "id": "soal-kls-1",
       "grade": 1,
       "badge": "Fase A • Kelas 1 SD",
-      "price": "Rp 20.000",
+      "price": "Rp 15.000",
       "coverImage": "/assets/soal_sas_cover_kelas1.jpg",
       "title": "Naskah Soal SAS PAI Kelas 1 SD",
       "description": "25 Soal Lengkap: 15 PG Bergambar, 5 Isian, 5 Uraian HOTS. Huruf Hijaiyah, Rukun Iman, Basmalah & Hamdalah, serta Tata Cara Bersuci.",
@@ -282,13 +282,14 @@
       "sampleUrl": "/preview_soal.html?kelas=1",
       "modalDetail": "25 Soal Lengkap (PG, Isian, Uraian), Kunci Jawaban, Rubrik Penilaian, dan Kisi-Kisi CP 020",
       "buyUrl": "https://lynk.id/bahanajarbuguru",
-      "visible": true
+      "visible": true,
+      "originalPrice": "Rp 20.000"
     },
     {
       "id": "soal-kls-2",
       "grade": 2,
       "badge": "Fase A • Kelas 2 SD",
-      "price": "Rp 20.000",
+      "price": "Rp 15.000",
       "coverImage": "/assets/soal_sas_cover_kelas2.jpg",
       "title": "Naskah Soal SAS PAI Kelas 2 SD",
       "description": "25 Soal Lengkap: Asmaul Husna, Huruf Hijaiyah Bersambung, Azan dan Ikamah, serta Keteladanan Nabi Nuh a.s. Dilengkapi Kunci Jawaban.",
@@ -301,13 +302,14 @@
       "sampleUrl": "/preview_soal.html?kelas=2",
       "modalDetail": "25 Soal Lengkap (PG, Isian, Uraian), Kunci Jawaban, Rubrik Penilaian, dan Kisi-Kisi CP 020",
       "buyUrl": "https://lynk.id/bahanajarbuguru",
-      "visible": true
+      "visible": true,
+      "originalPrice": "Rp 20.000"
     },
     {
       "id": "soal-kls-3",
       "grade": 3,
       "badge": "Fase B • Kelas 3 SD",
-      "price": "Rp 20.000",
+      "price": "Rp 15.000",
       "coverImage": "/assets/soal_sas_cover_kelas3.jpg",
       "title": "Naskah Soal SAS PAI Kelas 3 SD",
       "description": "25 Soal Lengkap: Surah Al-Humazah & Al-Kautsar, Sifat Wajib Allah, Berbakti Orang Tua & Guru, Shalat Sunah Rawatib, serta Rubrik Lengkap.",
@@ -320,13 +322,14 @@
       "sampleUrl": "/preview_soal.html?kelas=3",
       "modalDetail": "25 Soal Lengkap (PG, Isian, Uraian), Kunci Jawaban, Rubrik Penilaian, dan Kisi-Kisi CP 020",
       "buyUrl": "https://lynk.id/bahanajarbuguru",
-      "visible": true
+      "visible": true,
+      "originalPrice": "Rp 20.000"
     },
     {
       "id": "soal-kls-4",
       "grade": 4,
       "badge": "Fase B • Kelas 4 SD",
-      "price": "Rp 20.000",
+      "price": "Rp 15.000",
       "coverImage": "/assets/soal_sas_cover_kelas4.jpg",
       "title": "Naskah Soal SAS PAI Kelas 4 SD",
       "description": "25 Soal Lengkap: Surah Al-Hujurat: 13, Asmaul Husna Al-Malik/Al-Aziz, Tanda Usia Baligh, Hijrah Rasulullah SAW, Kunci & Kisi-kisi CP 020.",
@@ -339,13 +342,14 @@
       "sampleUrl": "/preview_soal.html?kelas=4",
       "modalDetail": "25 Soal Lengkap (PG, Isian, Uraian), Kunci Jawaban, Rubrik Penilaian, dan Kisi-Kisi CP 020",
       "buyUrl": "https://lynk.id/bahanajarbuguru",
-      "visible": true
+      "visible": true,
+      "originalPrice": "Rp 20.000"
     },
     {
       "id": "soal-kls-5",
       "grade": 5,
       "badge": "Fase C • Kelas 5 SD",
-      "price": "Rp 20.000",
+      "price": "Rp 15.000",
       "coverImage": "/assets/soal_sas_cover_kelas5.jpg",
       "title": "Naskah Soal SAS PAI Kelas 5 SD",
       "description": "25 Soal Lengkap: Surah Al-Ma'un, Asmaul Husna Al-Qawiyyu/Al-Qayyum, Zakat, Infak, Sedekah, Peristiwa Fathu Makkah, Kunci & Pedoman Skor.",
@@ -358,13 +362,14 @@
       "sampleUrl": "/preview_soal.html?kelas=5",
       "modalDetail": "25 Soal Lengkap (PG, Isian, Uraian), Kunci Jawaban, Rubrik Penilaian, dan Kisi-Kisi CP 020",
       "buyUrl": "https://lynk.id/bahanajarbuguru",
-      "visible": true
+      "visible": true,
+      "originalPrice": "Rp 20.000"
     },
     {
       "id": "soal-kls-6",
       "grade": 6,
       "badge": "Fase C • Kelas 6 SD",
-      "price": "Rp 20.000",
+      "price": "Rp 15.000",
       "coverImage": "/assets/soal_sas_cover_kelas6.jpg",
       "title": "Naskah Soal SAS PAI Kelas 6 SD",
       "description": "25 Soal Lengkap: Surah Ad-Duha, Asmaul Husna Al-Ghaffar/Al-Wahid, Toleransi Beragama, Makanan Halal/Haram, Khulafaur Rasyidin & Kisi-kisi.",
@@ -377,7 +382,8 @@
       "sampleUrl": "/preview_soal.html?kelas=6",
       "modalDetail": "25 Soal Lengkap (PG, Isian, Uraian), Kunci Jawaban, Rubrik Penilaian, dan Kisi-Kisi CP 020",
       "buyUrl": "https://lynk.id/bahanajarbuguru",
-      "visible": true
+      "visible": true,
+      "originalPrice": "Rp 20.000"
     }
   ],
   "gameSection": {
