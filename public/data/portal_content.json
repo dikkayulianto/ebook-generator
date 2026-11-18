@@ -132,18 +132,10 @@
   ],
   "modulSection": {
     "katalogBadge": "Katalog 2",
-    "heading": "Modul Ajar Deep Learning PAI SD (Format 8 Halaman Lengkap)",
+    "heading": "Modul Ajar PAI & Budi Pekerti (Kelas 1–6 SD)",
     "subheading": "Dokumen administrasi guru berstandar supervisi akreditasi: Siklus Mindful, Meaningful & Joyful Learning dilengkapi LKPD dan Rubrik Penilaian.",
-    "topSampleLabel": "Baca Contoh Modul Lengkap (8 Halaman)",
-    "topSampleUrl": "/modul_ajar_deep_learning_kelas1_bab1.html",
-    "featureBadge": "File Word (.docx) 100% Dapat Diedit",
-    "featureTitle": "Paket Administrasi Guru: Dari Tujuan Pembelajaran hingga Lembar Kerja Siswa",
-    "featureDescription": "Setiap modul ajar telah dirancang sistematis mencakup: Identitas Modul, Capaian Pembelajaran No. 020/2026, Profil Pelajar Pancasila & Rahmatan Lil 'Alamin, Pertanyaan Pemantik, Skenario Pembelajaran Berdiferensiasi, LKPD Siswa, Asesmen Formatif & Sumatif, serta Rubrik Ketercapaian.",
-    "featureTags": [
-      "Format Asli Microsoft Word (.docx)",
-      "Format Cetak PDF A4",
-      "Tersedia untuk Kelas 1 sampai 6"
-    ],
+    "topSampleLabel": "Lihat Contoh Modul",
+    "topSampleUrl": "/preview_modul.html?kelas=1",
     "priceHeading": "Harga Paket Modul Ajar",
     "priceValue": "Mulai Rp 25.000",
     "priceSubtext": "Tersedia per-bab maupun 1 semester",
@@ -151,19 +143,116 @@
   },
   "modulItems": [
     {
-      "id": "modul-kls-1-bab-1",
+      "id": "modul-kls-1",
       "grade": 1,
-      "badge": "Kelas 1 SD • Bab 1",
+      "badge": "Fase A • Kelas 1 SD",
       "price": "Rp 25.000",
-      "title": "Modul Ajar Deep Learning Kelas 1 Bab 1: Aku Cinta Al-Qur'an",
-      "description": "Modul lengkap 8 halaman mencakup identifikasi CP 020/2026, skenario PjBL 2 pertemuan, 2 lembar LKPD, asesmen HOTS, dan rubrik guru.",
+      "coverImage": "/assets/cover_illustration.jpg",
+      "title": "Modul Ajar PAI & BP Kelas 1 SD",
+      "description": "Format Deep Learning 8 Halaman: CP No. 020/2026, Siklus Mindful, Meaningful & Joyful Learning, Dilengkapi LKPD Siswa & Rubrik Asesmen.",
       "tags": [
         "8 Halaman A4",
         "Word + PDF",
         "LKPD & Rubrik"
       ],
-      "sampleLabel": "Buka Sampel Modul",
-      "sampleUrl": "/modul_ajar_deep_learning_kelas1_bab1.html",
+      "sampleLabel": "Detail",
+      "sampleUrl": "/preview_modul.html?kelas=1",
+      "modalDetail": "Modul Ajar Deep Learning 8 Halaman: Identitas CP 020, Skenario Joyful, LKPD, Asesmen HOTS",
+      "buyUrl": "https://lynk.id/bahanajarbuguru",
+      "visible": true
+    },
+    {
+      "id": "modul-kls-2",
+      "grade": 2,
+      "badge": "Fase A • Kelas 2 SD",
+      "price": "Rp 25.000",
+      "coverImage": "/assets/cover_kelas2.jpg",
+      "title": "Modul Ajar PAI & BP Kelas 2 SD",
+      "description": "Format Deep Learning 8 Halaman: CP No. 020/2026, Asmaul Husna, Huruf Hijaiyah Bersambung, Azan-Ikamah, LKPD & Rubrik Ketercapaian.",
+      "tags": [
+        "8 Halaman A4",
+        "Word + PDF",
+        "LKPD & Rubrik"
+      ],
+      "sampleLabel": "Detail",
+      "sampleUrl": "/preview_modul.html?kelas=2",
+      "modalDetail": "Modul Ajar Deep Learning 8 Halaman: Identitas CP 020, Asmaul Husna, Hijaiyah, LKPD & Asesmen",
+      "buyUrl": "https://lynk.id/bahanajarbuguru",
+      "visible": true
+    },
+    {
+      "id": "modul-kls-3",
+      "grade": 3,
+      "badge": "Fase B • Kelas 3 SD",
+      "price": "Rp 25.000",
+      "coverImage": "/assets/cover_kelas3.jpg",
+      "title": "Modul Ajar PAI & BP Kelas 3 SD",
+      "description": "Format Deep Learning 8 Halaman: CP No. 020/2026, Surah Al-Humazah/Al-Kautsar, Sifat Wajib Allah, Berbakti Orang Tua, LKPD & Asesmen.",
+      "tags": [
+        "8 Halaman A4",
+        "Word + PDF",
+        "LKPD & Rubrik"
+      ],
+      "sampleLabel": "Detail",
+      "sampleUrl": "/preview_modul.html?kelas=3",
+      "modalDetail": "Modul Ajar Deep Learning 8 Halaman: Al-Humazah, Sifat Allah, Berbakti, LKPD & Asesmen",
+      "buyUrl": "https://lynk.id/bahanajarbuguru",
+      "visible": true
+    },
+    {
+      "id": "modul-kls-4",
+      "grade": 4,
+      "badge": "Fase B • Kelas 4 SD",
+      "price": "Rp 25.000",
+      "coverImage": "/assets/cover_kelas4.jpg",
+      "title": "Modul Ajar PAI & BP Kelas 4 SD",
+      "description": "Format Deep Learning 8 Halaman: CP No. 020/2026, Surah Al-Hujurat: 13, Asmaul Husna, Usia Baligh, Hijrah Rasulullah, LKPD & Rubrik.",
+      "tags": [
+        "8 Halaman A4",
+        "Word + PDF",
+        "LKPD & Rubrik"
+      ],
+      "sampleLabel": "Detail",
+      "sampleUrl": "/preview_modul.html?kelas=4",
+      "modalDetail": "Modul Ajar Deep Learning 8 Halaman: Al-Hujurat, Asmaul Husna, Baligh, Hijrah, LKPD & Rubrik",
+      "buyUrl": "https://lynk.id/bahanajarbuguru",
+      "visible": true
+    },
+    {
+      "id": "modul-kls-5",
+      "grade": 5,
+      "badge": "Fase C • Kelas 5 SD",
+      "price": "Rp 25.000",
+      "coverImage": "/assets/cover_kelas5.jpg",
+      "title": "Modul Ajar PAI & BP Kelas 5 SD",
+      "description": "Format Deep Learning 8 Halaman: CP No. 020/2026, Surah Al-Ma'un, Asmaul Husna Al-Qawiyyu/Al-Qayyum, Zakat & Sedekah, Fathu Makkah, LKPD.",
+      "tags": [
+        "8 Halaman A4",
+        "Word + PDF",
+        "LKPD & Rubrik"
+      ],
+      "sampleLabel": "Detail",
+      "sampleUrl": "/preview_modul.html?kelas=5",
+      "modalDetail": "Modul Ajar Deep Learning 8 Halaman: Al-Ma'un, Asmaul Husna, Zakat, Fathu Makkah, LKPD & Rubrik",
+      "buyUrl": "https://lynk.id/bahanajarbuguru",
+      "visible": true
+    },
+    {
+      "id": "modul-kls-6",
+      "grade": 6,
+      "badge": "Fase C • Kelas 6 SD",
+      "price": "Rp 25.000",
+      "coverImage": "/assets/cover_kelas6.jpg",
+      "title": "Modul Ajar PAI & BP Kelas 6 SD",
+      "description": "Format Deep Learning 8 Halaman: CP No. 020/2026, Surah Ad-Duha, Asmaul Husna Al-Ghaffar, Makanan Halal/Haram, Khulafaur Rasyidin & Asesmen.",
+      "tags": [
+        "8 Halaman A4",
+        "Word + PDF",
+        "LKPD & Rubrik"
+      ],
+      "sampleLabel": "Detail",
+      "sampleUrl": "/preview_modul.html?kelas=6",
+      "modalDetail": "Modul Ajar Deep Learning 8 Halaman: Ad-Duha, Asmaul Husna, Halal/Haram, Khulafaur Rasyidin",
       "buyUrl": "https://lynk.id/bahanajarbuguru",
       "visible": true
     }

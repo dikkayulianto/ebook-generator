@@ -322,47 +322,15 @@
             <div>
               <p class="text-xs font-bold text-slate-500 uppercase tracking-wider">Katalog Materi 2</p>
               <h2 id="cms-modul-heading" class="text-xl sm:text-2xl font-black text-slate-900">
-                Modul Ajar Deep Learning (Format 8 Halaman)
+                Modul Ajar PAI &amp; Budi Pekerti (Kelas 1–6 SD)
               </h2>
             </div>
-            <a id="cms-modul-top-sample" href="/modul_ajar_deep_learning_kelas1_bab1.html" target="_blank" class="hidden sm:inline-flex text-xs font-bold px-3 py-1.5 rounded-full bg-white hover:bg-slate-100 border border-slate-200 text-slate-800 transition-colors">
-              Baca Contoh Lengkap
+            <a id="cms-modul-top-sample" href="/preview_modul.html?kelas=1" class="hidden sm:inline-flex text-xs font-bold px-3 py-1.5 rounded-full bg-white hover:bg-slate-100 border border-slate-200 text-slate-800 transition-colors">
+              Lihat Contoh Modul
             </a>
           </div>
 
-          <!-- Highlight Modul Feature Card (Warm Peach/Salmon Pastel) -->
-          <div class="edu-card-pastel bg-pastel-peach border border-pastel-peachBorder p-6 sm:p-7 space-y-4 shadow-sm">
-            <div class="flex flex-wrap items-center justify-between gap-2">
-              <span id="cms-modul-feature-badge" class="px-3 py-1 rounded-full bg-white/90 text-rose-950 font-extrabold text-[11px] border border-rose-200/80 shadow-xs">
-                File Word (.docx) 100% Dapat Diedit
-              </span>
-              <span class="text-xs font-bold px-3 py-1 rounded-full bg-white/80 text-slate-900">
-                ★ 5.0 • Supervisi Kurikulum
-              </span>
-            </div>
-            <h3 id="cms-modul-feature-title" class="text-xl sm:text-2xl font-black text-slate-900 leading-snug">
-              Paket Administrasi Guru: Dari Tujuan Pembelajaran hingga Lembar Kerja Siswa
-            </h3>
-            <p id="cms-modul-feature-desc" class="text-xs sm:text-sm text-slate-800 leading-relaxed font-normal">
-              Setiap modul ajar telah dirancang sistematis mencakup: Identitas Modul, Capaian Pembelajaran No. 020/2026, Profil Pelajar Pancasila, Pertanyaan Pemantik, Skenario Pembelajaran Berdiferensiasi, LKPD Siswa, Asesmen Formatif &amp; Sumatif, serta Rubrik Ketercapaian.
-            </p>
-            <div id="cms-modul-feature-tags" class="flex flex-wrap gap-2 text-xs font-medium text-slate-800">
-              <span class="bg-white/80 px-3 py-1 rounded-full border border-rose-200/60">Format Word (.docx)</span>
-              <span class="bg-white/80 px-3 py-1 rounded-full border border-rose-200/60">PDF A4 Siap Cetak</span>
-              <span class="bg-white/80 px-3 py-1 rounded-full border border-rose-200/60">Kelas 1 sampai 6 SD</span>
-            </div>
-            <div class="pt-2 flex flex-wrap items-center justify-between gap-3 border-t border-rose-200/60">
-              <div>
-                <p id="cms-modul-price-heading" class="text-xs font-bold text-slate-700">Paket Administrasi Guru</p>
-                <p id="cms-modul-price-value" class="text-2xl font-black text-slate-950">Mulai Rp 25.000</p>
-              </div>
-              <a id="cms-modul-buy-btn" href="https://lynk.id/bahanajarbuguru" target="_blank" rel="noopener noreferrer" class="px-5 py-2.5 rounded-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs shadow transition-all">
-                Pesan di Lynk.id &rarr;
-              </a>
-            </div>
-          </div>
-
-          <!-- Modul Cards Grid -->
+          <!-- Modul Cards Grid (styled exactly like Buku Siswa) -->
           <div id="modul-grid-container" class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5"></div>
         </section>
 
@@ -904,17 +872,21 @@
           setLink('cms-modul-buy-btn', data.modulSection.buyUrl);
         }
 
-        // Render Modul Ajar Items Grid
+        // Render Modul Ajar Items Grid (Matching Buku Siswa Styling)
         if (Array.isArray(data.modulItems)) {
           const modulContainer = document.getElementById('modul-grid-container');
           if (modulContainer) {
             const visibleModuls = data.modulItems.filter((item) => item.visible !== false);
             modulContainer.innerHTML = visibleModuls
               .map((item, idx) => {
-                const theme = pastelThemes[(idx + 2) % pastelThemes.length];
+                const theme = pastelThemes[(idx + 1) % pastelThemes.length];
+                const targetUrl = item.sampleUrl || `/preview_modul.html?kelas=${item.grade}`;
+                const actionLeft = `<a href="${escapeHtml(targetUrl)}" class="px-4 py-2 rounded-full text-xs font-bold text-slate-800 bg-white/90 hover:bg-white border border-black/10 transition-colors">Detail</a>`;
+
                 return `
-                  <article class="product-item edu-card-pastel ${theme.bg} border ${theme.border} p-5 sm:p-6 flex flex-col justify-between" data-category="modul" data-grade="${escapeHtml(item.grade || 'all')}">
+                  <article class="product-item edu-card-pastel ${theme.bg} border ${theme.border} p-5 sm:p-6 flex flex-col justify-between" data-category="modul" data-grade="${escapeHtml(item.grade)}">
                     <div class="space-y-3">
+                      <!-- Top Badge & Rating -->
                       <div class="flex items-center justify-between gap-2">
                         <span class="px-3 py-1 rounded-full text-xs font-black ${theme.badge} border shadow-xs inline-flex items-center gap-1.5">
                           <span>🚀</span>
@@ -924,14 +896,24 @@
                           ★ 5.0
                         </span>
                       </div>
-                      <h3 class="font-black text-slate-900 text-base sm:text-lg leading-snug">${escapeHtml(item.title)}</h3>
-                      <p class="text-xs text-slate-800 leading-relaxed">${escapeHtml(item.description)}</p>
-                      <div class="text-xs font-black text-slate-950">${escapeHtml(item.price)}</div>
+
+                      <!-- Modul Cover + Title Layout -->
+                      <div class="flex gap-4 items-start pt-1">
+                        <div class="w-20 sm:w-24 aspect-[3/4] rounded-xl overflow-hidden border border-black/10 shrink-0 bg-white/60 shadow-xs">
+                          <img src="${escapeHtml(item.coverImage || '/assets/cover_illustration.jpg')}" alt="${escapeHtml(item.title)}" class="w-full h-full object-cover">
+                        </div>
+                        <div class="space-y-1.5 min-w-0">
+                          <h3 class="font-black text-slate-900 text-base sm:text-lg leading-snug">${escapeHtml(item.title)}</h3>
+                          <p class="text-xs text-slate-700 leading-relaxed line-clamp-3">${escapeHtml(item.description)}</p>
+                          <div class="text-xs font-black text-slate-950 pt-1">${escapeHtml(item.price)}</div>
+                        </div>
+                      </div>
                     </div>
+
                     <div class="mt-4 pt-3 border-t border-black/10 flex items-center justify-between gap-2">
-                      <span class="text-[11px] font-bold text-slate-600">8 Halaman A4 Lengkap</span>
+                      <span class="text-[11px] font-bold text-slate-600">Format A4 &bull; Word &amp; PDF</span>
                       <div class="flex items-center gap-2">
-                        ${item.sampleUrl ? `<a href="${escapeHtml(item.sampleUrl)}" target="_blank" class="px-4 py-2 rounded-full text-xs font-bold text-slate-800 bg-white/90 hover:bg-white border border-black/10 transition-colors">${escapeHtml(item.sampleLabel || 'Buka Sampel')}</a>` : ''}
+                        ${actionLeft}
                         <a href="${escapeHtml(item.buyUrl || 'https://lynk.id/bahanajarbuguru')}" target="_blank" rel="noopener noreferrer" class="px-4 py-2 rounded-full text-xs font-black ${theme.btn} transition-all shadow-xs">Beli</a>
                       </div>
                     </div>
