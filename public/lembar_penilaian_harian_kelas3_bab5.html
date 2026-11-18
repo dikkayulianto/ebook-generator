@@ -28,15 +28,15 @@
       margin-bottom: 14px;
     }
 
-    /* Worksheet A4 Sheet */
+    /* Worksheet F4 / Folio Sheet (215mm x 330mm) */
     .sheet-page {
-      width: 210mm;
-      height: 297mm;
-      max-height: 297mm;
+      width: 215mm;
+      height: 330mm;
+      max-height: 330mm;
       background: #ffffff;
       border: 3.5px solid #16a34a;
       border-radius: 28px;
-      padding: 7mm 11mm;
+      padding: 9mm 12mm;
       box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
       position: relative;
       box-sizing: border-box;
@@ -75,10 +75,10 @@
         box-shadow: none !important;
         margin: 0 !important;
         page-break-after: always;
-        padding: 6mm 10mm !important;
+        padding: 8mm 11mm !important;
       }
       @page {
-        size: A4 portrait;
+        size: 215mm 330mm; /* Standard F4 / Folio */
         margin: 0;
       }
     }
@@ -98,15 +98,19 @@
 </head>
 <body>
 
-  <!-- TOP TOOLBAR (KONTROL CETAK & DOWNLOAD WORD) -->
+  <!-- TOP TOOLBAR (KONTROL CETAK & DOWNLOAD WORD F4) -->
   <div class="no-print flex flex-wrap items-center justify-center gap-3">
     <button onclick="window.print()" class="px-5 py-2.5 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs shadow-md transition-all flex items-center gap-2 cursor-pointer">
       <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
-      Cetak / Simpan PDF Lembar Soal (A4)
+      Cetak / Simpan PDF Lembar Soal (Kertas F4)
     </button>
-    <a href="/Soal_Penilaian_Harian_Kelas3_Kelahiran_Nabi_Muhammad.docx" download class="px-5 py-2.5 rounded-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs shadow-md transition-all flex items-center gap-2">
+    <a href="/Soal_Penilaian_Harian_PAI_Kelas3_Kisah_Nabi_Muhammad_F4.docx" download class="px-5 py-2.5 rounded-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs shadow-md transition-all flex items-center gap-2">
       <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
-      Download File Word (.docx)
+      Download Soal Word (F4)
+    </a>
+    <a href="/Kunci_Jawaban_Penilaian_Harian_PAI_Kelas3_Bab5_F4.docx" download class="px-5 py-2.5 rounded-full bg-amber-600 hover:bg-amber-500 text-white font-bold text-xs shadow-md transition-all flex items-center gap-2">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+      Download Kunci Jawaban (F4)
     </a>
     <a href="/" class="px-4 py-2.5 rounded-full bg-white hover:bg-slate-100 text-slate-700 font-bold text-xs border border-slate-300 transition-colors">
       &larr; Kembali ke Beranda
