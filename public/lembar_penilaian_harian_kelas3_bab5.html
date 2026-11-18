@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lembar Penilaian Harian PAI Kelas 3 — Kisah Nabi Muhammad saw.</title>
+  
+  <!-- Google Fonts: Fredoka & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700;800;900&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    body {
+      font-family: 'Nunito', 'Plus Jakarta Sans', sans-serif;
+      background: #f1f5f9;
+      color: #0f172a;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Print Preview Toolbar */
+    .no-print {
+      margin-bottom: 16px;
+    }
+
+    /* Worksheet A4 Sheet */
+    .sheet-page {
+      width: 210mm;
+      min-height: 297mm;
+      background: #ffffff;
+      border: 3px solid #22c55e;
+      border-radius: 26px;
+      padding: 10mm 12mm;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      position: relative;
+      overflow: hidden;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    @media print {
+      body {
+        background: transparent;
+        padding: 0;
+      }
+      .no-print {
+        display: none !important;
+      }
+      .sheet-page {
+        width: 100% !important;
+        min-height: 100vh !important;
+        border: 2.5px solid #22c55e !important;
+        box-shadow: none !important;
+        margin: 0 !important;
+        page-break-after: always;
+        padding: 8mm 10mm !important;
+      }
+      @page {
+        size: A4 portrait;
+        margin: 0;
+      }
+    }
+
+    .font-heading {
+      font-family: 'Fredoka', cursive, sans-serif;
+    }
+
+    /* Custom Option Spacing */
+    .opt-list {
+      padding-left: 20px;
+      line-height: 1.35;
+      font-size: 8.5pt;
+      color: #1e293b;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP TOOLBAR (KONTROL CETAK & DOWNLOAD WORD) -->
+  <div class="no-print flex items-center gap-3">
+    <button onclick="window.print()" class="px-5 py-2.5 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs shadow-md transition-all flex items-center gap-2 cursor-pointer">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
+      Cetak / Simpan PDF Lembar Soal (A4)
+    </button>
+    <a href="/Soal_Ulangan_Harian_PAI_Kelas3_Bab5_Periode_Makkah.docx" download class="px-5 py-2.5 rounded-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs shadow-md transition-all flex items-center gap-2">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+      Download File Word (.docx)
+    </a>
+    <a href="/" class="px-4 py-2.5 rounded-full bg-white hover:bg-slate-100 text-slate-700 font-bold text-xs border border-slate-300 transition-colors">
+      &larr; Kembali ke Beranda
+    </a>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- A4 PRINT SHEET (LEMBAR SOAL BERWARNA PERSIS SEPERTI GAMBAR) -->
+  <!-- ======================================================== -->
+  <main class="sheet-page">
+
+    <!-- 1. HEADER ILUSTRASI MASJID, JUDUL, & ANAK MEMBACA AL-QUR'AN -->
+    <header class="relative flex items-center justify-between pb-2 border-b-2 border-emerald-100">
+      
+      <!-- Ilustrasi Masjid Ceria (Kiri) -->
+      <div class="w-36 h-28 relative shrink-0 flex items-end">
+        <!-- SVG Masjid Indah Kubah Hijau & Menara Emas -->
+        <svg viewBox="0 0 160 120" class="w-full h-full drop-shadow-xs" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Background hills & clouds -->
+          <ellipse cx="70" cy="115" rx="80" ry="15" fill="#86efac" />
+          <path d="M10 110 Q 5 70 20 60 Q 35 70 30 110" fill="#22c55e" opacity="0.3"/>
+          <path d="M135 110 Q 145 60 155 70 Q 165 90 155 110" fill="#22c55e" opacity="0.3"/>
+          
+          <!-- Pohon Kelapa Kiri -->
+          <path d="M12 110 Q 18 75 14 55" stroke="#b45309" stroke-width="4" stroke-linecap="round"/>
+          <path d="M14 55 Q 0 45 -5 60" stroke="#16a34a" stroke-width="3" stroke-linecap="round"/>
+          <path d="M14 55 Q 10 35 2 40" stroke="#16a34a" stroke-width="3" stroke-linecap="round"/>
+          <path d="M14 55 Q 25 35 32 45" stroke="#16a34a" stroke-width="3" stroke-linecap="round"/>
+          <path d="M14 55 Q 30 55 35 65" stroke="#16a34a" stroke-width="3" stroke-linecap="round"/>
+
+          <!-- Gedung Utama Masjid -->
+          <rect x="42" y="62" width="66" height="48" rx="6" fill="#fef08a" stroke="#ca8a04" stroke-width="1.5"/>
+          <path d="M52 110 V 82 Q 75 68 98 82 V 110" fill="#fde047" stroke="#ca8a04" stroke-width="1.5"/>
+          <!-- Pintu Gerbang Lengkung -->
+          <path d="M64 110 V 88 Q 75 78 86 88 V 110 Z" fill="#047857"/>
+
+          <!-- Kubah Hijau Besar Tengah -->
+          <path d="M47 62 Q 75 18 103 62 Z" fill="#10b981" stroke="#047857" stroke-width="2"/>
+          <path d="M60 62 Q 75 28 90 62" fill="#34d399"/>
+          <!-- Bulan Sabit & Bintang Emas Puncak Kubah -->
+          <circle cx="75" cy="20" r="4" fill="#fbbf24"/>
+          <path d="M75 16 V 11" stroke="#fbbf24" stroke-width="2" stroke-linecap="round"/>
+          <path d="M73 11 Q 78 7 76 13 Q 75 12 73 11" fill="#f59e0b"/>
+
+          <!-- Menara Kiri -->
+          <rect x="25" y="45" width="14" height="65" rx="3" fill="#fef08a" stroke="#ca8a04" stroke-width="1.5"/>
+          <rect x="23" y="42" width="18" height="6" rx="2" fill="#f59e0b"/>
+          <path d="M25 42 Q 32 20 39 42 Z" fill="#10b981" stroke="#047857" stroke-width="1.5"/>
+          <circle cx="32" cy="21" r="2" fill="#fbbf24"/>
+
+          <!-- Menara Kanan -->
+          <rect x="111" y="52" width="12" height="58" rx="3" fill="#fef08a" stroke="#ca8a04" stroke-width="1.5"/>
+          <rect x="109" y="49" width="16" height="5" rx="2" fill="#f59e0b"/>
+          <path d="M111 49 Q 117 30 123 49 Z" fill="#10b981" stroke="#047857" stroke-width="1.5"/>
+          <circle cx="117" cy="31" r="2" fill="#fbbf24"/>
+        </svg>
+      </div>
+
+      <!-- Judul Tengah Berwarna & Melengkung -->
+      <div class="flex-1 text-center px-2 flex flex-col items-center">
+        <!-- Text Atas Hijau Tebal Bergradasi -->
+        <h1 class="font-heading text-[19pt] leading-tight font-black text-[#14532d] tracking-tight uppercase" style="text-shadow: 1px 1px 0 #bbf7d0;">
+          PENILAIAN HARIAN
+        </h1>
+        <h2 class="font-heading text-[12.5pt] leading-tight font-extrabold text-[#15803d] tracking-normal uppercase mt-0.5">
+          PENDIDIKAN AGAMA ISLAM DAN BUDI PEKERTI
+        </h2>
+        
+        <!-- Pill Badge KELAS 3 Warna Fuchsia Pink -->
+        <div class="mt-1 px-5 py-0.5 rounded-full bg-[#f43f5e] text-white font-heading font-black text-sm tracking-wide shadow-xs border-2 border-white inline-block">
+          KELAS 3
+        </div>
+
+        <!-- Pill Materi Kotak Hijau Muda -->
+        <div class="mt-1 px-4 py-1 rounded-xl bg-[#ecfdf5] border-2 border-[#86efac] text-[#065f46] font-extrabold text-[9pt] shadow-xs">
+          Materi: Kisah Kelahiran dan Masa Kanak-Kanak Nabi Muhammad saw.
+        </div>
+      </div>
+
+      <!-- Ilustrasi Kartun Anak Muslim Membaca Al-Qur'an (Kanan) -->
+      <div class="w-36 h-28 relative shrink-0 flex items-end justify-end">
+        <svg viewBox="0 0 160 120" class="w-full h-full drop-shadow-xs" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Background hills & palm tree right -->
+          <ellipse cx="100" cy="115" rx="70" ry="15" fill="#86efac" />
+          <path d="M148 110 Q 142 75 145 55" stroke="#b45309" stroke-width="4" stroke-linecap="round"/>
+          <path d="M145 55 Q 130 40 122 50" stroke="#16a34a" stroke-width="3" stroke-linecap="round"/>
+          <path d="M145 55 Q 140 32 132 38" stroke="#16a34a" stroke-width="3" stroke-linecap="round"/>
+          <path d="M145 55 Q 158 35 166 46" stroke="#16a34a" stroke-width="3" stroke-linecap="round"/>
+
+          <!-- Anak Laki-Laki (Kiri) Berpeci Putih & Gamis Biru -->
+          <g transform="translate(18, 22)">
+            <!-- Tubuh & Baju -->
+            <path d="M22 68 Q 36 64 50 68 L 54 95 Q 36 98 18 95 Z" fill="#38bdf8"/>
+            <path d="M30 68 V 85" stroke="#0284c7" stroke-width="2"/>
+            <!-- Tangan memegang Quran -->
+            <ellipse cx="22" cy="78" rx="5" ry="7" fill="#fed7aa"/>
+            <ellipse cx="50" cy="78" rx="5" ry="7" fill="#fed7aa"/>
+            <!-- Kepala & Peci -->
+            <circle cx="36" cy="48" r="16" fill="#fed7aa"/>
+            <path d="M20 45 Q 36 34 52 45 Q 52 48 20 48 Z" fill="#334155"/> <!-- Rambut -->
+            <path d="M20 42 Q 36 28 52 42 L 52 38 Q 36 24 20 38 Z" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/> <!-- Peci putih -->
+            <!-- Wajah Senyum -->
+            <ellipse cx="31" cy="48" rx="2" ry="3" fill="#0f172a"/>
+            <ellipse cx="41" cy="48" rx="2" ry="3" fill="#0f172a"/>
+            <circle cx="28" cy="53" r="2.5" fill="#fca5a5" opacity="0.6"/>
+            <circle cx="44" cy="53" r="2.5" fill="#fca5a5" opacity="0.6"/>
+            <path d="M32 54 Q 36 59 40 54" stroke="#e11d48" stroke-width="2" stroke-linecap="round"/>
+            <!-- Buku Terbuka Hijau -->
+            <path d="M24 75 L 36 78 L 48 75 L 47 88 L 36 90 L 25 88 Z" fill="#15803d" stroke="#ca8a04" stroke-width="1"/>
+            <path d="M36 78 V 90" stroke="#fef08a" stroke-width="1.5"/>
+          </g>
+
+          <!-- Anak Perempuan (Kanan) Berhijab Pink & Baju Kuning -->
+          <g transform="translate(68, 22)">
+            <!-- Baju -->
+            <path d="M20 70 Q 36 66 52 70 L 56 95 Q 36 98 16 95 Z" fill="#fde047"/>
+            <!-- Hijab Pink Menutupi Dada -->
+            <path d="M16 46 Q 36 22 56 46 Q 60 70 54 82 Q 36 86 18 82 Q 12 70 16 46 Z" fill="#fb7185"/>
+            <!-- Muka Oval -->
+            <ellipse cx="36" cy="49" rx="13" ry="14" fill="#fed7aa"/>
+            <!-- Inner Hijab -->
+            <path d="M23 44 Q 36 34 49 44" stroke="#f43f5e" stroke-width="2"/>
+            <!-- Wajah Senyum Mata Lengkung -->
+            <ellipse cx="31" cy="48" rx="2" ry="2.5" fill="#0f172a"/>
+            <ellipse cx="41" cy="48" rx="2" ry="2.5" fill="#0f172a"/>
+            <circle cx="28" cy="52" r="2.5" fill="#fda4af"/>
+            <circle cx="44" cy="52" r="2.5" fill="#fda4af"/>
+            <path d="M33 53 Q 36 57 39 53" stroke="#e11d48" stroke-width="1.8" stroke-linecap="round"/>
+            <!-- Tangan memegang Quran Hijau -->
+            <path d="M24 76 L 36 79 L 48 76 L 47 89 L 36 91 L 25 89 Z" fill="#16a34a" stroke="#ca8a04" stroke-width="1"/>
+            <path d="M36 79 V 91" stroke="#fef08a" stroke-width="1.5"/>
+          </g>
+        </svg>
+      </div>
+
+    </header>
+
+    <!-- 2. IDENTITAS SISWA (GARIS BAWAH TITIK-TITIK) -->
+    <section class="py-2.5 px-2 text-[9pt] font-extrabold text-[#1e293b] flex items-center justify-between border-b border-dashed border-emerald-300">
+      <div class="flex-1 flex items-center">
+        <span>Nama :</span>
+        <div class="flex-1 mx-2 border-b-2 border-dotted border-slate-400 h-4"></div>
+      </div>
+      <div class="w-48 flex items-center mx-3">
+        <span>Kelas :</span>
+        <div class="flex-1 mx-2 border-b-2 border-dotted border-slate-400 h-4"></div>
+      </div>
+      <div class="w-40 flex items-center">
+        <span>No. Absen :</span>
+        <div class="flex-1 mx-2 border-b-2 border-dotted border-slate-400 h-4"></div>
+      </div>
+    </section>
+
+    <!-- 3. BAGIAN A: PILIHAN GANDA (2 KOLOM LAYOUT) -->
+    <section class="mt-2.5">
+      <!-- Section Header Bar -->
+      <div class="flex items-center gap-2 mb-2">
+        <span class="w-7 h-7 rounded-full bg-[#15803d] text-white font-heading font-black text-sm flex items-center justify-center shrink-0 shadow-xs">
+          A.
+        </span>
+        <div class="flex-1 bg-[#fce7f3] border border-[#fbcfe8] py-1 px-3 rounded-r-full font-bold text-[8.8pt] text-[#0f172a]">
+          Berilah tanda silang (X) pada huruf A, B, atau C di lembar jawaban yang dianggap paling benar!
+        </div>
+      </div>
+
+      <!-- 2 Kolom Grid Soal 1 s.d. 10 -->
+      <div class="grid grid-cols-2 gap-x-6 text-[8.6pt] text-[#0f172a] leading-tight">
+        
+        <!-- KOLOM KIRI: SOAL 1 SAMPAI 5 -->
+        <div class="space-y-2 pr-4 border-r-2 border-dashed border-[#86efac]">
+          
+          <!-- Soal 1 -->
+          <div>
+            <div class="font-bold flex items-start">
+              <span class="w-5 shrink-0">1.</span>
+              <span>Nabi Muhammad saw. lahir di kota ....</span>
+            </div>
+            <div class="opt-list space-y-0.5 mt-0.5">
+              <div>a. Makkah</div>
+              <div>b. Madinah</div>
+              <div>c. Yatsrib</div>
+            </div>
+          </div>
+
+          <!-- Soal 2 -->
+          <div>
+            <div class="font-bold flex items-start">
+              <span class="w-5 shrink-0">2.</span>
+              <span>Nabi Muhammad saw. kecilnya dikenal dengan sebutan ....</span>
+            </div>
+            <div class="opt-list space-y-0.5 mt-0.5">
+              <div>a. Al-Amin</div>
+              <div>b. As-Siddiq</div>
+              <div>c. Al-Farabi</div>
+            </div>
+          </div>
+
+          <!-- Soal 3 -->
+          <div>
+            <div class="font-bold flex items-start">
+              <span class="w-5 shrink-0">3.</span>
+              <span>Ketika masih kecil, Nabi Muhammad saw. suka membantu ....</span>
+            </div>
+            <div class="opt-list space-y-0.5 mt-0.5">
+              <div>a. berdagang</div>
+              <div>b. orang tuanya</div>
+              <div>c. teman-temannya</div>
+            </div>
+          </div>
+
+          <!-- Soal 4 -->
+          <div>
+            <div class="font-bold flex items-start">
+              <span class="w-5 shrink-0">4.</span>
+              <span>Peristiwa yang menunjukkan Nabi Muhammad saw. dipercaya oleh masyarakat adalah ....</span>
+            </div>
+            <div class="opt-list space-y-0.5 mt-0.5">
+              <div>a. berkelana ke negeri lain</div>
+              <div>b. dikenal sebagai Al-Amin</div>
+              <div>c. menikah dengan Khadijah</div>
+            </div>
+          </div>
+
+          <!-- Soal 5 -->
+          <div>
+            <div class="font-bold flex items-start">
+              <span class="w-5 shrink-0">5.</span>
+              <span>Salah satu keteladanan Nabi Muhammad saw. pada masa kanak-kanak adalah ....</span>
+            </div>
+            <div class="opt-list space-y-0.5 mt-0.5">
+              <div>a. suka berbohong</div>
+              <div>b. jujur dan amanah</div>
+              <div>c. pemarah</div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- KOLOM KANAN: SOAL 6 SAMPAI 10 -->
+        <div class="space-y-2 pl-2">
+          
+          <!-- Soal 6 -->
+          <div>
+            <div class="font-bold flex items-start">
+              <span class="w-5 shrink-0">6.</span>
+              <span>Ibu Nabi Muhammad saw. bernama ....</span>
+            </div>
+            <div class="opt-list space-y-0.5 mt-0.5">
+              <div>a. Aisyah</div>
+              <div>b. Siti Khadijah</div>
+              <div>c. Fatimah</div>
+            </div>
+          </div>
+
+          <!-- Soal 7 -->
+          <div>
+            <div class="font-bold flex items-start">
+              <span class="w-5 shrink-0">7.</span>
+              <span>Ketika berumur 40 tahun, Nabi Muhammad saw. menerima wahyu pertama di Gua ....</span>
+            </div>
+            <div class="opt-list space-y-0.5 mt-0.5">
+              <div>a. Hira</div>
+              <div>b. Tsur</div>
+              <div>c. Uhud</div>
+            </div>
+          </div>
+
+          <!-- Soal 8 -->
+          <div>
+            <div class="font-bold flex items-start">
+              <span class="w-5 shrink-0">8.</span>
+              <span>Sikap yang sesuai dengan ajaran Nabi Muhammad saw. saat berdoa adalah ....</span>
+            </div>
+            <div class="opt-list space-y-0.5 mt-0.5">
+              <div>a. berdoa dengan khusyuk</div>
+              <div>b. berdoa sambil bermain</div>
+              <div>c. berdoa sambil tidur</div>
+            </div>
+          </div>
+
+          <!-- Soal 9 -->
+          <div>
+            <div class="font-bold flex items-start">
+              <span class="w-5 shrink-0">9.</span>
+              <span>Ibadah haji dilakukan di ....</span>
+            </div>
+            <div class="opt-list space-y-0.5 mt-0.5">
+              <div>a. Masjid Nabawi</div>
+              <div>b. Masjidil Haram</div>
+              <div>c. Masjid Aqsa</div>
+            </div>
+          </div>
+
+          <!-- Soal 10 -->
+          <div>
+            <div class="font-bold flex items-start">
+              <span class="w-5 shrink-0">10.</span>
+              <span>Salah satu manfaat meneladani Nabi Muhammad saw. adalah ....</span>
+            </div>
+            <div class="opt-list space-y-0.5 mt-0.5">
+              <div>a. hidup disiplin dan jujur</div>
+              <div>b. malas beribadah</div>
+              <div>c. suka marah</div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 4. BAGIAN B: ISIAN SINGKAT (1 KOLOM PENUH) -->
+    <section class="mt-3">
+      <!-- Section Header Bar -->
+      <div class="flex items-center gap-2 mb-2">
+        <span class="w-7 h-7 rounded-full bg-[#15803d] text-white font-heading font-black text-sm flex items-center justify-center shrink-0 shadow-xs">
+          B.
+        </span>
+        <div class="flex-1 bg-[#fce7f3] border border-[#fbcfe8] py-1 px-3 rounded-r-full font-bold text-[8.8pt] text-[#0f172a]">
+          Isilah titik-titik berikut dengan jawaban yang tepat!
+        </div>
+      </div>
+
+      <!-- Daftar Soal Isian 11 s.d. 15 -->
+      <div class="space-y-1.5 text-[8.6pt] text-[#0f172a] pl-1 leading-normal font-semibold">
+        <div class="flex items-baseline">
+          <span class="w-6 shrink-0 font-bold">11.</span>
+          <span>Nabi Muhammad saw. lahir pada tahun <span class="inline-block border-b-2 border-dotted border-slate-500 w-36 mx-1"></span> di kota Makkah.</span>
+        </div>
+        <div class="flex items-baseline">
+          <span class="w-6 shrink-0 font-bold">12.</span>
+          <span>Masa kecil Nabi Muhammad saw. dikenal dengan sebutan <span class="inline-block border-b-2 border-dotted border-slate-500 w-44 mx-1"></span></span>
+        </div>
+        <div class="flex items-baseline">
+          <span class="w-6 shrink-0 font-bold">13.</span>
+          <span>Peristiwa penting yang terjadi saat Nabi Muhammad saw. berusia 40 tahun adalah menerima wahyu di <span class="inline-block border-b-2 border-dotted border-slate-500 w-40 mx-1"></span></span>
+        </div>
+        <div class="flex items-baseline">
+          <span class="w-6 shrink-0 font-bold">14.</span>
+          <span>Ketika melaksanakan ibadah haji, kita harus <span class="inline-block border-b-2 border-dotted border-slate-500 w-36 mx-1"></span> dan mengikuti aturan yang ada.</span>
+        </div>
+        <div class="flex items-baseline">
+          <span class="w-6 shrink-0 font-bold">15.</span>
+          <span>Keteladanan Nabi Muhammad saw. yang dapat kita tiru adalah <span class="inline-block border-b-2 border-dotted border-slate-500 w-52 mx-1"></span></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. FOOTER ILUSTRASI PAGAR, BANNER MOTIVASI PINK, & MINIATUR KA'BAH -->
+    <footer class="mt-3 pt-2 relative flex items-center justify-between border-t border-emerald-100">
+      
+      <!-- Pagar Kayu & Bunga Kartun (Kiri Bawah) -->
+      <div class="w-24 h-14 relative shrink-0 flex items-end">
+        <svg viewBox="0 0 100 60" class="w-full h-full" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Bunga-bunga ceria -->
+          <circle cx="15" cy="20" r="5" fill="#f43f5e"/>
+          <circle cx="15" cy="20" r="2.5" fill="#fef08a"/>
+          <path d="M15 25 V 45" stroke="#16a34a" stroke-width="2"/>
+          <circle cx="28" cy="14" r="5" fill="#38bdf8"/>
+          <circle cx="28" cy="14" r="2.5" fill="#fef08a"/>
+          <path d="M28 19 V 45" stroke="#16a34a" stroke-width="2"/>
+          <!-- Daun hijau -->
+          <ellipse cx="20" cy="35" rx="6" ry="3" fill="#22c55e" transform="rotate(-30 20 35)"/>
+
+          <!-- Pagar Kayu Oranye/Cokelat -->
+          <g fill="#f97316" stroke="#c2410c" stroke-width="1.2">
+            <!-- Palang Horisontal -->
+            <rect x="2" y="32" width="70" height="5" rx="1.5"/>
+            <rect x="2" y="44" width="70" height="5" rx="1.5"/>
+            <!-- Tiang Pagar Runcing Vertikal -->
+            <path d="M8 52 V 24 L 12 18 L 16 24 V 52 Z"/>
+            <path d="M22 52 V 24 L 26 18 L 30 24 V 52 Z"/>
+            <path d="M36 52 V 24 L 40 18 L 44 24 V 52 Z"/>
+            <path d="M50 52 V 24 L 54 18 L 58 24 V 52 Z"/>
+            <path d="M64 52 V 24 L 68 18 L 72 24 V 52 Z"/>
+          </g>
+        </svg>
+      </div>
+
+      <!-- Banner Motivasi Akhlak Mulia (Tengah) -->
+      <div class="flex-1 mx-2 flex flex-col items-center">
+        <div class="px-5 py-1.5 rounded-full bg-[#fdf2f8] border-2 border-[#f472b6] text-center shadow-xs flex items-center justify-center gap-2">
+          <span class="text-rose-500 text-sm">💖</span>
+          <div class="font-heading font-black text-[9.2pt] text-[#0f172a] leading-tight">
+            Mari meneladani akhlak mulia<br>
+            <span class="text-[#047857]">Nabi Muhammad saw.</span> dalam kehidupan sehari-hari!
+          </div>
+          <span class="text-rose-500 text-sm">💖</span>
+        </div>
+      </div>
+
+      <!-- Ilustrasi Ka'bah Emas & Pohon Kelapa (Kanan Bawah) -->
+      <div class="w-24 h-14 relative shrink-0 flex items-end justify-end">
+        <svg viewBox="0 0 100 60" class="w-full h-full" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Pohon Kelapa Kecil -->
+          <path d="M85 55 Q 88 35 84 20" stroke="#b45309" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M84 20 Q 75 12 70 18" stroke="#16a34a" stroke-width="2" stroke-linecap="round"/>
+          <path d="M84 20 Q 82 8 76 10" stroke="#16a34a" stroke-width="2" stroke-linecap="round"/>
+          <path d="M84 20 Q 94 10 98 16" stroke="#16a34a" stroke-width="2" stroke-linecap="round"/>
+
+          <!-- Miniatur Ka'bah 3D Perspective -->
+          <!-- Sisi Depan Hitam -->
+          <polygon points="35,28 65,22 65,52 35,58" fill="#1e293b" stroke="#0f172a" stroke-width="1.2"/>
+          <!-- Pita Kiswah Emas Depan -->
+          <polygon points="35,34 65,28 65,31 35,37" fill="#fbbf24"/>
+          <!-- Pintu Ka'bah Emas -->
+          <polygon points="40,42 48,40 48,55 40,57" fill="#f59e0b" stroke="#b45309" stroke-width="0.8"/>
+
+          <!-- Sisi Samping Kanan Hitam Lebih Terang -->
+          <polygon points="65,22 80,26 80,54 65,52" fill="#334155" stroke="#0f172a" stroke-width="1.2"/>
+          <!-- Pita Kiswah Emas Samping -->
+          <polygon points="65,28 80,32 80,35 65,31" fill="#f59e0b"/>
+
+          <!-- Atap Ka'bah -->
+          <polygon points="35,28 50,18 80,26 65,22" fill="#475569"/>
+        </svg>
+      </div>
+
+    </footer>
+
+  </main>
+
+</body>
+</html>
