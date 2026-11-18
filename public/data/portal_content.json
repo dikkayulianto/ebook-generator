@@ -259,117 +259,123 @@
   ],
   "soalSection": {
     "katalogBadge": "Katalog 3",
-    "heading": "Bank Soal SAS (Sumatif Akhir Semester) PAI Kelas 1-6 SD",
+    "heading": "Bank Soal SAS (Sumatif Akhir Semester) Kelas 1–6 SD",
     "subheading": "Naskah ujian 25 Soal (15 PG + 5 Isian + 5 Uraian HOTS) lengkap dengan Kunci Jawaban, Rubrik Penilaian, dan Kisi-Kisi CP No. 020 Tahun 2026.",
-    "topSampleLabel": "Coba Latihan Soal Interaktif",
-    "topSampleUrl": "/soal_sas_prototype.html"
+    "topSampleLabel": "Lihat Contoh Soal",
+    "topSampleUrl": "/preview_soal.html?kelas=1"
   },
   "soalItems": [
     {
       "id": "soal-kls-1",
       "grade": 1,
-      "badge": "SAS Kelas 1 SD • Semester 1",
+      "badge": "Fase A • Kelas 1 SD",
       "price": "Rp 20.000",
       "coverImage": "/assets/soal_sas_cover_kelas1.jpg",
       "title": "Naskah Soal SAS PAI Kelas 1 SD",
-      "description": "15 PG Bergambar, 5 Isian, 5 Uraian Penalaran. Huruf Hijaiyah, Rukun Iman, Basmalah/Hamdalah, dan Bersuci.",
+      "description": "25 Soal Lengkap: 15 PG Bergambar, 5 Isian, 5 Uraian HOTS. Huruf Hijaiyah, Rukun Iman, Basmalah & Hamdalah, serta Tata Cara Bersuci.",
       "tags": [
-        "Word .docx",
-        "PDF Siap Cetak",
-        "Kunci & Rubrik"
+        "25 Soal Lengkap",
+        "Word & PDF",
+        "Kunci & Kisi-Kisi"
       ],
-      "sampleLabel": "Flyer 9:16",
-      "sampleUrl": "/flyer_sas_kelas1.html",
+      "sampleLabel": "Detail",
+      "sampleUrl": "/preview_soal.html?kelas=1",
+      "modalDetail": "25 Soal Lengkap (PG, Isian, Uraian), Kunci Jawaban, Rubrik Penilaian, dan Kisi-Kisi CP 020",
       "buyUrl": "https://lynk.id/bahanajarbuguru",
       "visible": true
     },
     {
       "id": "soal-kls-2",
       "grade": 2,
-      "badge": "SAS Kelas 2 SD • Semester 1",
+      "badge": "Fase A • Kelas 2 SD",
       "price": "Rp 20.000",
       "coverImage": "/assets/soal_sas_cover_kelas2.jpg",
       "title": "Naskah Soal SAS PAI Kelas 2 SD",
-      "description": "Asmaul Husna, Huruf Hijaiyah Bersambung, Azan dan Ikamah, serta Keteladanan Nabi Nuh a.s.",
+      "description": "25 Soal Lengkap: Asmaul Husna, Huruf Hijaiyah Bersambung, Azan dan Ikamah, serta Keteladanan Nabi Nuh a.s. Dilengkapi Kunci Jawaban.",
       "tags": [
-        "Word .docx",
-        "PDF Siap Cetak",
-        "Kisi-kisi CP 020"
+        "25 Soal Lengkap",
+        "Word & PDF",
+        "Kunci & Kisi-Kisi"
       ],
-      "sampleLabel": "Flyer 9:16",
-      "sampleUrl": "/flyer_sas_kelas2.html",
+      "sampleLabel": "Detail",
+      "sampleUrl": "/preview_soal.html?kelas=2",
+      "modalDetail": "25 Soal Lengkap (PG, Isian, Uraian), Kunci Jawaban, Rubrik Penilaian, dan Kisi-Kisi CP 020",
       "buyUrl": "https://lynk.id/bahanajarbuguru",
       "visible": true
     },
     {
       "id": "soal-kls-3",
       "grade": 3,
-      "badge": "SAS Kelas 3 SD • Semester 1",
+      "badge": "Fase B • Kelas 3 SD",
       "price": "Rp 20.000",
       "coverImage": "/assets/soal_sas_cover_kelas3.jpg",
       "title": "Naskah Soal SAS PAI Kelas 3 SD",
-      "description": "Surah Al-Humazah & Al-Kautsar, Sifat-Sifat Wajib Allah, Berbakti Orang Tua & Guru, Shalat Sunah Rawatib.",
+      "description": "25 Soal Lengkap: Surah Al-Humazah & Al-Kautsar, Sifat Wajib Allah, Berbakti Orang Tua & Guru, Shalat Sunah Rawatib, serta Rubrik Lengkap.",
       "tags": [
-        "Word .docx",
-        "PDF Siap Cetak",
-        "Kunci & Rubrik"
+        "25 Soal Lengkap",
+        "Word & PDF",
+        "Kunci & Kisi-Kisi"
       ],
-      "sampleLabel": "Flyer 9:16",
-      "sampleUrl": "/flyer_sas_kelas3.html",
+      "sampleLabel": "Detail",
+      "sampleUrl": "/preview_soal.html?kelas=3",
+      "modalDetail": "25 Soal Lengkap (PG, Isian, Uraian), Kunci Jawaban, Rubrik Penilaian, dan Kisi-Kisi CP 020",
       "buyUrl": "https://lynk.id/bahanajarbuguru",
       "visible": true
     },
     {
       "id": "soal-kls-4",
       "grade": 4,
-      "badge": "SAS Kelas 4 SD • Semester 1",
+      "badge": "Fase B • Kelas 4 SD",
       "price": "Rp 20.000",
       "coverImage": "/assets/soal_sas_cover_kelas4.jpg",
       "title": "Naskah Soal SAS PAI Kelas 4 SD",
-      "description": "Surah Al-Hujurat 13, Asmaul Husna, Keragaman Manusia, Menyambut Usia Baligh, Hijrah Rasulullah SAW ke Madinah.",
+      "description": "25 Soal Lengkap: Surah Al-Hujurat: 13, Asmaul Husna Al-Malik/Al-Aziz, Tanda Usia Baligh, Hijrah Rasulullah SAW, Kunci & Kisi-kisi CP 020.",
       "tags": [
-        "Word .docx",
-        "PDF Siap Cetak",
-        "Penalaran HOTS"
+        "25 Soal Lengkap",
+        "Word & PDF",
+        "Kunci & Kisi-Kisi"
       ],
-      "sampleLabel": "Flyer 9:16",
-      "sampleUrl": "/flyer_sas_kelas4.html",
+      "sampleLabel": "Detail",
+      "sampleUrl": "/preview_soal.html?kelas=4",
+      "modalDetail": "25 Soal Lengkap (PG, Isian, Uraian), Kunci Jawaban, Rubrik Penilaian, dan Kisi-Kisi CP 020",
       "buyUrl": "https://lynk.id/bahanajarbuguru",
       "visible": true
     },
     {
       "id": "soal-kls-5",
       "grade": 5,
-      "badge": "SAS Kelas 5 SD • Semester 1",
+      "badge": "Fase C • Kelas 5 SD",
       "price": "Rp 20.000",
       "coverImage": "/assets/soal_sas_cover_kelas5.jpg",
       "title": "Naskah Soal SAS PAI Kelas 5 SD",
-      "description": "Surah Al-Ma'un, Asmaul Husna Al-Qawiyyu/Al-Qayyum, Zakat/Infak/Sedekah/Hadiah, Peristiwa Fathu Makkah.",
+      "description": "25 Soal Lengkap: Surah Al-Ma'un, Asmaul Husna Al-Qawiyyu/Al-Qayyum, Zakat, Infak, Sedekah, Peristiwa Fathu Makkah, Kunci & Pedoman Skor.",
       "tags": [
-        "Word .docx",
-        "PDF Siap Cetak",
-        "Rubrik Lengkap"
+        "25 Soal Lengkap",
+        "Word & PDF",
+        "Kunci & Kisi-Kisi"
       ],
-      "sampleLabel": "Flyer 9:16",
-      "sampleUrl": "/flyer_sas_kelas5.html",
+      "sampleLabel": "Detail",
+      "sampleUrl": "/preview_soal.html?kelas=5",
+      "modalDetail": "25 Soal Lengkap (PG, Isian, Uraian), Kunci Jawaban, Rubrik Penilaian, dan Kisi-Kisi CP 020",
       "buyUrl": "https://lynk.id/bahanajarbuguru",
       "visible": true
     },
     {
       "id": "soal-kls-6",
       "grade": 6,
-      "badge": "SAS Kelas 6 SD • Semester 1",
+      "badge": "Fase C • Kelas 6 SD",
       "price": "Rp 20.000",
       "coverImage": "/assets/soal_sas_cover_kelas6.jpg",
       "title": "Naskah Soal SAS PAI Kelas 6 SD",
-      "description": "Surah Ad-Duha, Asmaul Husna Al-Ghaffar, Ketentuan Makanan Halal & Haram, Jasa Khulafaur Rasyidin.",
+      "description": "25 Soal Lengkap: Surah Ad-Duha, Asmaul Husna Al-Ghaffar/Al-Wahid, Toleransi Beragama, Makanan Halal/Haram, Khulafaur Rasyidin & Kisi-kisi.",
       "tags": [
-        "Word .docx",
-        "PDF Siap Cetak",
-        "Analisis HOTS"
+        "25 Soal Lengkap",
+        "Word & PDF",
+        "Kunci & Kisi-Kisi"
       ],
-      "sampleLabel": "Flyer 9:16",
-      "sampleUrl": "/flyer_sas_kelas6.html",
+      "sampleLabel": "Detail",
+      "sampleUrl": "/preview_soal.html?kelas=6",
+      "modalDetail": "25 Soal Lengkap (PG, Isian, Uraian), Kunci Jawaban, Rubrik Penilaian, dan Kisi-Kisi CP 020",
       "buyUrl": "https://lynk.id/bahanajarbuguru",
       "visible": true
     }
