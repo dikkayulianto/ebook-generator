@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10b981" />
+      <stop offset="100%" stop-color="#047857" />
+    </linearGradient>
+    <linearGradient id="starGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fde047" />
+      <stop offset="100%" stop-color="#f59e0b" />
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="#064e3b" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- Squircle Background -->
+  <rect width="512" height="512" rx="128" fill="url(#bgGrad)"/>
+  <rect x="18" y="18" width="476" height="476" rx="114" fill="none" stroke="#ffffff" stroke-width="4" stroke-opacity="0.2"/>
+
+  <!-- Stylized Open Book Graphic -->
+  <g filter="url(#shadow)" transform="translate(0, -15)">
+    <!-- Main Book Pages -->
+    <path d="M256 335 C205 315 135 315 85 330 L85 190 C135 175 205 175 256 195 C307 175 377 175 427 190 L427 330 C377 315 307 315 256 335 Z" fill="#ffffff"/>
+    
+    <!-- Left Page -->
+    <path d="M256 335 C205 315 135 315 85 330 L85 190 C135 175 205 175 256 195 Z" fill="#f8fafc"/>
+    <!-- Right Page -->
+    <path d="M256 335 C307 315 377 315 427 330 L427 190 C377 175 307 175 256 195 Z" fill="#ffffff"/>
+    
+    <!-- Spine Divider / Bookmark Ribbon -->
+    <path d="M256 195 L256 320 L248 308 L240 320 L240 195 Z" fill="#10b981"/>
+
+    <!-- Left Page Decorative Lines -->
+    <line x1="125" y1="225" x2="215" y2="232" stroke="#cbd5e1" stroke-width="7" stroke-linecap="round"/>
+    <line x1="125" y1="255" x2="215" y2="262" stroke="#cbd5e1" stroke-width="7" stroke-linecap="round"/>
+    <line x1="125" y1="285" x2="195" y2="290" stroke="#cbd5e1" stroke-width="7" stroke-linecap="round"/>
+
+    <!-- Right Page Decorative Lines -->
+    <line x1="297" y1="232" x2="387" y2="225" stroke="#cbd5e1" stroke-width="7" stroke-linecap="round"/>
+    <line x1="297" y1="262" x2="387" y2="255" stroke="#cbd5e1" stroke-width="7" stroke-linecap="round"/>
+    <line x1="317" y1="290" x2="387" y2="285" stroke="#cbd5e1" stroke-width="7" stroke-linecap="round"/>
+  </g>
+
+  <!-- Golden Knowledge Star -->
+  <path d="M375 110 L385 135 L410 145 L385 155 L375 180 L365 155 L340 145 L365 135 Z" fill="url(#starGrad)"/>
+  <circle cx="325" cy="115" r="7" fill="#fde047" fill-opacity="0.9"/>
+  <circle cx="420" cy="170" r="5" fill="#fde047" fill-opacity="0.9"/>
+
+  <!-- BG Monogram Brand Mark -->
+  <text x="256" y="428" font-family="'Outfit', 'Plus Jakarta Sans', system-ui, sans-serif" font-weight="900" font-size="74" fill="#ffffff" text-anchor="middle" letter-spacing="3">BU GURU</text>
+</svg>
