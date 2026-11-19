@@ -1,0 +1,675 @@
+import os
+import json
+from build_all_product_pages import GRADES_DATA
+
+def generate_unified_soal_page(grade):
+    data = GRADES_DATA[grade]
+    fase = data["fase"]
+    title = f"Soal SAS PAI Kelas {grade} SD Kurikulum Merdeka + Kunci Jawaban"
+    desc = f"Contoh soal SAS PAI Kelas {grade} SD Kurikulum Merdeka lengkap kunci jawaban dan kisi-kisi. Unduh naskah format Word dan PDF."
+    canonical = f"https://bahanajarbuguru.my.id/soal-sas-pai-kelas-{grade}.html"
+    
+    pastel_list = [
+        ("bg-[#e8f8f0]", "border-[#10b981]/20", "bg-emerald-600", "text-emerald-950"),
+        ("bg-[#f3effe]", "border-[#8b5cf6]/20", "bg-purple-600", "text-purple-950"),
+        ("bg-[#fff1eb]", "border-[#f97316]/20", "bg-orange-600", "text-orange-950"),
+        ("bg-[#eff6ff]", "border-[#3b82f6]/20", "bg-blue-600", "text-blue-950"),
+        ("bg-[#fef9c3]", "border-[#eab308]/30", "bg-amber-600", "text-amber-950"),
+    ]
+
+    bab_html = ""
+    for idx, (title_b, desc_b) in enumerate(data["bab_list"]):
+        bg_col, brd_col, num_bg, text_col = pastel_list[idx % len(pastel_list)]
+        bab_html += f"""
+        <div class="p-3.5 rounded-2xl {bg_col} border {brd_col} flex items-start gap-3">
+          <span class="w-6 h-6 rounded-full {num_bg} text-white font-bold text-xs flex items-center justify-center shrink-0">{idx+1}</span>
+          <div>
+            <h3 class="font-bold {text_col}">{title_b}</h3>
+            <p class="text-slate-600 mt-0.5">{desc_b}</p>
+          </div>
+        </div>"""
+
+    q_html = ""
+    table_rows = ""
+    for i, (q_text, opts, ans) in enumerate(data["sample_questions"], 1):
+        if opts:
+            opts_html = "".join([f'<div class="p-2 bg-white rounded-xl border border-slate-200/80">{opt}</div>' for opt in opts])
+            opts_wrap = f'<div class="grid grid-cols-1 sm:grid-cols-3 gap-1.5 pl-2 text-slate-700 font-medium">{opts_html}</div>'
+        else:
+            opts_wrap = ""
+        q_html += f"""
+        <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+          <p class="font-bold text-slate-900">{q_text}</p>
+          {opts_wrap}
+        </div>"""
+        table_rows += f'<tr class="hover:bg-slate-50"><td class="border border-slate-200 px-4 py-1.5 text-center">{i}</td><td class="border border-slate-200 px-4 py-1.5 text-emerald-700 font-bold">{ans}</td></tr>'
+
+    other_soal_links = "".join([
+        f"""<a href="/soal-sas-pai-kelas-{g}.html" class="p-3.5 rounded-2xl bg-slate-50 hover:bg-emerald-50 border border-slate-200 text-xs font-semibold flex items-center justify-between text-slate-800 hover:text-emerald-950 transition-colors">
+          <span>Soal SAS PAI Kelas {g} SD</span> <span>&rarr;</span>
+        </a>""" for g in range(1, 7) if g != grade
+    ])
+
+    html = f"""<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{title}</title>
+  
+  <link rel="canonical" href="{canonical}">
+  <meta name="description" content="{desc}">
+  <meta name="robots" content="index, follow">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="{title}">
+  <meta property="og:description" content="{desc}">
+  <meta property="og:image" content="https://bahanajarbuguru.my.id{data['cover_soal']}">
+  <meta property="og:url" content="{canonical}">
+
+  <!-- Schema.org Product & FAQPage -->
+  <script type="application/ld+json">
+  {{
+    "@context": "https://schema.org",
+    "@graph": [
+      {{
+        "@type": "Product",
+        "name": "Naskah Soal SAS PAI Kelas {grade} SD Kurikulum Merdeka (Kunci Jawaban + Kisi-kisi)",
+        "description": "Naskah soal SAS PAI Kelas {grade} SD lengkap 25 butir soal (15 pilihan ganda, 5 isian, 5 uraian), kunci jawaban, dan kisi-kisi penulisan soal CP No. 020. Format Word (.docx) dan PDF.",
+        "image": "https://bahanajarbuguru.my.id{data['cover_soal']}",
+        "brand": {{
+          "@type": "Brand",
+          "name": "Bahan Ajar Bu Guru"
+        }},
+        "offers": {{
+          "@type": "Offer",
+          "url": "https://lynk.id/bahanajarbuguru",
+          "price": "15000",
+          "priceCurrency": "IDR",
+          "priceValidUntil": "2027-12-31",
+          "availability": "https://schema.org/InStock"
+        }}
+      }},
+      {{
+        "@type": "FAQPage",
+        "mainEntity": [
+          {{
+            "@type": "Question",
+            "name": "Apakah naskah soal bisa diedit?",
+            "acceptedAnswer": {{
+              "@type": "Answer",
+              "text": "Bisa. Versi Word (.docx) dapat Anda ubah, misalnya menambah nama sekolah, mengganti urutan soal, atau menyesuaikan jumlah soal."
+            }}
+          }},
+          {{
+            "@type": "Question",
+            "name": "Format file apa yang saya dapatkan?",
+            "acceptedAnswer": {{
+              "@type": "Answer",
+              "text": "Anda mendapatkan file Word (.docx) dan PDF. Versi PDF sudah rapi dan siap dicetak."
+            }}
+          }},
+          {{
+            "@type": "Question",
+            "name": "Apakah ada kunci jawaban dan kisi-kisi?",
+            "acceptedAnswer": {{
+              "@type": "Answer",
+              "text": "Ya, kunci jawaban untuk semua soal dan matriks kisi-kisi penulisan soal sudah termasuk dalam paket naskah."
+            }}
+          }},
+          {{
+            "@type": "Question",
+            "name": "Apakah sesuai dengan Kurikulum Merdeka?",
+            "acceptedAnswer": {{
+              "@type": "Answer",
+              "text": "Soal disusun mengacu pada Capaian Pembelajaran (CP) No. 020 Kemendikbudristek untuk PAI dan Budi Pekerti kelas {grade} SD ({fase})."
+            }}
+          }},
+          {{
+            "@type": "Question",
+            "name": "Bagaimana cara menerima file setelah membayar?",
+            "acceptedAnswer": {{
+              "@type": "Answer",
+              "text": "Tautan unduhan file Word dan PDF langsung aktif di layar konfirmasi Lynk.id serta dikirimkan otomatis ke WhatsApp/email Anda sesaat setelah pembayaran berhasil."
+            }}
+          }}
+        ]
+      }}
+    ]
+  }}
+  </script>
+
+  <!-- Tailwind CSS & Fonts matching Homepage Theme -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {{
+      theme: {{
+        extend: {{
+          fontFamily: {{
+            sans: ['"Outfit"', '"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
+            arabic: ['"Amiri"', 'serif'],
+          }},
+          colors: {{
+            canvas: '#ccebe0',
+            appBg: '#faf7f2',
+            sidebarBg: '#f3eee8',
+            panelBg: '#f5efe6',
+            brand: {{
+              50: '#f0fdf4',
+              100: '#dcfce7',
+              600: '#16a34a',
+              700: '#15803d',
+              900: '#14532d',
+            }}
+          }}
+        }}
+      }}
+    }}
+  </script>
+
+  <style>
+    ::-webkit-scrollbar {{ width: 6px; height: 6px; }}
+    ::-webkit-scrollbar-track {{ background: #faf7f2; }}
+    ::-webkit-scrollbar-thumb {{ background: #cbd5e1; border-radius: 9999px; }}
+    ::-webkit-scrollbar-thumb:hover {{ background: #94a3b8; }}
+    .no-scrollbar::-webkit-scrollbar {{ display: none; }}
+    .no-scrollbar {{ -ms-overflow-style: none; scrollbar-width: none; }}
+    .edu-card-pastel {{
+      border-radius: 24px;
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease;
+    }}
+    .edu-card-pastel:hover {{
+      transform: translateY(-2px);
+      box-shadow: 0 12px 24px -8px rgba(15, 23, 42, 0.08);
+    }}
+  </style>
+</head>
+<body class="bg-canvas min-h-screen p-2 sm:p-4 lg:p-6 flex flex-col justify-start items-center font-sans antialiased text-slate-800">
+
+  <!-- ======================================================== -->
+  <!-- MAIN APP MOCKUP CONTAINER (Matching Homepage Theme)      -->
+  <!-- ======================================================== -->
+  <div class="w-full max-w-[1400px] bg-appBg rounded-[28px] sm:rounded-[36px] shadow-2xl shadow-emerald-950/15 border border-[#e5dfd5] overflow-hidden flex flex-col">
+
+    <!-- TOP WINDOW CHROME (Browser Mockup Bar) -->
+    <div class="bg-white/80 backdrop-blur border-b border-[#ece6dc] px-4 sm:px-6 py-3 flex items-center justify-between gap-4 select-none sticky top-0 z-40">
+      <div class="flex items-center gap-2">
+        <span class="w-3 h-3 rounded-full bg-[#ff5f56] border border-[#e0443e] inline-block"></span>
+        <span class="w-3 h-3 rounded-full bg-[#ffbd2e] border border-[#dea123] inline-block"></span>
+        <span class="w-3 h-3 rounded-full bg-[#27c93f] border border-[#1aab29] inline-block"></span>
+      </div>
+
+      <div class="flex-1 max-w-md mx-auto hidden sm:flex items-center justify-center gap-2 px-3.5 py-1 rounded-full bg-slate-100/90 border border-slate-200/80 text-xs text-slate-700 font-medium">
+        <svg class="w-3 h-3 text-emerald-600" viewBox="0 0 24 24" fill="currentColor">
+          <path fill-rule="evenodd" d="M12 1.5a5.25 5.25 0 00-5.25 5.25v3a3 3 0 00-3 3v6.75a3 3 0 003 3h10.5a3 3 0 003-3v-6.75a3 3 0 00-3-3v-3c0-2.9-2.35-5.25-5.25-5.25zm3.75 8.25v-3a3.75 3.75 0 00-7.5 0v3h7.5z" clip-rule="evenodd" />
+        </svg>
+        <span class="truncate font-semibold">bahanajarbuguru.my.id/soal-sas-pai-kelas-{grade}.html</span>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <a href="/" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white hover:bg-slate-100 text-slate-800 text-xs font-bold border border-slate-200 shadow-xs transition-colors">
+          <span>&larr; Beranda</span>
+        </a>
+        <a href="https://lynk.id/bahanajarbuguru" target="_blank" rel="sponsored nofollow noopener" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold shadow-xs transition-all">
+          <span>Toko Lynk.id &rarr;</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- ANNOUNCEMENT BANNER -->
+    <aside aria-label="Status Pratinjau Terlindungi" class="bg-[#1b2533] text-emerald-100 text-[11px] sm:text-xs py-2 px-4 text-center font-medium flex items-center justify-center gap-2">
+      <span>🔒 <strong>Mode Pratinjau Terlindungi:</strong> Naskah asli Microsoft Word (.docx) dan PDF siap cetak dapat diunduh melalui toko Lynk.id.</span>
+    </aside>
+
+    <!-- INNER 3-COLUMN WORKSPACE -->
+    <div class="flex-1 flex flex-col lg:flex-row p-3 sm:p-5 lg:p-6 gap-5 lg:gap-6 items-start relative">
+
+      <!-- COLUMN 1: LEFT FLOATING ICON DOCK -->
+      <aside aria-label="Navigasi Menu Cepat" class="hidden lg:flex flex-col items-center justify-between w-16 bg-sidebarBg rounded-3xl p-3 py-5 sticky top-20 self-start shrink-0 border border-[#e8dfd5] shadow-xs z-30">
+        <div class="space-y-6 flex flex-col items-center">
+          <a href="/" class="w-10 h-10 rounded-2xl bg-emerald-600 text-white flex items-center justify-center font-black text-sm shadow-sm" title="Kembali ke Beranda">
+            BG
+          </a>
+
+          <nav class="flex flex-col items-center gap-3">
+            <a href="/" class="w-11 h-11 rounded-full bg-white hover:bg-slate-100 text-slate-700 flex items-center justify-center border border-slate-200 transition-colors" title="Katalog Beranda">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+              </svg>
+            </a>
+            <a href="/bank-soal-sas-pai-sd.html" class="w-11 h-11 rounded-full bg-slate-900 text-white flex items-center justify-center shadow" title="Bank Soal SAS SD">
+              <span class="text-base">📝</span>
+            </a>
+            <a href="/modul-ajar-pai-sd.html" class="w-11 h-11 rounded-full bg-white hover:bg-slate-100 text-slate-700 flex items-center justify-center border border-slate-200 transition-colors" title="Modul Ajar Deep Learning">
+              <span class="text-base">🚀</span>
+            </a>
+            <a href="/buku-siswa-pai-sd.html" class="w-11 h-11 rounded-full bg-white hover:bg-slate-100 text-slate-700 flex items-center justify-center border border-slate-200 transition-colors" title="Buku Siswa PAI">
+              <span class="text-base">📘</span>
+            </a>
+          </nav>
+        </div>
+
+        <div class="flex flex-col items-center gap-3 pt-6 border-t border-[#e2d8cd]">
+          <a href="/#profil-guru" class="w-10 h-10 rounded-full overflow-hidden border-2 border-emerald-600/40 shadow-sm block" title="Profil Bahan Ajar Bu Guru">
+            <img src="/assets/avatar_profile_buguru.jpg" alt="Foto Profil" class="w-full h-full object-cover">
+          </a>
+        </div>
+      </aside>
+
+      <!-- COLUMN 2: CENTER MAIN CONTENT -->
+      <main class="flex-1 w-full space-y-6">
+
+        <nav aria-label="Breadcrumb" class="flex items-center gap-2 text-xs font-semibold text-slate-500">
+          <a href="/" class="hover:text-emerald-700 transition-colors">Beranda</a>
+          <span>&rsaquo;</span>
+          <a href="/bank-soal-sas-pai-sd.html" class="hover:text-emerald-700 transition-colors">Bank Soal SAS PAI SD</a>
+          <span>&rsaquo;</span>
+          <span class="text-slate-900 font-bold">Soal SAS PAI Kelas {grade}</span>
+        </nav>
+
+        <header class="space-y-3 pt-1">
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="px-3.5 py-1 rounded-full bg-emerald-100 text-emerald-950 font-bold text-xs border border-emerald-200/80">
+              Kurikulum Merdeka • CP No. 020 • {fase} (Kelas {grade} SD)
+            </span>
+            <span class="px-3.5 py-1 rounded-full bg-amber-100 text-amber-950 font-bold text-xs border border-amber-300">
+              ⭐ Diskon 25% Promo Pendidik
+            </span>
+          </div>
+
+          <h1 class="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 tracking-tight leading-snug">
+            {title}
+          </h1>
+
+          <div class="space-y-3 text-xs sm:text-sm text-slate-600 leading-relaxed font-normal pt-1">
+            <p>
+              Menyusun soal Sumatif Akhir Semester (SAS) untuk siswa kelas {grade} butuh waktu dan ketelitian agar butir soal proporsional dengan alur capaian pembelajaran. Halaman ini menyediakan naskah soal SAS Pendidikan Agama Islam dan Budi Pekerti Kelas {grade} SD Kurikulum Merdeka yang sudah dilengkapi kunci jawaban dan kisi-kisi, sehingga Bapak/Ibu guru bisa langsung memakainya atau menyesuaikannya dengan kebutuhan kelas.
+            </p>
+            <p>
+              Di bawah ini tersedia contoh soal gratis agar Anda bisa menilai kualitas naskah sebelum memutuskan memakai versi lengkapnya.
+            </p>
+          </div>
+        </header>
+
+        <!-- SECTION: ISI NASKAH -->
+        <section class="bg-white rounded-3xl p-6 sm:p-7 border border-[#e5ded4] space-y-4 shadow-xs">
+          <h2 class="text-lg sm:text-xl font-black text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2">
+            <span>📋</span>
+            <span>Isi Naskah Soal SAS PAI Kelas {grade}</span>
+          </h2>
+          <p class="text-xs sm:text-sm text-slate-600 font-medium">Naskah lengkap berisi:</p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm font-medium">
+            <div class="flex items-start gap-2.5 p-3.5 rounded-2xl bg-[#f3effe] border border-[#8b5cf6]/20">
+              <span class="text-purple-700 font-bold text-base">✓</span>
+              <span><strong>15 soal pilihan ganda</strong> dengan opsi jawaban berbobot sesuai asesmen sumatif SD.</span>
+            </div>
+            <div class="flex items-start gap-2.5 p-3.5 rounded-2xl bg-[#e8f8f0] border border-[#10b981]/20">
+              <span class="text-emerald-700 font-bold text-base">✓</span>
+              <span><strong>5 soal isian singkat</strong> untuk mengukur pemahaman konsep dasar dan hafalan dalil.</span>
+            </div>
+            <div class="flex items-start gap-2.5 p-3.5 rounded-2xl bg-[#fff1eb] border border-[#f97316]/20">
+              <span class="text-orange-700 font-bold text-base">✓</span>
+              <span><strong>5 soal uraian HOTS</strong> dengan skenario aplikatif adab sehari-hari di rumah dan sekolah.</span>
+            </div>
+            <div class="flex items-start gap-2.5 p-3.5 rounded-2xl bg-[#eff6ff] border border-[#3b82f6]/20">
+              <span class="text-blue-700 font-bold text-base">✓</span>
+              <span><strong>Kunci jawaban untuk semua soal</strong> disertai pedoman penskoran transparan skala 100 poin.</span>
+            </div>
+            <div class="flex items-start gap-2.5 p-3.5 rounded-2xl bg-[#fef9c3] border border-[#eab308]/30">
+              <span class="text-amber-800 font-bold text-base">✓</span>
+              <span><strong>Kisi-kisi soal</strong> yang memuat Capaian Pembelajaran (CP) dan Tujuan Pembelajaran resmi (CP No. 020).</span>
+            </div>
+            <div class="flex items-start gap-2.5 p-3.5 rounded-2xl bg-[#ffe4e6] border border-[#f43f5e]/20">
+              <span class="text-rose-700 font-bold text-base">✓</span>
+              <span>Format <strong>Word (.docx)</strong> yang bisa diedit dan <strong>PDF</strong> yang siap dicetak.</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION: MATERI YANG DIUJIKAN -->
+        <section class="bg-white rounded-3xl p-6 sm:p-7 border border-[#e5ded4] space-y-4 shadow-xs">
+          <h2 class="text-lg sm:text-xl font-black text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2">
+            <span>📖</span>
+            <span>Materi yang Diujikan (Semester 1 Kelas {grade})</span>
+          </h2>
+          <p class="text-xs sm:text-sm text-slate-600">Soal disusun berdasarkan materi PAI Kelas {grade} Semester 1, yaitu:</p>
+          <div class="space-y-3 text-xs sm:text-sm">
+            {bab_html}
+          </div>
+        </section>
+
+        <!-- SECTION: CONTOH SOAL GRATIS -->
+        <section class="bg-white rounded-3xl p-6 sm:p-7 border border-[#e5ded4] space-y-5 shadow-xs">
+          <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+            <h2 class="text-lg sm:text-xl font-black text-slate-900 flex items-center gap-2">
+              <span>📝</span>
+              <span>Contoh Soal Gratis</span>
+            </h2>
+            <span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">5 Butir Sampel</span>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-600">Berikut lima contoh soal beserta kunci jawabannya:</p>
+          <div class="space-y-3 text-xs sm:text-sm">
+            {q_html}
+          </div>
+
+          <div class="pt-2 space-y-2">
+            <h3 class="text-sm font-black text-slate-900">Kunci jawaban contoh soal:</h3>
+            <div class="overflow-x-auto max-w-sm">
+              <table class="w-full text-xs text-left border-collapse border border-slate-200 rounded-2xl overflow-hidden">
+                <thead>
+                  <tr class="bg-slate-100 text-slate-800 font-bold">
+                    <th class="border border-slate-200 px-4 py-2 text-center w-16">No</th>
+                    <th class="border border-slate-200 px-4 py-2">Jawaban Benar</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-200 font-semibold text-slate-700">
+                  {table_rows}
+                </tbody>
+              </table>
+            </div>
+            <p class="text-xs text-slate-500 italic pt-1">
+              &gt; Soal di atas hanya contoh. Naskah lengkap memuat soal dari seluruh bab di semester ini.
+            </p>
+          </div>
+        </section>
+
+        <!-- SECTION: CUPLIKAN NASKAH (PREVIEW BER-WATERMARK) -->
+        <section class="bg-white rounded-3xl p-6 sm:p-7 border border-[#e5ded4] space-y-4 shadow-xs">
+          <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+            <h2 class="text-lg sm:text-xl font-black text-slate-900 flex items-center gap-2">
+              <span>🔍</span>
+              <span>Cuplikan Naskah Ujian (Preview)</span>
+            </h2>
+            <span class="text-xs font-bold text-slate-500 bg-slate-100 px-3 py-1 rounded-full border border-slate-200">
+              Dokumen Asli Ber-Watermark
+            </span>
+          </div>
+
+          <p class="text-xs sm:text-sm text-slate-600">
+            Berikut cuplikan visual naskah lembar soal asli dan cover penilaian siswa kelas {grade}. Anda dapat memeriksa kejelasan tata letak berkas sebelum mengunduh versi lengkapnya:
+          </p>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 pt-1">
+            <div class="rounded-3xl overflow-hidden border border-slate-200/90 bg-slate-50 shadow-xs flex flex-col justify-between group">
+              <div class="p-3 text-center border-b border-slate-200/80 bg-white flex items-center justify-between">
+                <span class="text-xs font-black text-slate-800">1. Cover &amp; Lembar Penilaian Siswa</span>
+                <span class="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">Format Word</span>
+              </div>
+              <div class="p-3 flex items-center justify-center bg-[#faf7f2]">
+                <img src="{data['cover_soal']}" alt="Contoh halaman naskah soal SAS PAI Kelas {grade} SD" loading="lazy" class="w-full aspect-[3/4] object-cover rounded-2xl shadow-xs transition-transform duration-300 group-hover:scale-[1.02]">
+              </div>
+              <div class="p-3 text-center text-xs font-semibold text-slate-500 border-t border-slate-200/80 bg-white">
+                <em>Cover &amp; Identitas Penilaian SAS Kelas {grade}</em>
+              </div>
+            </div>
+
+            <div class="rounded-3xl overflow-hidden border border-emerald-200 bg-emerald-50/30 shadow-xs flex flex-col justify-between group relative">
+              <div class="p-3 text-center border-b border-emerald-100 bg-white flex items-center justify-between">
+                <span class="text-xs font-black text-emerald-950 flex items-center gap-1.5">
+                  <span>📄</span> <span>2. Pratinjau Naskah Soal (Watermark)</span>
+                </span>
+                <span class="text-[10px] font-bold text-amber-800 bg-amber-50 px-2 py-0.5 rounded-full border border-amber-200">Sampel PDF Asli</span>
+              </div>
+              <div class="p-3 flex items-center justify-center bg-[#faf7f2] relative cursor-pointer" onclick="openLightbox('/assets/watermark_soal_sas_kelas{grade}.png', 'Pratinjau Lembar Soal SAS PAI Kelas {grade} SD (Watermark)')">
+                <img src="/assets/watermark_soal_sas_kelas{grade}.png" alt="Lembar Soal SAS PAI Kelas {grade} SD Asli Ber-watermark" loading="lazy" class="w-full aspect-[3/4] object-contain rounded-2xl shadow-xs transition-transform duration-300 group-hover:scale-[1.02] bg-white">
+                <div class="absolute inset-0 flex items-center justify-center bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl">
+                  <span class="px-4 py-2 rounded-full bg-slate-900/90 text-white text-xs font-bold shadow-lg flex items-center gap-1.5 backdrop-blur-xs">
+                    <span>🔍</span> <span>Klik untuk Perbesar</span>
+                  </span>
+                </div>
+              </div>
+              <div class="p-3 border-t border-emerald-100 bg-white flex items-center justify-between gap-2">
+                <button onclick="openLightbox('/assets/watermark_soal_sas_kelas{grade}.png', 'Pratinjau Lembar Soal SAS PAI Kelas {grade} SD (Watermark)')" class="text-xs font-bold text-emerald-700 hover:text-emerald-800 transition-colors inline-flex items-center gap-1">
+                  <span>🔍</span> <span>Perbesar Lembar</span>
+                </button>
+                <a href="/preview_soal.html?kelas={grade}" class="text-xs font-bold text-slate-800 hover:text-slate-950 px-3 py-1.5 rounded-full bg-slate-100 hover:bg-slate-200 transition-colors inline-flex items-center gap-1">
+                  <span>📖 Reader 5 Halaman &rarr;</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION: CARA MENDAPATKAN NASKAH LENGKAP -->
+        <section class="bg-gradient-to-br from-emerald-50 via-teal-50 to-amber-50 rounded-3xl p-6 sm:p-8 border border-emerald-200 space-y-4 shadow-xs text-center">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white text-emerald-800 font-extrabold text-xs shadow-2xs border border-emerald-100">
+            <span>✨ Naskah Lengkap Siap Edit</span>
+          </div>
+          <h2 class="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">Cara Mendapatkan Naskah Lengkap</h2>
+          <p class="text-xs sm:text-sm text-slate-700 leading-relaxed max-w-xl mx-auto">
+            Naskah lengkap Soal SAS PAI Kelas {grade} tersedia di toko resmi Lynk.id Bahan Ajar Bu Guru:
+          </p>
+          
+          <div class="max-w-md mx-auto bg-white/90 backdrop-blur-xs rounded-2xl p-5 border border-emerald-200 text-xs sm:text-sm space-y-2.5 text-left font-medium shadow-xs">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+              <span class="text-slate-500">Format Dokumen</span>
+              <span class="font-bold text-slate-900">Word (.docx) &amp; PDF</span>
+            </div>
+            <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+              <span class="text-slate-500">Harga Promo</span>
+              <div class="flex items-center gap-2">
+                <span class="text-xs text-slate-400 line-through">Rp 20.000</span>
+                <span class="font-black text-emerald-700 text-base">Rp 15.000</span>
+                <span class="text-[9px] bg-red-100 text-red-700 font-extrabold px-1.5 py-0.5 rounded-full">Hemat 25%</span>
+              </div>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-slate-500">Metode Pembayaran</span>
+              <span class="font-bold text-slate-900 text-right">QRIS, GoPay, OVO, ShopeePay, Transfer Bank</span>
+            </div>
+          </div>
+
+          <div class="pt-2">
+            <a href="https://lynk.id/bahanajarbuguru" target="_blank" rel="sponsored nofollow noopener" class="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-slate-900 hover:bg-slate-800 text-white font-black text-sm shadow-md transition-all hover:scale-105 active:scale-95">
+              <span>Beli Naskah Lengkap di Lynk.id</span>
+              <span>&rarr;</span>
+            </a>
+            <p class="text-[11px] text-slate-500 mt-2">
+              Tautan unduhan Word dan PDF otomatis aktif di layar konfirmasi dan dikirim ke WhatsApp/email Anda.
+            </p>
+          </div>
+        </section>
+
+        <!-- SECTION: FAQ -->
+        <section class="bg-white rounded-3xl p-6 sm:p-7 border border-[#e5ded4] space-y-4 shadow-xs">
+          <h2 class="text-lg sm:text-xl font-black text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2">
+            <span>❓</span>
+            <span>Pertanyaan yang Sering Diajukan</span>
+          </h2>
+          <div class="space-y-3 text-xs sm:text-sm">
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-100 space-y-1">
+              <h3 class="font-extrabold text-slate-900 text-sm">Apakah naskah soal bisa diedit?</h3>
+              <p class="text-slate-600 leading-relaxed">Bisa. Versi Word (.docx) dapat Anda ubah, misalnya menambah nama sekolah, mengganti urutan soal, atau menyesuaikan jumlah soal.</p>
+            </div>
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-100 space-y-1">
+              <h3 class="font-extrabold text-slate-900 text-sm">Format file apa yang saya dapatkan?</h3>
+              <p class="text-slate-600 leading-relaxed">Anda mendapatkan file Word (.docx) dan PDF. Versi PDF sudah rapi dan siap dicetak.</p>
+            </div>
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-100 space-y-1">
+              <h3 class="font-extrabold text-slate-900 text-sm">Apakah ada kunci jawaban dan kisi-kisi?</h3>
+              <p class="text-slate-600 leading-relaxed">Ya, kunci jawaban dan kisi-kisi sudah termasuk lengkap di dalam naskah.</p>
+            </div>
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-100 space-y-1">
+              <h3 class="font-extrabold text-slate-900 text-sm">Apakah sesuai dengan Kurikulum Merdeka?</h3>
+              <p class="text-slate-600 leading-relaxed">Soal disusun mengacu pada Capaian Pembelajaran (CP) No. 020 Kemendikbudristek untuk PAI dan Budi Pekerti kelas {grade} SD ({fase}).</p>
+            </div>
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-100 space-y-1">
+              <h3 class="font-extrabold text-slate-900 text-sm">Bagaimana cara menerima file setelah membayar?</h3>
+              <p class="text-slate-600 leading-relaxed">Link unduhan file Word dan PDF dikirim otomatis dan langsung dapat diunduh sesaat setelah pembayaran berhasil diverifikasi oleh sistem Lynk.id.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION: INTERNAL LINKS -->
+        <section class="bg-white rounded-3xl p-6 sm:p-7 border border-[#e5ded4] space-y-4 shadow-xs">
+          <h2 class="text-lg sm:text-xl font-black text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2">
+            <span>🔗</span>
+            <span>Perangkat PAI Kelas {grade} Lainnya</span>
+          </h2>
+          <p class="text-xs sm:text-sm text-slate-600">Lengkapi persiapan mengajar Anda dengan:</p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm font-semibold">
+            <a href="/modul-ajar-pai-kelas-{grade}.html" class="p-4 rounded-2xl bg-slate-50 hover:bg-emerald-50 border border-slate-200 hover:border-emerald-200 transition-all flex items-center justify-between text-slate-800 hover:text-emerald-950">
+              <span class="flex items-center gap-2"><span>🚀</span> <span>Modul Ajar PAI Kelas {grade}</span></span>
+              <span>&rarr;</span>
+            </a>
+            <a href="/buku-siswa-pai-kelas-{grade}.html" class="p-4 rounded-2xl bg-slate-50 hover:bg-emerald-50 border border-slate-200 hover:border-emerald-200 transition-all flex items-center justify-between text-slate-800 hover:text-emerald-950">
+              <span class="flex items-center gap-2"><span>📘</span> <span>Buku Siswa PAI Kelas {grade}</span></span>
+              <span>&rarr;</span>
+            </a>
+            <a href="/bank-soal-sas-pai-sd.html" class="p-4 rounded-2xl bg-slate-50 hover:bg-emerald-50 border border-slate-200 hover:border-emerald-200 transition-all flex items-center justify-between text-slate-800 hover:text-emerald-950">
+              <span class="flex items-center gap-2"><span>📚</span> <span>Semua Bank Soal SAS PAI SD</span></span>
+              <span>&rarr;</span>
+            </a>
+            <a href="/" class="p-4 rounded-2xl bg-slate-50 hover:bg-emerald-50 border border-slate-200 hover:border-emerald-200 transition-all flex items-center justify-between text-slate-800 hover:text-emerald-950">
+              <span class="flex items-center gap-2"><span>🏠</span> <span>Kembali ke Halaman Utama</span></span>
+              <span>&rarr;</span>
+            </a>
+          </div>
+          <div class="pt-3 border-t border-slate-100">
+            <p class="text-xs text-slate-500 font-bold mb-2">Soal SAS Jenjang Kelas Lain:</p>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+              {other_soal_links}
+            </div>
+          </div>
+        </section>
+
+      </main>
+
+      <!-- COLUMN 3: RIGHT FLOATING SUMMARY & CHECKOUT SIDEBAR -->
+      <aside aria-label="Rincian Berkas dan Pembelian" class="w-full lg:w-80 bg-panelBg rounded-3xl p-5 sm:p-6 space-y-6 shrink-0 border border-[#e8dfd5] sticky top-20 self-start">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-black text-slate-900 flex items-center gap-1.5">
+            <span>📦</span> <span>Paket Soal Kelas {grade}</span>
+          </span>
+          <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black bg-emerald-100 text-emerald-900 border border-emerald-300">
+            Tersedia
+          </span>
+        </div>
+
+        <div class="aspect-[3/4] rounded-2xl overflow-hidden border border-black/10 shadow-xs bg-white">
+          <img src="{data['cover_soal']}" alt="Cover Naskah Soal SAS PAI Kelas {grade}" class="w-full h-full object-cover">
+        </div>
+
+        <div class="p-4 rounded-2xl bg-white border border-[#e2d8cd] space-y-2">
+          <span class="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">Harga Promo Spesial:</span>
+          <div class="flex items-baseline gap-2">
+            <span class="text-2xl font-black text-slate-950">Rp 15.000</span>
+            <span class="text-xs text-slate-400 font-bold line-through">Rp 20.000</span>
+          </div>
+          <p class="text-[11px] text-slate-600 leading-relaxed">
+            Format Word (.docx) siap sunting &amp; PDF siap cetak tanpa watermark.
+          </p>
+          <div class="pt-2">
+            <a href="https://lynk.id/bahanajarbuguru" target="_blank" rel="sponsored nofollow noopener" class="w-full py-3 rounded-full bg-slate-900 hover:bg-slate-800 text-white font-black text-xs text-center shadow transition-all block">
+              Beli Sekarang via Lynk.id &rarr;
+            </a>
+          </div>
+        </div>
+
+        <div class="space-y-2 text-xs text-slate-600 font-medium">
+          <div class="flex items-center gap-2">
+            <span class="text-emerald-600">✓</span>
+            <span>100% Word (.docx) Dapat Diedit</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-emerald-600">✓</span>
+            <span>Kunci Jawaban &amp; Rubrik Skor</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-emerald-600">✓</span>
+            <span>Matriks Kisi-Kisi CP No. 020</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-emerald-600">✓</span>
+            <span>Unduh Instan Setelah Bayar</span>
+          </div>
+        </div>
+
+        <div class="pt-2 border-t border-[#e2d8cd] text-center">
+          <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-2">Metode Pembayaran Resmi</span>
+          <div class="flex flex-wrap items-center justify-center gap-1.5 text-[11px] font-bold text-slate-700">
+            <span class="px-2 py-1 bg-white rounded-lg border border-slate-200">QRIS</span>
+            <span class="px-2 py-1 bg-white rounded-lg border border-slate-200">GoPay</span>
+            <span class="px-2 py-1 bg-white rounded-lg border border-slate-200">OVO</span>
+            <span class="px-2 py-1 bg-white rounded-lg border border-slate-200">ShopeePay</span>
+            <span class="px-2 py-1 bg-white rounded-lg border border-slate-200">Transfer</span>
+          </div>
+        </div>
+      </aside>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-white border-t border-[#ece6dc] py-6 px-6 text-xs text-slate-500">
+      <div class="max-w-[1400px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div><span class="font-bold text-slate-800">Bahan Ajar Bu Guru</span> &bull; Kurikulum Merdeka CP No. 020</div>
+        <div class="flex items-center gap-4 font-semibold">
+          <a href="/kebijakan-privasi.html" class="hover:text-slate-800 transition-colors">Kebijakan Privasi</a>
+          <a href="/syarat-ketentuan.html" class="hover:text-slate-800 transition-colors">Syarat &amp; Ketentuan</a>
+          <a href="/tentang-kami.html" class="hover:text-slate-800 transition-colors">Tentang Kami</a>
+          <a href="https://lynk.id/bahanajarbuguru" target="_blank" rel="sponsored nofollow noopener" class="text-emerald-700 hover:underline">Toko Lynk.id &rarr;</a>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- LIGHTBOX MODAL -->
+  <div id="lightbox-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-3 sm:p-6" onclick="closeLightbox(event)">
+    <div class="relative max-w-4xl max-h-[92vh] bg-white rounded-3xl p-4 sm:p-6 overflow-hidden flex flex-col shadow-2xl" onclick="event.stopPropagation()">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+        <h3 id="lightbox-title" class="font-black text-slate-900 text-sm sm:text-base">Pratinjau Lembar Soal (Watermark)</h3>
+        <button onclick="closeLightbox()" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold flex items-center justify-center text-sm transition-colors">
+          ✕
+        </button>
+      </div>
+      <div class="flex-1 overflow-auto py-4 flex items-center justify-center bg-slate-50 rounded-2xl border border-slate-200/80 my-2">
+        <img id="lightbox-img" src="" alt="Pratinjau Lembar Soal" class="max-w-full max-h-[70vh] object-contain shadow-md rounded-xl">
+      </div>
+      <div class="pt-2 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+        <span class="text-slate-500 font-medium">Naskah lengkap 100% tanpa watermark dan format Word (.docx) dapat diunduh di Lynk.id.</span>
+        <a href="https://lynk.id/bahanajarbuguru" target="_blank" rel="sponsored nofollow noopener" class="px-5 py-2 rounded-full bg-slate-900 hover:bg-slate-800 text-white font-bold transition-all shadow-xs">
+          Beli Naskah Lengkap di Lynk.id &rarr;
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function openLightbox(src, title) {{
+      document.getElementById('lightbox-img').src = src;
+      document.getElementById('lightbox-title').textContent = title || 'Pratinjau Lembar Soal (Watermark)';
+      const modal = document.getElementById('lightbox-modal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }}
+    function closeLightbox(event) {{
+      const modal = document.getElementById('lightbox-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }}
+    document.addEventListener('keydown', function(e) {{
+      if (e.key === 'Escape') closeLightbox();
+    }});
+  </script>
+
+</body>
+</html>
+"""
+    return html
+
+def main():
+    print("Updating all Soal SAS pages to unified web theme...")
+    for grade in range(1, 7):
+        html = generate_unified_soal_page(grade)
+        filename = f"public/soal-sas-pai-kelas-{grade}.html"
+        with open(filename, "w", encoding="utf-8") as f:
+            f.write(html)
+        print(f"Updated: {filename}")
+
+if __name__ == "__main__":
+    main()
