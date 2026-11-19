@@ -1,0 +1,33 @@
+name: 🚀 Auto Deploy Website to Hosting via FTP
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'public/**'
+      - '.github/workflows/deploy.yml'
+
+  # Memungkinkan deploy manual dari tab Actions di GitHub
+  workflow_dispatch:
+
+jobs:
+  web-deploy:
+    name: 🌐 Sync Public Files to Web Hosting
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: 📤 Deploy via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: ${{ secrets.FTP_SERVER_DIR || 'public_html/' }}
+          local-dir: ./public/
+          dangerous-clean-slate: false
