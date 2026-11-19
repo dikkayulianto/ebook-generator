@@ -12,7 +12,7 @@
   <meta property="og:type" content="article">
   <meta property="og:title" content="Modul Ajar PAI Kelas 6 SD Kurikulum Merdeka (Deep Learning)">
   <meta property="og:description" content="Modul ajar Deep Learning PAI Kelas 6 SD Kurikulum Merdeka 8 halaman lengkap dengan LKPD dan rubrik KKTP format Word dan PDF.">
-  <meta property="og:image" content="/assets/cover_illustration.jpg">
+  <meta property="og:image" content="https://bahanajarbuguru.my.id/assets/cover_illustration.jpg">
   <meta property="og:url" content="https://bahanajarbuguru.my.id/modul-ajar-pai-kelas-6.html">
 
   <!-- Schema.org Product & FAQPage -->
@@ -37,160 +37,569 @@
           "priceValidUntil": "2027-12-31",
           "availability": "https://schema.org/InStock"
         }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Apakah file modul ajar bisa diedit?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Bisa. Modul disediakan dalam format Microsoft Word (.docx) lengkap sehingga guru bebas mengedit identitas sekolah, tujuan, dan alokasi waktu."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Apa yang dimaksud dengan pendekatan Deep Learning?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Modul ajar mengintegrasikan 3 pilar: Mindful Learning (kesadaran penuh), Meaningful Learning (kebermaknaan kontekstual), dan Joyful Learning (kegiatan menyenangkan ramah anak)."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Apakah sudah dilengkapi LKPD dan Rubrik KKTP?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Ya, modul 8 halaman mencakup Lembar Kerja Peserta Didik (LKPD) berdiferensiasi serta rubrik Kriteria Ketercapaian Tujuan Pembelajaran (KKTP)."
+            }
+          }
+        ]
       }
     ]
   }
   </script>
 
+  <!-- Tailwind CSS & Fonts matching Homepage Theme -->
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Outfit"', '"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
+          },
+          colors: {
+            canvas: '#ccebe0',
+            appBg: '#faf7f2',
+            sidebarBg: '#f3eee8',
+            panelBg: '#f5efe6',
+            brand: {
+              50: '#f0fdf4',
+              100: '#dcfce7',
+              600: '#16a34a',
+              700: '#15803d',
+              900: '#14532d',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #faf7f2; }
+    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+  </style>
 </head>
-<body class="bg-[#faf7f2] text-slate-800 antialiased font-sans">
+<body class="bg-canvas min-h-screen p-2 sm:p-4 lg:p-6 flex flex-col justify-start items-center font-sans antialiased text-slate-800">
 
-  <!-- HEADER -->
-  <header class="bg-white border-b border-[#e5ded4] sticky top-0 z-40 shadow-xs">
-    <div class="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
-      <a href="/" class="flex items-center gap-2.5">
-        <div class="w-8 h-8 rounded-full bg-emerald-600 text-white font-black text-sm flex items-center justify-center">BG</div>
-        <div>
-          <span class="font-black text-slate-900 text-sm tracking-tight block">Bahan Ajar Bu Guru</span>
-          <span class="text-[10px] text-slate-500 block -mt-0.5">PAI SD Kurikulum Merdeka</span>
-        </div>
-      </a>
+  <!-- MAIN APP MOCKUP CONTAINER -->
+  <div class="w-full max-w-[1400px] bg-appBg rounded-[28px] sm:rounded-[36px] shadow-2xl shadow-emerald-950/15 border border-[#e5dfd5] overflow-hidden flex flex-col">
+
+    <!-- TOP WINDOW CHROME -->
+    <div class="bg-white/80 backdrop-blur border-b border-[#ece6dc] px-4 sm:px-6 py-3 flex items-center justify-between gap-4 select-none sticky top-0 z-40">
       <div class="flex items-center gap-2">
-        <a href="/" class="text-xs font-bold text-slate-600 hover:text-slate-900 px-3 py-1.5 rounded-full hover:bg-slate-100">&larr; Beranda</a>
-        <a href="https://lynk.id/bahanajarbuguru" target="_blank" rel="sponsored nofollow noopener" class="px-3.5 py-1.5 rounded-full bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold shadow-xs">Toko Lynk.id &rarr;</a>
+        <span class="w-3 h-3 rounded-full bg-[#ff5f56] border border-[#e0443e] inline-block"></span>
+        <span class="w-3 h-3 rounded-full bg-[#ffbd2e] border border-[#dea123] inline-block"></span>
+        <span class="w-3 h-3 rounded-full bg-[#27c93f] border border-[#1aab29] inline-block"></span>
       </div>
-    </div>
-  </header>
 
-  <!-- CONTENT -->
-  <main class="max-w-4xl mx-auto px-4 py-6 sm:py-8 space-y-8">
-    <nav aria-label="Breadcrumb" class="text-xs font-medium text-slate-500 flex items-center gap-1.5">
-      <a href="/" class="hover:text-emerald-700">Beranda</a>
-      <span>&rsaquo;</span>
-      <a href="/modul-ajar-pai-sd.html" class="hover:text-emerald-700">Modul Ajar PAI SD</a>
-      <span>&rsaquo;</span>
-      <span class="text-slate-800 font-bold">Modul Ajar PAI Kelas 6</span>
-    </nav>
-
-    <header class="space-y-3">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-100 text-amber-950 font-bold text-xs">
-        <span>Deep Learning 8 Halaman • CP No. 020 • Fase C (Kelas 6 SD)</span>
+      <div class="flex-1 max-w-md mx-auto hidden sm:flex items-center justify-center gap-2 px-3.5 py-1 rounded-full bg-slate-100/90 border border-slate-200/80 text-xs text-slate-700 font-medium">
+        <svg class="w-3 h-3 text-emerald-600" viewBox="0 0 24 24" fill="currentColor">
+          <path fill-rule="evenodd" d="M12 1.5a5.25 5.25 0 00-5.25 5.25v3a3 3 0 00-3 3v6.75a3 3 0 003 3h10.5a3 3 0 003-3v-6.75a3 3 0 00-3-3v-3c0-2.9-2.35-5.25-5.25-5.25zm3.75 8.25v-3a3.75 3.75 0 00-7.5 0v3h7.5z" clip-rule="evenodd" />
+        </svg>
+        <span class="truncate font-semibold">bahanajarbuguru.my.id/modul-ajar-pai-kelas-6.html</span>
       </div>
-      <h1 class="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 tracking-tight leading-snug">
-        Modul Ajar PAI Kelas 6 SD Kurikulum Merdeka (Deep Learning)
-      </h1>
-      <p class="text-sm sm:text-base text-slate-600 leading-relaxed font-normal">
-        Naskah perangkat ajar Modul Ajar Pendidikan Agama Islam dan Budi Pekerti (PAI &amp; BP) Kelas 6 SD format 8 halaman lengkap berbasis pendekatan <em>Deep Learning</em> (Mindful, Meaningful, Joyful Learning). Dilengkapi Lembar Kerja Peserta Didik (LKPD) diferensiasi dan rubrik Kriteria Ketercapaian Tujuan Pembelajaran (KKTP) dalam format Microsoft Word (.docx) siap sunting.
-      </p>
-    </header>
 
-    <!-- SECTION: KOMPONEN MODUL -->
-    <section class="bg-white rounded-2xl p-6 border border-[#e5ded4] space-y-4 shadow-xs">
-      <h2 class="text-lg sm:text-xl font-black text-slate-900 border-b border-slate-100 pb-2">
-        8 Halaman Struktur Lengkap Standar Supervisi
-      </h2>
-      <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm font-medium">
-        <li class="p-3 rounded-xl bg-slate-50 border border-slate-100"><strong>Hal 1:</strong> Identitas Umum, Capaian Pembelajaran (CP No. 020), dan Profil Pelajar Pancasila.</li>
-        <li class="p-3 rounded-xl bg-slate-50 border border-slate-100"><strong>Hal 2:</strong> Alur Tujuan Pembelajaran (ATP) dan Pemahaman Bermakna.</li>
-        <li class="p-3 rounded-xl bg-slate-50 border border-slate-100"><strong>Hal 3:</strong> Pertanyaan Pemantik &amp; Model Pembelajaran Berdiferensiasi.</li>
-        <li class="p-3 rounded-xl bg-slate-50 border border-slate-100"><strong>Hal 4:</strong> Skenario Pembelajaran Fase 1: Mindful Learning (Apersepsi &amp; Kesadaran).</li>
-        <li class="p-3 rounded-xl bg-slate-50 border border-slate-100"><strong>Hal 5:</strong> Skenario Pembelajaran Fase 2: Meaningful Learning (Eksplorasi Konsep).</li>
-        <li class="p-3 rounded-xl bg-slate-50 border border-slate-100"><strong>Hal 6:</strong> Skenario Pembelajaran Fase 3: Joyful Learning (Kolaborasi &amp; Permainan).</li>
-        <li class="p-3 rounded-xl bg-slate-50 border border-slate-100"><strong>Hal 7:</strong> Lembar Kerja Peserta Didik (LKPD) Berdiferensiasi.</li>
-        <li class="p-3 rounded-xl bg-slate-50 border border-slate-100"><strong>Hal 8:</strong> Rubrik Asesmen Diagnostik, Formatif, dan Sumatif KKTP.</li>
-      </ul>
-    </section>
-
-    <!-- SECTION: MATERI -->
-    <section class="bg-white rounded-2xl p-6 border border-[#e5ded4] space-y-4 shadow-xs">
-      <h2 class="text-lg sm:text-xl font-black text-slate-900 border-b border-slate-100 pb-2">
-        Cakupan Bab Semester 1 (Kelas 6 SD)
-      </h2>
-      <div class="space-y-3 text-xs sm:text-sm">
-        
-    <div class="p-3.5 rounded-xl bg-amber-50/60 border border-amber-100">
-      <h3 class="font-bold text-amber-950">Bab 1: Mengkaji Surah Ad-Duha</h3>
-      <p class="text-slate-600 mt-1">Hukum bacaan mad, asbabun nuzul surah Ad-Duha, optimisme hidup, dan larangan bersikap sewenang-wenang.</p>
-    </div>
-    <div class="p-3.5 rounded-xl bg-amber-50/60 border border-amber-100">
-      <h3 class="font-bold text-amber-950">Bab 2: Asmaul Husna (Al-Ghaffar, Al-Afuw, Al-Wahid, As-Samad)</h3>
-      <p class="text-slate-600 mt-1">Meneladani sifat pemaaf Allah Swt. dan bergantung hanya kepada Allah Yang Maha Esa.</p>
-    </div>
-    <div class="p-3.5 rounded-xl bg-amber-50/60 border border-amber-100">
-      <h3 class="font-bold text-amber-950">Bab 3: Toleransi Beragama (Surah Al-Kafirun)</h3>
-      <p class="text-slate-600 mt-1">Batasan toleransi dalam Islam: 'Untukmu agamamu, dan untukku agamaku' (Lakum dinukum waliyadin).</p>
-    </div>
-    <div class="p-3.5 rounded-xl bg-amber-50/60 border border-amber-100">
-      <h3 class="font-bold text-amber-950">Bab 4: Adab Bergaul & Menjauhi Ghibah</h3>
-      <p class="text-slate-600 mt-1">Menghindari perilaku menggunjing (ghibah), memfitnah, dan menjaga etika berkomunikasi di media sosial.</p>
-    </div>
-    <div class="p-3.5 rounded-xl bg-amber-50/60 border border-amber-100">
-      <h3 class="font-bold text-amber-950">Bab 5: Keteladanan Khulafaur Rasyidin</h3>
-      <p class="text-slate-600 mt-1">Kepemimpinan Abu Bakar As-Siddiq, Umar bin Khattab, Utsman bin Affan, dan Ali bin Abi Thalib r.a.</p>
-    </div>
-      </div>
-    </section>
-
-    <!-- SECTION: CTA -->
-    <section class="bg-gradient-to-br from-amber-50 via-rose-50 to-emerald-50 rounded-2xl p-6 sm:p-8 border border-amber-200 space-y-4 text-center shadow-xs">
-      <h2 class="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
-        Dapatkan Modul Ajar Lengkap Kelas 6 (Word .docx)
-      </h2>
-      <p class="text-xs sm:text-sm text-slate-700 max-w-xl mx-auto leading-relaxed">
-        Bebas ganti nama sekolah, logo madrasah, kepala sekolah, dan nama guru Anda langsung di Word tanpa proteksi.
-      </p>
-      <div class="pt-2">
-        <p class="text-2xl font-black text-slate-950 mb-3">Rp 25.000</p>
-        <a href="https://lynk.id/bahanajarbuguru" target="_blank" rel="sponsored nofollow noopener" class="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-slate-900 hover:bg-slate-800 text-white font-black text-sm shadow-md transition-all hover:scale-105">
-          <span>Pesan Modul Ajar di Lynk.id</span> <span>&rarr;</span>
+      <div class="flex items-center gap-2">
+        <a href="/" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white hover:bg-slate-100 text-slate-800 text-xs font-bold border border-slate-200 shadow-xs transition-colors">
+          <span>&larr; Beranda</span>
+        </a>
+        <a href="https://lynk.id/bahanajarbuguru" target="_blank" rel="sponsored nofollow noopener" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold shadow-xs transition-all">
+          <span>Toko Lynk.id &rarr;</span>
         </a>
       </div>
-    </section>
+    </div>
 
-    <!-- SECTION: LINKS -->
-    <section class="bg-white rounded-2xl p-6 border border-[#e5ded4] space-y-4 shadow-xs">
-      <h2 class="text-lg sm:text-xl font-black text-slate-900 border-b border-slate-100 pb-2">Perangkat PAI Terkait</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm font-semibold">
-        <a href="/soal-sas-pai-kelas-6.html" class="p-3.5 rounded-xl bg-slate-50 hover:bg-emerald-50 border border-slate-200 flex items-center justify-between text-slate-800">
-          <span>📝 Naskah Soal SAS PAI Kelas 6 SD</span> <span>&rarr;</span>
-        </a>
-        <a href="/buku-siswa-pai-kelas-6.html" class="p-3.5 rounded-xl bg-slate-50 hover:bg-emerald-50 border border-slate-200 flex items-center justify-between text-slate-800">
-          <span>📘 Buku Siswa PAI Kelas 6 SD</span> <span>&rarr;</span>
-        </a>
-      </div>
-      <div class="pt-3 border-t border-slate-100">
-        <p class="text-xs text-slate-500 font-bold mb-2">Modul Ajar Jenjang Kelas Lain:</p>
-        <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
-          <a href="/modul-ajar-pai-kelas-1.html" class="p-3 rounded-xl bg-slate-50 hover:bg-emerald-50 border border-slate-200 text-xs font-semibold flex items-center justify-between text-slate-800 hover:text-emerald-950">
+    <!-- ANNOUNCEMENT BANNER -->
+    <aside aria-label="Status Pratinjau Terlindungi" class="bg-[#1b2533] text-emerald-100 text-[11px] sm:text-xs py-2 px-4 text-center font-medium flex items-center justify-center gap-2">
+      <span>🔒 <strong>Mode Pratinjau Terlindungi:</strong> Naskah asli Microsoft Word (.docx) 8 halaman &amp; PDF siap pakai dapat diunduh di Lynk.id.</span>
+    </aside>
+
+    <!-- INNER 3-COLUMN WORKSPACE -->
+    <div class="flex-1 flex flex-col lg:flex-row p-3 sm:p-5 lg:p-6 gap-5 lg:gap-6 items-start relative">
+
+      <!-- COLUMN 1: LEFT FLOATING ICON DOCK -->
+      <aside aria-label="Navigasi Menu Cepat" class="hidden lg:flex flex-col items-center justify-between w-16 bg-sidebarBg rounded-3xl p-3 py-5 sticky top-20 self-start shrink-0 border border-[#e8dfd5] shadow-xs z-30">
+        <div class="space-y-6 flex flex-col items-center">
+          <a href="/" class="w-10 h-10 rounded-2xl bg-emerald-600 text-white flex items-center justify-center font-black text-sm shadow-sm" title="Kembali ke Beranda">
+            BG
+          </a>
+
+          <nav class="flex flex-col items-center gap-3">
+            <a href="/" class="w-11 h-11 rounded-full bg-white hover:bg-slate-100 text-slate-700 flex items-center justify-center border border-slate-200 transition-colors" title="Katalog Beranda">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+              </svg>
+            </a>
+            <a href="/bank-soal-sas-pai-sd.html" class="w-11 h-11 rounded-full bg-white hover:bg-slate-100 text-slate-700 flex items-center justify-center border border-slate-200 transition-colors" title="Bank Soal SAS">
+              <span class="text-base">📝</span>
+            </a>
+            <a href="/modul-ajar-pai-sd.html" class="w-11 h-11 rounded-full bg-slate-900 text-white flex items-center justify-center shadow" title="Modul Ajar Deep Learning">
+              <span class="text-base">🚀</span>
+            </a>
+            <a href="/buku-siswa-pai-sd.html" class="w-11 h-11 rounded-full bg-white hover:bg-slate-100 text-slate-700 flex items-center justify-center border border-slate-200 transition-colors" title="Buku Siswa PAI">
+              <span class="text-base">📘</span>
+            </a>
+          </nav>
+        </div>
+
+        <div class="flex flex-col items-center gap-3 pt-6 border-t border-[#e2d8cd]">
+          <a href="/#profil-guru" class="w-10 h-10 rounded-full overflow-hidden border-2 border-emerald-600/40 shadow-sm block" title="Profil Bahan Ajar Bu Guru">
+            <img src="/assets/avatar_profile_buguru.jpg" alt="Foto Profil" class="w-full h-full object-cover">
+          </a>
+        </div>
+      </aside>
+
+      <!-- COLUMN 2: CENTER MAIN CONTENT -->
+      <main class="flex-1 w-full space-y-6">
+
+        <nav aria-label="Breadcrumb" class="flex items-center gap-2 text-xs font-semibold text-slate-500">
+          <a href="/" class="hover:text-emerald-700 transition-colors">Beranda</a>
+          <span>&rsaquo;</span>
+          <a href="/modul-ajar-pai-sd.html" class="hover:text-emerald-700 transition-colors">Modul Ajar PAI SD</a>
+          <span>&rsaquo;</span>
+          <span class="text-slate-900 font-bold">Modul Ajar PAI Kelas 6</span>
+        </nav>
+
+        <header class="space-y-3 pt-1">
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="px-3.5 py-1 rounded-full bg-purple-100 text-purple-950 font-bold text-xs border border-purple-200">
+              Kurikulum Merdeka • CP No. 020 • Fase C (Kelas 6 SD)
+            </span>
+            <span class="px-3.5 py-1 rounded-full bg-amber-100 text-amber-950 font-bold text-xs border border-amber-300">
+              🚀 3 Siklus Deep Learning
+            </span>
+          </div>
+
+          <h1 class="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 tracking-tight leading-snug">
+            Modul Ajar PAI Kelas 6 SD Kurikulum Merdeka (Deep Learning)
+          </h1>
+
+          <div class="space-y-3 text-xs sm:text-sm text-slate-600 leading-relaxed font-normal pt-1">
+            <p>
+              Perangkat ajar Modul Ajar Pendidikan Agama Islam dan Budi Pekerti (PAI &amp; BP) Kelas 6 SD Kurikulum Merdeka dirancang komprehensif 8 halaman per materi untuk memenuhi standar supervisi akademik dinas pendidikan.
+            </p>
+            <p>
+              Menerapkan siklus <strong>Deep Learning</strong> (Mindful, Meaningful, Joyful Learning), modul ini dilengkapi skenario diferensiasi, Lembar Kerja Peserta Didik (LKPD) siap cetak, serta instrumen asesmen Kriteria Ketercapaian Tujuan Pembelajaran (KKTP).
+            </p>
+          </div>
+        </header>
+
+        <!-- SECTION: 3 PILAR DEEP LEARNING -->
+        <section class="bg-white rounded-3xl p-6 sm:p-7 border border-[#e5ded4] space-y-4 shadow-xs">
+          <h2 class="text-lg sm:text-xl font-black text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2">
+            <span>✨</span>
+            <span>3 Pilar Inti Pendekatan Deep Learning</span>
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 text-xs sm:text-sm">
+            <div class="p-4 rounded-2xl bg-[#f3effe] border border-[#8b5cf6]/20 space-y-1.5">
+              <span class="text-2xl block">🧘</span>
+              <h3 class="font-extrabold text-purple-950">1. Mindful Learning</h3>
+              <p class="text-slate-600 text-xs leading-relaxed">Membangun kesadaran penuh, kehadiran emosional, dan fokus adab islami peserta didik sebelum memulai penyerapan materi.</p>
+            </div>
+            <div class="p-4 rounded-2xl bg-[#e8f8f0] border border-[#10b981]/20 space-y-1.5">
+              <span class="text-2xl block">💡</span>
+              <h3 class="font-extrabold text-emerald-950">2. Meaningful Learning</h3>
+              <p class="text-slate-600 text-xs leading-relaxed">Mengaitkan ayat Al-Qur'an dan nilai akhlak langsung dengan fenomena kehidupan nyata siswa di rumah dan madrasah.</p>
+            </div>
+            <div class="p-4 rounded-2xl bg-[#fff1eb] border border-[#f97316]/20 space-y-1.5">
+              <span class="text-2xl block">🎨</span>
+              <h3 class="font-extrabold text-orange-950">3. Joyful Learning</h3>
+              <p class="text-slate-600 text-xs leading-relaxed">Aktivitas belajar berbasis permainan edukatif, diskusi visual, dan proyek kelompok yang membahagiakan anak usia SD.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION: KELENGKAPAN 8 HALAMAN -->
+        <section class="bg-white rounded-3xl p-6 sm:p-7 border border-[#e5ded4] space-y-4 shadow-xs">
+          <h2 class="text-lg sm:text-xl font-black text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2">
+            <span>📋</span>
+            <span>Kelengkapan Dokumen Modul Ajar (8 Halaman)</span>
+          </h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm font-medium">
+            <div class="flex items-start gap-2.5 p-3.5 rounded-2xl bg-[#eff6ff] border border-[#3b82f6]/20">
+              <span class="text-blue-700 font-bold text-base">✓</span>
+              <span><strong>Identitas &amp; Capaian Pembelajaran:</strong> Memuat CP No. 020, Tujuan Pembelajaran (TP), dan profil pelajar Pancasila.</span>
+            </div>
+            <div class="flex items-start gap-2.5 p-3.5 rounded-2xl bg-[#fef9c3] border border-[#eab308]/30">
+              <span class="text-amber-800 font-bold text-base">✓</span>
+              <span><strong>Pemahaman Bermakna:</strong> Pertanyaan pemantik kontekstual yang merangsang nalar kritis siswa.</span>
+            </div>
+            <div class="flex items-start gap-2.5 p-3.5 rounded-2xl bg-[#e8f8f0] border border-[#10b981]/20">
+              <span class="text-emerald-700 font-bold text-base">✓</span>
+              <span><strong>Skenario Pembelajaran Diferensiasi:</strong> Langkah pendahuluan, inti, dan penutup untuk keragaman gaya belajar siswa.</span>
+            </div>
+            <div class="flex items-start gap-2.5 p-3.5 rounded-2xl bg-[#fff1eb] border border-[#f97316]/20">
+              <span class="text-orange-700 font-bold text-base">✓</span>
+              <span><strong>LKPD Siap Pakai:</strong> Lembar kerja siswa mandiri dan kelompok yang interaktif.</span>
+            </div>
+            <div class="flex items-start gap-2.5 p-3.5 rounded-2xl bg-[#f3effe] border border-[#8b5cf6]/20">
+              <span class="text-purple-700 font-bold text-base">✓</span>
+              <span><strong>Rubrik Asesmen KKTP:</strong> Pedoman penilaian sikap spiritual, sosial, dan unjuk kerja terukur.</span>
+            </div>
+            <div class="flex items-start gap-2.5 p-3.5 rounded-2xl bg-[#ffe4e6] border border-[#f43f5e]/20">
+              <span class="text-rose-700 font-bold text-base">✓</span>
+              <span><strong>Format Word (.docx) &amp; PDF:</strong> 100% bebas diedit nama sekolah, logo, dan nama pendidik.</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION: MATERI YANG DIPELAJARI -->
+        <section class="bg-white rounded-3xl p-6 sm:p-7 border border-[#e5ded4] space-y-4 shadow-xs">
+          <h2 class="text-lg sm:text-xl font-black text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2">
+            <span>📖</span>
+            <span>Materi Pembelajaran Semester 1 (Kelas 6)</span>
+          </h2>
+          <p class="text-xs sm:text-sm text-slate-600">Modul ajar disusun lengkap untuk 5 bab materi semester ganjil:</p>
+          <div class="space-y-3 text-xs sm:text-sm">
+            
+        <div class="p-3.5 rounded-2xl bg-[#e8f8f0] border border-[#10b981]/20 flex items-start gap-3">
+          <span class="w-6 h-6 rounded-full bg-emerald-600 text-white font-bold text-xs flex items-center justify-center shrink-0">1</span>
+          <div>
+            <h3 class="font-bold text-emerald-950 text-sm">Bab 1: Mengkaji Surah Ad-Duha</h3>
+            <p class="text-slate-600 text-xs sm:text-sm mt-0.5">Hukum bacaan mad, asbabun nuzul surah Ad-Duha, optimisme hidup, dan larangan bersikap sewenang-wenang.</p>
+          </div>
+        </div>
+        <div class="p-3.5 rounded-2xl bg-[#f3effe] border border-[#8b5cf6]/20 flex items-start gap-3">
+          <span class="w-6 h-6 rounded-full bg-purple-600 text-white font-bold text-xs flex items-center justify-center shrink-0">2</span>
+          <div>
+            <h3 class="font-bold text-purple-950 text-sm">Bab 2: Asmaul Husna (Al-Ghaffar, Al-Afuw, Al-Wahid, As-Samad)</h3>
+            <p class="text-slate-600 text-xs sm:text-sm mt-0.5">Meneladani sifat pemaaf Allah Swt. dan bergantung hanya kepada Allah Yang Maha Esa.</p>
+          </div>
+        </div>
+        <div class="p-3.5 rounded-2xl bg-[#fff1eb] border border-[#f97316]/20 flex items-start gap-3">
+          <span class="w-6 h-6 rounded-full bg-orange-600 text-white font-bold text-xs flex items-center justify-center shrink-0">3</span>
+          <div>
+            <h3 class="font-bold text-orange-950 text-sm">Bab 3: Toleransi Beragama (Surah Al-Kafirun)</h3>
+            <p class="text-slate-600 text-xs sm:text-sm mt-0.5">Batasan toleransi dalam Islam: 'Untukmu agamamu, dan untukku agamaku' (Lakum dinukum waliyadin).</p>
+          </div>
+        </div>
+        <div class="p-3.5 rounded-2xl bg-[#eff6ff] border border-[#3b82f6]/20 flex items-start gap-3">
+          <span class="w-6 h-6 rounded-full bg-blue-600 text-white font-bold text-xs flex items-center justify-center shrink-0">4</span>
+          <div>
+            <h3 class="font-bold text-blue-950 text-sm">Bab 4: Adab Bergaul & Menjauhi Ghibah</h3>
+            <p class="text-slate-600 text-xs sm:text-sm mt-0.5">Menghindari perilaku menggunjing (ghibah), memfitnah, dan menjaga etika berkomunikasi di media sosial.</p>
+          </div>
+        </div>
+        <div class="p-3.5 rounded-2xl bg-[#fef9c3] border border-[#eab308]/30 flex items-start gap-3">
+          <span class="w-6 h-6 rounded-full bg-amber-600 text-white font-bold text-xs flex items-center justify-center shrink-0">5</span>
+          <div>
+            <h3 class="font-bold text-amber-950 text-sm">Bab 5: Keteladanan Khulafaur Rasyidin</h3>
+            <p class="text-slate-600 text-xs sm:text-sm mt-0.5">Kepemimpinan Abu Bakar As-Siddiq, Umar bin Khattab, Utsman bin Affan, dan Ali bin Abi Thalib r.a.</p>
+          </div>
+        </div>
+          </div>
+        </section>
+
+        <!-- SECTION: CUPLIKAN NASKAH MODUL (PREVIEW) -->
+        <section class="bg-white rounded-3xl p-6 sm:p-7 border border-[#e5ded4] space-y-4 shadow-xs">
+          <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+            <h2 class="text-lg sm:text-xl font-black text-slate-900 flex items-center gap-2">
+              <span>🔍</span>
+              <span>Cuplikan Naskah Modul Ajar (Preview)</span>
+            </h2>
+            <span class="text-xs font-bold text-slate-500 bg-slate-100 px-3 py-1 rounded-full border border-slate-200">
+              Pratinjau Dokumen Asli
+            </span>
+          </div>
+
+          <p class="text-xs sm:text-sm text-slate-600">
+            Berikut cuplikan visual layout naskah modul ajar dan lembar skenario LKPD peserta didik kelas 6:
+          </p>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 pt-1">
+            <div class="rounded-3xl overflow-hidden border border-slate-200/90 bg-slate-50 shadow-xs flex flex-col justify-between group">
+              <div class="p-3 text-center border-b border-slate-200/80 bg-white flex items-center justify-between">
+                <span class="text-xs font-black text-slate-800">1. Cover &amp; Identitas Modul</span>
+                <span class="text-[10px] font-bold text-purple-700 bg-purple-50 px-2 py-0.5 rounded-full border border-purple-200">Format Word</span>
+              </div>
+              <div class="p-3 flex items-center justify-center bg-[#faf7f2]">
+                <img src="/assets/cover_illustration.jpg" alt="Cover Modul Ajar PAI Kelas 6 SD" loading="lazy" class="w-full aspect-[3/4] object-cover rounded-2xl shadow-xs transition-transform duration-300 group-hover:scale-[1.02]">
+              </div>
+              <div class="p-3 text-center text-xs font-semibold text-slate-500 border-t border-slate-200/80 bg-white">
+                <em>Modul Ajar Deep Learning Fase Fase C</em>
+              </div>
+            </div>
+
+            <div class="rounded-3xl overflow-hidden border border-purple-200 bg-purple-50/30 shadow-xs flex flex-col justify-between group relative">
+              <div class="p-3 text-center border-b border-purple-100 bg-white flex items-center justify-between">
+                <span class="text-xs font-black text-purple-950 flex items-center gap-1.5">
+                  <span>📄</span> <span>2. Skenario &amp; LKPD Modul</span>
+                </span>
+                <span class="text-[10px] font-bold text-amber-800 bg-amber-50 px-2 py-0.5 rounded-full border border-amber-200">Sampel Asli</span>
+              </div>
+              <div class="p-3 flex items-center justify-center bg-[#faf7f2] relative cursor-pointer" onclick="openLightbox('/assets/carousel_modul_ajar_slide2.jpg', 'Pratinjau Lembar Skenario &amp; LKPD Modul Ajar Kelas 6')">
+                <img src="/assets/carousel_modul_ajar_slide2.jpg" alt="Cuplikan Skenario Modul Ajar PAI Kelas 6" loading="lazy" class="w-full aspect-[3/4] object-cover rounded-2xl shadow-xs transition-transform duration-300 group-hover:scale-[1.02] bg-white">
+                <div class="absolute inset-0 flex items-center justify-center bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl">
+                  <span class="px-4 py-2 rounded-full bg-slate-900/90 text-white text-xs font-bold shadow-lg flex items-center gap-1.5 backdrop-blur-xs">
+                    <span>🔍</span> <span>Klik untuk Perbesar</span>
+                  </span>
+                </div>
+              </div>
+              <div class="p-3 border-t border-purple-100 bg-white flex items-center justify-between gap-2">
+                <button onclick="openLightbox('/assets/carousel_modul_ajar_slide2.jpg', 'Pratinjau Lembar Skenario &amp; LKPD Modul Ajar Kelas 6')" class="text-xs font-bold text-purple-700 hover:text-purple-800 transition-colors inline-flex items-center gap-1">
+                  <span>🔍</span> <span>Perbesar Lembar</span>
+                </button>
+                <a href="/preview_modul.html?kelas=6" class="text-xs font-bold text-slate-800 hover:text-slate-950 px-3 py-1.5 rounded-full bg-slate-100 hover:bg-slate-200 transition-colors inline-flex items-center gap-1">
+                  <span>📖 Reader Interaktif &rarr;</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION: CARA MENDAPATKAN MODUL LENGKAP -->
+        <section class="bg-gradient-to-br from-purple-50 via-teal-50 to-emerald-50 rounded-3xl p-6 sm:p-8 border border-purple-200 space-y-4 shadow-xs text-center">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white text-purple-800 font-extrabold text-xs shadow-2xs border border-purple-100">
+            <span>🚀 Paket Lengkap 1 Semester</span>
+          </div>
+          <h2 class="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">Cara Mendapatkan Modul Ajar Lengkap</h2>
+          <p class="text-xs sm:text-sm text-slate-700 leading-relaxed max-w-xl mx-auto">
+            Naskah lengkap Modul Ajar PAI Kelas 6 SD siap unduh di toko resmi Lynk.id Bahan Ajar Bu Guru:
+          </p>
+          
+          <div class="max-w-md mx-auto bg-white/90 backdrop-blur-xs rounded-2xl p-5 border border-purple-200 text-xs sm:text-sm space-y-2.5 text-left font-medium shadow-xs">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+              <span class="text-slate-500">Format Dokumen</span>
+              <span class="font-bold text-slate-900">Word (.docx) &amp; PDF Siap Pakai</span>
+            </div>
+            <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+              <span class="text-slate-500">Harga Promo</span>
+              <div class="flex items-center gap-2">
+                <span class="text-xs text-slate-400 line-through">Rp 35.000</span>
+                <span class="font-black text-purple-700 text-base">Rp 25.000</span>
+                <span class="text-[9px] bg-red-100 text-red-700 font-extrabold px-1.5 py-0.5 rounded-full">Hemat 28%</span>
+              </div>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-slate-500">Metode Pembayaran</span>
+              <span class="font-bold text-slate-900 text-right">QRIS, GoPay, OVO, ShopeePay, Transfer Bank</span>
+            </div>
+          </div>
+
+          <div class="pt-2">
+            <a href="https://lynk.id/bahanajarbuguru" target="_blank" rel="sponsored nofollow noopener" class="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-slate-900 hover:bg-slate-800 text-white font-black text-sm shadow-md transition-all hover:scale-105 active:scale-95">
+              <span>Beli Modul Lengkap di Lynk.id</span>
+              <span>&rarr;</span>
+            </a>
+            <p class="text-[11px] text-slate-500 mt-2">
+              Tautan unduhan Word dan PDF otomatis aktif di layar konfirmasi dan dikirim ke WhatsApp/email Anda.
+            </p>
+          </div>
+        </section>
+
+        <!-- SECTION: FAQ -->
+        <section class="bg-white rounded-3xl p-6 sm:p-7 border border-[#e5ded4] space-y-4 shadow-xs">
+          <h2 class="text-lg sm:text-xl font-black text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2">
+            <span>❓</span>
+            <span>Pertanyaan yang Sering Diajukan (FAQ)</span>
+          </h2>
+          <div class="space-y-3 text-xs sm:text-sm">
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-100 space-y-1">
+              <h3 class="font-extrabold text-slate-900 text-sm">Apakah file modul ajar bisa diedit?</h3>
+              <p class="text-slate-600 leading-relaxed">Bisa. Format Microsoft Word (.docx) dapat disesuaikan sepenuhnya, termasuk mengganti nama sekolah, kepala sekolah, nama guru pengampu, dan alokasi waktu.</p>
+            </div>
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-100 space-y-1">
+              <h3 class="font-extrabold text-slate-900 text-sm">Apakah sudah sesuai acuan CP Kemendikbudristek?</h3>
+              <p class="text-slate-600 leading-relaxed">Sangat sesuai. Modul mengacu pada Capaian Pembelajaran (CP) No. 020 Kemendikbudristek untuk SD Fase Fase C.</p>
+            </div>
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-100 space-y-1">
+              <h3 class="font-extrabold text-slate-900 text-sm">Bagaimana cara menerima file setelah checkout?</h3>
+              <p class="text-slate-600 leading-relaxed">File Word dan PDF dapat langsung diunduh seketika setelah pembayaran Anda terverifikasi oleh Lynk.id.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION: INTERNAL LINKS -->
+        <section class="bg-white rounded-3xl p-6 sm:p-7 border border-[#e5ded4] space-y-4 shadow-xs">
+          <h2 class="text-lg sm:text-xl font-black text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2">
+            <span>🔗</span>
+            <span>Perangkat PAI Kelas 6 Lainnya</span>
+          </h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm font-semibold">
+            <a href="/soal-sas-pai-kelas-6.html" class="p-4 rounded-2xl bg-slate-50 hover:bg-emerald-50 border border-slate-200 hover:border-emerald-200 transition-all flex items-center justify-between text-slate-800 hover:text-emerald-950">
+              <span class="flex items-center gap-2"><span>📝</span> <span>Soal SAS PAI Kelas 6</span></span>
+              <span>&rarr;</span>
+            </a>
+            <a href="/buku-siswa-pai-kelas-6.html" class="p-4 rounded-2xl bg-slate-50 hover:bg-emerald-50 border border-slate-200 hover:border-emerald-200 transition-all flex items-center justify-between text-slate-800 hover:text-emerald-950">
+              <span class="flex items-center gap-2"><span>📘</span> <span>Buku Siswa PAI Kelas 6</span></span>
+              <span>&rarr;</span>
+            </a>
+            <a href="/modul-ajar-pai-sd.html" class="p-4 rounded-2xl bg-slate-50 hover:bg-emerald-50 border border-slate-200 hover:border-emerald-200 transition-all flex items-center justify-between text-slate-800 hover:text-emerald-950">
+              <span class="flex items-center gap-2"><span>🚀</span> <span>Semua Modul Ajar PAI SD</span></span>
+              <span>&rarr;</span>
+            </a>
+            <a href="/" class="p-4 rounded-2xl bg-slate-50 hover:bg-emerald-50 border border-slate-200 hover:border-emerald-200 transition-all flex items-center justify-between text-slate-800 hover:text-emerald-950">
+              <span class="flex items-center gap-2"><span>🏠</span> <span>Kembali ke Halaman Utama</span></span>
+              <span>&rarr;</span>
+            </a>
+          </div>
+          <div class="pt-3 border-t border-slate-100">
+            <p class="text-xs text-slate-500 font-bold mb-2">Modul Ajar Jenjang Kelas Lain:</p>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+              <a href="/modul-ajar-pai-kelas-1.html" class="p-3.5 rounded-2xl bg-slate-50 hover:bg-emerald-50 border border-slate-200 text-xs font-semibold flex items-center justify-between text-slate-800 hover:text-emerald-950 transition-colors">
           <span>Modul Ajar PAI Kelas 1 SD</span> <span>&rarr;</span>
-        </a><a href="/modul-ajar-pai-kelas-2.html" class="p-3 rounded-xl bg-slate-50 hover:bg-emerald-50 border border-slate-200 text-xs font-semibold flex items-center justify-between text-slate-800 hover:text-emerald-950">
+        </a><a href="/modul-ajar-pai-kelas-2.html" class="p-3.5 rounded-2xl bg-slate-50 hover:bg-emerald-50 border border-slate-200 text-xs font-semibold flex items-center justify-between text-slate-800 hover:text-emerald-950 transition-colors">
           <span>Modul Ajar PAI Kelas 2 SD</span> <span>&rarr;</span>
-        </a><a href="/modul-ajar-pai-kelas-3.html" class="p-3 rounded-xl bg-slate-50 hover:bg-emerald-50 border border-slate-200 text-xs font-semibold flex items-center justify-between text-slate-800 hover:text-emerald-950">
+        </a><a href="/modul-ajar-pai-kelas-3.html" class="p-3.5 rounded-2xl bg-slate-50 hover:bg-emerald-50 border border-slate-200 text-xs font-semibold flex items-center justify-between text-slate-800 hover:text-emerald-950 transition-colors">
           <span>Modul Ajar PAI Kelas 3 SD</span> <span>&rarr;</span>
-        </a><a href="/modul-ajar-pai-kelas-4.html" class="p-3 rounded-xl bg-slate-50 hover:bg-emerald-50 border border-slate-200 text-xs font-semibold flex items-center justify-between text-slate-800 hover:text-emerald-950">
+        </a><a href="/modul-ajar-pai-kelas-4.html" class="p-3.5 rounded-2xl bg-slate-50 hover:bg-emerald-50 border border-slate-200 text-xs font-semibold flex items-center justify-between text-slate-800 hover:text-emerald-950 transition-colors">
           <span>Modul Ajar PAI Kelas 4 SD</span> <span>&rarr;</span>
-        </a><a href="/modul-ajar-pai-kelas-5.html" class="p-3 rounded-xl bg-slate-50 hover:bg-emerald-50 border border-slate-200 text-xs font-semibold flex items-center justify-between text-slate-800 hover:text-emerald-950">
+        </a><a href="/modul-ajar-pai-kelas-5.html" class="p-3.5 rounded-2xl bg-slate-50 hover:bg-emerald-50 border border-slate-200 text-xs font-semibold flex items-center justify-between text-slate-800 hover:text-emerald-950 transition-colors">
           <span>Modul Ajar PAI Kelas 5 SD</span> <span>&rarr;</span>
         </a>
+            </div>
+          </div>
+        </section>
+
+      </main>
+
+      <!-- COLUMN 3: RIGHT FLOATING SUMMARY & CHECKOUT SIDEBAR -->
+      <aside aria-label="Rincian Berkas dan Pembelian" class="w-full lg:w-80 bg-panelBg rounded-3xl p-5 sm:p-6 space-y-6 shrink-0 border border-[#e8dfd5] sticky top-20 self-start">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-black text-slate-900 flex items-center gap-1.5">
+            <span>📦</span> <span>Modul Ajar Kelas 6</span>
+          </span>
+          <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black bg-purple-100 text-purple-900 border border-purple-300">
+            Tersedia
+          </span>
+        </div>
+
+        <div class="aspect-[3/4] rounded-2xl overflow-hidden border border-black/10 shadow-xs bg-white">
+          <img src="/assets/cover_illustration.jpg" alt="Cover Modul Ajar PAI Kelas 6" class="w-full h-full object-cover">
+        </div>
+
+        <div class="p-4 rounded-2xl bg-white border border-[#e2d8cd] space-y-2">
+          <span class="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">Harga Promo Spesial:</span>
+          <div class="flex items-baseline gap-2">
+            <span class="text-2xl font-black text-slate-950">Rp 25.000</span>
+            <span class="text-xs text-slate-400 font-bold line-through">Rp 35.000</span>
+          </div>
+          <p class="text-[11px] text-slate-600 leading-relaxed">
+            Format Word (.docx) 8 halaman &amp; PDF siap pakai supervisi dinas.
+          </p>
+          <div class="pt-2">
+            <a href="https://lynk.id/bahanajarbuguru" target="_blank" rel="sponsored nofollow noopener" class="w-full py-3 rounded-full bg-slate-900 hover:bg-slate-800 text-white font-black text-xs text-center shadow transition-all block">
+              Beli Sekarang via Lynk.id &rarr;
+            </a>
+          </div>
+        </div>
+
+        <div class="space-y-2 text-xs text-slate-600 font-medium">
+          <div class="flex items-center gap-2">
+            <span class="text-emerald-600">✓</span>
+            <span>100% Word (.docx) Dapat Diedit</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-emerald-600">✓</span>
+            <span>Siklus Mindful, Meaningful, Joyful</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-emerald-600">✓</span>
+            <span>LKPD &amp; Rubrik KKTP Lengkap</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-emerald-600">✓</span>
+            <span>Unduh Instan Setelah Bayar</span>
+          </div>
+        </div>
+
+        <div class="pt-2 border-t border-[#e2d8cd] text-center">
+          <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-2">Metode Pembayaran Resmi</span>
+          <div class="flex flex-wrap items-center justify-center gap-1.5 text-[11px] font-bold text-slate-700">
+            <span class="px-2 py-1 bg-white rounded-lg border border-slate-200">QRIS</span>
+            <span class="px-2 py-1 bg-white rounded-lg border border-slate-200">GoPay</span>
+            <span class="px-2 py-1 bg-white rounded-lg border border-slate-200">OVO</span>
+            <span class="px-2 py-1 bg-white rounded-lg border border-slate-200">ShopeePay</span>
+            <span class="px-2 py-1 bg-white rounded-lg border border-slate-200">Transfer</span>
+          </div>
+        </div>
+      </aside>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-white border-t border-[#ece6dc] py-6 px-6 text-xs text-slate-500">
+      <div class="max-w-[1400px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div><span class="font-bold text-slate-800">Bahan Ajar Bu Guru</span> &bull; Kurikulum Merdeka CP No. 020</div>
+        <div class="flex items-center gap-4 font-semibold">
+          <a href="/kebijakan-privasi.html" class="hover:text-slate-800 transition-colors">Kebijakan Privasi</a>
+          <a href="/syarat-ketentuan.html" class="hover:text-slate-800 transition-colors">Syarat &amp; Ketentuan</a>
+          <a href="/tentang-kami.html" class="hover:text-slate-800 transition-colors">Tentang Kami</a>
+          <a href="https://lynk.id/bahanajarbuguru" target="_blank" rel="sponsored nofollow noopener" class="text-emerald-700 hover:underline">Toko Lynk.id &rarr;</a>
         </div>
       </div>
-    </section>
-  </main>
+    </footer>
 
-  <footer class="bg-white border-t border-[#ece6dc] py-6 px-4 text-xs text-slate-500 mt-12">
-    <div class="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
-      <div><span class="font-bold text-slate-800">Bahan Ajar Bu Guru</span> &bull; Kurikulum Merdeka CP No. 020</div>
-      <div class="flex items-center gap-4 font-semibold">
-        <a href="/kebijakan-privasi.html">Kebijakan Privasi</a>
-        <a href="/syarat-ketentuan.html">Syarat &amp; Ketentuan</a>
-        <a href="/tentang-kami.html">Tentang Kami</a>
-        <a href="https://lynk.id/bahanajarbuguru" target="_blank" rel="sponsored nofollow noopener" class="text-emerald-700 hover:underline">Toko Lynk.id &rarr;</a>
+  </div>
+
+  <!-- LIGHTBOX MODAL -->
+  <div id="lightbox-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-3 sm:p-6" onclick="closeLightbox(event)">
+    <div class="relative max-w-4xl max-h-[92vh] bg-white rounded-3xl p-4 sm:p-6 overflow-hidden flex flex-col shadow-2xl" onclick="event.stopPropagation()">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+        <h3 id="lightbox-title" class="font-black text-slate-900 text-sm sm:text-base">Pratinjau Modul Ajar</h3>
+        <button onclick="closeLightbox()" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold flex items-center justify-center text-sm transition-colors">
+          ✕
+        </button>
+      </div>
+      <div class="flex-1 overflow-auto py-4 flex items-center justify-center bg-slate-50 rounded-2xl border border-slate-200/80 my-2">
+        <img id="lightbox-img" src="" alt="Pratinjau Modul Ajar" class="max-w-full max-h-[70vh] object-contain shadow-md rounded-xl">
+      </div>
+      <div class="pt-2 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+        <span class="text-slate-500 font-medium">Modul lengkap format Word (.docx) dapat diunduh langsung di Lynk.id.</span>
+        <a href="https://lynk.id/bahanajarbuguru" target="_blank" rel="sponsored nofollow noopener" class="px-5 py-2 rounded-full bg-slate-900 hover:bg-slate-800 text-white font-bold transition-all shadow-xs">
+          Beli Modul Lengkap di Lynk.id &rarr;
+        </a>
       </div>
     </div>
-  </footer>
+  </div>
+
+  <script>
+    function openLightbox(src, title) {
+      document.getElementById('lightbox-img').src = src;
+      document.getElementById('lightbox-title').textContent = title || 'Pratinjau Modul Ajar';
+      const modal = document.getElementById('lightbox-modal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+    function closeLightbox(event) {
+      const modal = document.getElementById('lightbox-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeLightbox();
+    });
+  </script>
+
 </body>
 </html>
