@@ -490,7 +490,7 @@
                 Buku Siswa PAI &amp; Budi Pekerti (1–6 SD)
               </h2>
             </div>
-            <a id="cms-buku-top-sample" href="/preview_buku.html?kelas=1" class="hidden sm:inline-flex text-xs font-bold px-3 py-1.5 rounded-full bg-white hover:bg-slate-100 border border-slate-200 text-slate-800 transition-colors">
+            <a id="cms-buku-top-sample" href="/buku-siswa-pai-sd.html" class="hidden sm:inline-flex text-xs font-bold px-3 py-1.5 rounded-full bg-white hover:bg-slate-100 border border-slate-200 text-slate-800 transition-colors">
               Lihat Contoh Halaman
             </a>
           </div>
@@ -526,7 +526,7 @@
                 Modul Ajar PAI &amp; Budi Pekerti (Kelas 1–6 SD)
               </h2>
             </div>
-            <a id="cms-modul-top-sample" href="/preview_modul.html?kelas=1" class="hidden sm:inline-flex text-xs font-bold px-3 py-1.5 rounded-full bg-white hover:bg-slate-100 border border-slate-200 text-slate-800 transition-colors">
+            <a id="cms-modul-top-sample" href="/modul-ajar-pai-sd.html" class="hidden sm:inline-flex text-xs font-bold px-3 py-1.5 rounded-full bg-white hover:bg-slate-100 border border-slate-200 text-slate-800 transition-colors">
               Lihat Contoh Modul
             </a>
           </div>
@@ -546,7 +546,7 @@
                 Bank Soal SAS (Sumatif Akhir Semester) Kelas 1–6 SD
               </h2>
             </div>
-            <a id="cms-soal-top-sample" href="/preview_soal.html?kelas=1" class="hidden sm:inline-flex text-xs font-bold px-3 py-1.5 rounded-full bg-white hover:bg-slate-100 border border-slate-200 text-slate-800 transition-colors">
+            <a id="cms-soal-top-sample" href="/bank-soal-sas-pai-sd.html" class="hidden sm:inline-flex text-xs font-bold px-3 py-1.5 rounded-full bg-white hover:bg-slate-100 border border-slate-200 text-slate-800 transition-colors">
               Lihat Contoh Soal
             </a>
           </div>
@@ -652,7 +652,7 @@
               <a href="/soal-sas-pai-kelas-1.html" class="px-3 py-1.5 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-800 transition-colors border border-slate-200">
                 📝 Soal SAS PAI Kelas 1 SD &rarr;
               </a>
-              <a href="/preview_soal.html?kelas=2" class="px-3 py-1.5 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-800 transition-colors border border-slate-200">
+              <a href="/soal-sas-pai-kelas-2.html" class="px-3 py-1.5 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-800 transition-colors border border-slate-200">
                 📝 Soal SAS PAI Kelas 2 SD &rarr;
               </a>
               <a href="/lembar_penilaian_harian_kelas3_bab5.html" class="px-3 py-1.5 rounded-full bg-emerald-100 hover:bg-emerald-200 text-emerald-900 transition-colors border border-emerald-200">
@@ -1065,7 +1065,7 @@
               .filter((item) => item.visible !== false)
               .map((item, idx) => {
                 const theme = pastelThemes[idx % pastelThemes.length];
-                const targetUrl = item.sampleUrl || `/preview_buku.html?kelas=${item.grade}`;
+                const targetUrl = item.sampleUrl || `/buku-siswa-pai-kelas-${item.grade}.html`;
                 const actionLeft = `<a href="${escapeHtml(targetUrl)}" class="px-4 py-2 rounded-full text-xs font-bold text-slate-800 bg-white/90 hover:bg-white border border-black/10 transition-colors">Detail</a>`;
 
                 return `
@@ -1140,7 +1140,7 @@
             modulContainer.innerHTML = visibleModuls
               .map((item, idx) => {
                 const theme = pastelThemes[(idx + 1) % pastelThemes.length];
-                const targetUrl = item.sampleUrl || `/preview_modul.html?kelas=${item.grade}`;
+                const targetUrl = item.sampleUrl || `/modul-ajar-pai-kelas-${item.grade}.html`;
                 const actionLeft = `<a href="${escapeHtml(targetUrl)}" class="px-4 py-2 rounded-full text-xs font-bold text-slate-800 bg-white/90 hover:bg-white border border-black/10 transition-colors">Detail</a>`;
 
                 return `
@@ -1198,7 +1198,7 @@
               .filter((item) => item.visible !== false)
               .map((item, idx) => {
                 const theme = pastelThemes[(idx + 2) % pastelThemes.length];
-                const targetUrl = item.sampleUrl || `/preview_soal.html?kelas=${item.grade}`;
+                const targetUrl = item.sampleUrl || `/soal-sas-pai-kelas-${item.grade}.html`;
                 const actionLeft = `<a href="${escapeHtml(targetUrl)}" class="px-4 py-2 rounded-full text-xs font-bold text-slate-800 bg-white/90 hover:bg-white border border-black/10 transition-colors">Detail</a>`;
 
                 const priceHtml = item.originalPrice

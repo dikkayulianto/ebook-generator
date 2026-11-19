@@ -18,7 +18,7 @@
     "heading": "Buku Siswa PAI & Budi Pekerti (Kelas 1-6 SD)",
     "subheading": "Buku materi 1 semester penuh dengan ilustrasi ramah anak, tata letak standar penerbit A4, dan acuan CP No. 020 Tahun 2026.",
     "topSampleLabel": "Lihat Contoh Halaman Buku",
-    "topSampleUrl": "/preview_buku.html?kelas=1"
+    "topSampleUrl": "/buku-siswa-pai-sd.html"
   },
   "bukuItems": [
     {
@@ -34,7 +34,7 @@
         "Semester 1 Penuh"
       ],
       "sampleLabel": "Detail",
-      "sampleUrl": "/preview_buku.html?kelas=1",
+      "sampleUrl": "/buku-siswa-pai-kelas-1.html",
       "modalDetail": "",
       "buyUrl": "https://lynk.id/bahanajarbuguru",
       "visible": true
@@ -52,7 +52,7 @@
         "Semester 1 Penuh"
       ],
       "sampleLabel": "Detail",
-      "sampleUrl": "/preview_buku.html?kelas=2",
+      "sampleUrl": "/buku-siswa-pai-kelas-2.html",
       "modalDetail": "Asmaul Husna, Hijaiyah Bersambung, Azan/Ikamah, Nabi Nuh a.s.",
       "buyUrl": "https://lynk.id/bahanajarbuguru",
       "visible": true
@@ -70,7 +70,7 @@
         "Semester 1 Penuh"
       ],
       "sampleLabel": "Detail",
-      "sampleUrl": "/preview_buku.html?kelas=3",
+      "sampleUrl": "/buku-siswa-pai-kelas-3.html",
       "modalDetail": "Surah Al-Humazah/Al-Kautsar, Sifat Wajib Allah, Berbakti Orang Tua, Sholat Sunnah Rawatib",
       "buyUrl": "https://lynk.id/bahanajarbuguru",
       "visible": true
@@ -88,7 +88,7 @@
         "Semester 1 Penuh"
       ],
       "sampleLabel": "Detail",
-      "sampleUrl": "/preview_buku.html?kelas=4",
+      "sampleUrl": "/buku-siswa-pai-kelas-4.html",
       "modalDetail": "Surah Al-Hujurat: 13, Asmaul Husna, Usia Baligh, Hijrah Rasulullah SAW",
       "buyUrl": "https://lynk.id/bahanajarbuguru",
       "visible": true
@@ -106,7 +106,7 @@
         "Semester 1 Penuh"
       ],
       "sampleLabel": "Detail",
-      "sampleUrl": "/preview_buku.html?kelas=5",
+      "sampleUrl": "/buku-siswa-pai-kelas-5.html",
       "modalDetail": "Surah Al-Ma'un & Yatim, Asmaul Husna, Zakat/Infak/Sedekah, Fathu Makkah",
       "buyUrl": "https://lynk.id/bahanajarbuguru",
       "visible": true
@@ -124,7 +124,7 @@
         "Tingkat Akhir SD"
       ],
       "sampleLabel": "Detail",
-      "sampleUrl": "/preview_buku.html?kelas=6",
+      "sampleUrl": "/buku-siswa-pai-kelas-6.html",
       "modalDetail": "Surah Ad-Duha, Asmaul Husna Al-Ghaffar, Makanan Halal/Haram, Khulafaur Rasyidin",
       "buyUrl": "https://lynk.id/bahanajarbuguru",
       "visible": true
@@ -135,7 +135,7 @@
     "heading": "Modul Ajar PAI & Budi Pekerti (Kelas 1–6 SD)",
     "subheading": "Dokumen administrasi guru berstandar supervisi akreditasi: Siklus Mindful, Meaningful & Joyful Learning dilengkapi LKPD dan Rubrik Penilaian.",
     "topSampleLabel": "Lihat Contoh Modul",
-    "topSampleUrl": "/preview_modul.html?kelas=1",
+    "topSampleUrl": "/modul-ajar-pai-sd.html",
     "priceHeading": "Harga Paket Modul Ajar",
     "priceValue": "Mulai Rp 25.000",
     "priceSubtext": "Tersedia per-bab maupun 1 semester",
@@ -156,7 +156,7 @@
         "LKPD & Rubrik"
       ],
       "sampleLabel": "Detail",
-      "sampleUrl": "/preview_modul.html?kelas=1",
+      "sampleUrl": "/modul-ajar-pai-kelas-1.html",
       "modalDetail": "Modul Ajar Deep Learning 8 Halaman: Identitas CP 020, Skenario Joyful, LKPD, Asesmen HOTS",
       "buyUrl": "https://lynk.id/bahanajarbuguru",
       "visible": true
@@ -175,7 +175,7 @@
         "LKPD & Rubrik"
       ],
       "sampleLabel": "Detail",
-      "sampleUrl": "/preview_modul.html?kelas=2",
+      "sampleUrl": "/modul-ajar-pai-kelas-2.html",
       "modalDetail": "Modul Ajar Deep Learning 8 Halaman: Identitas CP 020, Asmaul Husna, Hijaiyah, LKPD & Asesmen",
       "buyUrl": "https://lynk.id/bahanajarbuguru",
       "visible": true
@@ -194,7 +194,7 @@
         "LKPD & Rubrik"
       ],
       "sampleLabel": "Detail",
-      "sampleUrl": "/preview_modul.html?kelas=3",
+      "sampleUrl": "/modul-ajar-pai-kelas-3.html",
       "modalDetail": "Modul Ajar Deep Learning 8 Halaman: Al-Humazah, Sifat Allah, Berbakti, LKPD & Asesmen",
       "buyUrl": "https://lynk.id/bahanajarbuguru",
       "visible": true
@@ -213,7 +213,7 @@
         "LKPD & Rubrik"
       ],
       "sampleLabel": "Detail",
-      "sampleUrl": "/preview_modul.html?kelas=4",
+      "sampleUrl": "/modul-ajar-pai-kelas-4.html",
       "modalDetail": "Modul Ajar Deep Learning 8 Halaman: Al-Hujurat, Asmaul Husna, Baligh, Hijrah, LKPD & Rubrik",
       "buyUrl": "https://lynk.id/bahanajarbuguru",
       "visible": true
@@ -232,7 +232,7 @@
         "LKPD & Rubrik"
       ],
       "sampleLabel": "Detail",
-      "sampleUrl": "/preview_modul.html?kelas=5",
+      "sampleUrl": "/modul-ajar-pai-kelas-5.html",
       "modalDetail": "Modul Ajar Deep Learning 8 Halaman: Al-Ma'un, Asmaul Husna, Zakat, Fathu Makkah, LKPD & Rubrik",
       "buyUrl": "https://lynk.id/bahanajarbuguru",
       "visible": true
@@ -251,7 +251,7 @@
         "LKPD & Rubrik"
       ],
       "sampleLabel": "Detail",
-      "sampleUrl": "/preview_modul.html?kelas=6",
+      "sampleUrl": "/modul-ajar-pai-kelas-6.html",
       "modalDetail": "Modul Ajar Deep Learning 8 Halaman: Ad-Duha, Asmaul Husna, Halal/Haram, Khulafaur Rasyidin",
       "buyUrl": "https://lynk.id/bahanajarbuguru",
       "visible": true
@@ -262,7 +262,7 @@
     "heading": "Bank Soal SAS (Sumatif Akhir Semester) Kelas 1–6 SD",
     "subheading": "Naskah ujian 25 Soal (15 PG + 5 Isian + 5 Uraian HOTS) lengkap dengan Kunci Jawaban, Rubrik Penilaian, dan Kisi-Kisi CP No. 020 Tahun 2026.",
     "topSampleLabel": "Lihat Contoh Soal",
-    "topSampleUrl": "/preview_soal.html?kelas=1"
+    "topSampleUrl": "/bank-soal-sas-pai-sd.html"
   },
   "soalItems": [
     {
@@ -279,7 +279,7 @@
         "Kunci & Kisi-Kisi"
       ],
       "sampleLabel": "Detail",
-      "sampleUrl": "/preview_soal.html?kelas=1",
+      "sampleUrl": "/soal-sas-pai-kelas-1.html",
       "modalDetail": "25 Soal Lengkap (PG, Isian, Uraian), Kunci Jawaban, Rubrik Penilaian, dan Kisi-Kisi CP 020",
       "buyUrl": "https://lynk.id/bahanajarbuguru",
       "visible": true,
@@ -299,7 +299,7 @@
         "Kunci & Kisi-Kisi"
       ],
       "sampleLabel": "Detail",
-      "sampleUrl": "/preview_soal.html?kelas=2",
+      "sampleUrl": "/soal-sas-pai-kelas-2.html",
       "modalDetail": "25 Soal Lengkap (PG, Isian, Uraian), Kunci Jawaban, Rubrik Penilaian, dan Kisi-Kisi CP 020",
       "buyUrl": "https://lynk.id/bahanajarbuguru",
       "visible": true,
@@ -319,7 +319,7 @@
         "Kunci & Kisi-Kisi"
       ],
       "sampleLabel": "Detail",
-      "sampleUrl": "/preview_soal.html?kelas=3",
+      "sampleUrl": "/soal-sas-pai-kelas-3.html",
       "modalDetail": "25 Soal Lengkap (PG, Isian, Uraian), Kunci Jawaban, Rubrik Penilaian, dan Kisi-Kisi CP 020",
       "buyUrl": "https://lynk.id/bahanajarbuguru",
       "visible": true,
@@ -339,7 +339,7 @@
         "Kunci & Kisi-Kisi"
       ],
       "sampleLabel": "Detail",
-      "sampleUrl": "/preview_soal.html?kelas=4",
+      "sampleUrl": "/soal-sas-pai-kelas-4.html",
       "modalDetail": "25 Soal Lengkap (PG, Isian, Uraian), Kunci Jawaban, Rubrik Penilaian, dan Kisi-Kisi CP 020",
       "buyUrl": "https://lynk.id/bahanajarbuguru",
       "visible": true,
@@ -359,7 +359,7 @@
         "Kunci & Kisi-Kisi"
       ],
       "sampleLabel": "Detail",
-      "sampleUrl": "/preview_soal.html?kelas=5",
+      "sampleUrl": "/soal-sas-pai-kelas-5.html",
       "modalDetail": "25 Soal Lengkap (PG, Isian, Uraian), Kunci Jawaban, Rubrik Penilaian, dan Kisi-Kisi CP 020",
       "buyUrl": "https://lynk.id/bahanajarbuguru",
       "visible": true,
@@ -379,7 +379,7 @@
         "Kunci & Kisi-Kisi"
       ],
       "sampleLabel": "Detail",
-      "sampleUrl": "/preview_soal.html?kelas=6",
+      "sampleUrl": "/soal-sas-pai-kelas-6.html",
       "modalDetail": "25 Soal Lengkap (PG, Isian, Uraian), Kunci Jawaban, Rubrik Penilaian, dan Kisi-Kisi CP 020",
       "buyUrl": "https://lynk.id/bahanajarbuguru",
       "visible": true,

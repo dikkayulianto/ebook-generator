@@ -14,6 +14,15 @@
   <meta property="og:description" content="Naskah ujian Sumatif Akhir Semester (SAS) PAI SD Kurikulum Merdeka. File Word (.docx) & PDF.">
   <meta property="og:image" content="/assets/soal_sas_cover_kelas1.jpg">
   <meta property="og:url" content="https://bahanajarbuguru.my.id/preview_soal.html">
+  <script>
+    (function(){
+      var p = new URLSearchParams(window.location.search);
+      var k = p.get('kelas');
+      if (k && ['1','2','3','4','5','6'].indexOf(k) !== -1) {
+        window.location.replace('/soal-sas-pai-kelas-' + k + '.html');
+      }
+    })();
+  </script>
 
   <!-- Schema.org JSON-LD Structured Data -->
   <script type="application/ld+json">
