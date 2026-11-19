@@ -1,4 +1,5 @@
 # Robots.txt untuk Bahan Ajar Bu Guru
+# Auto-deploy sync: 2026-11-19
 User-agent: *
 Allow: /
 
