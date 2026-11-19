@@ -1,5 +1,5 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/pendarloka/public_html/
+    - export DEPLOYPATH=/home/pendarloka/bahanajarbuguru.my.id/
     - /bin/cp -R public/. $DEPLOYPATH
