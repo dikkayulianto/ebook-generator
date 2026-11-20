@@ -2,5 +2,27 @@
   "version": 2,
   "framework": null,
   "outputDirectory": "public",
-  "cleanUrls": true
+  "cleanUrls": true,
+  "redirects": [
+    {
+      "source": "/game_petualangan_islami.html",
+      "destination": "/game-petualangan-islami.html",
+      "permanent": true
+    },
+    {
+      "source": "/modul_ajar_deep_learning_kelas1_bab1.html",
+      "destination": "/modul-ajar-pai-kelas-1.html",
+      "permanent": true
+    },
+    {
+      "source": "/soal_sas_prototype.html",
+      "destination": "/soal-sas-pai-kelas-1.html",
+      "permanent": true
+    },
+    {
+      "source": "/buku_siswa_pai_kelas1_semester1.html",
+      "destination": "/buku-siswa-pai-kelas-1.html",
+      "permanent": true
+    }
+  ]
 }
