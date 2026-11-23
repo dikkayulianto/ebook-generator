@@ -756,6 +756,17 @@
           </div>
 
           <div class="flex items-center gap-2 shrink-0">
+            <a
+              id="btn-download-docx"
+              href="#"
+              download
+              class="hidden min-h-[40px] px-3.5 py-2 text-xs font-bold rounded-lg bg-blue-700 hover:bg-blue-800 text-white shadow-sm transition-colors inline-flex items-center gap-1.5"
+            >
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+              </svg>
+              <span>Unduh Word (.docx)</span>
+            </a>
             <button
               type="button"
               id="btn-open-fullscreen"
@@ -1076,7 +1087,7 @@
         : `Bab ${chapterNum}: Materi Terkait Kurikulum`;
     }
 
-    function loadPreviewUrl(url, heading, statusLabel, statusTone) {
+    function loadPreviewUrl(url, heading, statusLabel, statusTone, docxUrl) {
       currentSavedUrl = url;
       document.getElementById('preview-error-state').classList.add('hidden');
       const frame = document.getElementById('preview-frame');
@@ -1090,6 +1101,17 @@
         statusEl.className = 'inline-flex items-center gap-1.5 text-xs bg-brand-50 text-brand-900 border border-brand-200 px-2.5 py-0.5 rounded-md font-semibold';
       } else {
         statusEl.className = 'inline-flex items-center gap-1.5 text-xs bg-slate-100 text-slate-800 border border-slate-300 px-2.5 py-0.5 rounded-md font-semibold';
+      }
+
+      const btnDocx = document.getElementById('btn-download-docx');
+      if (btnDocx) {
+        const targetDocx = docxUrl || (url && url.endsWith('.html') && url.startsWith('/exports/') ? url.replace(/\.html$/, '.docx') : null);
+        if (targetDocx) {
+          btnDocx.href = targetDocx;
+          btnDocx.classList.remove('hidden');
+        } else {
+          btnDocx.classList.add('hidden');
+        }
       }
 
       document.getElementById('btn-open-fullscreen').disabled = false;
@@ -1331,7 +1353,7 @@
             ? 'Naskah Soal SAS Siap'
             : 'Buku Siswa Selesai';
 
-        loadPreviewUrl(data.savedFile, docTitle, doneLabel, 'success');
+        loadPreviewUrl(data.savedFile, docTitle, doneLabel, 'success', data.docxFile);
         showFormFeedback('Dokumen berhasil disusun dan ditampilkan pada panel pratinjau.', 'success');
 
         if (window.innerWidth < 1024) {

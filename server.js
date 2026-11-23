@@ -2,12 +2,28 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const fs = require('fs');
+const { execFile } = require('child_process');
 const multer = require('multer');
 const pdfParse = require('pdf-parse');
 const mammoth = require('mammoth');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+// Helper: Convert generated HTML to styled Microsoft Word (.docx)
+function generateDocxFromHtml(htmlPath, docxPath) {
+  return new Promise((resolve) => {
+    const pythonScript = path.join(__dirname, 'scripts', 'html_to_docx.py');
+    execFile('python', [pythonScript, htmlPath, docxPath], (err, stdout, stderr) => {
+      if (err) {
+        console.warn('DOCX Generation Warning:', err.message, stderr);
+        return resolve(null);
+      }
+      console.log('✅ DOCX Berhasil Dibuat:', docxPath);
+      resolve(docxPath);
+    });
+  });
+}
 
 // Setup Multer for document uploads
 const upload = multer({
@@ -1035,6 +1051,9 @@ async function renderBookHtml(bookData, apiKey) {
   <div style="position: sticky; top: 0; z-index: 999; background: #059669; color: white; padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 8px rgba(0,0,0,0.15);" class="no-print">
     <div><strong>✨ E-Book Siap Cetak:</strong> ${bookData.title} Kelas ${bookData.grade} (${gradeTheme.fase})</div>
     <div style="display: flex; gap: 10px; align-items: center;">
+      <a id="btn-top-docx" href="#" download class="no-print" style="background: #2563eb; color: #ffffff; text-decoration: none; padding: 6px 16px; border-radius: 20px; font-weight: 700; cursor: pointer; font-size: 10.5pt; display: inline-flex; align-items: center; gap: 6px;">
+        📥 Unduh Word (.docx)
+      </a>
       <button id="btn-toggle-edit" onclick="toggleEditMode()" style="background: #ffffff; color: #065f46; border: none; padding: 6px 16px; border-radius: 20px; font-weight: 700; cursor: pointer; font-size: 10.5pt; display: flex; align-items: center; gap: 6px;">
         ✏️ Edit Teks Langsung
       </button>
@@ -1042,6 +1061,13 @@ async function renderBookHtml(bookData, apiKey) {
     </div>
   </div>
   <script class="no-print">
+    window.addEventListener('DOMContentLoaded', () => {
+      const docxBtn = document.getElementById('btn-top-docx');
+      if (docxBtn) {
+        const cur = window.location.pathname;
+        if (cur.endsWith('.html')) docxBtn.href = cur.replace(/\.html$/, '.docx');
+      }
+    });
     function toggleEditMode() {
       const isEditing = document.body.contentEditable === 'true';
       document.body.contentEditable = !isEditing;
@@ -1605,10 +1631,20 @@ async function renderModulAjarHtml(modulData) {
   <!-- TOP BAR CONTROL -->
   <div style="position: sticky; top: 0; z-index: 999; background: #064e3b; color: white; padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 8px rgba(0,0,0,0.2);" class="no-print">
     <div><strong>🌟 MODUL AJAR DEEP LEARNING:</strong> ${modulData.subject} Kelas ${modulData.grade} Bab ${modulData.chapterNumber}</div>
-    <div style="display: flex; gap: 10px;">
+    <div style="display: flex; gap: 10px; align-items: center;">
+      <a id="btn-top-docx" href="#" download class="no-print" style="background: #2563eb; color: #ffffff; text-decoration: none; padding: 6px 16px; border-radius: 20px; font-weight: bold; cursor: pointer; font-size: 10pt; display: inline-flex; align-items: center; gap: 5px;">📥 Unduh Word (.docx)</a>
       <button onclick="window.print()" style="background: #f59e0b; color: #78350f; border: none; padding: 6px 18px; border-radius: 20px; font-weight: bold; cursor: pointer; font-size: 10pt;">🖨️ Cetak / Download PDF (8 Hal)</button>
     </div>
   </div>
+  <script class="no-print">
+    window.addEventListener('DOMContentLoaded', () => {
+      const docxBtn = document.getElementById('btn-top-docx');
+      if (docxBtn) {
+        const cur = window.location.pathname;
+        if (cur.endsWith('.html')) docxBtn.href = cur.replace(/\.html$/, '.docx');
+      }
+    });
+  </script>
 
   <!-- ==================== HALAMAN 1: COVER MODUL AJAR ==================== -->
   <div class="page cover-container">
@@ -2452,9 +2488,19 @@ async function renderSasHtml(sasData) {
   <div style="position: sticky; top: 0; z-index: 999; background: #047857; color: white; padding: 8px 18px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 8px rgba(0,0,0,0.15);" class="no-print">
     <div><strong>📝 Naskah Soal SAS & Kunci Jawaban:</strong> ${subject} Kelas ${g} Semester ${sem} (5 Halaman A4 Presisi)</div>
     <div style="display: flex; gap: 8px; align-items: center;">
+      <a id="btn-top-docx" href="#" download class="no-print" style="background: #2563eb; color: #ffffff; text-decoration: none; padding: 5px 16px; border-radius: 20px; font-weight: 700; cursor: pointer; font-size: 9.5pt; display: inline-flex; align-items: center; gap: 5px;">📥 Unduh Word (.docx)</a>
       <button onclick="window.print()" style="background: #f59e0b; color: #78350f; border: none; padding: 5px 16px; border-radius: 20px; font-weight: 700; cursor: pointer; font-size: 9.5pt;">🖨️ Cetak / Download PDF (5 Hal A4)</button>
     </div>
   </div>
+  <script class="no-print">
+    window.addEventListener('DOMContentLoaded', () => {
+      const docxBtn = document.getElementById('btn-top-docx');
+      if (docxBtn) {
+        const cur = window.location.pathname;
+        if (cur.endsWith('.html')) docxBtn.href = cur.replace(/\.html$/, '.docx');
+      }
+    });
+  </script>
 
   <!-- ==================== HALAMAN 1 (A4): KOP, IDENTITAS, PETUNJUK & PG 1-7 ==================== -->
   <div class="page">
@@ -2750,15 +2796,21 @@ app.post('/api/generate', async (req, res) => {
 
       const sanitizedTitle = `Naskah_Soal_SAS_${subject}_Kelas_${grade}_Sem_${semester}`.replace(/[^a-zA-Z0-9_-]/g, '_');
       const fileName = `${sanitizedTitle}_${Date.now()}.html`;
+      const docxFileName = fileName.replace(/\.html$/, '.docx');
       const filePath = path.join(exportsDir, fileName);
+      const docxPath = path.join(exportsDir, docxFileName);
       fs.writeFileSync(filePath, htmlOutput, 'utf8');
+
+      // Generate Word (.docx) alongside HTML
+      await generateDocxFromHtml(filePath, docxPath);
 
       return res.json({
         success: true,
         mode: 'soal_sas',
         sasData,
         htmlOutput,
-        savedFile: `/exports/${fileName}`
+        savedFile: `/exports/${fileName}`,
+        docxFile: `/exports/${docxFileName}`
       });
     }
 
@@ -2790,15 +2842,21 @@ app.post('/api/generate', async (req, res) => {
       
       const sanitizedTitle = `Modul_Ajar_${subject}_Kelas_${grade}_Bab_${chapterNumber || 1}`.replace(/[^a-zA-Z0-9_-]/g, '_');
       const fileName = `${sanitizedTitle}_${Date.now()}.html`;
+      const docxFileName = fileName.replace(/\.html$/, '.docx');
       const filePath = path.join(exportsDir, fileName);
+      const docxPath = path.join(exportsDir, docxFileName);
       fs.writeFileSync(filePath, htmlOutput, 'utf8');
+
+      // Generate Word (.docx) alongside HTML
+      await generateDocxFromHtml(filePath, docxPath);
 
       return res.json({
         success: true,
         mode: 'modul_ajar',
         modulData,
         htmlOutput,
-        savedFile: `/exports/${fileName}`
+        savedFile: `/exports/${fileName}`,
+        docxFile: `/exports/${docxFileName}`
       });
     }
 
@@ -2822,15 +2880,21 @@ app.post('/api/generate', async (req, res) => {
     // Save to exports
     const sanitizedTitle = `${subject}_Kelas_${grade}_Sem_${semester}`.replace(/[^a-zA-Z0-9_-]/g, '_');
     const fileName = `${sanitizedTitle}_${Date.now()}.html`;
+    const docxFileName = fileName.replace(/\.html$/, '.docx');
     const filePath = path.join(exportsDir, fileName);
+    const docxPath = path.join(exportsDir, docxFileName);
     fs.writeFileSync(filePath, htmlOutput, 'utf8');
+
+    // Generate Word (.docx) alongside HTML
+    await generateDocxFromHtml(filePath, docxPath);
 
     res.json({
       success: true,
       mode: 'ebook',
       bookData,
       htmlOutput,
-      savedFile: `/exports/${fileName}`
+      savedFile: `/exports/${fileName}`,
+      docxFile: `/exports/${docxFileName}`
     });
   } catch (err) {
     console.error('Generation Error:', err);
@@ -2840,6 +2904,33 @@ app.post('/api/generate', async (req, res) => {
 
 // Serve exported HTML files
 app.use("/exports", express.static(exportsDir));
+
+// Endpoint: On-demand DOCX Generator & Downloader for any exported file
+app.get('/api/get-docx', async (req, res) => {
+  try {
+    const file = req.query.file;
+    if (!file) return res.status(400).json({ error: 'Parameter file diperlukan' });
+    const cleanName = path.basename(file).replace(/\.docx$/, '.html');
+    const htmlPath = path.join(exportsDir, cleanName);
+    const docxPath = path.join(exportsDir, cleanName.replace(/\.html$/, '.docx'));
+
+    if (!fs.existsSync(htmlPath)) {
+      return res.status(404).json({ error: 'Berkas HTML asal tidak ditemukan' });
+    }
+
+    if (!fs.existsSync(docxPath)) {
+      await generateDocxFromHtml(htmlPath, docxPath);
+    }
+
+    if (fs.existsSync(docxPath)) {
+      return res.download(docxPath);
+    } else {
+      return res.status(500).json({ error: 'Gagal membuat berkas DOCX' });
+    }
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
 
 // === ADMIN CMS & CONTENT MANAGEMENT ENDPOINTS ===
 const publicDir = path.join(__dirname, 'public');
