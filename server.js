@@ -1146,7 +1146,7 @@ Struktur JSON yang HARUS dikembalikan:
   ],
   "sarana": {
     "media": "LCD Proyektor, Kartu Huruf/Konsep 3D Berwarna, Puzzle Kayu, Gunting Siswa, Audio Murottal",
-    "sumber": "Buku Guru & Siswa Kelas ${grade} Kemendikbudristek 2024, Pedoman Tajwid/Iqro', Mushaf Standar Kemenag RI"
+    "sumber": "Buku Guru & Siswa Kelas ${grade} Kemendikdasmen 2026, Pedoman Tajwid/Iqro', Mushaf Standar Kemenag RI"
   },
   "targetDanPilar": {
     "target": "28 Peserta Didik Reguler Fase A (dilengkapi bimbingan diferensiasi & pengayaan)",
@@ -1697,7 +1697,7 @@ async function renderModulAjarHtml(modulData) {
       <strong style="color: #44403c; font-size: 9.2pt;">🛠️ Sarana, Prasarana & Sumber Belajar:</strong>
       <div style="margin-top: 2px; display: grid; grid-template-columns: 1.2fr 1fr; gap: 6px; font-size: 8.2pt; color: #292524;">
         <div><strong>• Media & Alat:</strong> ${modulData.sarana?.media || 'LCD Proyektor, Kartu Peraga 3D, Puzzle, Gunting & Lem, Audio'}</div>
-        <div><strong>• Sumber Belajar:</strong> ${modulData.sarana?.sumber || 'Buku Guru & Siswa Kemendikbudristek, Mushaf Standar Kemenag RI'}</div>
+        <div><strong>• Sumber Belajar:</strong> ${modulData.sarana?.sumber || 'Buku Guru & Siswa Kemendikdasmen, Mushaf Standar Kemenag RI'}</div>
       </div>
     </div>
 
