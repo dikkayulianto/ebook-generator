@@ -3,6 +3,12 @@
   "framework": null,
   "outputDirectory": "public",
   "cleanUrls": true,
+  "functions": {
+    "api/*.js": {
+      "maxDuration": 60,
+      "memory": 1024
+    }
+  },
   "redirects": [
     {
       "source": "/game_petualangan_islami:ext(.html)?",

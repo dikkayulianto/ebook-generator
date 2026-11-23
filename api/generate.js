@@ -1,5 +1,9 @@
 // Vercel Serverless Function: api/generate.js
-// Handles structured, rich Indonesian Jabar Beraksi evidence document generation
+// Handles:
+// 1. Soal SAS, Modul Ajar Deep Learning, & E-Book Siswa PAI SD Kurikulum Merdeka
+// 2. Bukti Fisik Jabar Beraksi (Legacy Compatibility)
+
+const engine = require('../lib/generator-engine');
 
 module.exports = async function handler(req, res) {
   // Set CORS headers
@@ -22,12 +26,43 @@ module.exports = async function handler(req, res) {
   }
 
   try {
-    const { indicatorName, evidenceTypes, extraNotes, schoolInfo, apiKey: clientApiKey, model: requestedModel } = req.body || {};
+    const body = req.body || {};
+    const { indicatorName, mode, subject } = body;
 
-    if (!indicatorName) {
-      res.status(400).json({ error: 'Nama indikator wajib diisi.' });
+    // === BRANCH 1: GENERATOR SOAL SAS, MODUL AJAR, E-BOOK SISWA ===
+    if (mode || subject || !indicatorName) {
+      if (!indicatorName && !mode && !subject) {
+        res.status(400).json({ error: 'Parameter dokumen tidak valid atau kosong.' });
+        return;
+      }
+
+      const clientApiKey = (body.apiKey || process.env.GEMINI_API_KEY || '').trim();
+      if (!clientApiKey && body.provider !== 'ollama') {
+        res.status(400).json({ error: 'API Key Google Gemini belum diatur. Masukkan API Key Anda pada formulir mesin AI.' });
+        return;
+      }
+
+      const params = {
+        ...body,
+        apiKey: clientApiKey,
+        provider: body.provider || 'gemini',
+        model: body.model || 'gemini-3.8-flash'
+      };
+
+      console.log(`[Vercel Serverless] Generating document: mode=${params.mode || 'buku_siswa'}, subject=${params.subject}`);
+      const result = await engine.generateDocument(params);
+
+      res.status(200).json({
+        success: true,
+        mode: result.mode,
+        htmlOutput: result.htmlOutput,
+        data: result.data
+      });
       return;
     }
+
+    // === BRANCH 2: BUKTI FISIK JABAR BERAKSI (LEGACY COMPATIBILITY) ===
+    const { evidenceTypes, extraNotes, schoolInfo, apiKey: clientApiKey, model: requestedModel } = body;
 
     const apiKey = (clientApiKey || process.env.GEMINI_API_KEY || '').trim();
     if (!apiKey) {
@@ -95,7 +130,6 @@ Kepala ${sch.name}
 ${sch.ks}
 NIP. ${sch.ks_nip}`;
 
-    // Candidates models to query
     const modelsToTry = [
       requestedModel && requestedModel !== 'auto' ? requestedModel : null,
       'gemini-1.5-flash',
@@ -108,7 +142,6 @@ NIP. ${sch.ks_nip}`;
     let lastError = null;
 
     for (const m of modelsToTry) {
-      // Filter out any non-text or TTS models
       if (m.includes('tts') || m.includes('audio') || m.includes('embedding')) continue;
 
       for (const ver of ['v1beta', 'v1']) {
@@ -147,6 +180,6 @@ NIP. ${sch.ks_nip}`;
     });
   } catch (err) {
     console.error('API Generate Error:', err);
-    res.status(500).json({ error: err.message });
+    res.status(500).json({ error: err.message || 'Terjadi kesalahan pada server generator.' });
   }
 };

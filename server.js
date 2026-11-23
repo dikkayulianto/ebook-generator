@@ -10,16 +10,16 @@ const mammoth = require('mammoth');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Helper: Convert generated HTML to styled Microsoft Word (.docx)
+// Helper: Convert generated HTML to styled Microsoft Word (.docx) via native Word COM
 function generateDocxFromHtml(htmlPath, docxPath) {
   return new Promise((resolve) => {
-    const pythonScript = path.join(__dirname, 'scripts', 'html_to_docx.py');
-    execFile('python', [pythonScript, htmlPath, docxPath], (err, stdout, stderr) => {
+    const psScript = path.join(__dirname, 'scripts', 'word_convert.ps1');
+    execFile('powershell', ['-ExecutionPolicy', 'Bypass', '-File', psScript, '-inputPath', htmlPath, '-outputPath', docxPath], (err, stdout, stderr) => {
       if (err) {
         console.warn('DOCX Generation Warning:', err.message, stderr);
         return resolve(null);
       }
-      console.log('✅ DOCX Berhasil Dibuat:', docxPath);
+      console.log('✅ DOCX Berhasil Dibuat via Word COM:', docxPath);
       resolve(docxPath);
     });
   });

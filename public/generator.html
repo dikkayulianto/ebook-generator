@@ -10,6 +10,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Studio Generator Perangkat Ajar | Bahan Ajar Bu Guru</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="/js/generator-engine.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,500;1,6..72,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -1087,13 +1088,44 @@
         : `Bab ${chapterNum}: Materi Terkait Kurikulum`;
     }
 
-    function loadPreviewUrl(url, heading, statusLabel, statusTone, docxUrl) {
+    let currentHtmlContent = '';
+
+    function downloadActiveDocumentAsDoc(filename) {
+      let content = currentHtmlContent;
+      if (!content) {
+        try {
+          const frame = document.getElementById('preview-frame');
+          if (frame && frame.contentDocument && frame.contentDocument.documentElement) {
+            content = frame.contentDocument.documentElement.outerHTML;
+          }
+        } catch (e) {}
+      }
+      if (!content) {
+        alert('Dokumen belum selesai dimuat untuk diunduh.');
+        return;
+      }
+      const cleanTitle = (filename || 'Dokumen_Bahan_Ajar').replace(/[^a-zA-Z0-9_-]/g, '_');
+      const header = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>" + cleanTitle + "</title></head><body>";
+      const footer = "</body></html>";
+      const blob = new Blob(['\ufeff' + header + content + footer], { type: 'application/msword' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = cleanTitle + '.doc';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+    function loadPreviewUrl(url, heading, statusLabel, statusTone, docxUrl, rawHtml) {
       currentSavedUrl = url;
+      if (rawHtml) currentHtmlContent = rawHtml;
       document.getElementById('preview-error-state').classList.add('hidden');
       const frame = document.getElementById('preview-frame');
       frame.src = url;
       document.getElementById('preview-heading').innerText = heading;
-      document.getElementById('preview-file-path').innerText = url;
+      document.getElementById('preview-file-path').innerText = url.startsWith('blob:') ? 'Dokumen Siap (Browser Memory)' : url;
 
       const statusEl = document.getElementById('preview-status');
       statusEl.innerText = statusLabel;
@@ -1106,11 +1138,17 @@
       const btnDocx = document.getElementById('btn-download-docx');
       if (btnDocx) {
         const targetDocx = docxUrl || (url && url.endsWith('.html') && url.startsWith('/exports/') ? url.replace(/\.html$/, '.docx') : null);
+        btnDocx.classList.remove('hidden');
         if (targetDocx) {
           btnDocx.href = targetDocx;
-          btnDocx.classList.remove('hidden');
+          btnDocx.onclick = null;
+          btnDocx.removeAttribute('target');
         } else {
-          btnDocx.classList.add('hidden');
+          btnDocx.removeAttribute('href');
+          btnDocx.onclick = function(e) {
+            e.preventDefault();
+            downloadActiveDocumentAsDoc(heading);
+          };
         }
       }
 
@@ -1316,31 +1354,61 @@
       }
       previewStatus.className = 'inline-flex items-center gap-1.5 text-xs bg-amber-100 text-amber-900 border border-amber-300 px-2.5 py-0.5 rounded-md font-semibold';
 
-      try {
-        const response = await fetch('/api/generate', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            mode: currentMode,
-            subject,
-            grade,
-            semester,
-            curriculum,
-            customNotes,
-            chapterNumber,
-            chapterTitle,
-            meetings,
-            modelStyle,
-            referenceText: extractedReferenceText,
-            provider: currentProvider,
-            apiKey,
-            model: currentProvider === 'gemini' ? geminiModel : hermesModel,
-            endpoint: hermesEndpoint
-          })
-        });
+      const requestPayload = {
+        mode: currentMode,
+        subject,
+        grade,
+        semester,
+        curriculum,
+        customNotes,
+        chapterNumber,
+        chapterTitle,
+        meetings,
+        modelStyle,
+        referenceText: extractedReferenceText,
+        provider: currentProvider,
+        apiKey,
+        model: currentProvider === 'gemini' ? geminiModel : hermesModel,
+        endpoint: hermesEndpoint
+      };
 
-        const data = await response.json();
-        if (!response.ok) throw new Error(data.error || 'Gagal menghasilkan dokumen dari server');
+      try {
+        let docHtml = null;
+        let savedFileUrl = null;
+        let docxFileUrl = null;
+
+        try {
+          const response = await fetch('/api/generate', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(requestPayload)
+          });
+
+          if (response.ok) {
+            const data = await response.json();
+            docHtml = data.htmlOutput;
+            savedFileUrl = data.savedFile;
+            docxFileUrl = data.docxFile;
+          } else {
+            const errData = await response.json().catch(() => ({}));
+            throw new Error(errData.error || `Server merespons ${response.status}: ${response.statusText}`);
+          }
+        } catch (fetchErr) {
+          console.warn('Backend /api/generate gagal atau tidak merespons, mencoba pemrosesan client-side:', fetchErr.message);
+          // Fallback to client-side generation if GeneratorEngine is available and provider is gemini
+          if (window.GeneratorEngine && currentProvider === 'gemini') {
+            if (!apiKey) throw new Error('API Key Google Gemini diperlukan.');
+            loadingText.innerText = 'Menyusun dokumen langsung di browser Anda via Gemini AI...';
+            const clientResult = await window.GeneratorEngine.generateDocument(requestPayload);
+            docHtml = clientResult.htmlOutput;
+          } else {
+            throw fetchErr;
+          }
+        }
+
+        if (!docHtml && !savedFileUrl) {
+          throw new Error('Dokumen tidak menghasilkan luaran.');
+        }
 
         const docTitle = currentMode === 'modul_ajar'
           ? `Hasil: Modul Ajar Kelas ${grade} Bab ${chapterNumber}`
@@ -1353,7 +1421,13 @@
             ? 'Naskah Soal SAS Siap'
             : 'Buku Siswa Selesai';
 
-        loadPreviewUrl(data.savedFile, docTitle, doneLabel, 'success', data.docxFile);
+        let targetUrl = savedFileUrl;
+        if (!targetUrl && docHtml) {
+          const blob = new Blob([docHtml], { type: 'text/html;charset=utf-8' });
+          targetUrl = URL.createObjectURL(blob);
+        }
+
+        loadPreviewUrl(targetUrl, docTitle, doneLabel, 'success', docxFileUrl, docHtml);
         showFormFeedback('Dokumen berhasil disusun dan ditampilkan pada panel pratinjau.', 'success');
 
         if (window.innerWidth < 1024) {
